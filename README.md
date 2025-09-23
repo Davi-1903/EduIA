@@ -1,0 +1,2 @@
+# EduAI
+Projeto de pesquisa
