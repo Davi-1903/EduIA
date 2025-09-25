@@ -1,3 +1,3 @@
 # EduAI
 
-Projeto de pesquisa
+Sistema de geração de materiais de estudo com IA
