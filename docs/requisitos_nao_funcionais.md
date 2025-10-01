@@ -8,7 +8,7 @@
 
 ...
 
-## 1. Caracteristicas do perfis
+## 1. Caracteristicas dos perfis
 
 1. Perfil do aluno
 2. Perfil do professor
