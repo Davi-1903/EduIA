@@ -78,9 +78,9 @@
 
 | Código   | Requisito                                                        | Propriedade | Status                 |
 | :------: | ---------------------------------------------------------------- | ----------- | ---------------------- |
-| **NF12** | Implementar criptografia SSL/TLS para todas as comunicações      | ... | ⏳ Planejando         |
+| **NF12** | Implementar criptografia SSL/TLS para todas as comunicações      | Importante  | ⏳ Planejando          |
 | **NF13** | Armazenar senhas utilizando hashing seguro com `Argon2`          | Importante  | 🔧 Em desenvolvimento |
-| **NF14** | Implementar autenticação multifator (MFA) para acessos sensíveis | ...  | ⏳ Planejando         |
+| **NF14** | Implementar autenticação multifator (MFA) para acessos sensíveis | Importante  | ⏳ Planejando          |
 
 ...
 
@@ -93,7 +93,7 @@
 | Código   | Requisito                                       | Propriedade | Status                 |
 | :------: | ----------------------------------------------- | ----------- | ---------------------- |
 | **NF15** | Interface intuitiva e fácil de navegar          | Importante  | 🔧 Em desenvolvimento |
-| **NF16** | Compatível com dispositivos móveis (responsivo) | Importante  |🔧 Em desenvolvimento |
+| **NF16** | Compatível com dispositivos móveis (responsivo) | Importante  | 🔧 Em desenvolvimento |
 <!-- | **RNF31** | Atender aos padrões de acessibilidade (ex: WCAG 2.1) | ⏳ Planejando | -->
 
 ...
@@ -123,7 +123,7 @@
 | **NF21** | Home              | Página inicial do site (Landing Page), para mostrar as funcionalidades                          | Essencial   | 🔧 Em desenvolvimento  |
 | **NF22** | Login             | Autenticação do usuário                                                                         | Essencial   | 🔧 Em desenvolvimento  |
 | **NF23** | Cadastro          | Registro de novos usuários                                                                      | Essencial   | 🔧 Em desenvolvimento  |
-| **NF24** | Dashboard         | Área principal: criação e visualização de materiais, grupos, entre outras funcionalidades       | Essencial   | ⏳ Planejando          |
+| **NF24** | Dashboard         | Área principal: criação e visualização de materiais, grupos, entre outras funcionalidades       | Essencial   | 🔧 Em desenvolvimento  |
 | **NF25** | Perfil            | Visualização e edição do perfil do usuário                                                      | Essencial   | 🔧 Em desenvolvimento  |
 | **NF26** | Históricos        | Visualização dos históricos do usuário                                                          | Essencial   | 🔧 Em desenvolvimento  |
 | **NF27** | Sobre             | Informações sobre a plataforma                                                                  | Essencial   | 🔧 Em desenvolvimento  |
