@@ -18,10 +18,6 @@
 
 ## 2. Inteligencia Artificial
 
-| Código   | Requisito                                       | Propriedade | Status                 |
-| :------: | ----------------------------------------------- | ----------- | -----------------------|
-| **NF11** | Usar geração aumentada de recuperação (**RAG**) | Importante  | 🔧 Em desenvolvimento |
-
 ### Frameworks
 
 1. **LangChain**
@@ -52,13 +48,12 @@
 
 ## 3. Performance
 
-<!-- | Código    | Requisito                                             | Status         |
-| :-------: | ----------------------------------------------------- | -------------- |
-| **RNF01** | Resposta em até 2 segundos para 95% das requisições   | ⏳ Planejando |
-| **RNF02** | Resposta em até 5 segundos para 99% das requisições   | ⏳ Planejando |
-| **RNF03** | Resposta em até 10 segundos para 100% das requisições | ⏳ Planejando | -->
-
-...
+| Código   | Requisito                                             | Propriedade | Status                 |
+| :------: | ----------------------------------------------------- | ----------- | -----------------------|
+| **NF11** | Usar geração aumentada de recuperação (**RAG**)       | Essencial   | 🔧 Em desenvolvimento |
+| **NF12** | Resposta em até 2 segundos para 95% das requisições   | Importante  | ⏳ Planejando         |
+| **NF13** | Resposta em até 5 segundos para 99% das requisições   | Importante  | ⏳ Planejando         |
+| **NF14** | Resposta em até 10 segundos para 100% das requisições | Importante  | ⏳ Planejando         |
 
 ## 4. Escalabilidade
 
@@ -78,13 +73,17 @@
 
 | Código   | Requisito                                                        | Propriedade | Status                 |
 | :------: | ---------------------------------------------------------------- | ----------- | ---------------------- |
-| **NF12** | Implementar criptografia SSL/TLS para todas as comunicações      | Importante  | ⏳ Planejando          |
-| **NF13** | Armazenar senhas utilizando hashing seguro com `Argon2`          | Importante  | 🔧 Em desenvolvimento |
-| **NF14** | Implementar autenticação multifator (MFA) para acessos sensíveis | Importante  | ⏳ Planejando          |
+| **NF15** | Implementar criptografia SSL/TLS para todas as comunicações      | Importante  | ⏳ Planejando         |
+| **NF16** | Armazenar senhas utilizando hashing seguro com `Argon2`          | Importante  | 🔧 Em desenvolvimento |
+| **NF17** | Implementar autenticação multifator (MFA) para acessos sensíveis | Desejável   | ⏳ Planejando         |
 
 ...
 
 ## 7. Privacidade
+
+| Código   | Requisito                                   | Propriedade | Status                 |
+| :------: | ------------------------------------------- | ----------- | ---------------------- |
+| **NF18** | Permitir que os usuários excluam seus dados | Essencial   | 🔧 Em desenvolvimento |
 
 ...
 
@@ -92,8 +91,8 @@
 
 | Código   | Requisito                                       | Propriedade | Status                 |
 | :------: | ----------------------------------------------- | ----------- | ---------------------- |
-| **NF15** | Interface intuitiva e fácil de navegar          | Importante  | 🔧 Em desenvolvimento |
-| **NF16** | Compatível com dispositivos móveis (responsivo) | Importante  | 🔧 Em desenvolvimento |
+| **NF19** | Interface intuitiva e fácil de navegar          | Importante  | 🔧 Em desenvolvimento |
+| **NF20** | Compatível com dispositivos móveis (responsivo) | Importante  | 🔧 Em desenvolvimento |
 <!-- | **RNF31** | Atender aos padrões de acessibilidade (ex: WCAG 2.1) | ⏳ Planejando | -->
 
 ...
@@ -102,8 +101,8 @@
 
 | Código   | Requisito                        | Propriedade | Status                 |
 | :------: | -------------------------------- | ----------- | ---------------------- |
-| **NF17** | Código documentado e comentado   | Importante  | 🔧 Em desenvolvimento |
-| **NF18** | Estrutura modular e reutilizável | Importante  | 🔧 Em desenvolvimento |
+| **NF21** | Código documentado e comentado   | Importante  | 🔧 Em desenvolvimento |
+| **NF22** | Estrutura modular e reutilizável | Importante  | 🔧 Em desenvolvimento |
 
 ...
 
@@ -111,8 +110,8 @@
 
 | Código   | Requisito                                                            | Propriedade | Status         |
 | :------: | -------------------------------------------------------------------- | ----------- | -------------- |
-| **NF19** | Utilizar serviços em nuvem com custo-benefício (ex: AWS, GCP, Azure) | ... | ⏳ Planejando |
-| **NF20** | Monitorar e otimizar o uso de recursos para minimizar custos         | ... | ⏳ Planejando |
+| **NF23** | Utilizar serviços em nuvem com custo-benefício (ex: AWS, GCP, Azure) | ... | ⏳ Planejando |
+| **NF24** | Monitorar e otimizar o uso de recursos para minimizar custos         | Importante  | ⏳ Planejando |
 
 ...
 
@@ -120,11 +119,11 @@
 
 | Código   | Página            | Funcionalidade                                                                                  | Propriedade | Status                  |
 | :------: | ----------------- | ----------------------------------------------------------------------------------------------- | ----------- | ----------------------- |
-| **NF21** | Home              | Página inicial do site (Landing Page), para mostrar as funcionalidades                          | Essencial   | 🔧 Em desenvolvimento  |
-| **NF22** | Login             | Autenticação do usuário                                                                         | Essencial   | 🔧 Em desenvolvimento  |
-| **NF23** | Cadastro          | Registro de novos usuários                                                                      | Essencial   | 🔧 Em desenvolvimento  |
-| **NF24** | Dashboard         | Área principal: criação e visualização de materiais, grupos, entre outras funcionalidades       | Essencial   | 🔧 Em desenvolvimento  |
-| **NF25** | Perfil            | Visualização e edição do perfil do usuário                                                      | Essencial   | 🔧 Em desenvolvimento  |
-| **NF26** | Históricos        | Visualização dos históricos do usuário                                                          | Essencial   | 🔧 Em desenvolvimento  |
-| **NF27** | Sobre             | Informações sobre a plataforma                                                                  | Essencial   | 🔧 Em desenvolvimento  |
-| **NF28** | Configurações     | Configurações do usuário e preferências da IA                                                   | Essencial   | 🔧 Em desenvolvimento  |
+| **NF25** | Home              | Página inicial do site (Landing Page), para mostrar as funcionalidades                          | Essencial   | 🔧 Em desenvolvimento  |
+| **NF26** | Login             | Autenticação do usuário                                                                         | Essencial   | 🔧 Em desenvolvimento  |
+| **NF27** | Cadastro          | Registro de novos usuários                                                                      | Essencial   | 🔧 Em desenvolvimento  |
+| **NF28** | Dashboard         | Área principal: criação e visualização de materiais, grupos, entre outras funcionalidades       | Essencial   | 🔧 Em desenvolvimento  |
+| **NF29** | Perfil            | Visualização e edição do perfil do usuário                                                      | Essencial   | 🔧 Em desenvolvimento  |
+| **NF30** | Históricos        | Visualização dos históricos do usuário                                                          | Essencial   | 🔧 Em desenvolvimento  |
+| **NF31** | Sobre             | Informações sobre a plataforma                                                                  | Essencial   | 🔧 Em desenvolvimento  |
+| **NF32** | Configurações     | Configurações do usuário e preferências da IA                                                   | Essencial   | 🔧 Em desenvolvimento  |
