@@ -40,11 +40,11 @@
 
 2. **ChatGPT**
 
-    A versão PRO custa 20 dolares por mês. Muito usado e famoso, domina todos os testes de performance
+    Muito usado e famoso, domina todos os testes de performance
 
 3. **Perplexity**
 
-    A versão PRO custa 20 dolares por mês. Se popularizando entre estudantes, pela sua característica de buscar as fontas dos resultados mostrados
+    Se popularizando entre estudantes, pela sua característica de buscar as fontes dos resultados mostrados
 
 ## 3. Performance
 
@@ -57,13 +57,11 @@
 
 ## 4. Escalabilidade
 
-<!-- | Código    | Requisito                              | Status         |
-| :-------: | -------------------------------------- | -------------- |
-| **RNF01** | Suporte para 100 usuários simultâneos  | ⏳ Planejando |
-| **RNF02** | Suporte para 500 usuários simultâneos  | ⏳ Planejando |
-| **RNF03** | Suporte para 1000 usuários simultâneos | ⏳ Planejando | -->
-
-...
+| Código    | Requisito                              | Propriedade | Status         |
+| :-------: | -------------------------------------- | ----------- | -------------- |
+| **RNF01** | Suporte para 100 usuários simultâneos  | Desejável   | ⏳ Planejando |
+| **RNF02** | Suporte para 500 usuários simultâneos  | Desejável   | ⏳ Planejando |
+| **RNF03** | Suporte para 1000 usuários simultâneos | Desejável   | ⏳ Planejando |
 
 ## 5. Confiabilidade
 
@@ -77,15 +75,11 @@
 | **NF16** | Armazenar senhas utilizando hashing seguro com `Argon2`          | Importante  | 🔧 Em desenvolvimento |
 | **NF17** | Implementar autenticação multifator (MFA) para acessos sensíveis | Desejável   | ⏳ Planejando         |
 
-...
-
 ## 7. Privacidade
 
 | Código   | Requisito                                   | Propriedade | Status                 |
 | :------: | ------------------------------------------- | ----------- | ---------------------- |
 | **NF18** | Permitir que os usuários excluam seus dados | Essencial   | 🔧 Em desenvolvimento |
-
-...
 
 ## 8. Usabilidade
 
@@ -95,8 +89,6 @@
 | **NF20** | Compatível com dispositivos móveis (responsivo) | Importante  | 🔧 Em desenvolvimento |
 <!-- | **RNF31** | Atender aos padrões de acessibilidade (ex: WCAG 2.1) | ⏳ Planejando | -->
 
-...
-
 ## 9. Manutenibilidade
 
 | Código   | Requisito                        | Propriedade | Status                 |
@@ -104,16 +96,12 @@
 | **NF21** | Código documentado e comentado   | Importante  | 🔧 Em desenvolvimento |
 | **NF22** | Estrutura modular e reutilizável | Importante  | 🔧 Em desenvolvimento |
 
-...
-
 ## 10. Custo operacional
 
 | Código   | Requisito                                                            | Propriedade | Status         |
 | :------: | -------------------------------------------------------------------- | ----------- | -------------- |
 | **NF23** | Utilizar serviços em nuvem com custo-benefício (ex: AWS, GCP, Azure) | ... | ⏳ Planejando |
 | **NF24** | Monitorar e otimizar o uso de recursos para minimizar custos         | Importante  | ⏳ Planejando |
-
-...
 
 ## 11. Páginas
 
