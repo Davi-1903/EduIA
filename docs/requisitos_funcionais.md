@@ -18,7 +18,7 @@
 | Código   | Requisito                                                                                               | Propriedade | Status                 |
 | :-----:  | ------------------------------------------------------------------------------------------------------- | ----------- | ---------------------- |
 | **RF08** | O usuário poderá editar seu próprio perfil                                                              | Importante  | 🔧 Em desenvolvimento |
-| **RF09** | O usuário poderá habilitar a memória da IA                                                              | ... | ⏳ Planejando         |
+| **RF09** | O usuário poderá gerenciar as preferências gerais                                                       | Importante  | 🔧 Em desenvolvimento |
 | **RF10** | O usuário poderá especificar como deseja o comportamento da IA (mais visual, mais leitura, mais testes) | ... | ⏳ Planejando         |
 
 ## 3. Geração de materiais com IA
@@ -45,7 +45,7 @@
 | **RF23** | Permitir salvar materiais criados                                | Essencial   | 🔧 Em desenvolvimento |
 | **RF24** | Proporcionar a organização dos materiais por disciplinas         | Desejável   | ⏳ Planejando         |
 | **RF25** | Permitir a visualização dos materiais diretamente pelo navegador | Essencial   | 🔧 Em desenvolvimento |
-| **RF26** | Permitir o download dos materiais gerados (PDFs, imagens, etc.)  | Importante  | 🔧 Em desenvolvimento |
+| **RF26** | Permitir o download dos materiais gerados (PDFs, imagens, etc)   | Importante  | 🔧 Em desenvolvimento |
 | **RF27** | Permitir buscar materiais por palavra-chave                      | Desejável   | ⏳ Planejando         |
 
 ## 5. Criação de grupos (Sugestão futura)
