@@ -19,7 +19,7 @@
 | :-----:  | ------------------------------------------------------------------------------------------------------- | ----------- | ---------------------- |
 | **RF08** | O usuário poderá editar seu próprio perfil                                                              | Importante  | 🔧 Em desenvolvimento |
 | **RF09** | O usuário poderá gerenciar as preferências gerais                                                       | Importante  | 🔧 Em desenvolvimento |
-| **RF10** | O usuário poderá especificar como deseja o comportamento da IA (mais visual, mais leitura, mais testes) | ... | ⏳ Planejando         |
+| **RF10** | O usuário poderá especificar como deseja o comportamento da IA (mais visual, mais leitura, mais testes) | Desejável   | ⏳ Planejando         |
 
 ## 3. Geração de materiais com IA
 
@@ -33,8 +33,8 @@
 | **RF16** | Gerar Explicações                      | Explicação de um assunto ou matéria para diferentes níveis, podendo usar analogias e demonstrar aplicações      | Ambos     | Essencial   | 🔧 Em desenvolvimento |
 | **RF17** | Gerar Exercícios guiados               | Questões já respondidas, com passo a passo e explicações detalhadas                                             | Ambos     | Essencial   | 🔧 Em desenvolvimento |
 | **RF18** | Gerar Planos de aula                   | Base do que deve ser abordado na aula em questão                                                                | Professor | Essencial   | 🔧 Em desenvolvimento |
-| **RF19** | Gerar Mapas mentais                    | Arquivos em PNG ou PDF                                                                                          | Aluno     | ... | ⏳ Planejando         |
-| **RF20** | Gerar Mapas conceituais                | Arquivos em PNG ou PDF                                                                                          | Aluno     | ... | ⏳ Planejando         |
+| **RF19** | Gerar Mapas mentais                    | Arquivos em PNG ou PDF                                                                                          | Ambos     | Desejável   | ⏳ Planejando         |
+| **RF20** | Gerar Mapas conceituais                | Arquivos em PNG ou PDF                                                                                          | Ambos     | Desejável   | ⏳ Planejando         |
 | **RF21** | Gerar Roteiros de estudo               | Contém o que deve ser estudado e em qual sequência                                                              | Aluno     | Essencial   | 🔧 Em desenvolvimento |
 | **RF22** | Gerar Desafios                         | Desafios para cada assunto ou matéria                                                                           | Ambos     | Importante  | 🔧 Em desenvolvimento |
 
