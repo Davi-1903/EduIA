@@ -1,6 +1,12 @@
 <div align='center'>
-    <img src='client/public/logo.svg' loading='lazy' width='400' style='margin-bottom: -3rem' alt='Logo EduIA'>
-    <h3>Sistema Inteligente de Apoio a Educação</h3>
+    <img
+        src='client/public/logo.svg'
+        loading='lazy'
+        width='400'
+        style='margin-bottom: -3rem'
+        alt='Logo EduIA'
+    >
+    <h3>Sistema Inteligente de Apoio à Educação</h3>
 </div>
 
 ---
