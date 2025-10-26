@@ -21,10 +21,10 @@ O **EduIA** é um sistema de geração de materiais de estudo com **IA** (Inteli
 
 O sistema gera diversos materiais que são distribuídos entre professores e alunos. Abaixo está uma tabela com todos os materiais que são gerados.
 
-| Materiais              | Como funcionam                                                                                             |
+| Material               | Como funciona                                                                                              |
 | ---------------------- | ---------------------------------------------------------------------------------------------------------- |
 | **Questões**           | Listas de exercícios com quantidade e nível especificados pelo usuário                                     |
-| **Formulários**        | Formulários objetivos com quantidade e nível especificados pelo usuário                                    |
+| **Formulários**        | Formulários com quantidade e nível especificados pelo usuário                                              |
 | **Quiz**               | Quizzes com pontuação e tempo estabelecidos pelo usuário                                                   |
 | **Flashcards**         | Cartões com perguntas simples e suas respostas                                                             |
 | **Resumos**            | Resumo de um determinado assunto ou matéria                                                                |
@@ -45,9 +45,9 @@ Devido à complexidade do sistema, foram necessárias mais de uma tecnologia par
 | ---------------- | -------------------------------------------------------------------------------------------------------------------------------- |
 | `Flask`          | microframework `Python` usado na integração com o `front-end` e `back-end`                                                       |
 | `ReactJS`        | Biblioteca `JavaScript` para a criação de interfaces                                                                             |
-| `MySQL`          | Tipo de banco de dados relacional utilizado para armazenar informações                                                           |
+| `MySQL`          | Tipo de banco de dados relacional utilizado para armazenar dados e informações                                                   |
 | `LangChain`      | Framework para a orquestração da **LLM**                                                                                         |
-| `GPT-5 nano`     | `API` para integração com o modelo de linguagem `OpenAI`                                                                         |
+| `GPT-5 nano`     | Modelo de linguagem desenvolvido pela **OpenAI**                                                                                 |
 
 ### 🧠 IA
 
