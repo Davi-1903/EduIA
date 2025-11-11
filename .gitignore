@@ -17,6 +17,7 @@ env/
 .env/
 venv/
 .venv/
+ENV/
 
 # Arquivos binários
 __pycache__/
