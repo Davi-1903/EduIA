@@ -1,7 +1,7 @@
 import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import Layout from './layout';
-import './index.css';
+import './globals.css';
 
 const router = createBrowserRouter([
     {

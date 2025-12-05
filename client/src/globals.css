@@ -1,0 +1,106 @@
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap');
+/* Fonte provisória */
+
+@import 'tailwindcss';
+
+:root {
+    --height-header: 80px;
+
+    --base-color1: #071d39;
+    --base-color2: #ff6700;
+    --base-color3: #ebebeb;
+    --base-color4: #c0c0c0;
+    --base-color5: #50808e;
+
+    --font-primary: 'Roboto'
+}
+
+@theme inline {
+    /* ============================== CABEÇALHO ============================== */
+    --height-header: var(--height-header);
+    --color-header: hsl(from var(--base-color3) h s calc(l + 5) / 0.75);
+    
+    /* ============================== CORES ============================== */
+    --color-color1-bright: hsl(from var(--base-color1) h s calc(l + 5));
+    --color-color1-normal: var(--base-color1);
+    --color-color1-dark: hsl(from var(--base-color1) h s calc(l - 5));
+
+    --color-color2-bright: hsl(from var(--base-color2) h s calc(l + 5));
+    --color-color2-normal: var(--base-color2);
+    --color-color2-dark: hsl(from var(--base-color2) h s calc(l - 5));
+
+    --color-color3-bright: hsl(from var(--base-color3) h s calc(l + 5));
+    --color-color3-normal: var(--base-color3);
+    --color-color3-dark: hsl(from var(--base-color3) h s calc(l - 5));
+
+    --color-color4-bright: hsl(from var(--base-color4) h s calc(l + 5));
+    --color-color4-normal: var(--base-color4);
+    --color-color4-dark: hsl(from var(--base-color4) h s calc(l - 5));
+
+    --color-color5-bright: hsl(from var(--base-color5) h s calc(l + 5));
+    --color-color5-normal: var(--base-color5);
+    --color-color5-dark: hsl(from var(--base-color5) h s calc(l - 5));
+
+    /* ============================== FONTES ============================== */
+    --font-primary: var(--font-primary);
+    --text-md: 1rem;
+
+    /* ============================== SOMBRAS ============================== */
+    --shadow-sm: 0.25rem 0.25rem 1rem hsl(from var(--base-color5) h s l / 0.1)
+}
+
+@layer base {
+    * {
+        box-sizing: border-box;
+        margin: 0;
+        padding: 0;
+        border: 0;
+    }
+
+    .wrapper {
+        min-height: 100vh;
+        background-color: var(--base-color3);
+    }
+}
+
+@layer components {
+    .nav-header {
+        position: fixed;
+        inset: -0.5rem;
+        height: 100vh;
+        width: 100vw;
+        background-color: hsl(from var(--base-color3) h s calc(l + 5));
+
+        &>ul {
+            margin-top: calc(var(--height-header) + 1rem);
+            height: calc(100% - var(--height-header) - 1rem);
+            flex-direction: column;
+            align-items: stretch;
+            padding-inline: 1rem;
+            gap: 1rem !important;
+        }
+
+        & li {
+            width: 100%;
+        }
+
+        & a {
+            display: block;
+            border-radius: 0.5rem;
+            padding: 0.5rem 1rem !important;
+            font-size: 1.6rem !important;
+            background-color: transparent !important;
+            color: var(--base-color1) !important;
+            border: none !important;
+        }
+        
+        & a:hover {
+            background-color: hsl(from var(--base-color3) h s calc(l - 5)) !important;
+            box-shadow: none !important;
+        }
+    }
+}
+
+@utility shadow-link {
+    box-shadow: 0 0 0.5rem hsl(from var(--base-color1) h s l / 0.75);
+}
