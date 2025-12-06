@@ -20,6 +20,9 @@
     --height-header: var(--height-header);
     --color-header: hsl(from var(--base-color3) h s calc(l + 5) / 0.75);
     
+    /* ============================== RODAPÉ ============================== */
+    --color-footer: hsl(from var(--base-color3) h s calc(l + 4));
+
     /* ============================== CORES ============================== */
     --color-color1-bright: hsl(from var(--base-color1) h s calc(l + 5));
     --color-color1-normal: var(--base-color1);
@@ -93,7 +96,7 @@
             color: var(--base-color1) !important;
             border: none !important;
         }
-        
+
         & a:hover {
             background-color: hsl(from var(--base-color3) h s calc(l - 5)) !important;
             box-shadow: none !important;

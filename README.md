@@ -2,8 +2,8 @@
     <img
         src='client/public/logo_light.svg'
         loading='lazy'
-        width='400'
-        style='margin-bottom: -3rem'
+        width='300'
+        style='margin-top: 3rem'
         alt='Logo EduIA'
     >
     <h3>Sistema Inteligente de Apoio à Educação</h3>

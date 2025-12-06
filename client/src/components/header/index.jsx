@@ -38,7 +38,7 @@ export default function Header() {
     return (
         <header className='h-header bg-header sticky top-2 left-2 z-1 mx-auto flex w-[calc(100vw-1rem)] max-w-400 items-center justify-between rounded-2xl px-4 shadow-sm backdrop-blur-sm sm:px-8'>
             <Link to='/' className='z-2'>
-                <img src={Logo} alt='Logo EduIA' className='h-12 sm:h-16' />
+                <img src={Logo} alt='Logo EduIA' className='h-5 sm:h-7' />
             </Link>
             <nav className={isOpenMenu ? 'nav-header' : 'hidden sm:block'}>
                 <ul className='flex items-center gap-8'>
