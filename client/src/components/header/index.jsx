@@ -49,29 +49,29 @@ export default function Header() {
                 <ul className='flex items-center gap-8'>
                     <li>
                         <Link
-                            to='/about'
+                            to='/sobre'
                             className='font-primary text-color1-100 text-md font-medium'
                             onClick={closeMenu}
                         >
-                            About
+                            Sobre
                         </Link>
                     </li>
                     <li>
                         <Link
-                            to='/signin'
+                            to='/login'
                             className='font-primary border-color1-100 text-color1-100 hover:bg-color1-100 hover:text-color3-100 text-md cursor-pointer rounded-lg border-2 px-4 py-2 font-medium transition-all duration-150'
                             onClick={closeMenu}
                         >
-                            Signin
+                            Login
                         </Link>
                     </li>
                     <li>
                         <Link
-                            to='/signup'
+                            to='/cadastro'
                             className='font-primary border-color1-100 text-color3-100 bg-color1-100 hover:shadow-link text-md cursor-pointer rounded-lg border-2 px-4 py-2 font-medium transition-all duration-150'
                             onClick={closeMenu}
                         >
-                            Signup
+                            Cadastro
                         </Link>
                     </li>
                 </ul>

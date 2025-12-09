@@ -54,7 +54,7 @@ export default function Footer() {
                         <ul>
                             {funcionalidades.map((material, idx) => (
                                 <li key={idx}>
-                                    <Link to='/about' className='font-primary text-color1-100 hover:underline'>
+                                    <Link to='/sobre' className='font-primary text-color1-100 hover:underline'>
                                         Gerar {material}
                                     </Link>
                                 </li>
@@ -67,7 +67,7 @@ export default function Footer() {
                         </h2>
                         <ul>
                             <li>
-                                <Link to='/about' className='font-primary text-color1-100 hover:underline'>
+                                <Link to='/sobre' className='font-primary text-color1-100 hover:underline'>
                                     Sobre o <strong>EduIA</strong>
                                 </Link>
                             </li>

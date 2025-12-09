@@ -4,6 +4,7 @@ import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
 import Layout from './layout';
 const SignUp = lazy(() => import('./pages/unprotected/signup'));
+const SignIn = lazy(() => import('./pages/unprotected/signin'));
 
 import './globals.css';
 
@@ -13,12 +14,12 @@ const router = createBrowserRouter([
         element: <Layout />,
         children: [
             { index: true, element: <h1>Home</h1> },
-            { path: 'signin', element: <h1>Signin</h1> },
-            { path: 'signup', element: <SignUp /> },
+            { path: 'login', element: <SignIn /> },
+            { path: 'cadastro', element: <SignUp /> },
             { path: 'dash', element: <h1>Dashboard</h1> },
-            { path: 'profile', element: <h1>Profile</h1> },
-            { path: 'history', element: <h1>History</h1> },
-            { path: 'about', element: <h1>About</h1> },
+            { path: 'perfil', element: <h1>Perfil</h1> },
+            { path: 'historico', element: <h1>Historico</h1> },
+            { path: 'sobre', element: <h1>Sobre</h1> },
             { path: 'config', element: <h1>Config</h1> },
         ],
     },

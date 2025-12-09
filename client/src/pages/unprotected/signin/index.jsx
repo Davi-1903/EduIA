@@ -1,8 +1,8 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { IconEye, IconEyeOff, IconMail, IconUser } from '@tabler/icons-react';
+import { IconEye, IconEyeOff, IconMail } from '@tabler/icons-react';
 
-export default function SignUp() {
+export default function SignIn() {
     // Adicionar responsividade
     const [showPassword, setShowPassword] = useState(false);
 
@@ -13,27 +13,7 @@ export default function SignUp() {
     return (
         <main className='grid min-h-[calc(100vh-var(--height-header))] place-items-center p-4'>
             <form className='bg-color3-200 flex w-sm min-w-80 flex-col gap-4 rounded-3xl p-8 shadow-lg'>
-                <h2 className='font-primary text-color1-100 text-center text-4xl font-bold'>Cadastro</h2>
-                <div>
-                    <label htmlFor='nome' className='text-color1-100 block'>
-                        Nome
-                    </label>
-                    <div className='relative'>
-                        <input
-                            type='text'
-                            id='nome'
-                            className='bg-color3-100 min-h-12 w-full rounded-lg pr-12 pl-4 outline-0'
-                            placeholder='Qual o seu nome?'
-                            required
-                        />
-                        <label
-                            htmlFor='nome'
-                            className='hover:bg-color3-50 absolute top-[0.3rem] right-[0.3rem] grid aspect-square h-[2.4rem] cursor-text place-items-center rounded-sm'
-                        >
-                            <IconUser size={26} className='stroke-color1-100' />
-                        </label>
-                    </div>
-                </div>
+                <h2 className='font-primary text-color1-100 text-center text-[2.5rem]/[50px] font-bold'>Login</h2>
                 <div>
                     <label htmlFor='email' className='text-color1-100 block'>
                         Email
@@ -86,10 +66,11 @@ export default function SignUp() {
                     Entrar
                 </button>
                 <div className='text-center'>
+                    <Link className='text-color1-100 font-bold hover:underline'>Esqueceu sua senha?</Link>
                     <p className='mt-1 text-center'>
-                        Já tem uma conta?{' '}
-                        <Link to='/login' className='text-color1-100 font-bold hover:underline'>
-                            Login
+                        Não tem uma conta?{' '}
+                        <Link to='/cadastro' className='text-color1-100 font-bold hover:underline'>
+                            Cadastro
                         </Link>
                     </p>
                 </div>
