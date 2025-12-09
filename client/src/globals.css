@@ -8,7 +8,7 @@
 
     --base-color1: #071d39;
     --base-color2: #ff6700;
-    --base-color3: #ebebeb;
+    --base-color3: #ebebef;
     --base-color4: #c0c0c0;
     --base-color5: #50808e;
 
@@ -24,25 +24,35 @@
     --color-footer: hsl(from var(--base-color3) h s calc(l + 4));
 
     /* ============================== CORES ============================== */
-    --color-color1-bright: hsl(from var(--base-color1) h s calc(l + 5));
-    --color-color1-normal: var(--base-color1);
-    --color-color1-dark: hsl(from var(--base-color1) h s calc(l - 5));
+    --color-color1-25: hsl(from var(--base-color1) h s calc(l - 10));
+    --color-color1-50: hsl(from var(--base-color1) h s calc(l - 5));
+    --color-color1-100: var(--base-color1);
+    --color-color1-200: hsl(from var(--base-color1) h s calc(l + 5));
+    --color-color1-400: hsl(from var(--base-color1) h s calc(l + 10));
 
-    --color-color2-bright: hsl(from var(--base-color2) h s calc(l + 5));
-    --color-color2-normal: var(--base-color2);
-    --color-color2-dark: hsl(from var(--base-color2) h s calc(l - 5));
+    --color-color2-25: hsl(from var(--base-color2) h s calc(l - 10));
+    --color-color2-50: hsl(from var(--base-color2) h s calc(l - 5));
+    --color-color2-100: var(--base-color2);
+    --color-color2-200: hsl(from var(--base-color2) h s calc(l + 5));
+    --color-color2-400: hsl(from var(--base-color2) h s calc(l + 10));
 
-    --color-color3-bright: hsl(from var(--base-color3) h s calc(l + 5));
-    --color-color3-normal: var(--base-color3);
-    --color-color3-dark: hsl(from var(--base-color3) h s calc(l - 5));
+    --color-color3-25: hsl(from var(--base-color3) h s calc(l - 10));
+    --color-color3-50: hsl(from var(--base-color3) h s calc(l - 5));
+    --color-color3-100: var(--base-color3);
+    --color-color3-200: hsl(from var(--base-color3) h s calc(l + 5));
+    --color-color3-400: hsl(from var(--base-color3) h s calc(l + 10));
 
-    --color-color4-bright: hsl(from var(--base-color4) h s calc(l + 5));
-    --color-color4-normal: var(--base-color4);
-    --color-color4-dark: hsl(from var(--base-color4) h s calc(l - 5));
+    --color-color4-25: hsl(from var(--base-color4) h s calc(l - 10));
+    --color-color4-50: hsl(from var(--base-color4) h s calc(l - 5));
+    --color-color4-100: var(--base-color4);
+    --color-color4-200: hsl(from var(--base-color4) h s calc(l + 5));
+    --color-color4-400: hsl(from var(--base-color4) h s calc(l + 10));
 
-    --color-color5-bright: hsl(from var(--base-color5) h s calc(l + 5));
-    --color-color5-normal: var(--base-color5);
-    --color-color5-dark: hsl(from var(--base-color5) h s calc(l - 5));
+    --color-color5-25: hsl(from var(--base-color5) h s calc(l - 10));
+    --color-color5-50: hsl(from var(--base-color5) h s calc(l - 5));
+    --color-color5-100: var(--base-color5);
+    --color-color5-200: hsl(from var(--base-color5) h s calc(l + 5));
+    --color-color5-400: hsl(from var(--base-color5) h s calc(l + 10));
 
     /* ============================== FONTES ============================== */
     --font-primary: var(--font-primary);
