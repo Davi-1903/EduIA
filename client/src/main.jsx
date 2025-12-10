@@ -14,8 +14,6 @@ const router = createBrowserRouter([
         element: <Layout />,
         children: [
             { index: true, element: <h1>Home</h1> },
-            { path: 'login', element: <SignIn /> },
-            { path: 'cadastro', element: <SignUp /> },
             { path: 'dash', element: <h1>Dashboard</h1> },
             { path: 'perfil', element: <h1>Perfil</h1> },
             { path: 'historico', element: <h1>Historico</h1> },
@@ -23,6 +21,8 @@ const router = createBrowserRouter([
             { path: 'config', element: <h1>Config</h1> },
         ],
     },
+    { path: '/login', element: <SignIn /> },
+    { path: '/cadastro', element: <SignUp /> },
 ]);
 
 createRoot(document.getElementById('root')).render(

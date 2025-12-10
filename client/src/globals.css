@@ -78,7 +78,8 @@
 
     .wrapper {
         min-height: 100vh;
-        background-color: var(--base-color3); /* Trocar background para gradiente */
+        background-color: var(--base-color3);
+        /* Trocar background para gradiente */
     }
 }
 
@@ -122,4 +123,9 @@
 
 @utility shadow-link {
     box-shadow: 0 0 0.5rem hsl(from var(--base-color1) h s l / 0.75);
+}
+
+@utility bg-auth {
+    background: url('/backgrounds/background-login.jpg') no-repeat center bottom;
+    background-size: cover;
 }
