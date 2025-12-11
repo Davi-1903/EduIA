@@ -12,6 +12,9 @@ dist
 dist-ssr
 *.local
 
+# .env raiz
+.env
+
 # Ambiente virtual
 env/
 .env/
