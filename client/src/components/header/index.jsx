@@ -41,51 +41,53 @@ export default function Header() {
     }, [lockScroll]);
 
     return (
-        <header className='bg-header sticky top-2 left-2 z-1 mx-auto flex h-[60px] w-[calc(100vw-1rem)] max-w-400 items-center justify-between rounded-2xl px-4 shadow-sm backdrop-blur-sm sm:h-20 sm:px-8'>
-            <Link to='/' className='z-2'>
-                <img src={Logo} alt='Logo EduIA' className='h-4 sm:h-7' />
-            </Link>
-            <nav className={isOpenMenu ? 'nav-header' : 'hidden sm:block'}>
-                <ul className='flex items-center gap-8'>
-                    <li>
-                        <Link
-                            to='/sobre'
-                            className='font-primary text-color1-100 text-md font-medium'
-                            onClick={closeMenu}
-                        >
-                            Sobre
-                        </Link>
-                    </li>
-                    <li>
-                        <Link
-                            to='/login'
-                            className='font-primary border-color1-100 text-color1-100 hover:bg-color1-100 hover:text-color3-100 text-md cursor-pointer rounded-lg border-2 px-4 py-2 font-medium transition-all duration-150'
-                            onClick={closeMenu}
-                        >
-                            Login
-                        </Link>
-                    </li>
-                    <li>
-                        <Link
-                            to='/cadastro'
-                            className='font-primary border-color1-100 text-color3-100 bg-color1-100 hover:shadow-link text-md cursor-pointer rounded-lg border-2 px-4 py-2 font-medium transition-all duration-150'
-                            onClick={closeMenu}
-                        >
-                            Cadastro
-                        </Link>
-                    </li>
-                </ul>
-            </nav>
-            <button
-                className='hover:bg-color3-50 z-2 block cursor-pointer rounded-md p-2 sm:hidden'
-                onClick={toggleMenu}
-            >
-                {isOpenMenu ? (
-                    <IconX size={22} className='stroke-color1-100' />
-                ) : (
-                    <IconMenu3 size={22} className='stroke-color1-100' />
-                )}
-            </button>
+        <header className='bg-header sticky top-0 z-1 h-[60px] w-full px-4 shadow-sm backdrop-blur-sm sm:h-20 sm:px-8'>
+            <div className='mx-auto flex h-full max-w-400 items-center justify-between'>
+                <Link to='/' className='z-2'>
+                    <img src={Logo} alt='Logo EduIA' className='h-4 sm:h-7' />
+                </Link>
+                <nav className={isOpenMenu ? 'nav-header' : 'hidden sm:block'}>
+                    <ul className='flex items-center gap-8'>
+                        <li>
+                            <Link
+                                to='/sobre'
+                                className='font-primary text-color1-100 text-md font-medium'
+                                onClick={closeMenu}
+                            >
+                                Sobre
+                            </Link>
+                        </li>
+                        <li>
+                            <Link
+                                to='/login'
+                                className='font-primary border-color1-100 text-color1-100 hover:bg-color1-100 hover:text-color3-100 text-md cursor-pointer rounded-lg border-2 px-4 py-2 font-medium transition-all duration-150'
+                                onClick={closeMenu}
+                            >
+                                Login
+                            </Link>
+                        </li>
+                        <li>
+                            <Link
+                                to='/cadastro'
+                                className='font-primary border-color1-100 text-color3-100 bg-color1-100 hover:shadow-link text-md cursor-pointer rounded-lg border-2 px-4 py-2 font-medium transition-all duration-150'
+                                onClick={closeMenu}
+                            >
+                                Cadastro
+                            </Link>
+                        </li>
+                    </ul>
+                </nav>
+                <button
+                    className='hover:bg-color3-50 z-2 block cursor-pointer rounded-md p-2 sm:hidden'
+                    onClick={toggleMenu}
+                >
+                    {isOpenMenu ? (
+                        <IconX size={22} className='stroke-color1-100' />
+                    ) : (
+                        <IconMenu3 size={22} className='stroke-color1-100' />
+                    )}
+                </button>
+            </div>
         </header>
     );
 }

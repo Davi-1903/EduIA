@@ -1,6 +1,7 @@
 import { lazy } from 'react';
 import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
+import { HelmetProvider } from 'react-helmet-async';
 
 import Layout from './layout';
 const SignUp = lazy(() => import('./pages/unprotected/signup'));
@@ -21,12 +22,12 @@ const router = createBrowserRouter([
             { path: 'config', element: <h1>Config</h1> },
         ],
     },
-    { path: '/login', element: <SignIn /> },
-    { path: '/cadastro', element: <SignUp /> },
+    { path: 'login', element: <SignIn /> },
+    { path: 'cadastro', element: <SignUp /> },
 ]);
 
 createRoot(document.getElementById('root')).render(
-    <>
+    <HelmetProvider>
         <RouterProvider router={router} />
-    </>,
+    </HelmetProvider>,
 );
