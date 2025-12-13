@@ -55,7 +55,7 @@ export default function Header() {
             className={`sm:h-header bg-color4-400/75 fixed z-5 h-[60px] w-full px-4 shadow-lg backdrop-blur-lg transition-all duration-250 sm:px-8 ${dropHeader ? 'top-0' : '-top-(--height-header)'}`}
         >
             <div className='mx-auto flex h-full max-w-400 items-center justify-between'>
-                <Link to='/' className='z-2'>
+                <Link to='/' className='z-2' onClick={closeMenu}>
                     <img src={Logo} alt='Logo EduIA' className='h-5 sm:h-6' />
                 </Link>
                 <nav className={isOpenMenu ? 'nav-header' : 'hidden sm:block'}>
