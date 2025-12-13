@@ -33,13 +33,13 @@ export default function Footer() {
                                 <IconBrandGithub
                                     size={32}
                                     strokeWidth={2}
-                                    className='stroke-color1-100 hover:bg-color3-50 box-content rounded-lg p-2'
+                                    className='stroke-color1-100 hover:bg-color4-50 box-content rounded-lg p-2'
                                 />
                             </Link>
                         </li>
                     </ul>
                     <button
-                        className='border-color1-100 hover:bg-color1-100 text-color1-100 hover:stroke-color3-100 stroke-color1-100 hover:text-color3-100 flex cursor-pointer gap-2 rounded-lg border-3 px-4 py-2 transition-all duration-100'
+                        className='border-color1-100 hover:bg-color1-100 text-color1-100 hover:stroke-color3-100 stroke-color1-100 hover:text-color4-100 flex cursor-pointer gap-2 rounded-lg border-3 px-4 py-2 transition-all duration-100'
                         onClick={() => window.scroll({ top: 0, behavior: 'smooth' })}
                     >
                         <span className='font-primary font-medium'>Voltar para o topo</span>
@@ -84,7 +84,7 @@ export default function Footer() {
                     </article>
                 </div>
             </div>
-            <p className='font-primary bg-color1-50 text-color3-100 p-4 text-center text-sm'>
+            <p className='font-primary bg-color1-50 text-color4-100 p-4 text-center text-sm'>
                 Copyright &copy; {new Date().getFullYear()} <strong>EduIA</strong> | Todos os direitos reservados.
             </p>
         </footer>

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { IconMenu3, IconX } from '@tabler/icons-react';
 import Logo from '/logo_dark.svg';
@@ -6,6 +6,8 @@ import Logo from '/logo_dark.svg';
 export default function Header() {
     const [isOpenMenu, setOpenMenu] = useState(false);
     const [lockScroll, setLockScroll] = useState(false);
+    const [dropHeader, setDropHeader] = useState(true);
+    const lastY = useRef(null);
 
     function toggleMenu() {
         if (!isOpenMenu) {
@@ -28,11 +30,19 @@ export default function Header() {
             if (event.key === 'Escape') closeMenu();
         }
 
+        function handleScroll() {
+            const scrolled = window.scrollY;
+            setDropHeader(lastY.current === null || scrolled < lastY.current);
+            lastY.current = scrolled;
+        }
+
         window.addEventListener('resize', closeMenu);
         window.addEventListener('keydown', handleEscape);
+        window.addEventListener('scroll', handleScroll);
         return () => {
             window.removeEventListener('resize', closeMenu);
             window.removeEventListener('keydown', handleEscape);
+            window.removeEventListener('scroll', handleScroll);
         };
     }, [closeMenu]);
 
@@ -41,17 +51,19 @@ export default function Header() {
     }, [lockScroll]);
 
     return (
-        <header className='bg-header sticky top-0 z-1 h-[60px] w-full px-4 shadow-sm backdrop-blur-sm sm:h-20 sm:px-8'>
+        <header
+            className={`sm:h-header bg-color4-400/75 fixed z-5 h-[60px] w-full px-4 shadow-lg backdrop-blur-lg transition-all duration-250 sm:px-8 ${dropHeader ? 'top-0' : '-top-(--height-header)'}`}
+        >
             <div className='mx-auto flex h-full max-w-400 items-center justify-between'>
                 <Link to='/' className='z-2'>
-                    <img src={Logo} alt='Logo EduIA' className='h-4 sm:h-7' />
+                    <img src={Logo} alt='Logo EduIA' className='h-5 sm:h-6' />
                 </Link>
                 <nav className={isOpenMenu ? 'nav-header' : 'hidden sm:block'}>
                     <ul className='flex items-center gap-8'>
                         <li>
                             <Link
                                 to='/sobre'
-                                className='font-primary text-color1-100 text-md font-medium'
+                                className='font-primary text-color1-100 text-sm font-medium'
                                 onClick={closeMenu}
                             >
                                 Sobre
@@ -60,7 +72,7 @@ export default function Header() {
                         <li>
                             <Link
                                 to='/login'
-                                className='font-primary border-color1-100 text-color1-100 hover:bg-color1-100 hover:text-color3-100 text-md cursor-pointer rounded-lg border-2 px-4 py-2 font-medium transition-all duration-150'
+                                className='font-primary border-color1-100 text-color1-100 hover:bg-color1-100 hover:text-color4-100 cursor-pointer rounded-lg border-2 px-4 py-2 text-sm font-medium transition-all duration-150'
                                 onClick={closeMenu}
                             >
                                 Login
@@ -69,7 +81,7 @@ export default function Header() {
                         <li>
                             <Link
                                 to='/cadastro'
-                                className='font-primary border-color1-100 text-color3-100 bg-color1-100 hover:shadow-link text-md cursor-pointer rounded-lg border-2 px-4 py-2 font-medium transition-all duration-150'
+                                className='font-primary border-color1-100 text-color4-100 bg-color1-100 hover:shadow-link cursor-pointer rounded-lg border-2 px-4 py-2 text-sm font-medium transition-all duration-150'
                                 onClick={closeMenu}
                             >
                                 Cadastro
@@ -78,7 +90,7 @@ export default function Header() {
                     </ul>
                 </nav>
                 <button
-                    className='hover:bg-color3-50 z-2 block cursor-pointer rounded-md p-2 sm:hidden'
+                    className='hover:bg-color4-50 z-2 block cursor-pointer rounded-md p-2 sm:hidden'
                     onClick={toggleMenu}
                 >
                     {isOpenMenu ? (

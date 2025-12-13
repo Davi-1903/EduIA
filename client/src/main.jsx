@@ -6,6 +6,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import Layout from './layout';
 const SignUp = lazy(() => import('./pages/unprotected/signup'));
 const SignIn = lazy(() => import('./pages/unprotected/signin'));
+const LandingPage = lazy(() => import('./pages/unprotected/landingpage'));
 
 import './globals.css';
 
@@ -14,7 +15,7 @@ const router = createBrowserRouter([
         path: '/',
         element: <Layout />,
         children: [
-            { index: true, element: <h1>Home</h1> },
+            { index: true, element: <LandingPage /> },
             { path: 'dash', element: <h1>Dashboard</h1> },
             { path: 'perfil', element: <h1>Perfil</h1> },
             { path: 'historico', element: <h1>Historico</h1> },
