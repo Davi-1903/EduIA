@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { IconArrowUp, IconBrandGithub } from '@tabler/icons-react';
-import Logo from '/logo_dark.svg';
+import Logo from '/assets/logo_dark.svg';
 
 export default function Footer() {
     const funcionalidades = [

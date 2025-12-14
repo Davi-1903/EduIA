@@ -1,5 +1,5 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 /* Fonte provisória */
+@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
 
 @import 'tailwindcss';
 
@@ -8,7 +8,7 @@
 
     --base-color1: #011F5B;
     --base-color2: #071D39;
-    --base-color3: #7A7A8A;
+    --base-color3: #3A3A4A;
     --base-color4: #EBEBEF;
 
     --font-primary: 'Inter';
@@ -150,7 +150,7 @@
 }
 
 @utility bg-auth {
-    background: url('/backgrounds/background-login.jpg') no-repeat center bottom;
+    background: url('/assets/backgrounds/background-login.jpg') no-repeat center bottom;
     background-size: cover;
 }
 
@@ -173,11 +173,11 @@
 }
 
 @utility animate-carrossel {
-    animation: animate-carrossel 60s linear infinite;
+    animation: animate-carrossel 120s linear infinite;
 }
 
 @utility animate-carrossel-reverse {
-    animation: animate-carrossel 60s linear infinite reverse;
+    animation: animate-carrossel 120s linear infinite reverse;
 }
 
 @keyframes animate-carrossel {

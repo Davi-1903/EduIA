@@ -1,6 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import { Link } from 'react-router-dom';
 import Card from '../../../components/card';
+import Mascote from '/assets/mascote.png';
 
 export default function LandingPage() {
     const materiais = [
@@ -77,20 +78,26 @@ export default function LandingPage() {
             </Helmet>
             <main>
                 {/* Adicionar um background diferente. Quem sabe o tal do mascote */}
-                <section className='bg-color4-200 flex w-full flex-col items-start justify-center gap-4 px-8 py-12 pt-24 md:min-h-screen md:px-16 md:py-32'>
-                    <h1 className='font-primary title-welcome max-w-300 pb-2 text-4xl font-bold text-balance md:text-[5rem] md:font-semibold'>
-                        Aprenda de forma inteligente e personalizada
-                    </h1>
-                    <p className='font-secundary text-color1-50 max-w-300 text-lg text-balance md:text-2xl'>
-                        O <strong>EduIA</strong> utiliza inteligência artificial para criar planos de aula, desafios e
-                        conteúdos adaptados ao seu ritmo de aprendizado
-                    </p>
-                    <Link to='/cadastro'>
-                        <button className='bg-color1-100 text-color4-200 font-primary hover:shadow-lg-hard mt-4 cursor-pointer rounded-xl px-8 py-4 text-xl transition-all duration-200'>
-                            Crie uma conta
-                        </button>
-                    </Link>
+                <section className='bg-color4-200 flex w-full items-center justify-center gap-4 p-12 pt-24 md:min-h-screen md:px-16 md:py-32'>
+                    <article className='flex-1 lg:flex-2'>
+                        <h1 className='font-primary title-welcome mb-4 max-w-300 pb-2 text-4xl font-bold text-balance md:text-5xl md:font-semibold lg:text-7xl'>
+                            Aprenda de forma inteligente e personalizada
+                        </h1>
+                        <p className='font-secundary text-color1-50 max-w-300 text-lg text-balance md:text-2xl'>
+                            O <strong>EduIA</strong> utiliza inteligência artificial para criar planos de aula, desafios
+                            e conteúdos adaptados ao seu ritmo de aprendizado
+                        </p>
+                        <Link to='/cadastro'>
+                            <button className='bg-color1-100 text-color4-200 font-primary hover:shadow-lg-hard mt-4 cursor-pointer rounded-xl px-8 py-4 text-xl transition-all duration-200'>
+                                Crie uma conta
+                            </button>
+                        </Link>
+                    </article>
+                    <article className='hidden flex-1 lg:block'>
+                        <img src={Mascote} alt='Mascote' className='mx-auto' />
+                    </article>
                 </section>
+                {/* Não sei se ficou muito bom. Tem alguns detalhes para alterar */}
                 <section className='bg-color4-200 min-h-screen p-8 md:p-16 md:pt-0'>
                     <h2 className='font-primary text-color2-200 mb-16 text-4xl font-semibold md:text-center md:text-5xl'>
                         Gere materiais de forma rápida e fácil
@@ -120,6 +127,25 @@ export default function LandingPage() {
                                 ))}
                             </article>
                         </article>
+                    </article>
+                </section>
+                <section className='bg-color4-200 flex flex-wrap items-center justify-center gap-8 px-8 py-32 md:min-h-screen md:p-24 md:pt-0'>
+                    <article className='flex-2 basis-80'>
+                        <h2 className='text-color2-200 font-primary mb-4 text-4xl font-bold md:text-5xl'>
+                            O que é o EduIA?
+                        </h2>
+                        <p className='text-md text-color3-100 font-secundary text-balance md:text-xl'>
+                            O <strong>EduIA</strong> é um sistema de geração de materiais de estudo com{' '}
+                            <strong>IA</strong> (Inteligência Artificial), desenvolvido por estudantes do ensino médio
+                            técnico integrado do <strong>IFRN</strong> - campus Caicó. O sistema visa reduzir o tempo
+                            gasto por alunos e professores, gerando materiais de estudo e de aula.
+                        </p>
+                    </article>
+                    <article className='hidden flex-1 basis-80 md:block'>
+                        {/* Adicionar uma imagem que tem a ver com o projeto */}
+                        <div className='bg-color4-25 mx-auto grid aspect-square h-120 place-items-center rounded-4xl'>
+                            IMG
+                        </div>
                     </article>
                 </section>
             </main>
