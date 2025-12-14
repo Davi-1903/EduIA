@@ -113,6 +113,31 @@
             box-shadow: none !important;
         }
     }
+
+    .slide-container {
+        position: relative;
+
+        &::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            right: 0;
+            height: 100%;
+            width: 10%;
+            background-image: linear-gradient(to left, var(--color-color4-200), transparent);
+        }
+
+        &::before {
+            content: '';
+            z-index: 1;
+            position: absolute;
+            top: 0;
+            left: 0;
+            height: 100%;
+            width: 10%;
+            background-image: linear-gradient(to right, var(--color-color4-200), transparent);
+        }
+    }
 }
 
 @utility bg-welcome {
@@ -133,4 +158,34 @@
     background-image: linear-gradient(to right bottom, var(--color-color1-100) 25%, var(--color-color2-400), var(--color-color4-25));
     background-clip: text;
     color: transparent;
+}
+
+@utility scrollbar-hide {
+    &::-webkit-scrollbar {
+        display: none;
+    }
+
+    &::-moz-scrollbar {
+        display: none;
+    }
+
+    scrollbar-width: none;
+}
+
+@utility animate-carrossel {
+    animation: animate-carrossel 60s linear infinite;
+}
+
+@utility animate-carrossel-reverse {
+    animation: animate-carrossel 60s linear infinite reverse;
+}
+
+@keyframes animate-carrossel {
+    from {
+        transform: translateX(0);
+    }
+
+    to {
+        transform: translateX(-100%);
+    }
 }
