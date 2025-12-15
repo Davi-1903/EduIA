@@ -177,6 +177,22 @@
     animation: animate-carrossel 120s linear infinite reverse;
 }
 
+@utility animate-emerge-up {
+    animation: animation-emerge-up 1s 250ms ease forwards;
+}
+
+@utility animate-emerge-down {
+    animation: animation-emerge-down 1s 250ms ease forwards;
+}
+
+@utility animate-emerge-left {
+    animation: animation-emerge-left 1s 250ms ease forwards;
+}
+
+@utility animate-emerge-right {
+    animation: animation-emerge-right 1s 250ms ease forwards;
+}
+
 @keyframes animate-carrossel {
     from {
         transform: translateX(0);
@@ -184,5 +200,53 @@
 
     to {
         transform: translateX(-100%);
+    }
+}
+
+@keyframes animation-emerge-up {
+    from {
+        transform: translateY(-1rem);
+        opacity: 0;
+    }
+
+    to {
+        transform: none;
+        opacity: 1;
+    }
+}
+
+@keyframes animation-emerge-down {
+    from {
+        transform: translateY(1rem);
+        opacity: 0;
+    }
+
+    to {
+        transform: none;
+        opacity: 1;
+    }
+}
+
+@keyframes animation-emerge-left {
+    from {
+        transform: translateX(-1rem);
+        opacity: 0;
+    }
+
+    to {
+        transform: none;
+        opacity: 1;
+    }
+}
+
+@keyframes animation-emerge-right {
+    from {
+        transform: translateX(1rem);
+        opacity: 0;
+    }
+
+    to {
+        transform: none;
+        opacity: 1;
     }
 }

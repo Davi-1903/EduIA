@@ -1,6 +1,9 @@
+import { useEffect, useRef, useState } from 'react';
 import Card from '../../../../../components/card';
 
 export default function LandingPageMateriais() {
+    const [isEmerge, setEmerge] = useState(false);
+    const sectionRef = useRef(null);
     const materiais = [
         {
             id: 1,
@@ -64,14 +67,33 @@ export default function LandingPageMateriais() {
         },
     ];
 
+    useEffect(() => {
+        const observer = new IntersectionObserver(
+            entris => {
+                entris.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        setEmerge(true);
+                        observer.unobserve(entry.target);
+                    }
+                });
+            },
+            { threshold: 0.4 },
+        );
+
+        if (sectionRef.current) observer.observe(sectionRef.current);
+        return () => observer.disconnect();
+    }, []);
+
     return (
         <>
             {/* Não sei se ficou muito bom. Tem alguns detalhes para alterar */}
-            <section className='bg-color4-200 p-8 md:p-16 md:pt-0'>
-                <h2 className='font-primary text-color2-200 mb-16 text-4xl font-semibold md:text-center md:text-5xl'>
-                    Gere materiais de forma rápida e fácil
-                </h2>
-                <article className='slide-container'>
+            <section ref={sectionRef} className='bg-color4-200 p-8 md:p-16 md:pt-0'>
+                <article className={`mb-16 opacity-0 ${isEmerge ? 'animate-emerge-up' : ''}`}>
+                    <h2 className='font-primary text-color2-200 text-4xl font-semibold md:text-center md:text-5xl'>
+                        Gere materiais de forma rápida e fácil
+                    </h2>
+                </article>
+                <article className={`slide-container translate-y-4 opacity-0 ${isEmerge ? 'animate-emerge-down' : ''}`}>
                     <article className='scrollbar-hide flex overflow-x-auto'>
                         <article className='animate-carrossel flex w-fit gap-4 pr-4'>
                             {materiais.map(material => (
