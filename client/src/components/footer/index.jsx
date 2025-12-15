@@ -17,7 +17,7 @@ export default function Footer() {
     ];
 
     return (
-        <footer className='bg-footer'>
+        <footer className='bg-color4-400'>
             <div className='mx-auto flex max-w-360 flex-col justify-between gap-4 p-4 sm:p-12 lg:flex-row'>
                 <article className='lg:max-w-md'>
                     <Link to='/'>

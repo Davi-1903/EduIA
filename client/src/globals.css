@@ -19,9 +19,6 @@
     /* ============================== CABEÇALHO ============================== */
     --height-header: var(--height-header);
 
-    /* ============================== RODAPÉ ============================== */
-    --color-footer: hsl(from var(--base-color4) h s calc(l + 4));
-
     /* ============================== CORES ============================== */
     --color-color1-25: hsl(from var(--base-color1) h s calc(l - 10));
     --color-color1-50: hsl(from var(--base-color1) h s calc(l - 5));

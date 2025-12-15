@@ -67,7 +67,7 @@ export default function LandingPageMateriais() {
     return (
         <>
             {/* Não sei se ficou muito bom. Tem alguns detalhes para alterar */}
-            <section className='bg-color4-200 min-h-screen p-8 md:p-16 md:pt-0'>
+            <section className='bg-color4-200 p-8 md:p-16 md:pt-0'>
                 <h2 className='font-primary text-color2-200 mb-16 text-4xl font-semibold md:text-center md:text-5xl'>
                     Gere materiais de forma rápida e fácil
                 </h2>
@@ -98,7 +98,6 @@ export default function LandingPageMateriais() {
                     </article>
                 </article>
             </section>
-            ;
         </>
     );
 }
