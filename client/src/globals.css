@@ -205,7 +205,7 @@
 
 @keyframes animation-emerge-up {
     from {
-        transform: translateY(-1rem);
+        transform: translateY(-25%);
         opacity: 0;
     }
 
@@ -217,7 +217,7 @@
 
 @keyframes animation-emerge-down {
     from {
-        transform: translateY(1rem);
+        transform: translateY(25%);
         opacity: 0;
     }
 
@@ -229,7 +229,7 @@
 
 @keyframes animation-emerge-left {
     from {
-        transform: translateX(-1rem);
+        transform: translateX(-25%);
         opacity: 0;
     }
 
@@ -241,7 +241,7 @@
 
 @keyframes animation-emerge-right {
     from {
-        transform: translateX(1rem);
+        transform: translateX(25%);
         opacity: 0;
     }
 

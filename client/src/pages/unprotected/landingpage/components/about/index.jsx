@@ -15,7 +15,7 @@ export default function LandingPageAbout() {
                     }
                 });
             },
-            { threshold: 0.5 },
+            { threshold: 0.4 },
         );
 
         if (sectionRef.current) observer.observe(sectionRef.current);
@@ -27,9 +27,7 @@ export default function LandingPageAbout() {
             ref={sectionRef}
             className='bg-color4-200 flex flex-wrap items-center justify-center gap-8 px-8 py-32 md:min-h-screen md:p-24 md:pt-0'
         >
-            <article
-                className={`max-w-200 flex-2 basis-80 -translate-x-4 opacity-0 ${isEmerge ? 'animate-emerge-left' : ''}`}
-            >
+            <article className={`max-w-200 flex-2 basis-80 opacity-0 ${isEmerge ? 'animate-emerge-left' : ''}`}>
                 <h2 className='text-color2-200 font-primary mb-4 text-4xl font-bold md:text-5xl'>O que é o EduIA?</h2>
                 {/* Talvez usar outro texto */}
                 <p className='text-md text-color3-100 font-secundary text-balance md:text-xl/normal'>
@@ -40,7 +38,7 @@ export default function LandingPageAbout() {
                 </p>
             </article>
             <article
-                className={`hidden max-w-200 flex-1 basis-80 translate-x-4 opacity-0 md:block ${isEmerge ? 'animate-emerge-right' : ''}`}
+                className={`hidden max-w-200 flex-1 basis-80 opacity-0 md:block ${isEmerge ? 'animate-emerge-right' : ''}`}
             >
                 {/* Adicionar uma imagem que tem a ver com o projeto */}
                 <img src={Mascote} alt='Mascote' className='mx-auto max-w-130' />

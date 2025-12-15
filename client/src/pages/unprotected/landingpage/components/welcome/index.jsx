@@ -27,7 +27,7 @@ export default function LandingPageWelcome() {
                 ref={sectionRef}
                 className='bg-color4-200 flex w-full items-center justify-center p-12 pt-24 md:min-h-screen md:px-16 md:py-32'
             >
-                <article className={`-translate-x-4 opacity-0 ${isEmerge ? 'animate-emerge-left' : ''}`}>
+                <article className={`opacity-0 ${isEmerge ? 'animate-emerge-left' : ''}`}>
                     <h1 className='font-primary title-welcome mb-4 max-w-300 pb-2 text-4xl font-bold text-balance md:text-5xl md:font-semibold lg:text-6xl'>
                         Aprenda de forma inteligente e personalizada
                     </h1>
@@ -41,9 +41,7 @@ export default function LandingPageWelcome() {
                         </button>
                     </Link>
                 </article>
-                <article
-                    className={`hidden translate-x-4 opacity-0 xl:block ${isEmerge ? 'animate-emerge-right' : ''}`}
-                >
+                <article className={`hidden opacity-0 xl:block ${isEmerge ? 'animate-emerge-right' : ''}`}>
                     <img src={Mascote} alt='Mascote' className='mx-auto max-w-130' />
                 </article>
             </section>

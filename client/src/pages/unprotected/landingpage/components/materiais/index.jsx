@@ -93,7 +93,7 @@ export default function LandingPageMateriais() {
                         Gere materiais de forma rápida e fácil
                     </h2>
                 </article>
-                <article className={`slide-container translate-y-4 opacity-0 ${isEmerge ? 'animate-emerge-down' : ''}`}>
+                <article className={`slide-container opacity-0 ${isEmerge ? 'animate-emerge-down' : ''}`}>
                     <article className='scrollbar-hide flex overflow-x-auto'>
                         <article className='animate-carrossel flex w-fit gap-4 pr-4'>
                             {materiais.map(material => (
