@@ -15,7 +15,7 @@ class User(Base, UserMixin):
     password:Mapped[str] = mapped_column(nullable=False)
 
     type:Mapped[str] = mapped_column(String(50))
-    __mapped_args__ = {
+    __mapper_args__ = {
         'polymorphic_identity':'user',
         'polymorphic_on':type
     }
