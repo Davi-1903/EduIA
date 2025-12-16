@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import Card from '../../../../../components/card';
+import Card from '../card';
 
 export default function LandingPageMateriais() {
     const [isEmerge, setEmerge] = useState(false);

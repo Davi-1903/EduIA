@@ -25,7 +25,7 @@ export default function LandingPageWelcome() {
             {/* Adicionar um background diferente. Quem sabe o tal do mascote */}
             <section
                 ref={sectionRef}
-                className='bg-color4-200 flex w-full items-center justify-center p-12 pt-24 md:min-h-screen md:px-16 md:py-32'
+                className='bg-color4-200 flex w-full items-center justify-center p-8 pt-24 md:min-h-screen md:px-16 md:py-32'
             >
                 <article className={`opacity-0 ${isEmerge ? 'animate-emerge-left' : ''}`}>
                     <h1 className='font-primary title-welcome mb-4 max-w-300 pb-2 text-4xl font-bold text-balance md:text-5xl md:font-semibold lg:text-6xl'>
