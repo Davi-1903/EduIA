@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import Mascote from '/assets/mascote/landingpage_sobre.png';
+import Mascote from '/assets/images/mascote/landingpage_sobre.png';
 
 export default function LandingPageAbout() {
     const [isEmerge, setEmerge] = useState(false);

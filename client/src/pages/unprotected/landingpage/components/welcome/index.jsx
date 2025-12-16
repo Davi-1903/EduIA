@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Mascote from '/assets/mascote/landingpage_welcome.png';
+import Mascote from '/assets/images/mascote/landingpage_welcome.png';
 
 export default function LandingPageWelcome() {
     const [isEmerge, setEmerge] = useState(false);

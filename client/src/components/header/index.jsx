@@ -1,7 +1,7 @@
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { IconMenu3, IconX } from '@tabler/icons-react';
-import Logo from '/assets/logo_dark.svg';
+import Logo from '/assets/images/logo_dark.svg';
 
 export default function Header() {
     const [isOpenMenu, setOpenMenu] = useState(false);

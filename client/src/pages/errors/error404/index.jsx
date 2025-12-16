@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import Mascote from '/assets/mascote/error_404.png';
+import Mascote from '/assets/images/mascote/error_404.png';
 
 export default function Error404() {
     return (

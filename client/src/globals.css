@@ -1,7 +1,14 @@
-/* Fonte provisória */
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
-
 @import 'tailwindcss';
+
+@font-face {
+    font-family: 'Inter';
+    src: url('../public/assets/fonts/Inter/Inter-VariableFont_opsz\,wght.ttf');
+}
+
+@font-face {
+    font-family: 'Roboto';
+    src: url('../public/assets/fonts/Roboto/Roboto-VariableFont_wdth\,wght.ttf');
+}
 
 :root {
     --height-header: 60px;
@@ -139,17 +146,12 @@
     }
 }
 
-@utility bg-welcome {
-    background: url('/backgrounds/image.png') no-repeat center right;
-    background-size: contain
-}
-
 @utility shadow-link {
     box-shadow: 0 0 0.5rem hsl(from var(--base-color1) h s l / 0.75);
 }
 
 @utility bg-auth {
-    background: url('/assets/backgrounds/background-login.jpg') no-repeat center bottom;
+    background: url('/assets/images/backgrounds/background-login.jpg') no-repeat center bottom;
     background-size: cover;
 }
 
