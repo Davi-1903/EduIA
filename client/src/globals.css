@@ -2,12 +2,12 @@
 
 @font-face {
     font-family: 'Inter';
-    src: url('../public/assets/fonts/Inter/Inter-VariableFont_opsz\,wght.ttf');
+    src: url('/assets/fonts/Inter/Inter-VariableFont_opsz\,wght.ttf');
 }
 
 @font-face {
     font-family: 'Roboto';
-    src: url('../public/assets/fonts/Roboto/Roboto-VariableFont_wdth\,wght.ttf');
+    src: url('/assets/fonts/Roboto/Roboto-VariableFont_wdth\,wght.ttf');
 }
 
 :root {

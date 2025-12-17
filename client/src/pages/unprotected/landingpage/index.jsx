@@ -14,6 +14,7 @@ export default function LandingPage() {
                 />
             </Helmet>
             <main>
+                {/* Adicionar mais uma seção. Talvez sobre perguntas frequentes ou algo do tipo */}
                 <LandingPageWelcome />
                 <LandingPageMateriais />
                 <LandingPageAbout />
