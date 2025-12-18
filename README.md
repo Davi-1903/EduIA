@@ -1,6 +1,6 @@
 <div align='center'>
     <img
-        src='client/public/logo_light.svg'
+        src='client/public/assets/images/logo_light.svg'
         loading='lazy'
         width='300'
         style='margin-top: 3rem'
