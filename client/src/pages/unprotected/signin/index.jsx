@@ -17,8 +17,8 @@ export default function SignIn() {
                 <title>EduIA | Login</title>
                 <meta name='description' content='Página de autenticação de usuários do sistema EduIA' />
             </Helmet>
-            <main className='grid min-h-screen grid-cols-1 md:grid-cols-[3fr_2fr] lg:grid-cols-[2fr_3fr]'>
-                <article className='bg-color4-200 grid place-items-center p-4'>
+            <main className='bg-color4-200 grid min-h-screen grid-cols-1 p-4 md:grid-cols-[3fr_2fr] lg:grid-cols-[2fr_3fr]'>
+                <article className='grid place-items-center p-4'>
                     <Link to='/' className='absolute top-4 left-4'>
                         <button className='hover:bg-color4-100 cursor-pointer gap-2 rounded-lg p-2 transition-all duration-75'>
                             <IconArrowLeft className='stroke-color1-100' />
@@ -90,7 +90,7 @@ export default function SignIn() {
                         </p>
                     </form>
                 </article>
-                <article className='bg-auth hidden md:block'></article> {/* Imagem provisória */}
+                <article className='bg-auth hidden rounded-2xl md:block'></article> {/* Imagem provisória */}
             </main>
             <Footer />
         </>

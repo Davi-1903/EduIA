@@ -13,11 +13,31 @@ import Footer from '../../../components/footer';
 import { Helmet } from 'react-helmet-async';
 
 export default function SignUp() {
+    const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [mode, setMode] = useState(null);
+    const passwordClassifications = [
+        // Adicionar cores que variam entre o vermelho e o verde com um ton azulado :)
+        { indication: 'Muito Fraca', color: 'var(--color-color1-25)' },
+        { indication: 'Fraca', color: 'var(--color-color1-50)' },
+        { indication: 'Média', color: 'var(--color-color1-100)' },
+        { indication: 'Forte', color: 'var(--color-color1-200)' },
+        { indication: 'Muito Forte', color: 'var(--color-color1-400)' },
+    ];
 
     function toggleShowPassword() {
         setShowPassword(!showPassword);
+    }
+
+    function classifyPassword(password) {
+        const conditions = [/.{8,}/, /[a-z]/, /[A-Z]/, /[0-9]/, /\W/];
+        let security = 0;
+        for (let regex of conditions) {
+            if (regex.test(password)) {
+                security++;
+            }
+        }
+        return security;
     }
 
     return (
@@ -26,8 +46,8 @@ export default function SignUp() {
                 <title>EduIA | Cadastro</title>
                 <meta name='description' content='Página de cadastro de usuários do sistema EduIA' />
             </Helmet>
-            <main className='grid min-h-screen grid-cols-1 md:grid-cols-[3fr_2fr] lg:grid-cols-[2fr_3fr]'>
-                <article className='bg-color4-200 grid place-items-center p-4 md:p-12'>
+            <main className='bg-color4-200 grid min-h-screen grid-cols-1 p-4 lg:grid-cols-[2fr_3fr]'>
+                <article className='grid place-items-center p-4 md:p-12'>
                     {/* Talvez fazer um botão que volte ao estado anterior, para a opções de escolher o tipo da conta */}
                     <Link to='/' className='absolute top-4 left-4'>
                         <button className='hover:bg-color4-100 cursor-pointer gap-2 rounded-lg p-2 transition-all duration-75'>
@@ -111,6 +131,8 @@ export default function SignUp() {
                                         id='senha'
                                         className='bg-color4-100 min-h-12 w-full rounded-lg pr-12 pl-4 outline-0'
                                         placeholder='Sua senha secreta...'
+                                        value={password}
+                                        onChange={e => setPassword(e.target.value)}
                                         required
                                     />
                                     <button
@@ -125,6 +147,19 @@ export default function SignUp() {
                                         )}
                                     </button>
                                 </div>
+                                <div className='bg-color4-100 mt-2 h-1 rounded-full'>
+                                    <div
+                                        className='h-full rounded-full bg-blue-600 transition-all duration-150'
+                                        style={{
+                                            width: `${classifyPassword(password) * 20}%`,
+                                            backgroundColor:
+                                                passwordClassifications[classifyPassword(password) - 1]?.color,
+                                        }}
+                                    ></div>
+                                </div>
+                                <span className='font-secundary text-color3-400 mt-1 block text-right'>
+                                    {passwordClassifications[classifyPassword(password) - 1]?.indication}
+                                </span>
                             </div>
                             <button
                                 type='submit'
@@ -143,7 +178,7 @@ export default function SignUp() {
                         </form>
                     )}
                 </article>
-                <article className='bg-auth hidden md:block'></article>
+                <article className='hidden rounded-2xl bg-[url(/assets/images/mascote/cadastro.png)] bg-cover bg-center bg-no-repeat lg:block'></article>
             </main>
             <Footer />
         </>
