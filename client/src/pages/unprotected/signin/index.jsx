@@ -1,16 +1,41 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate  } from 'react-router-dom';
 import { IconArrowLeft, IconEye, IconEyeOff, IconMail } from '@tabler/icons-react';
 import { Helmet } from 'react-helmet-async';
 import Footer from '../../../components/footer';
 
+
 export default function SignIn() {
     const [showPassword, setShowPassword] = useState(false);
+    const [email, setEmail] = useState('');
+    const [senha, setSenha] = useState('');
+    const navigate = useNavigate();
 
     function toggleShowPassword() {
         setShowPassword(!showPassword);
     }
 
+    async function submit(e) {
+        e.preventDefault();
+        // console.log('SUBMIT DISPARADO');
+
+        const response = await fetch('http://localhost:5000/api/auth/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                email,
+                senha,
+            }),
+        });
+
+        const data = await response.json();
+
+        if (data.ok) {
+            navigate('/');
+        } else {
+            alert(data.message);
+        }
+    }
     return (
         <>
             <Helmet>
@@ -24,7 +49,8 @@ export default function SignIn() {
                             <IconArrowLeft className='stroke-color1-100' />
                         </button>
                     </Link>
-                    <form className='box-content flex w-full max-w-80 flex-col gap-4'>
+                    <form onSubmit={submit} 
+                    className='box-content flex w-full max-w-80 flex-col gap-4'>
                         <h2 className='font-primary text-color1-100 text-[2.5rem]/[50px] font-bold'>Login</h2>
                         <div>
                             <label htmlFor='email' className='text-color1-100 block'>
@@ -34,9 +60,11 @@ export default function SignIn() {
                                 <input
                                     type='email'
                                     id='email'
+                                    required
+                                    value={email}
+                                    onChange={e => setEmail(e.target.value)}
                                     className='bg-color4-100 min-h-12 w-full rounded-lg pr-12 pl-4 outline-0'
                                     placeholder='exemplo@gmail.com'
-                                    required
                                 />
                                 <label
                                     htmlFor='email'
@@ -54,9 +82,11 @@ export default function SignIn() {
                                 <input
                                     type={showPassword ? 'text' : 'password'}
                                     id='senha'
+                                    required
+                                    value={senha}
+                                    onChange={e => setSenha(e.target.value)}
                                     className='bg-color4-100 min-h-12 w-full rounded-lg pr-12 pl-4 outline-0'
                                     placeholder='Sua senha secreta...'
-                                    required
                                 />
                                 <button
                                     type='button'
