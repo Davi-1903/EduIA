@@ -16,6 +16,9 @@ export default function SignUp() {
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
     const [mode, setMode] = useState(null);
+    const [nome, setNome] = useState('');
+    const [email, setEmail] = useState('');
+    const [loading, setLoading] = useState(false);
     const passwordClassifications = [
         // Adicionar cores que variam entre o vermelho e o verde com um ton azulado :)
         { indication: 'Muito Fraca', color: 'var(--color-color1-25)' },
@@ -24,6 +27,42 @@ export default function SignUp() {
         { indication: 'Forte', color: 'var(--color-color1-200)' },
         { indication: 'Muito Forte', color: 'var(--color-color1-400)' },
     ];
+
+    async function handleRegister(e) {
+        e.preventDefault();
+        console.log('disparou')
+        setLoading(true);
+
+        try {
+                const response = await fetch('http://localhost:5000/api/auth/register', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+            },
+                credentials: 'include', 
+                body: JSON.stringify({
+                    nome,
+                    email,
+                    password,
+                    type: mode
+                }),
+            });
+
+            const data = await response.json();
+
+            if (!data.ok) {
+            alert(data.message);
+            return;
+            }
+
+            window.location.href = data.redirect;
+            } catch (err) {
+                console.error(err);
+                alert('Erro ao cadastrar usuário');
+            } finally {
+                setLoading(false);
+            }
+    }
 
     function toggleShowPassword() {
         setShowPassword(!showPassword);
@@ -64,14 +103,14 @@ export default function SignUp() {
                                 {/* Talvez mudar as cores */}
                                 <button
                                     className='bg-color1-100 hover:shadow-lg-hard flex min-h-12 w-full flex-1 basis-50 cursor-pointer items-center justify-center gap-4 rounded-xl py-4 transition-all duration-150'
-                                    onClick={() => setMode('Teacher')}
+                                    onClick={() => setMode('Student')}
                                 >
                                     <IconSchool size={26} className='stroke-color4-200' />
                                     <span className='text-color4-200 text-lg font-semibold'>Aluno</span>
                                 </button>
                                 <button
                                     className='bg-color1-100 hover:shadow-lg-hard flex min-h-12 w-full flex-1 basis-50 cursor-pointer items-center justify-center gap-4 rounded-xl py-4 transition-all duration-150'
-                                    onClick={() => setMode('Student')}
+                                    onClick={() => setMode('Teacher')}
                                 >
                                     <IconChalkboardTeacher size={26} className='stroke-color4-200' />
                                     <span className='text-color4-200 text-lg font-semibold'>Professor</span>
@@ -79,7 +118,7 @@ export default function SignUp() {
                             </div>
                         </article>
                     ) : (
-                        <form className='flex w-full max-w-80 flex-col gap-4'>
+                        <form className='flex w-full max-w-80 flex-col gap-4' onSubmit={handleRegister}>
                             <h2 className='font-primary text-color1-100 text-4xl font-bold'>Cadastro</h2>
                             <div>
                                 <label htmlFor='nome' className='text-color1-100 block'>
@@ -89,6 +128,8 @@ export default function SignUp() {
                                     <input
                                         type='text'
                                         id='nome'
+                                        value={nome}
+                                        onChange={(e) => setNome(e.target.value)}
                                         className='bg-color4-100 min-h-12 w-full rounded-lg pr-12 pl-4 outline-0'
                                         placeholder='Qual o seu nome?'
                                         required
@@ -109,6 +150,8 @@ export default function SignUp() {
                                     <input
                                         type='email'
                                         id='email'
+                                        value={email}
+                                        onChange={(e) => setEmail(e.target.value)}
                                         className='bg-color4-100 min-h-12 w-full rounded-lg pr-12 pl-4 outline-0'
                                         placeholder='exemplo@gmail.com'
                                         required
@@ -131,8 +174,8 @@ export default function SignUp() {
                                         id='senha'
                                         className='bg-color4-100 min-h-12 w-full rounded-lg pr-12 pl-4 outline-0'
                                         placeholder='Sua senha secreta...'
+                                        onChange={(e) => setPassword(e.target.value)}
                                         value={password}
-                                        onChange={e => setPassword(e.target.value)}
                                         required
                                     />
                                     <button

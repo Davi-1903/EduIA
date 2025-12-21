@@ -31,7 +31,7 @@ export default function SignIn() {
         const data = await response.json();
 
         if (data.ok) {
-            navigate('/');
+            navigate(data.redirect);
         } else {
             alert(data.message);
         }
