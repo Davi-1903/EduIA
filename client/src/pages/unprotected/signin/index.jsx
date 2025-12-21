@@ -5,11 +5,13 @@ import { Helmet } from 'react-helmet-async';
 import getCSRF from '../../../api/csrf';
 import Footer from '../../../components/footer';
 import ProtectedRoute from '../../../components/protectedRoute';
+import { useAuthenticated } from '../../../context/authContext';
 
 export default function SignIn() {
     const [showPassword, setShowPassword] = useState(false);
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
+    const { setAuthenticated } = useAuthenticated();
     const navigate = useNavigate();
 
     function toggleShowPassword() {
@@ -20,26 +22,29 @@ export default function SignIn() {
         e.preventDefault();
         const csrf = await getCSRF();
 
-        const response = await fetch('http://localhost:5000/api/auth/login', {
-            method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-                'X-CSRFToken': csrf,
-            },
-            body: JSON.stringify({
-                email,
-                senha,
-            }),
-        });
+        try {
+            const response = await fetch('/api/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'X-CSRFToken': csrf,
+                },
+                credentials: 'include',
+                body: JSON.stringify({ email, senha }),
+            });
+            const data = await response.json();
 
-        const data = await response.json();
+            if (!data.ok) {
+                throw new Error(data.message);
+            }
 
-        if (data.ok) {
+            setAuthenticated(true);
             navigate(data.redirect);
-        } else {
-            alert(data.message);
+        } catch (err) {
+            alert(err.message);
         }
     }
+
     return (
         <ProtectedRoute isPrivate={false}>
             <Helmet>

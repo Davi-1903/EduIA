@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import {
     IconArrowLeft,
     IconChalkboardTeacher,
@@ -13,6 +13,7 @@ import { Helmet } from 'react-helmet-async';
 import getCSRF from '../../../api/csrf';
 import Footer from '../../../components/footer';
 import ProtectedRoute from '../../../components/protectedRoute';
+import { useAuthenticated } from '../../../context/authContext';
 
 export default function SignUp() {
     const [mode, setMode] = useState(null);
@@ -20,7 +21,8 @@ export default function SignUp() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
-    const [loading, setLoading] = useState(false);
+    const { setAuthenticated } = useAuthenticated();
+    const navigate = useNavigate();
     const passwordClassifications = [
         // Adicionar cores que variam entre o vermelho e o verde com um ton azulado :)
         { indication: 'Muito Fraca', color: 'var(--color-color1-25)' },
@@ -33,37 +35,27 @@ export default function SignUp() {
     async function handleRegister(e) {
         e.preventDefault();
         const csrf = await getCSRF();
-        setLoading(true);
 
         try {
-            const response = await fetch('http://localhost:5000/api/auth/register', {
+            const response = await fetch('/api/auth/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'X-CSRFToken': csrf,
                 },
                 credentials: 'include',
-                body: JSON.stringify({
-                    nome,
-                    email,
-                    password,
-                    type: mode,
-                }),
+                body: JSON.stringify({ nome, email, password, type: mode }),
             });
-
             const data = await response.json();
 
             if (!data.ok) {
-                alert(data.message);
-                return;
+                throw new Error(data.message);
             }
 
-            window.location.href = data.redirect;
+            setAuthenticated(true);
+            navigate(data.redirect);
         } catch (err) {
-            console.error(err);
-            alert('Erro ao cadastrar usuário');
-        } finally {
-            setLoading(false);
+            alert(err.message);
         }
     }
 

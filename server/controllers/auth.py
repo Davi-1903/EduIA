@@ -46,16 +46,15 @@ def login():
     with SessionLocal() as session:
         try:
             data = request.get_json()
+            if not data:
+                return jsonify({'ok': False, 'message': 'Dados não recebidos'}), 400
 
-            email = data.get('email')
-            senha = data.get('senha')
-
-            user_exist = session.query(User).filter_by(email=email).first()
+            user_exist = session.query(User).filter_by(email=data['email']).first()
 
             if not user_exist:
                 return jsonify({'ok': False, 'message': 'Este email não está cadastrado no sistema'}), 401
 
-            senha_hasher.verify(user_exist.password, senha)
+            senha_hasher.verify(user_exist.password, data['senha'])
             login_user(user_exist)
 
             return jsonify({'ok': True, 'redirect': '/dash'}), 200
@@ -63,8 +62,7 @@ def login():
         except VerifyMismatchError:
             return jsonify({'ok': False, 'message': 'Senha incorreta'}), 401
 
-        except Exception as e:
-            print(e)  
+        except Exception:
             return jsonify({'ok': False, 'message': 'Ocorreu um erro interno'}), 500
 
 
