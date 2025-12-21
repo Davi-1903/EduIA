@@ -4,8 +4,8 @@ from flask import Flask, jsonify
 from flask_cors import CORS
 from flask_login import LoginManager
 from flask_wtf import CSRFProtect
-from models.connection import SessionLocal, init_database
-from models.database import User
+from database import SessionLocal, init_database
+from models.user import User
 
 
 def config_app(app: Flask):

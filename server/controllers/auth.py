@@ -3,8 +3,8 @@ from flask_login import login_required, login_user
 from argon2 import PasswordHasher
 from argon2.exceptions import VerifyMismatchError
 from flask_wtf.csrf import generate_csrf
-from models.database import User, Aluno, Professor
-from models.connection import SessionLocal
+from server.models.user import User, Aluno, Professor
+from database import SessionLocal
 
 
 bp_auth = Blueprint('auth', __name__, url_prefix='/api/auth')
@@ -25,10 +25,10 @@ def register():
                 return jsonify({'ok': False, 'message': 'Usuário já existe'}), 409
             
             if data['type'] == 'Student':
-                new_user = Aluno(user_name=data['nome'], email=data['email'], password=senha_hasher.hash(data['password']))
+                new_user = Aluno(name=data['nome'], email=data['email'], password=senha_hasher.hash(data['password']))
             elif data['type'] == 'Teacher':
-                new_user = Professor(user_name=data['nome'], email=data['email'], password=senha_hasher.hash(data['password']))
-            else: 
+                new_user = Professor(name=data['nome'], email=data['email'], password=senha_hasher.hash(data['password']))
+            else:
                 return jsonify({'ok': False, 'message': 'Tipo inválido'}), 400
             
             session.add(new_user)
