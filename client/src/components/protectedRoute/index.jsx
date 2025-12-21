@@ -21,7 +21,7 @@ export default function ProtectedRoute({ children, isPrivate }) {
     }, [setAuthenticated]);
 
     // Retornar loading;
-    if (isPrivate && !isOk) return <Navigate to='/auth' />;
+    if (isPrivate && !isOk) return <Navigate to='/login' />;
     if (!isPrivate && isOk) return <Navigate to='/dash' />;
     return children;
 }
