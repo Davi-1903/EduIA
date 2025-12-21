@@ -1,7 +1,8 @@
 from flask import Blueprint, jsonify, request
-from flask_login import login_user
+from flask_login import login_required, login_user
 from argon2 import PasswordHasher
 from argon2.exceptions import VerifyMismatchError
+from flask_wtf.csrf import generate_csrf
 from models.database import User, Aluno, Professor
 from models.connection import SessionLocal
 
@@ -65,3 +66,14 @@ def login():
         except Exception as e:
             print(e)  
             return jsonify({'ok': False, 'message': 'Ocorreu um erro interno'}), 500
+
+
+@bp_auth.route('/check')
+@login_required
+def check():
+    return jsonify({'ok': False}), 200
+
+
+@bp_auth.route('/csrf')
+def get_csrf():
+    return jsonify({'csrfToken': generate_csrf()}), 200

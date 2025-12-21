@@ -12,10 +12,8 @@ dist
 dist-ssr
 *.local
 
-# .env raiz
-.env
-
-# Ambiente virtual
+# Variáveis de ambiente e ambiente virtual
+.env*
 env/
 .env/
 venv/
@@ -37,7 +35,6 @@ __pycache__/
 *.njsproj
 *.sln
 *.sw?
-
 
 # Databases
 *.db

@@ -1,9 +1,10 @@
 import { useState } from 'react';
-import { Link, useNavigate  } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { IconArrowLeft, IconEye, IconEyeOff, IconMail } from '@tabler/icons-react';
 import { Helmet } from 'react-helmet-async';
+import getCSRF from '../../../api/csrf';
 import Footer from '../../../components/footer';
-
+import ProtectedRoute from '../../../components/protectedRoute';
 
 export default function SignIn() {
     const [showPassword, setShowPassword] = useState(false);
@@ -17,11 +18,14 @@ export default function SignIn() {
 
     async function submit(e) {
         e.preventDefault();
-        // console.log('SUBMIT DISPARADO');
+        const csrf = await getCSRF();
 
         const response = await fetch('http://localhost:5000/api/auth/login', {
             method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': csrf,
+            },
             body: JSON.stringify({
                 email,
                 senha,
@@ -37,7 +41,7 @@ export default function SignIn() {
         }
     }
     return (
-        <>
+        <ProtectedRoute isPrivate={false}>
             <Helmet>
                 <title>EduIA | Login</title>
                 <meta name='description' content='Página de autenticação de usuários do sistema EduIA' />
@@ -49,8 +53,7 @@ export default function SignIn() {
                             <IconArrowLeft className='stroke-color1-100' />
                         </button>
                     </Link>
-                    <form onSubmit={submit} 
-                    className='box-content flex w-full max-w-80 flex-col gap-4'>
+                    <form onSubmit={submit} className='box-content flex w-full max-w-80 flex-col gap-4'>
                         <h2 className='font-primary text-color1-100 text-[2.5rem]/[50px] font-bold'>Login</h2>
                         <div>
                             <label htmlFor='email' className='text-color1-100 block'>
@@ -123,6 +126,6 @@ export default function SignIn() {
                 <article className='bg-auth hidden rounded-2xl md:block'></article> {/* Imagem provisória */}
             </main>
             <Footer />
-        </>
+        </ProtectedRoute>
     );
 }

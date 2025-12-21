@@ -9,15 +9,17 @@ import {
     IconSchool,
     IconUser,
 } from '@tabler/icons-react';
-import Footer from '../../../components/footer';
 import { Helmet } from 'react-helmet-async';
+import getCSRF from '../../../api/csrf';
+import Footer from '../../../components/footer';
+import ProtectedRoute from '../../../components/protectedRoute';
 
 export default function SignUp() {
-    const [password, setPassword] = useState('');
-    const [showPassword, setShowPassword] = useState(false);
     const [mode, setMode] = useState(null);
     const [nome, setNome] = useState('');
     const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
+    const [showPassword, setShowPassword] = useState(false);
     const [loading, setLoading] = useState(false);
     const passwordClassifications = [
         // Adicionar cores que variam entre o vermelho e o verde com um ton azulado :)
@@ -30,38 +32,39 @@ export default function SignUp() {
 
     async function handleRegister(e) {
         e.preventDefault();
-        console.log('disparou')
+        const csrf = await getCSRF();
         setLoading(true);
 
         try {
-                const response = await fetch('http://localhost:5000/api/auth/register', {
+            const response = await fetch('http://localhost:5000/api/auth/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
-            },
-                credentials: 'include', 
+                    'X-CSRFToken': csrf,
+                },
+                credentials: 'include',
                 body: JSON.stringify({
                     nome,
                     email,
                     password,
-                    type: mode
+                    type: mode,
                 }),
             });
 
             const data = await response.json();
 
             if (!data.ok) {
-            alert(data.message);
-            return;
+                alert(data.message);
+                return;
             }
 
             window.location.href = data.redirect;
-            } catch (err) {
-                console.error(err);
-                alert('Erro ao cadastrar usuário');
-            } finally {
-                setLoading(false);
-            }
+        } catch (err) {
+            console.error(err);
+            alert('Erro ao cadastrar usuário');
+        } finally {
+            setLoading(false);
+        }
     }
 
     function toggleShowPassword() {
@@ -80,7 +83,7 @@ export default function SignUp() {
     }
 
     return (
-        <>
+        <ProtectedRoute isPrivate={false}>
             <Helmet>
                 <title>EduIA | Cadastro</title>
                 <meta name='description' content='Página de cadastro de usuários do sistema EduIA' />
@@ -129,7 +132,7 @@ export default function SignUp() {
                                         type='text'
                                         id='nome'
                                         value={nome}
-                                        onChange={(e) => setNome(e.target.value)}
+                                        onChange={e => setNome(e.target.value)}
                                         className='bg-color4-100 min-h-12 w-full rounded-lg pr-12 pl-4 outline-0'
                                         placeholder='Qual o seu nome?'
                                         required
@@ -151,7 +154,7 @@ export default function SignUp() {
                                         type='email'
                                         id='email'
                                         value={email}
-                                        onChange={(e) => setEmail(e.target.value)}
+                                        onChange={e => setEmail(e.target.value)}
                                         className='bg-color4-100 min-h-12 w-full rounded-lg pr-12 pl-4 outline-0'
                                         placeholder='exemplo@gmail.com'
                                         required
@@ -174,7 +177,7 @@ export default function SignUp() {
                                         id='senha'
                                         className='bg-color4-100 min-h-12 w-full rounded-lg pr-12 pl-4 outline-0'
                                         placeholder='Sua senha secreta...'
-                                        onChange={(e) => setPassword(e.target.value)}
+                                        onChange={e => setPassword(e.target.value)}
                                         value={password}
                                         required
                                     />
@@ -224,6 +227,6 @@ export default function SignUp() {
                 <article className='hidden rounded-2xl bg-[url(/assets/images/mascote/cadastro.png)] bg-cover bg-center bg-no-repeat lg:block'></article>
             </main>
             <Footer />
-        </>
+        </ProtectedRoute>
     );
 }
