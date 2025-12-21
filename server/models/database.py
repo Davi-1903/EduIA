@@ -1,9 +1,8 @@
 from flask_login import UserMixin
 from sqlalchemy.orm import Mapped, mapped_column
 from sqlalchemy import String, ForeignKey
+from .connection import Base
 
-from . import Base
-from .connection import engine
 
 class User(Base, UserMixin):
     __tablename__ = 'users'
@@ -44,5 +43,3 @@ class Aluno(User):
     __mapper_args__ = {
         "polymorphic_identity": "aluno"
     }
-
-Base.metadata.create_all(engine)

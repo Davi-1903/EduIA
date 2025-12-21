@@ -1,13 +1,14 @@
-import json
 from flask import Blueprint, jsonify, request
-from flask_login import login_user, user_accessed
+from flask_login import login_user
 from argon2 import PasswordHasher
 from argon2.exceptions import VerifyMismatchError
 from models.database import User, Aluno, Professor
 from models.connection import SessionLocal
 
+
 bp_auth = Blueprint('auth', __name__, url_prefix='/api/auth')
 senha_hasher = PasswordHasher()
+
 
 @bp_auth.route('/register', methods=['POST'])
 def register():
