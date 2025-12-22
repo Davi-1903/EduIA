@@ -3,6 +3,7 @@ import ProtectedRoute from '../../../components/protectedRoute';
 import LandingPageWelcome from './components/welcome';
 import LandingPageMateriais from './components/materiais';
 import LandingPageAbout from './components/about';
+import LandingPageQuestions from './components/questions';
 
 export default function LandingPage() {
     return (
@@ -19,6 +20,7 @@ export default function LandingPage() {
                 <LandingPageWelcome />
                 <LandingPageMateriais />
                 <LandingPageAbout />
+                <LandingPageQuestions />
             </main>
         </ProtectedRoute>
     );
