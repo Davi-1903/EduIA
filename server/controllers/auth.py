@@ -3,7 +3,7 @@ from flask_login import login_required, login_user
 from argon2 import PasswordHasher
 from argon2.exceptions import VerifyMismatchError
 from flask_wtf.csrf import generate_csrf
-from server.models.user import User, Aluno, Professor
+from models.user import User, Aluno, Professor
 from database import SessionLocal
 
 

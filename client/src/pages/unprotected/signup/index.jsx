@@ -201,7 +201,7 @@ export default function SignUp() {
                             </div>
                             <button
                                 type='submit'
-                                className='bg-color1-100 text-color4-100 hover:shadow-lg-hard mt-2 min-h-12 cursor-pointer rounded-lg text-xl transition-all duration-150'
+                                className='bg-color1-100 text-color4-100 hover:shadow-lg-hard min-h-12 cursor-pointer rounded-lg text-xl transition-all duration-150'
                             >
                                 Entrar
                             </button>

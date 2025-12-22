@@ -128,7 +128,7 @@ export default function SignIn() {
                         </p>
                     </form>
                 </article>
-                <article className='bg-auth hidden rounded-2xl md:block'></article> {/* Imagem provisória */}
+                <article className='hidden rounded-2xl bg-[url(/assets/images/mascote/login.png)] bg-cover bg-center bg-no-repeat lg:block'></article>
             </main>
             <Footer />
         </ProtectedRoute>
