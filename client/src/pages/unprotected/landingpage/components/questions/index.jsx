@@ -23,7 +23,7 @@ export default function LandingPageQuestions() {
         },
         {
             id: 4,
-            question: 'O sistema usar qual IA?',
+            question: 'O sistema usa qual IA?',
             answer: 'O sistema utiliza do modelo de linguagem ChatGPT-5 nano, por suas popularidade, capacidade de resposta, velocidade e baixo custo',
         },
     ];

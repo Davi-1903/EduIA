@@ -2,7 +2,7 @@ import { lazy } from 'react';
 import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
-import { AuthenticatedProvider } from './context/authContext';
+import WrapperProvider from './context/wrapperProvider';
 
 import Layout from './layout';
 const SignUp = lazy(() => import('./pages/unprotected/signup'));
@@ -26,14 +26,15 @@ const router = createBrowserRouter([
             { path: '*', element: <Error404 /> },
         ],
     },
+    // Procurar fazer uma gambiarra para esse layout diferente :)
     { path: 'login', element: <SignIn /> },
     { path: 'cadastro', element: <SignUp /> },
 ]);
 
 createRoot(document.getElementById('root')).render(
     <HelmetProvider>
-        <AuthenticatedProvider>
+        <WrapperProvider>
             <RouterProvider router={router} />
-        </AuthenticatedProvider>
+        </WrapperProvider>
     </HelmetProvider>,
 );

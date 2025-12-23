@@ -37,7 +37,7 @@ def register():
 
             return jsonify({'ok': True, 'redirect': '/dash'}), 201
 
-        except Exception as e:
+        except Exception:
             return jsonify({'ok': False, 'message': 'Erro interno'}), 500
 
 

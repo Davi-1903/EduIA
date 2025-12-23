@@ -82,7 +82,8 @@
         border: 0;
     }
 
-    html, body {
+    html,
+    body {
         overflow-x: hidden;
     }
 }
@@ -196,6 +197,18 @@
     animation: animation-emerge-right 1s 250ms ease forwards;
 }
 
+@utility animate-new-message {
+    animation: animate-new-message 1s ease forwards;
+}
+
+@utility animate-delete-message {
+    animation: animate-delete-message 1s ease forwards; /* Não sei o porquê do REVERSE não funcionar */
+}
+
+@utility animate-progress {
+    animation: animate-progress 10s linear forwards;
+}
+
 @keyframes animate-carrossel {
     from {
         transform: translateX(0);
@@ -251,5 +264,36 @@
     to {
         transform: none;
         opacity: 1;
+    }
+}
+
+@keyframes animate-progress {
+    from {
+        width: 0;
+    }
+
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes animate-new-message {
+    from {
+        transform: translateX(calc(100% + 1rem));
+    }
+
+    to {
+        transform: none;
+    }
+}
+
+
+@keyframes animate-delete-message {
+    from {
+        transform: none;
+    }
+    
+    to {
+        transform: translateX(calc(100% + 1rem));
     }
 }
