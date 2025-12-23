@@ -9,7 +9,17 @@ export default defineConfig({
         open: true,
         port: 3000,
         proxy: {
-            '/api': 'http://localhost:5000'
-        }
+            '/api': 'http://localhost:5000',
+        },
+    },
+    build: {
+        rollupOptions: {
+            output: {
+                manualChunks: {
+                    vendor: ['react', 'react-dom', 'react-helmet-async', 'react-router-dom', 'tailwindcss'],
+                    ui: ['@tabler/icons-react'],
+                },
+            },
+        },
     },
 });
