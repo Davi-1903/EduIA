@@ -63,7 +63,7 @@ export default function SignIn() {
                     <meta name='description' content='Página de autenticação de usuários do sistema EduIA' />
                 </Helmet>
                 <RenderMessages />
-                <main className='bg-color4-200 grid min-h-screen grid-cols-1 p-4 md:grid-cols-[3fr_2fr] lg:grid-cols-[2fr_3fr]'>
+                <main className='bg-color4-200 grid min-h-screen grid-cols-1 p-4 lg:grid-cols-[2fr_3fr]'>
                     <article className='grid place-items-center p-4'>
                         <Link to='/' className='absolute top-4 left-4'>
                             <button className='hover:bg-color4-100 cursor-pointer gap-2 rounded-lg p-2 transition-all duration-75'>
