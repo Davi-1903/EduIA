@@ -29,7 +29,6 @@ export default function LandingPageAbout() {
         >
             <article className={`max-w-200 flex-2 basis-80 opacity-0 ${isEmerge ? 'animate-emerge-left' : ''}`}>
                 <h2 className='text-color2-200 font-primary mb-4 text-4xl font-bold md:text-5xl'>O que é o EduIA?</h2>
-                {/* Talvez usar outro texto */}
                 <p className='text-md text-color3-100 font-secundary text-balance md:text-xl/normal'>
                     O <strong>EduIA</strong> é um sistema de geração de materiais com <strong>IA</strong> (Inteligência
                     Artificial), desenvolvido por estudantes do ensino médio técnico integrado do <strong>IFRN</strong>{' '}

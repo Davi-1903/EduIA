@@ -27,12 +27,11 @@ export default function SignUp() {
     const { setMessages } = useMessages();
     const navigate = useNavigate();
     const passwordClassifications = [
-        // Adicionar cores que variam entre o vermelho e o verde com um ton azulado :)
-        { indication: 'Muito Fraca', color: 'var(--color-color1-25)' },
-        { indication: 'Fraca', color: 'var(--color-color1-50)' },
-        { indication: 'Média', color: 'var(--color-color1-100)' },
-        { indication: 'Forte', color: 'var(--color-color1-200)' },
-        { indication: 'Muito Forte', color: 'var(--color-color1-400)' },
+        { indication: 'Muito Fraca', color: '#a52a2a' },
+        { indication: 'Fraca', color: '#df7500' },
+        { indication: 'Média', color: '#dfc500' },
+        { indication: 'Forte', color: '#7add32' },
+        { indication: 'Muito Forte', color: '#32cd42' },
     ];
 
     async function handleRegister(e) {
@@ -200,7 +199,7 @@ export default function SignUp() {
                                     </div>
                                     <div className='bg-color4-100 mt-2 h-1 rounded-full'>
                                         <div
-                                            className='h-full rounded-full bg-blue-600 transition-all duration-150'
+                                            className='h-full rounded-full transition-all duration-150'
                                             style={{
                                                 width: `${classifyPassword(password) * 20}%`,
                                                 backgroundColor:

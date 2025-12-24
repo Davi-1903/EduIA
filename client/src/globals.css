@@ -202,7 +202,7 @@
 }
 
 @utility animate-delete-message {
-    animation: animate-delete-message 1s ease forwards; /* Não sei o porquê do REVERSE não funcionar */
+    animation: animate-delete-message 1s ease forwards;
 }
 
 @utility animate-progress {
@@ -286,7 +286,6 @@
         transform: none;
     }
 }
-
 
 @keyframes animate-delete-message {
     from {

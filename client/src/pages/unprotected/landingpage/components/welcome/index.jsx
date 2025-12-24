@@ -22,7 +22,7 @@ export default function LandingPageWelcome() {
 
     return (
         <>
-            {/* Adicionar um background diferente. Quem sabe o tal do mascote */}
+            {/* No futuro fazer o efeito de parallax :) */}
             <section
                 ref={sectionRef}
                 className='bg-color4-200 flex w-full items-center justify-center p-8 pt-24 md:min-h-screen md:px-16 md:py-32'
