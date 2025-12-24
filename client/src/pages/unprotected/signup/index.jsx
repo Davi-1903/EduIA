@@ -229,7 +229,7 @@ export default function SignUp() {
                             </form>
                         )}
                     </article>
-                    <article className='hidden rounded-2xl bg-[url(/assets/images/mascote/cadastro.png)] bg-cover bg-center bg-no-repeat lg:block'></article>
+                    <article className='hidden rounded-2xl bg-[url(/assets/images/mascote/cadastro.webp)] bg-cover bg-center bg-no-repeat lg:block'></article>
                 </main>
                 <Footer />
             </div>

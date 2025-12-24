@@ -11,7 +11,7 @@ export default function ProtectedRoute({ children, isPrivate }) {
             .then(res => {
                 const result = res.status === 200;
                 setOk(result);
-                setAuthenticated(true);
+                setAuthenticated(result);
             })
             .catch(err => {
                 setOk(false);

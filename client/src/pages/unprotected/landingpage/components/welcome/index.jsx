@@ -7,8 +7,8 @@ export default function LandingPageWelcome() {
     const sectionRef = useRef(null);
 
     useEffect(() => {
-        const observer = new IntersectionObserver(entris => {
-            entris.forEach(entry => {
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
                 if (entry.isIntersecting) {
                     setEmerge(true);
                     observer.unobserve(entry.target);

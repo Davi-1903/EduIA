@@ -140,7 +140,7 @@ export default function SignIn() {
                             </p>
                         </form>
                     </article>
-                    <article className='hidden rounded-2xl bg-[url(/assets/images/mascote/login.png)] bg-cover bg-center bg-no-repeat lg:block'></article>
+                    <article className='hidden rounded-2xl bg-[url(/assets/images/mascote/login.webp)] bg-cover bg-center bg-no-repeat lg:block'></article>
                 </main>
                 <Footer />
             </div>
