@@ -53,6 +53,8 @@ Devido à complexidade do sistema, foi necessária mais de uma tecnologia para a
 
 A **IA** é o coração do projeto. Optamos por usar um modelo de linguagem pela sua capacidade de adaptação e generalização dos dados absorvidos durante o treinamento. Para que ela se adaptasse aos nossos dados, não a retreinamos; utilizamos **RAG** (Retrieval-Augmented Generation), ou geração aumentada de recuperação.
 
+---
+
 ## ▶️ Como executar o projeto
 
 Para executar o projeto há duas formas:
@@ -80,6 +82,8 @@ Para executar o projeto há duas formas:
         pip install -r requirements.txt
         ```
 
+        > Use ambiente virtual 😉
+
     - **Dentro do diretório `client/`**
 
         ```powershell
@@ -90,10 +94,10 @@ Para executar o projeto há duas formas:
 
     ```.env
     SECRET_KEY="<CHAVE SECRETA>"
-    DATABASE_URI="mysql+pymysql://root@localhost:<PORTA>/db_users"
+    DATABASE_URI="mysql+pymysql://root@localhost:<PORTA>/db_eduia"
 
     # Caso o banco use uma senha
-    DATABASE_URI="mysql+pymysql://root:<SENHA>@localhost:<PORTA>/db_users"
+    DATABASE_URI="mysql+pymysql://root:<SENHA>@localhost:<PORTA>/db_eduia"
     ```
 
 4. **Inicie ambos os servidores**
