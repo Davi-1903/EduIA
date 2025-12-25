@@ -36,22 +36,85 @@ O sistema gera diversos materiais que são distribuídos entre professores e alu
 
 ### ⚒️ Tecnologias
 
-Devido à complexidade do sistema, foram necessárias mais de uma tecnologia para a elaboração. Abaixo está uma tabela com as tecnologias usadas.
+Devido à complexidade do sistema, foi necessária mais de uma tecnologia para a elaboração. Abaixo está uma tabela com as tecnologias usadas.
 
 > [!NOTE]
 > Para mais detalhes, vá ao documento de [requisitos não funcionais](docs/requisitos_nao_funcionais.md).
 
-| Tecnologia       | Funcionalidade                                                                                                                   |
-| ---------------- | -------------------------------------------------------------------------------------------------------------------------------- |
-| `Flask`          | microframework `Python` usado na integração com o `front-end` e `back-end`                                                       |
-| `ReactJS`        | Biblioteca `JavaScript` para a criação de interfaces                                                                             |
-| `MySQL`          | Tipo de banco de dados relacional utilizado para armazenar dados e informações                                                   |
-| `LangChain`      | Framework para a orquestração da **LLM**                                                                                         |
-| `GPT-5 nano`     | Modelo de linguagem desenvolvido pela **OpenAI**                                                                                 |
+| Tecnologia       | Funcionalidade                                                                  |
+| ---------------- | ------------------------------------------------------------------------------- |
+| `Flask`          | microframework `Python` usado na integração com o `front-end` e `back-end`      |
+| `ReactJS`        | Biblioteca `JavaScript` para a criação de interfaces                            |
+| `MySQL`          | Tipo de banco de dados relacional utilizado para armazenar dados e informações  |
+| `LangChain`      | Framework para a orquestração da **LLM**                                        |
+| `GPT-5 nano`     | Modelo de linguagem desenvolvido pela **OpenAI**                                |
 
 ### 🧠 IA
 
-A **IA** é o centro do projeto. Optamos por usar um modelo de linguagem pela sua capacidade de adaptação e generalização dos dados absorvidos durante o treinamento. Para que ela se adaptasse aos nossos dados, não a retreinamos; utilizamos **RAG** (Retrieval-Augmented Generation), ou geração aumentada de recuperação.
+A **IA** é o coração do projeto. Optamos por usar um modelo de linguagem pela sua capacidade de adaptação e generalização dos dados absorvidos durante o treinamento. Para que ela se adaptasse aos nossos dados, não a retreinamos; utilizamos **RAG** (Retrieval-Augmented Generation), ou geração aumentada de recuperação.
+
+## ▶️ Como executar o projeto
+
+Para executar o projeto há duas formas:
+
+- **🧑‍💻 Modo desenvolvedor:** O modo desenvolvedor consiste em iniciar ambos os servidores (servidor do `Flask` e o servidor do `React`), possibilitando alterações em tempo real;
+- **🐋 Modo deploy com `Docker`:** O modo deploy é para quando o projeto estiver pronto para produção
+
+> [!IMPORTANT]
+> O projeto usa `Flask` e `React`. Ou seja, é necessário ter o `Python` e o `Node` instalados
+
+### 🧑‍💻 Modo desenvolvedor
+
+1. **Clone o repositório e acesse-o**
+
+    ```git
+    git clone https://github.com/Davi-1903/EduIA.git
+    cd EduIA
+    ```
+
+2. **Instale as dependências**
+
+    - **Dentro do diretório `server/`**
+
+        ```powershell
+        pip install -r requirements.txt
+        ```
+
+    - **Dentro do diretório `client/`**
+
+        ```powershell
+        npm install --legacy-peer-deps
+        ```
+
+3. **Crie um arquivo `.env` na raiz do projeto para as variáveis de ambiente e adicione**
+
+    ```.env
+    SECRET_KEY="<CHAVE SECRETA>"
+    DATABASE_URI="mysql+pymysql://root@localhost:<PORTA>/db_users"
+
+    # Caso o banco use uma senha
+    DATABASE_URI="mysql+pymysql://root:<SENHA>@localhost:<PORTA>/db_users"
+    ```
+
+4. **Inicie ambos os servidores**
+
+    - **Dentro do diretório `server/`**
+
+        ```powershell
+        python app.py
+        ```
+
+    - **Dentro do diretório `client/`**
+
+        ```powershell
+        npm run dev
+        ```
+
+Após finalizar esse passo a passo, a aplicação iniciará em seu navegador padrão em [`http://localhost:3000`](http://localhost:3000)
+
+### 🐋 Modo deploy com `Docker`
+
+Em breve... 🙃
 
 ## 📄 Documentos
 
