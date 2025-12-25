@@ -1,9 +1,21 @@
 import os
+from time import sleep
 from dotenv import load_dotenv
-from sqlalchemy import create_engine
+from sqlalchemy import Engine, create_engine
 from sqlalchemy.orm import sessionmaker, DeclarativeBase
+from sqlalchemy.exc import OperationalError
 
-#esse arquivo aqui é para criar uma "conexão" entre o .env que guarda dados sensiveis e o database.py, que vai precisar de algumas coisas do .env. O __init__.py não foi utilizado para essa função porque ele ficaria muito grande e poderia gerar confusão com import circular
+
+def get_connection(DATABASE_URI: str) -> Engine:
+    for _ in range(10):
+        try:
+            engine = create_engine(DATABASE_URI, echo=False)
+            engine.connect()
+            return engine
+        except OperationalError:
+            sleep(3)
+    raise RuntimeError('Não foi possível estabeler uma conexão com o banco de dados')
+
 
 load_dotenv()
 
@@ -11,7 +23,7 @@ DATABASE_URI = os.getenv("DATABASE_URI")
 if DATABASE_URI is None:
     raise RuntimeError("A variável de ambiente DATABASE_URI não foi definida")
 
-engine = create_engine(DATABASE_URI, echo=False)
+engine = get_connection(DATABASE_URI)
 SessionLocal = sessionmaker(bind=engine)
 
 
