@@ -41,13 +41,13 @@ Devido à complexidade do sistema, foi necessária mais de uma tecnologia para a
 > [!NOTE]
 > Para mais detalhes, vá ao documento de [requisitos não funcionais](docs/requisitos_nao_funcionais.md).
 
-| Tecnologia       | Funcionalidade                                                                  |
-| ---------------- | ------------------------------------------------------------------------------- |
-| `Flask`          | microframework `Python` usado na integração com o `front-end` e `back-end`      |
-| `ReactJS`        | Biblioteca `JavaScript` para a criação de interfaces                            |
-| `MySQL`          | Tipo de banco de dados relacional utilizado para armazenar dados e informações  |
-| `LangChain`      | Framework para a orquestração da **LLM**                                        |
-| `GPT-5 nano`     | Modelo de linguagem desenvolvido pela **OpenAI**                                |
+| Tecnologia   | Funcionalidade                                                                 |
+| ------------ | ------------------------------------------------------------------------------ |
+| `Flask`      | microframework `Python` usado na integração com o `front-end` e `back-end`     |
+| `ReactJS`    | Biblioteca `JavaScript` para a criação de interfaces                           |
+| `MySQL`      | Tipo de banco de dados relacional utilizado para armazenar dados e informações |
+| `LangChain`  | Framework para a orquestração da **LLM**                                       |
+| `GPT-5 nano` | Modelo de linguagem desenvolvido pela **OpenAI**                               |
 
 ### 🧠 IA
 
@@ -120,15 +120,25 @@ Após finalizar esse passo a passo, a aplicação iniciará em seu navegador pad
 
 Em breve... 🙃
 
+---
+
 ## 📄 Documentos
 
 - [Requisitos Funcionais](docs/requisitos_funcionais.md)
 - [Requisitos Não Funcionais](docs/requisitos_nao_funcionais.md)
 - [Framework e LLM](docs/framework_e_llm.md)
 
-## 😃 Contribuidores
+## 😁 Equipe
 
-- [Ana Cecilya](https://www.github.com/cecilya1)
-- [Ana Clara](https://www.github.com/anaclaraa1)
-- [Maria das Graças](https://www.github.com/mgdantas1)
-- [Miguel Tavares](https://www.github.com/migueltvrs13)
+| Nome                                                  | Papel no projeto |
+| ----------------------------------------------------- | ---------------- |
+| [Ana Cecilya](https://www.github.com/cecilya1)        | Desenvolvedora   |
+| [Ana Clara](https://www.github.com/anaclaraa1)        | Desenvolvedora   |
+| [Davi Francisco](https://www.github.com/Davi-1903)    | Desenvolvedor    |
+| [Maria das Graças](https://www.github.com/mgdantas1)  | Desenvolvedora   |
+| [Miguel Tavares](https://www.github.com/migueltvrs13) | Desenvolvedor    |
+| [Romerito Campos](https://github.com/RoCampos)        | Orientador       |
+
+## ⚖️ Licença
+
+O sistema foi construido como **Projeto de Pesquisa e Extensão** pelos alunos do **IFRN** - campus Caicó. [Licença MIT](LICENSE)
