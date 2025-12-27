@@ -41,13 +41,13 @@ Devido à complexidade do sistema, foi necessária mais de uma tecnologia para a
 > [!NOTE]
 > Para mais detalhes, vá ao documento de [requisitos não funcionais](docs/requisitos_nao_funcionais.md).
 
-| Tecnologia       | Funcionalidade                                                                  |
-| ---------------- | ------------------------------------------------------------------------------- |
-| `Flask`          | microframework `Python` usado na integração com o `front-end` e `back-end`      |
-| `ReactJS`        | Biblioteca `JavaScript` para a criação de interfaces                            |
-| `MySQL`          | Tipo de banco de dados relacional utilizado para armazenar dados e informações  |
-| `LangChain`      | Framework para a orquestração da **LLM**                                        |
-| `GPT-5 nano`     | Modelo de linguagem desenvolvido pela **OpenAI**                                |
+| Tecnologia   | Funcionalidade                                                           |
+| ------------ | ------------------------------------------------------------------------ |
+| `Flask`      | microframework `Python` usado na integração com o `frontend` e `backend` |
+| `ReactJS`    | Biblioteca `JavaScript` para a criação de interfaces                     |
+| `MySQL`      | Banco de dados relacional utilizado para armazenar dados e informações   |
+| `LangChain`  | Framework para a orquestração da **LLM**                                 |
+| `GPT-5 nano` | Modelo de linguagem desenvolvido pela **OpenAI**                         |
 
 ### 🧠 IA
 
@@ -57,10 +57,10 @@ A **IA** é o coração do projeto. Optamos por usar um modelo de linguagem pela
 
 ## ▶️ Como executar o projeto
 
-Para executar o projeto há duas formas:
+Para executar o projeto, há duas formas:
 
 - **🧑‍💻 Modo desenvolvedor:** O modo desenvolvedor consiste em iniciar ambos os servidores (servidor do `Flask` e o servidor do `React`), possibilitando alterações em tempo real;
-- **🐋 Modo deploy com `Docker`:** O modo deploy é para quando o projeto estiver pronto para produção
+- **🐋 Modo deploy com `Docker`:** O modo deploy é indicado para quando o projeto estiver pronto para produção;
 
 > [!IMPORTANT]
 > O projeto usa `Flask` e `React`. Ou seja, é necessário ter o `Python` e o `Node` instalados
@@ -76,19 +76,15 @@ Para executar o projeto há duas formas:
 
 2. **Instale as dependências**
 
-    - **Dentro do diretório `server/`**
+    ```bash
+    # Backend
+    cd server
+    pip install -r requirements.txt
 
-        ```powershell
-        pip install -r requirements.txt
-        ```
-
-        > Use ambiente virtual 😉
-
-    - **Dentro do diretório `client/`**
-
-        ```powershell
-        npm install --legacy-peer-deps
-        ```
+    # Frontend
+    cd ../client
+    npm install --legacy-peer-deps
+    ```
 
 3. **Crie um arquivo `.env` na raiz do projeto para as variáveis de ambiente e adicione**
 
@@ -102,17 +98,18 @@ Para executar o projeto há duas formas:
 
 4. **Inicie ambos os servidores**
 
-    - **Dentro do diretório `server/`**
+    ```bash
+    # Backend
+    cd ../server
+    python app.py
 
-        ```powershell
-        python app.py
-        ```
+    # Frontend
+    cd ../client
+    npm run dev
+    ```
 
-    - **Dentro do diretório `client/`**
-
-        ```powershell
-        npm run dev
-        ```
+> [!TIP]
+> Use ambiente virtual 😉
 
 Após finalizar esse passo a passo, a aplicação iniciará em seu navegador padrão em [`http://localhost:3000`](http://localhost:3000)
 
@@ -140,15 +137,27 @@ Após finalizar esse passo a passo, a aplicação iniciará em seu navegador pad
 
 Após finalizar esse passo a passo, a aplicação estará executando em [`http://localhost:3000`](http://localhost:3000)
 
+---
+
 ## 📄 Documentos
 
 - [Requisitos Funcionais](docs/requisitos_funcionais.md)
 - [Requisitos Não Funcionais](docs/requisitos_nao_funcionais.md)
 - [Framework e LLM](docs/framework_e_llm.md)
 
-## 😃 Contribuidores
+## 😁 Equipe
 
-- [Ana Cecilya](https://www.github.com/cecilya1)
-- [Ana Clara](https://www.github.com/anaclaraa1)
-- [Maria das Graças](https://www.github.com/mgdantas1)
-- [Miguel Tavares](https://www.github.com/migueltvrs13)
+| Nome                                                  | Papel no projeto |
+| ----------------------------------------------------- | ---------------- |
+| [Ana Cecilya](https://www.github.com/cecilya1)        | Desenvolvedora   |
+| [Ana Clara](https://www.github.com/anaclaraa1)        | Desenvolvedora   |
+| [Davi Francisco](https://www.github.com/Davi-1903)    | Desenvolvedor    |
+| [Maria das Graças](https://www.github.com/mgdantas1)  | Desenvolvedora   |
+| [Miguel Tavares](https://www.github.com/migueltvrs13) | Desenvolvedor    |
+| [Romerito Campos](https://github.com/RoCampos)        | Orientador       |
+
+## ⚖️ Licença
+
+O sistema foi construído como **Projeto de Pesquisa e Extensão** pelos alunos do **IFRN** - campus Caicó.
+
+- [Licença MIT](LICENSE)
