@@ -115,6 +115,9 @@ Após finalizar esse passo a passo, a aplicação iniciará em seu navegador pad
 
 ### 🐋 Modo deploy com `Docker`
 
+> [!IMPORTANT]
+> É necessário ter o Docker e o Docker Compose instalados
+
 1. **Clone o repositório e acesse-o**
 
     ```git
