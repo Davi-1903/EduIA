@@ -25,7 +25,7 @@ services:
         ports:
             - '3000:80'
         volumes:
-            - client-build:/usr/share/nginx/html
+            - client_build:/usr/share/nginx/html
             - ./nginx/nginx.conf:/etc/nginx/conf.d/default.conf
         depends_on:
             - server
