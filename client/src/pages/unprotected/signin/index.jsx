@@ -57,11 +57,11 @@ export default function SignIn() {
 
     return (
         <ProtectedRoute isPrivate={false}>
+            <Helmet>
+                <title>EduIA | Login</title>
+                <meta name='description' content='Página de autenticação de usuários do sistema EduIA' />
+            </Helmet>
             <div className='wrapper'>
-                <Helmet>
-                    <title>EduIA | Login</title>
-                    <meta name='description' content='Página de autenticação de usuários do sistema EduIA' />
-                </Helmet>
                 <RenderMessages />
                 <main className='bg-color4-200 grid min-h-screen grid-cols-1 p-4 lg:grid-cols-[2fr_3fr]'>
                     <article className='grid place-items-center p-4'>

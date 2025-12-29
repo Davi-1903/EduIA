@@ -37,7 +37,8 @@ def register():
 
             return jsonify({'ok': True, 'redirect': '/dash'}), 201
 
-        except Exception:
+        except:
+            session.rollback()
             return jsonify({'ok': False, 'message': 'Erro interno'}), 500
 
 
@@ -62,7 +63,7 @@ def login():
         except VerifyMismatchError:
             return jsonify({'ok': False, 'message': 'Senha incorreta'}), 401
 
-        except Exception:
+        except:
             return jsonify({'ok': False, 'message': 'Ocorreu um erro interno'}), 500
 
 

@@ -127,14 +127,14 @@ Em breve... 🙃
 
 ## 😁 Equipe
 
-| Nome                                                  | Papel no projeto |
-| ----------------------------------------------------- | ---------------- |
-| [Ana Cecilya](https://www.github.com/cecilya1)        | Desenvolvedora   |
-| [Ana Clara](https://www.github.com/anaclaraa1)        | Desenvolvedora   |
-| [Davi Francisco](https://www.github.com/Davi-1903)    | Desenvolvedor    |
-| [Maria das Graças](https://www.github.com/mgdantas1)  | Desenvolvedora   |
-| [Miguel Tavares](https://www.github.com/migueltvrs13) | Desenvolvedor    |
-| [Romerito Campos](https://github.com/RoCampos)        | Orientador       |
+| Nome                                              | Papel no projeto |
+| ------------------------------------------------- | ---------------- |
+| [Ana Cecilya](https://github.com/cecilya1)        | Desenvolvedora   |
+| [Ana Clara](https://github.com/anaclaraa1)        | Desenvolvedora   |
+| [Davi Francisco](https://github.com/Davi-1903)    | Desenvolvedor    |
+| [Maria das Graças](https://github.com/mgdantas1)  | Desenvolvedora   |
+| [Miguel Tavares](https://github.com/migueltvrs13) | Desenvolvedor    |
+| [Romerito Campos](https://github.com/RoCampos)    | Orientador       |
 
 ## ⚖️ Licença
 
