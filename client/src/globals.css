@@ -51,12 +51,6 @@
     --color-color4-200: hsl(from var(--base-color4) h s calc(l + 5));
     --color-color4-400: hsl(from var(--base-color4) h s calc(l + 10));
 
-    --color-color5-25: hsl(from var(--base-color5) h s calc(l - 10));
-    --color-color5-50: hsl(from var(--base-color5) h s calc(l - 5));
-    --color-color5-100: var(--base-color5);
-    --color-color5-200: hsl(from var(--base-color5) h s calc(l + 5));
-    --color-color5-400: hsl(from var(--base-color5) h s calc(l + 10));
-
     /* ============================== FONTES ============================== */
     --font-primary: var(--font-primary);
     --font-secundary: var(--font-secundary);
@@ -151,12 +145,6 @@
 
 @utility shadow-link {
     box-shadow: 0 0 0.5rem hsl(from var(--base-color1) h s l / 0.75);
-}
-
-@utility title-welcome {
-    background-image: linear-gradient(to right bottom, var(--color-color1-100) 25%, var(--color-color2-400), var(--color-color4-25));
-    background-clip: text;
-    color: transparent;
 }
 
 @utility scrollbar-hide {

@@ -1,15 +1,11 @@
 <div align='center'>
     <img
-        src='client/public/assets/images/logo_light.svg'
+        src='client/public/assets/images/README.png'
         loading='lazy'
-        width='300'
-        style='margin-top: 3rem'
         alt='Logo EduIA'
+        width='800'
     >
-    <h3>Sistema Inteligente de Apoio à Educação</h3>
 </div>
-
----
 
 ## 📚 O que é o EduIA
 
