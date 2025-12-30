@@ -37,9 +37,8 @@ export default function LandingPageAbout() {
                 </p>
             </article>
             <article
-                className={`hidden max-w-200 flex-1 basis-80 opacity-0 md:block ${isEmerge ? 'animate-emerge-right' : ''}`}
+                className={`hidden max-w-200 flex-1 basis-80 opacity-0 lg:block ${isEmerge ? 'animate-emerge-right' : ''}`}
             >
-                {/* Adicionar uma imagem que tem a ver com o projeto */}
                 <img src={Mascote} alt='Mascote' className='mx-auto max-w-130' />
             </article>
         </section>

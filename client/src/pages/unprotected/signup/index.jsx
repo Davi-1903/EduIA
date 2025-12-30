@@ -85,11 +85,11 @@ export default function SignUp() {
 
     return (
         <ProtectedRoute isPrivate={false}>
+            <Helmet>
+                <title>EduIA | Cadastro</title>
+                <meta name='description' content='Página de cadastro de usuários do sistema EduIA' />
+            </Helmet>
             <div className='wrapper'>
-                <Helmet>
-                    <title>EduIA | Cadastro</title>
-                    <meta name='description' content='Página de cadastro de usuários do sistema EduIA' />
-                </Helmet>
                 <RenderMessages />
                 <main className='bg-color4-200 grid min-h-screen grid-cols-1 p-4 lg:grid-cols-[2fr_3fr]'>
                     <article className='grid place-items-center p-4 md:p-12'>

@@ -28,7 +28,7 @@ export default function LandingPageWelcome() {
                 className='bg-color4-200 flex w-full items-center justify-center p-8 pt-24 md:min-h-screen md:px-16 md:py-32'
             >
                 <article className={`opacity-0 ${isEmerge ? 'animate-emerge-left' : ''}`}>
-                    <h1 className='font-primary title-welcome mb-4 max-w-300 pb-2 text-4xl font-bold text-balance md:text-5xl md:font-semibold lg:text-6xl'>
+                    <h1 className='font-primary bg-linear-to-br from-color1-100 from-25% via-color2-400 to-color4-25 bg-clip-text text-transparent mb-4 max-w-300 pb-2 text-4xl font-bold text-balance md:text-5xl md:font-semibold lg:text-6xl'>
                         Aprenda de forma inteligente e personalizada
                     </h1>
                     <p className='font-secundary text-color1-50 max-w-300 text-lg text-balance md:text-2xl'>
