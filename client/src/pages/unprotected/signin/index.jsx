@@ -128,7 +128,7 @@ export default function SignIn() {
                             </div>
                             <button
                                 type='submit'
-                                className='bg-color1-100 text-color4-100 hover:shadow-lg-hard mt-2 min-h-12 cursor-pointer rounded-lg text-xl transition-all duration-150'
+                                className='bg-button text-color4-100 hover:shadow-lg-hard mt-2 min-h-12 cursor-pointer rounded-lg text-xl transition-all duration-150'
                             >
                                 Entrar
                             </button>

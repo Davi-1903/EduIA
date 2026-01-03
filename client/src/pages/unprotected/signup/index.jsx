@@ -107,16 +107,15 @@ export default function SignUp() {
                                     deseja?
                                 </p>
                                 <div className='flex flex-wrap gap-4'>
-                                    {/* Talvez mudar as cores */}
                                     <button
-                                        className='bg-color1-100 hover:shadow-lg-hard flex min-h-12 w-full flex-1 basis-50 cursor-pointer items-center justify-center gap-4 rounded-xl py-4 transition-all duration-150'
+                                        className='bg-button hover:shadow-lg-hard flex min-h-12 w-full flex-1 basis-50 cursor-pointer items-center justify-center gap-4 rounded-xl py-4 transition-all duration-150'
                                         onClick={() => setMode('Student')}
                                     >
                                         <IconSchool size={26} className='stroke-color4-200' />
                                         <span className='text-color4-200 text-lg font-semibold'>Aluno</span>
                                     </button>
                                     <button
-                                        className='bg-color1-100 hover:shadow-lg-hard flex min-h-12 w-full flex-1 basis-50 cursor-pointer items-center justify-center gap-4 rounded-xl py-4 transition-all duration-150'
+                                        className='bg-button hover:shadow-lg-hard flex min-h-12 w-full flex-1 basis-50 cursor-pointer items-center justify-center gap-4 rounded-xl py-4 transition-all duration-150'
                                         onClick={() => setMode('Teacher')}
                                     >
                                         <IconChalkboardTeacher size={26} className='stroke-color4-200' />
@@ -213,7 +212,7 @@ export default function SignUp() {
                                 </div>
                                 <button
                                     type='submit'
-                                    className='bg-color1-100 text-color4-100 hover:shadow-lg-hard min-h-12 cursor-pointer rounded-lg text-xl transition-all duration-150'
+                                    className='bg-button text-color4-100 hover:shadow-lg-hard min-h-12 cursor-pointer rounded-lg text-xl transition-all duration-150'
                                 >
                                     Entrar
                                 </button>
