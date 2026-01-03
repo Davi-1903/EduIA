@@ -106,7 +106,7 @@
             border-radius: 0.5rem;
             padding: 0.5rem 1rem !important;
             font-size: 1.6rem !important;
-            background-color: transparent !important;
+            background-image: none !important;
             color: var(--base-color1) !important;
             border: none !important;
         }
