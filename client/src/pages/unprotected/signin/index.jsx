@@ -71,7 +71,9 @@ export default function SignIn() {
                             </button>
                         </Link>
                         <form onSubmit={submit} className='box-content flex w-full max-w-80 flex-col gap-4'>
-                            <h2 className='font-primary text-color1-100 text-[2.5rem]/[50px] font-bold'>Login</h2>
+                            <h2 className='font-primary from-color1-100 via-color1-400 to-color4-25 bg-linear-to-tr bg-clip-text text-[2.5rem]/[50px] font-bold text-transparent'>
+                                Login
+                            </h2>
                             <div>
                                 <label htmlFor='email' className='text-color1-100 block'>
                                     Email

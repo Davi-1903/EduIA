@@ -89,7 +89,7 @@ export default function LandingPageMateriais() {
             {/* Não sei se ficou muito bom. Tem alguns detalhes para alterar */}
             <section ref={sectionRef} className='bg-color4-200 p-8 md:p-16 md:pt-0'>
                 <article className={`mb-16 opacity-0 ${isEmerge ? 'animate-emerge-up' : ''}`}>
-                    <h2 className='font-primary text-color2-200 text-4xl font-semibold md:text-center md:text-5xl'>
+                    <h2 className='font-primary from-color1-100 via-color1-400 to-color4-25 bg-linear-to-tr bg-clip-text text-4xl font-semibold text-transparent md:text-center md:text-5xl'>
                         Gere materiais de forma rápida e fácil
                     </h2>
                 </article>

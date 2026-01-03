@@ -101,7 +101,9 @@ export default function SignUp() {
                         </Link>
                         {mode === null ? (
                             <article className='w-full max-w-md'>
-                                <h2 className='font-primary text-color1-100 text-6xl font-semibold'>Olá!</h2>
+                                <h2 className='font-primary from-color1-100 via-color1-400 to-color4-25 bg-linear-to-tr bg-clip-text text-6xl font-semibold text-transparent'>
+                                    Olá!
+                                </h2>
                                 <p className='text-color3-25 text-secundary mb-8 text-xl text-balance'>
                                     Para criar uma conta é preciso especificar o tipo da conta. Que tipo de conta
                                     deseja?
@@ -125,7 +127,9 @@ export default function SignUp() {
                             </article>
                         ) : (
                             <form className='flex w-full max-w-80 flex-col gap-4' onSubmit={handleRegister}>
-                                <h2 className='font-primary text-color1-100 text-4xl font-bold'>Cadastro</h2>
+                                <h2 className='font-primary from-color1-100 via-color1-400 to-color4-25 bg-linear-to-tr bg-clip-text text-4xl font-bold text-transparent'>
+                                    Cadastro
+                                </h2>
                                 <div>
                                     <label htmlFor='nome' className='text-color1-100 block'>
                                         Nome
