@@ -4,14 +4,14 @@
 
 |  Código  | Requisito             | Funcionalidade                                                                                                                   | Prioridade | Status                |
 | :------: | --------------------- | -------------------------------------------------------------------------------------------------------------------------------- | ---------- | --------------------- |
-| **NF01** | Usar `Python`         | Linguagem usada no `back-end`                                                                                                    | Essencial  | 🔧 Em desenvolvimento |
-| **NF02** | Usar `Flask`          | MicroFrameWork `python` usado na integração com o `front-end` e `back-end`                                                       | Essencial  | 🔧 Em desenvolvimento |
-| **NF03** | Usar `HTML`           | Linguagem de marcação de hiper-textos utilizada na construção do site                                                            | Essencial  | 🔧 Em desenvolvimento |
-| **NF04** | Usar `CSS`            | Linguagem utilizada na estilização do site                                                                                       | Essencial  | 🔧 Em desenvolvimento |
-| **NF05** | Usar `ReactJS`        | Biblioteca `JavaScript` para a criação de interfaces                                                                             | Essencial  | 🔧 Em desenvolvimento |
+| **NF01** | Usar `Python`         | Linguagem usada no `back-end`                                                                                                    | Essencial  | ✅ Implementado       |
+| **NF02** | Usar `Flask`          | MicroFrameWork `python` usado na integração com o `front-end` e `back-end`                                                       | Essencial  | ✅ Implementado       |
+| **NF03** | Usar `HTML`           | Linguagem de marcação de hiper-textos utilizada na construção do site                                                            | Essencial  | ✅ Implementado       |
+| **NF04** | Usar `CSS`            | Linguagem utilizada na estilização do site                                                                                       | Essencial  | ✅ Implementado       |
+| **NF05** | Usar `ReactJS`        | Biblioteca `JavaScript` para a criação de interfaces                                                                             | Essencial  | ✅ Implementado       |
 | **NF06** | Usar `MySQL`          | Tipo de banco de dados relacional utilizado para armazenar informações                                                           | Essencial  | 🔧 Em desenvolvimento |
-| **NF07** | Usar `Git` e `GitHub` | Ferramentas utilizadas para versionamento e compartilhamento do projeto para melhorar e otimizar o desenvolvimento da plataforma | Importante | 🔧 Em desenvolvimento |
-| **NF08** | Usar `Figma`          | Plataforma utilizada na criação do design das páginas antes na estilização com CSS                                               | Importante | 🔧 Em desenvolvimento |
+| **NF07** | Usar `Git` e `GitHub` | Ferramentas utilizadas para versionamento e compartilhamento do projeto para melhorar e otimizar o desenvolvimento da plataforma | Importante | ✅ Implementado       |
+| **NF08** | Usar `Figma`          | Plataforma utilizada na criação do design das páginas antes na estilização com CSS                                               | Importante | ✅ Implementado       |
 | **NF09** | Usar `LangChain`      | Framework para integrar a API da LLM                                                                                             | Essencial  | ⏳ Planejando         |
 | **NF10** | Usar `GPT-5 nano`     | API para integração com o modelo de linguagem `OpenAI`                                                                           | Essencial  | ⏳ Planejando         |
 
@@ -44,7 +44,7 @@
 |  Código  | Requisito                                                        | Prioridade | Status                |
 | :------: | ---------------------------------------------------------------- | ---------- | --------------------- |
 | **NF20** | Implementar criptografia SSL/TLS para todas as comunicações      | Importante | 🔧 Em desenvolvimento |
-| **NF21** | Armazenar senhas utilizando hashing seguro com `Argon2`          | Importante | 🔧 Em desenvolvimento |
+| **NF21** | Armazenar senhas utilizando hashing seguro com `Argon2`          | Importante | ✅ Implementado       |
 | **NF22** | Implementar autenticação multifator (MFA) para acessos sensíveis | Desejável  | 🔧 Em desenvolvimento |
 
 ## 6. Privacidade
