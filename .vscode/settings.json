@@ -1,6 +1,8 @@
 {
 	"editor.formatOnSave": true,
-	"editor.defaultFormatter": "esbenp.prettier-vscode",
 	"python.analysis.autoImportCompletions": true,
-	"python.analysis.typeCheckingMode": "standard"
+	"python.analysis.typeCheckingMode": "standard",
+	"[javascript][javascriptreact][json][css]": {
+		"editor.defaultFormatter": "esbenp.prettier-vscode"
+	}
 }

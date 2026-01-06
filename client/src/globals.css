@@ -106,7 +106,7 @@
             border-radius: 0.5rem;
             padding: 0.5rem 1rem !important;
             font-size: 1.6rem !important;
-            background-color: transparent !important;
+            background-image: none !important;
             color: var(--base-color1) !important;
             border: none !important;
         }
@@ -141,6 +141,10 @@
             background-image: linear-gradient(to right, var(--color-color4-200), transparent);
         }
     }
+}
+
+@utility bg-button {
+    background-image: linear-gradient(to top right, var(--base-color1), var(--color-color1-400))
 }
 
 @utility shadow-link {
@@ -277,7 +281,7 @@
     from {
         transform: none;
     }
-    
+
     to {
         transform: translateX(calc(100% + 1rem));
     }

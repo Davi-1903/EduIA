@@ -72,7 +72,7 @@ export default function Header() {
                         <li>
                             <Link
                                 to='/login'
-                                className='font-primary border-color1-100 text-color1-100 hover:bg-color1-100 hover:text-color4-100 cursor-pointer rounded-lg border-2 px-4 py-2 text-sm font-medium transition-all duration-150'
+                                className='font-primary border-color1-100 text-color1-100 hover:bg-button hover:text-color4-100 cursor-pointer rounded-lg border-2 px-4 py-2 text-sm font-medium transition-all duration-150'
                                 onClick={closeMenu}
                             >
                                 Login
@@ -81,7 +81,7 @@ export default function Header() {
                         <li>
                             <Link
                                 to='/cadastro'
-                                className='font-primary border-color1-100 text-color4-100 bg-color1-100 hover:shadow-link cursor-pointer rounded-lg border-2 px-4 py-2 text-sm font-medium transition-all duration-150'
+                                className='font-primary border-color1-100 text-color4-100 bg-button hover:shadow-link cursor-pointer rounded-lg border-2 px-4 py-2 text-sm font-medium transition-all duration-150'
                                 onClick={closeMenu}
                             >
                                 Cadastro

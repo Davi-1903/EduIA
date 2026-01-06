@@ -16,7 +16,7 @@ export default function Question({ question, answer }) {
                     role='button'
                     size={28}
                     strokeWidth={1.5}
-                    className={`bg-color1-100 stroke-color4-100 box-content shrink-0 rounded-full p-1 transition-all duration-150 ${open ? 'rotate-45' : ''}`}
+                    className={`bg-button stroke-color4-100 box-content shrink-0 rounded-full p-1 transition-all duration-150 ${open ? 'rotate-45' : ''}`}
                 />
             </div>
             <div className={`grid pt-2 transition-all duration-150 ${open ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}>

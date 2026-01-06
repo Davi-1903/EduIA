@@ -39,7 +39,7 @@ export default function Footer() {
                         </li>
                     </ul>
                     <button
-                        className='border-color1-100 hover:bg-color1-100 text-color1-100 hover:stroke-color3-100 stroke-color1-100 hover:text-color4-100 flex cursor-pointer gap-2 rounded-lg border-3 px-4 py-2 transition-all duration-100'
+                        className='border-color1-100 hover:bg-button text-color1-100 hover:stroke-color3-100 stroke-color1-100 hover:text-color4-100 flex cursor-pointer gap-2 rounded-lg border-3 px-4 py-2 transition-all duration-100'
                         onClick={() => window.scroll({ top: 0, behavior: 'smooth' })}
                     >
                         <span className='font-primary font-medium'>Voltar para o topo</span>

@@ -101,22 +101,23 @@ export default function SignUp() {
                         </Link>
                         {mode === null ? (
                             <article className='w-full max-w-md'>
-                                <h2 className='font-primary text-color1-100 text-6xl font-semibold'>Olá!</h2>
+                                <h2 className='font-primary from-color1-100 via-color1-400 to-color4-25 bg-linear-to-tr bg-clip-text text-6xl font-semibold text-transparent'>
+                                    Olá!
+                                </h2>
                                 <p className='text-color3-25 text-secundary mb-8 text-xl text-balance'>
                                     Para criar uma conta é preciso especificar o tipo da conta. Que tipo de conta
                                     deseja?
                                 </p>
                                 <div className='flex flex-wrap gap-4'>
-                                    {/* Talvez mudar as cores */}
                                     <button
-                                        className='bg-color1-100 hover:shadow-lg-hard flex min-h-12 w-full flex-1 basis-50 cursor-pointer items-center justify-center gap-4 rounded-xl py-4 transition-all duration-150'
+                                        className='bg-button hover:shadow-lg-hard flex min-h-12 w-full flex-1 basis-50 cursor-pointer items-center justify-center gap-4 rounded-xl py-4 transition-all duration-150'
                                         onClick={() => setMode('Student')}
                                     >
                                         <IconSchool size={26} className='stroke-color4-200' />
                                         <span className='text-color4-200 text-lg font-semibold'>Aluno</span>
                                     </button>
                                     <button
-                                        className='bg-color1-100 hover:shadow-lg-hard flex min-h-12 w-full flex-1 basis-50 cursor-pointer items-center justify-center gap-4 rounded-xl py-4 transition-all duration-150'
+                                        className='bg-button hover:shadow-lg-hard flex min-h-12 w-full flex-1 basis-50 cursor-pointer items-center justify-center gap-4 rounded-xl py-4 transition-all duration-150'
                                         onClick={() => setMode('Teacher')}
                                     >
                                         <IconChalkboardTeacher size={26} className='stroke-color4-200' />
@@ -126,7 +127,9 @@ export default function SignUp() {
                             </article>
                         ) : (
                             <form className='flex w-full max-w-80 flex-col gap-4' onSubmit={handleRegister}>
-                                <h2 className='font-primary text-color1-100 text-4xl font-bold'>Cadastro</h2>
+                                <h2 className='font-primary from-color1-100 via-color1-400 to-color4-25 bg-linear-to-tr bg-clip-text text-4xl font-bold text-transparent'>
+                                    Cadastro
+                                </h2>
                                 <div>
                                     <label htmlFor='nome' className='text-color1-100 block'>
                                         Nome
@@ -213,7 +216,7 @@ export default function SignUp() {
                                 </div>
                                 <button
                                     type='submit'
-                                    className='bg-color1-100 text-color4-100 hover:shadow-lg-hard min-h-12 cursor-pointer rounded-lg text-xl transition-all duration-150'
+                                    className='bg-button text-color4-100 hover:shadow-lg-hard min-h-12 cursor-pointer rounded-lg text-xl transition-all duration-150'
                                 >
                                     Entrar
                                 </button>

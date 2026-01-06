@@ -70,7 +70,7 @@ def login():
 @bp_auth.route('/check')
 @login_required
 def check():
-    return jsonify({'ok': False}), 200
+    return jsonify({'ok': True}), 200
 
 
 @bp_auth.route('/csrf')
