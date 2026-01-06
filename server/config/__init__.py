@@ -1,22 +1,15 @@
-import os
-from dotenv import load_dotenv
 from flask import Flask, jsonify
 from flask_cors import CORS
 from flask_login import LoginManager
 from flask_wtf import CSRFProtect
 from database import SessionLocal, init_database
 from models.user import User
+from utils import get_env
 
 
 def config_app(app: Flask):
-    load_dotenv()
-
-    SECRET_KEY = os.getenv('SECRET_KEY')
-    if SECRET_KEY is None or SECRET_KEY == '':
-        raise RuntimeError('A variável de ambiente SECRET_KEY não foi definida')
-
     app.config.update(
-        SECRET_KEY=SECRET_KEY,
+        SECRET_KEY=get_env('SECRET_KEY'),
         SESSION_COOKIE_HTTPONLY=True,
         SESSION_COOKIE_SECURE=False,
         SESSION_COOKIE_SAMESITE='Lax'

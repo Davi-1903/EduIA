@@ -125,7 +125,7 @@ Após finalizar esse passo a passo, a aplicação iniciará em seu navegador pad
 
     ```.env
     SECRET_KEY="<CHAVE SECRETA>"
-    DATABASE_URI="mysql+pymysql://root@mysql:3306/db_eduia"
+    DATABASE_URI="mysql+pymysql://root@database:3306/db_eduia"
     ```
 
 3. **Crie e inicie os `contêineres Docker`**

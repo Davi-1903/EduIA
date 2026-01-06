@@ -1,6 +1,7 @@
 # Diretórios de controle de versão e de configuração
 .git
 .gitignore
+.gitkeep
 .dockerignore
 
 # Logs
@@ -30,9 +31,7 @@ __pycache__/
 *.pyc
 
 # Editor directories and files
-.vscode/*
-!.vscode/extensions.json
-!.vscode/settings.json
+.vscode
 .idea
 .DS_Store
 *.suo
