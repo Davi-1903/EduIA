@@ -23,13 +23,17 @@ export default function Footer() {
                     <Link to='/'>
                         <img src={Logo} alt='Logo EduIA' className='my-4 h-6 sm:h-9' />
                     </Link>
-                    <p className='text-md/normal font-primary text-color1-100 text-balance'>
+                    <p className='text-base/normal font-primary text-color1-100 text-balance'>
                         Sistema de geração inteligente de materiais de aula e de estudo. Desenvolvido por estudantes do
                         ensino médio técnico integrado do <strong>IFRN</strong> - Campus Caicó.
                     </p>
                     <ul className='my-4 flex gap-4'>
                         <li>
-                            <Link to='https://github.com/Davi-1903/EduIA' target='_blank'>
+                            <Link
+                                to='https://github.com/Davi-1903/EduIA'
+                                target='_blank'
+                                aria-label='Link para o repostitório no github'
+                            >
                                 <IconBrandGithub
                                     size={32}
                                     strokeWidth={2}

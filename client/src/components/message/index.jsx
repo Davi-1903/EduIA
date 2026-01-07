@@ -30,7 +30,7 @@ export default function Message({ id, message, type }) {
                 )}
             </div>
             <div className='h-fit flex-1'>
-                <span className='font-secundary text-md/normal text-color4-200'>{message}</span>
+                <span className='font-secundary text-base/normal text-color4-200'>{message}</span>
             </div>
             <div className='self-start'>
                 <button
