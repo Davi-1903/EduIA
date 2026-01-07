@@ -1,15 +1,8 @@
-# ===================== BUILD =====================
-FROM node:24-alpine AS build
+FROM node:24-slim
 
 WORKDIR /app
+
 COPY package*.json .
-RUN npm ci --legacy-peer-deps
+RUN npm install --legacy-peer-deps
 
-COPY . .
-RUN npm run build
-
-# ===================== NGINX =====================
-FROM nginx:alpine
-
-COPY --from=build /app/dist /usr/share/nginx/html
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+CMD [ "npm", "run", "dev" ]

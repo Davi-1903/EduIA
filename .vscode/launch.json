@@ -1,0 +1,26 @@
+{
+	"configurations": [
+		{
+			"name": "Flask (Docker)",
+			"type": "debugpy",
+			"request": "attach",
+			"connect": {
+				"host": "localhost",
+				"port": 5678
+			},
+			"pathMappings": [
+				{
+					"localRoot": "${workspaceFolder}",
+					"remoteRoot": "/app"
+				}
+			]
+		},
+		{
+			"name": "React (Chrome)",
+			"type": "chrome",
+			"request": "launch",
+			"url": "http://localhost:3000",
+			"webRoot": "${workspaceFolder}/client/src"
+		}
+	]
+}

@@ -1,6 +1,7 @@
 {
 	"recommendations": [
 		"ms-python.python",
+		"ms-python.vscode-pylance",
 		"esbenp.prettier-vscode",
 		"dbaeumer.vscode-eslint",
 		"bradlc.vscode-tailwindcss",
@@ -8,4 +9,3 @@
 		"ms-vscode-remote.remote-containers"
 	]
 }
-

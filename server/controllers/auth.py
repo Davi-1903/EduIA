@@ -55,7 +55,7 @@ def login():
             if not user_exist:
                 return jsonify({'ok': False, 'message': 'Este email não está cadastrado no sistema'}), 401
 
-            senha_hasher.verify(user_exist.password, data['senha'])
+            senha_hasher.verify(user_exist.password, data['senha']) # type: ignore
             login_user(user_exist)
 
             return jsonify({'ok': True, 'redirect': '/dash'}), 200
