@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
-import Mascote from '/assets/images/mascote/landingpage_welcome.png';
+import Mascote from '/assets/images/mascote/landingpage_welcome.webp';
 
 export default function LandingPageWelcome() {
     const [isEmerge, setEmerge] = useState(false);
@@ -40,7 +40,7 @@ export default function LandingPageWelcome() {
                 </Link>
             </article>
             <article className={`hidden opacity-0 xl:block ${isEmerge ? 'animate-emerge-right' : ''}`}>
-                <img src={Mascote} alt='Mascote' className='mx-auto max-w-130' />
+                <img src={Mascote} alt='Mascote' loading='lazy' className='mx-auto max-w-130' />
             </article>
         </section>
     );
