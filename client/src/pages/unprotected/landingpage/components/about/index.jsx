@@ -1,5 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
-import Mascote from '/assets/images/mascote/landingpage_sobre.png';
+import Mascote from '/assets/images/mascote/landingpage_sobre.webp';
 
 export default function LandingPageAbout() {
     const [isEmerge, setEmerge] = useState(false);
@@ -41,7 +41,7 @@ export default function LandingPageAbout() {
             <article
                 className={`hidden max-w-200 flex-1 basis-80 opacity-0 lg:block ${isEmerge ? 'animate-emerge-right' : ''}`}
             >
-                <img src={Mascote} alt='Mascote' className='mx-auto max-w-130' />
+                <img src={Mascote} alt='Mascote' loading='lazy' className='mx-auto max-w-130' />
             </article>
         </section>
     );

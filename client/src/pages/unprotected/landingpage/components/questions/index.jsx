@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
 import Question from '../question';
-import Mascote from '/assets/images/mascote/landingpage_questions.png';
+import Mascote from '/assets/images/mascote/landingpage_questions.webp';
 
 export default function LandingPageQuestions() {
     const [emerge, setEmerge] = useState(false);
@@ -54,7 +54,7 @@ export default function LandingPageQuestions() {
                 <h2 className='font-primary from-color1-100 via-color1-400 to-color4-25 bg-linear-0 bg-clip-text pb-1 text-center text-3xl font-semibold text-transparent md:text-4xl'>
                     Perguntas frequentes
                 </h2>
-                <img src={Mascote} alt='Mascote' className='mx-auto hidden max-w-sm lg:block' />
+                <img src={Mascote} alt='Mascote' loading='lazy' className='mx-auto hidden max-w-sm lg:block' />
             </article>
             <article className={`flex-2 opacity-0 ${emerge ? 'animate-emerge-right' : ''} `}>
                 {questions.map(question => (
