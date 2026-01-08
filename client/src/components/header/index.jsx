@@ -92,6 +92,7 @@ export default function Header() {
                 <button
                     className='hover:bg-color4-50 z-2 block cursor-pointer rounded-md p-2 sm:hidden'
                     onClick={toggleMenu}
+                    aria-label='Abrir menu'
                 >
                     {isOpenMenu ? (
                         <IconX size={22} className='stroke-color1-100' />
