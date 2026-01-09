@@ -24,3 +24,6 @@ def get_connection(DATABASE_URI: str) -> Engine:
         except OperationalError:
             sleep(3)
     raise RuntimeError('Não foi possível estabeler uma conexão com o banco de dados')
+
+
+__all__ = ['get_env', 'get_connection']
