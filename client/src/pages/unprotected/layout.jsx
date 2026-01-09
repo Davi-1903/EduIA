@@ -1,7 +1,8 @@
+import { memo } from 'react';
 import { Outlet } from 'react-router-dom';
 import Header from '../../components/header';
 
-export default function UnprotectedLayout() {
+function UnprotectedLayout() {
     return (
         <>
             <Header />
@@ -9,3 +10,5 @@ export default function UnprotectedLayout() {
         </>
     );
 }
+
+export default memo(UnprotectedLayout);

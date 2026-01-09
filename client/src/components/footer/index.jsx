@@ -1,8 +1,9 @@
+import { memo } from 'react';
 import { Link } from 'react-router-dom';
 import { IconArrowUp, IconBrandGithub } from '@tabler/icons-react';
 import Logo from '/assets/images/logo_dark.svg';
 
-export default function Footer() {
+function Footer() {
     const funcionalidades = [
         'Questões',
         'Formulários',
@@ -20,10 +21,10 @@ export default function Footer() {
         <footer className='bg-color4-400'>
             <div className='mx-auto flex max-w-360 flex-col justify-between gap-4 p-4 sm:p-12 lg:flex-row'>
                 <article className='lg:max-w-md'>
-                    <Link to='/'>
-                        <img src={Logo} alt='Logo EduIA' className='my-4 h-6 sm:h-9' />
+                    <Link to='/' prefetch='intent'>
+                        <img src={Logo} alt='Logo EduIA' loading='lazy' className='my-4 h-6 sm:h-9' />
                     </Link>
-                    <p className='text-base/normal font-primary text-color1-100 text-balance'>
+                    <p className='font-primary text-color1-100 text-base/normal text-balance'>
                         Sistema de geração inteligente de materiais de aula e de estudo. Desenvolvido por estudantes do
                         ensino médio técnico integrado do <strong>IFRN</strong> - Campus Caicó.
                     </p>
@@ -71,7 +72,11 @@ export default function Footer() {
                         </h2>
                         <ul>
                             <li>
-                                <Link to='/sobre' className='font-primary text-color1-100 hover:underline'>
+                                <Link
+                                    to='/sobre'
+                                    className='font-primary text-color1-100 hover:underline'
+                                    prefetch='intent'
+                                >
                                     Sobre o <strong>EduIA</strong>
                                 </Link>
                             </li>
@@ -94,3 +99,5 @@ export default function Footer() {
         </footer>
     );
 }
+
+export default memo(Footer);

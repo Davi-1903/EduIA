@@ -1,9 +1,9 @@
-import { useCallback, useEffect, useRef, useState } from 'react';
+import { memo, useCallback, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { IconMenu3, IconX } from '@tabler/icons-react';
 import Logo from '/assets/images/logo_dark.svg';
 
-export default function Header() {
+function Header() {
     const [isOpenMenu, setOpenMenu] = useState(false);
     const [lockScroll, setLockScroll] = useState(false);
     const [dropHeader, setDropHeader] = useState(true);
@@ -52,11 +52,11 @@ export default function Header() {
 
     return (
         <header
-            className={`sm:h-header bg-color4-400/75 fixed z-5 h-[60px] w-full px-4 shadow-lg backdrop-blur-lg transition-all duration-250 sm:px-8 ${dropHeader ? 'top-0' : '-top-(--height-header)'}`}
+            className={`bg-color4-400/75 h-header fixed z-5 w-full px-4 shadow-lg backdrop-blur-lg transition-all duration-250 sm:px-8 ${dropHeader ? 'top-0' : '-top-(--height-header)'}`}
         >
             <div className='mx-auto flex h-full max-w-400 items-center justify-between'>
-                <Link to='/' className='z-2' onClick={closeMenu}>
-                    <img src={Logo} alt='Logo EduIA' className='h-5 sm:h-6' />
+                <Link to='/' className='z-2' onClick={closeMenu} prefetch='intent'>
+                    <img src={Logo} alt='Logo EduIA' loading='lazy' className='h-5 sm:h-6' />
                 </Link>
                 <nav className={isOpenMenu ? 'nav-header' : 'hidden sm:block'}>
                     <ul className='flex items-center gap-8'>
@@ -65,6 +65,7 @@ export default function Header() {
                                 to='/sobre'
                                 className='font-primary text-color1-100 text-sm font-medium'
                                 onClick={closeMenu}
+                                prefetch='intent'
                             >
                                 Sobre
                             </Link>
@@ -74,6 +75,7 @@ export default function Header() {
                                 to='/login'
                                 className='font-primary border-color1-100 text-color1-100 hover:bg-button hover:text-color4-100 cursor-pointer rounded-lg border-2 px-4 py-2 text-sm font-medium transition-all duration-150'
                                 onClick={closeMenu}
+                                prefetch='intent'
                             >
                                 Login
                             </Link>
@@ -83,6 +85,7 @@ export default function Header() {
                                 to='/cadastro'
                                 className='font-primary border-color1-100 text-color4-100 bg-button hover:shadow-link cursor-pointer rounded-lg border-2 px-4 py-2 text-sm font-medium transition-all duration-150'
                                 onClick={closeMenu}
+                                prefetch='intent'
                             >
                                 Cadastro
                             </Link>
@@ -104,3 +107,5 @@ export default function Header() {
         </header>
     );
 }
+
+export default memo(Header);
