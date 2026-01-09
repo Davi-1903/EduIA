@@ -65,7 +65,7 @@ export default function SignIn() {
                 <RenderMessages />
                 <main className='bg-color4-200 grid min-h-screen grid-cols-1 p-4 lg:grid-cols-[2fr_3fr]'>
                     <article className='grid place-items-center p-4'>
-                        <Link to='/' className='absolute top-4 left-4'>
+                        <Link to='/' className='absolute top-4 left-4' aria-label='Voltar para a página inicial'>
                             <button className='hover:bg-color4-100 cursor-pointer gap-2 rounded-lg p-2 transition-all duration-75'>
                                 <IconArrowLeft className='stroke-color1-100' />
                             </button>

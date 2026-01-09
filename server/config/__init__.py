@@ -33,3 +33,6 @@ def login_config(app: Flask):
     @login_manager.unauthorized_handler
     def unauthorized():
         return jsonify({'ok': False, 'message': 'Permissão negada'}), 401
+
+
+__all__ = ['config_app']

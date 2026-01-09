@@ -100,21 +100,24 @@ export default function LandingPageMateriais() {
                                 <Card key={material.id} {...material} />
                             ))}
                         </article>
-                        <article aria-hidden className='animate-carrossel flex w-fit gap-4 pr-4'>
+                        <article aria-hidden className='animate-carrossel pointer-events-none flex w-fit gap-4 pr-4'>
                             {materiais.map(material => (
-                                <Card key={material.id} {...material} />
+                                <Card key={`${material.id}-clone`} {...material} />
                             ))}
                         </article>
                     </article>
                     <article className='scrollbar-hide mt-4 flex overflow-x-auto'>
                         <article className='animate-carrossel-reverse flex w-fit gap-4 pl-4'>
                             {materiais.map(material => (
-                                <Card key={material.id} {...material} />
+                                <Card key={`${material.id}-rev`} {...material} />
                             ))}
                         </article>
-                        <article aria-hidden className='animate-carrossel-reverse flex w-fit gap-4 pl-4'>
+                        <article
+                            aria-hidden
+                            className='animate-carrossel-reverse pointer-events-none flex w-fit gap-4 pl-4'
+                        >
                             {materiais.map(material => (
-                                <Card key={material.id} {...material} />
+                                <Card key={`${material.id}-rev-clone`} {...material} />
                             ))}
                         </article>
                     </article>

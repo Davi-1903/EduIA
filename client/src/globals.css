@@ -3,11 +3,13 @@
 @font-face {
     font-family: 'Inter';
     src: url('/assets/fonts/Inter/Inter-VariableFont_opsz\,wght.ttf');
+    font-display: swap;
 }
 
 @font-face {
     font-family: 'Roboto';
     src: url('/assets/fonts/Roboto/Roboto-VariableFont_wdth\,wght.ttf');
+    font-display: swap;
 }
 
 :root {
@@ -54,7 +56,6 @@
     /* ============================== FONTES ============================== */
     --font-primary: var(--font-primary);
     --font-secundary: var(--font-secundary);
-    --text-md: 1rem;
 
     /* ============================== SOMBRAS ============================== */
     --shadow-sm: 0 0 0.25rem hsl(from var(--base-color3) h s l / 0.25);
@@ -76,6 +77,14 @@
 
     body {
         overflow-x: hidden;
+    }
+
+    @supports (-webkit-touch-callout: none) {
+        input,
+        textarea,
+        select {
+            @apply text-base;
+        }
     }
 }
 
