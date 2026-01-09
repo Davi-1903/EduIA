@@ -52,7 +52,7 @@ function Header() {
 
     return (
         <header
-            className={`sm:h-header bg-color4-400/75 fixed z-5 h-[60px] w-full px-4 shadow-lg backdrop-blur-lg transition-all duration-250 sm:px-8 ${dropHeader ? 'top-0' : '-top-(--height-header)'}`}
+            className={`bg-color4-400/75 h-header fixed z-5 w-full px-4 shadow-lg backdrop-blur-lg transition-all duration-250 sm:px-8 ${dropHeader ? 'top-0' : '-top-(--height-header)'}`}
         >
             <div className='mx-auto flex h-full max-w-400 items-center justify-between'>
                 <Link to='/' className='z-2' onClick={closeMenu} prefetch='intent'>

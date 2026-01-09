@@ -31,7 +31,14 @@ const router = createBrowserRouter([
             { path: 'historico', element: <h1>Historico</h1> },
             { path: 'sobre', element: <h1>Sobre</h1> },
             { path: 'config', element: <h1>Config</h1> },
-            { path: '*', element: <Error404 /> },
+            {
+                path: '*',
+                element: (
+                    <Suspense fallback={<Loading />}>
+                        <Error404 />
+                    </Suspense>
+                ),
+            },
         ],
     },
     // Procurar fazer uma gambiarra para esse layout diferente :)
