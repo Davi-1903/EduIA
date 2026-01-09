@@ -55,13 +55,56 @@ A **IA** é o coração do projeto. Optamos por usar um modelo de linguagem pela
 
 Para executar o projeto, há duas formas:
 
-- **🧑‍💻 Modo desenvolvedor:** O modo desenvolvedor consiste em iniciar ambos os servidores (servidor do `Flask` e o servidor do `React`), possibilitando alterações em tempo real;
+- **🧑‍💻 Modo desenvolvedor com `Docker`:** O modo desenvolvedor consiste em iniciar um container de desenvolvimento e abri-lo pelo `Vscode`;
 - **🐋 Modo deploy com `Docker`:** O modo deploy é indicado para quando o projeto estiver pronto para produção;
 
 > [!IMPORTANT]
-> O projeto usa `Flask` e `React`. Ou seja, é necessário ter o `Python` e o `Node` instalados
+> O projeto requer o `Docker` instalado em sua máquina. Caso não tenha, siga as instruções no site oficial: [https://docs.docker.com/get-docker/](https://docs.docker.com/get-docker/)
 
-### 🧑‍💻 Modo desenvolvedor
+### 🧑‍💻 Modo desenvolvedor com `Docker`
+
+1. **Clone o repositório e acesse-o**
+
+    ```git
+    git clone https://github.com/Davi-1903/EduIA.git
+    ```
+
+2. **Abra com `Vscode`**
+
+    ```powersheel
+    code EduIA
+    ```
+
+3. **Entre na branch `develop`**
+
+    ```git
+    git switch develop
+    ```
+
+4. **Certifique-se que a extensão `Dev Containers` está instalada**
+
+    - [Link para a extensão](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
+
+5. **Abra o container de desenvolvimento**
+
+    - Pressione `Ctrl` + `Shift` + `P` e digite `Dev Containers: Reopen in Container`. Após isso, aguarde a construção do container.
+
+6. **Caso deseje mudar o container de desenvolvimento, use o arquivo [`.devcontainer/devcontainer.json`](.devcontainer/devcontainer.json)**
+
+    ```json
+    {
+        ...
+        "service": "server" -> "client" // Por exemplo, para abrir o container do frontend
+        ...
+    }
+    ```
+
+Após finalizar esse passo a passo, o container de desenvolvimento estará aberto e você poderá executar o projeto.
+
+### 🐋 Modo deploy com `Docker`
+
+> [!IMPORTANT]
+> É necessário ter o `Docker` e o `Docker Compose` instalados
 
 1. **Clone o repositório e acesse-o**
 
@@ -70,65 +113,20 @@ Para executar o projeto, há duas formas:
     cd EduIA
     ```
 
-2. **Instale as dependências**
+2. **Entre na branch `build`**
 
-    ```bash
-    # Backend
-    cd server
-    pip install -r requirements.txt
-
-    # Frontend
-    cd ../client
-    npm install --legacy-peer-deps
+    ```git
+    git switch build
     ```
 
 3. **Crie um arquivo `.env` na raiz do projeto para as variáveis de ambiente e adicione**
 
     ```.env
     SECRET_KEY="<CHAVE SECRETA>"
-    DATABASE_URI="mysql+pymysql://root@localhost:<PORTA>/db_eduia"
-
-    # Caso o banco use uma senha
-    DATABASE_URI="mysql+pymysql://root:<SENHA>@localhost:<PORTA>/db_eduia"
-    ```
-
-4. **Inicie ambos os servidores**
-
-    ```bash
-    # Backend
-    cd ../server
-    python app.py
-
-    # Frontend
-    cd ../client
-    npm run dev
-    ```
-
-> [!TIP]
-> Use ambiente virtual 😉
-
-Após finalizar esse passo a passo, a aplicação iniciará em seu navegador padrão em [`http://localhost:3000`](http://localhost:3000)
-
-### 🐋 Modo deploy com `Docker`
-
-> [!IMPORTANT]
-> É necessário ter o Docker e o Docker Compose instalados
-
-1. **Clone o repositório e acesse-o**
-
-    ```git
-    git clone https://github.com/Davi-1903/EduIA.git
-    cd EduIA
-    ```
-
-2. **Crie um arquivo `.env` na raiz do projeto para as variáveis de ambiente e adicione**
-
-    ```.env
-    SECRET_KEY="<CHAVE SECRETA>"
     DATABASE_URI="mysql+pymysql://root@database:3306/db_eduia"
     ```
 
-3. **Crie e inicie os `contêineres Docker`**
+4. **Crie e inicie os `contêineres Docker`**
 
     ```powershell
     docker compose up -d
