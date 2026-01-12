@@ -1,6 +1,7 @@
 services:
     client:
         build: ./client
+        container_name: client
         ports:
             - '3000:80'
         depends_on:
@@ -8,6 +9,7 @@ services:
 
     server:
         build: ./server
+        container_name: server
         environment:
             - SECRET_KEY=${SECRET_KEY}
             - DATABASE_URI=${DATABASE_URI}
@@ -16,8 +18,10 @@ services:
 
     database:
         image: mysql:8
+        container_name: database
+        restart: always
         environment:
-            MYSQL_ALLOW_EMPTY_PASSWORD: true
+            MYSQL_ROOT_PASSWORD: ${DATABASE_PASSWORD}
             MYSQL_DATABASE: db_eduia
         volumes:
             - db_data:/var/lib/mysql
