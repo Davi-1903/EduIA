@@ -1,7 +1,8 @@
+import { memo } from 'react';
 import { useMessages } from '../../context/messagesContext';
 import Message from '../message';
 
-export default function RenderMessages() {
+function RenderMessages() {
     const { messages } = useMessages();
 
     return (
@@ -12,3 +13,5 @@ export default function RenderMessages() {
         </article>
     );
 }
+
+export default memo(RenderMessages);

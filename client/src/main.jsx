@@ -1,8 +1,9 @@
-import { lazy } from 'react';
+import { lazy, Suspense } from 'react';
 import { createRoot } from 'react-dom/client';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 import { HelmetProvider } from 'react-helmet-async';
 import WrapperProvider from './context/wrapperProvider';
+import Loading from './components/loading';
 
 import Layout from './layout';
 const SignUp = lazy(() => import('./pages/unprotected/signup'));
@@ -17,18 +18,46 @@ const router = createBrowserRouter([
         path: '/',
         element: <Layout />,
         children: [
-            { index: true, element: <LandingPage /> },
+            {
+                index: true,
+                element: (
+                    <Suspense fallback={<Loading />}>
+                        <LandingPage />
+                    </Suspense>
+                ),
+            },
             { path: 'dash', element: <h1>Dashboard</h1> },
             { path: 'perfil', element: <h1>Perfil</h1> },
             { path: 'historico', element: <h1>Historico</h1> },
             { path: 'sobre', element: <h1>Sobre</h1> },
             { path: 'config', element: <h1>Config</h1> },
-            { path: '*', element: <Error404 /> },
+            {
+                path: '*',
+                element: (
+                    <Suspense fallback={<Loading />}>
+                        <Error404 />
+                    </Suspense>
+                ),
+            },
         ],
     },
     // Procurar fazer uma gambiarra para esse layout diferente :)
-    { path: 'login', element: <SignIn /> },
-    { path: 'cadastro', element: <SignUp /> },
+    {
+        path: 'login',
+        element: (
+            <Suspense fallback={<Loading />}>
+                <SignIn />
+            </Suspense>
+        ),
+    },
+    {
+        path: 'cadastro',
+        element: (
+            <Suspense fallback={<Loading />}>
+                <SignUp />
+            </Suspense>
+        ),
+    },
 ]);
 
 createRoot(document.getElementById('root')).render(
