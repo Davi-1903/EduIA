@@ -48,7 +48,7 @@ export default function LandingPageQuestions() {
     return (
         <section
             ref={sectionRef}
-            className='bg-color4-200 flex flex-col justify-between gap-16 px-8 py-32 md:p-24 lg:flex-row'
+            className='from-color1-400/15 to-color4-200 flex flex-col justify-between gap-16 bg-radial-[at_left] to-60% px-8 py-32 md:bg-radial-[at_left] md:p-24 lg:flex-row'
         >
             <article className={`flex-1 opacity-0 ${emerge ? 'animate-emerge-left' : ''}`}>
                 <h2 className='font-primary from-color1-100 via-color1-400 to-color4-25 bg-linear-0 bg-clip-text pb-1 text-center text-3xl font-semibold text-transparent md:text-4xl'>
