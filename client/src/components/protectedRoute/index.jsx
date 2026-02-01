@@ -3,7 +3,7 @@ import { Navigate } from 'react-router-dom';
 import { useAuthenticated } from '../../context/authContext';
 
 export default function ProtectedRoute({ children, isPrivate }) {
-    const [isOk, setOk] = useState(false);
+    const [isOk, setOk] = useState(null);
     const { setAuthenticated } = useAuthenticated();
 
     useEffect(() => {
@@ -21,6 +21,7 @@ export default function ProtectedRoute({ children, isPrivate }) {
     }, [setAuthenticated]);
 
     // Retornar loading;
+    if (isOk === null) return <p>Carregando...</p>;
     if (isPrivate && !isOk) return <Navigate to='/login' />;
     if (!isPrivate && isOk) return <Navigate to='/dash' />;
     return children;
