@@ -1,7 +1,7 @@
 import { memo, useCallback, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { IconMenu3, IconX } from '@tabler/icons-react';
-import Logo from '/assets/images/logo_dark.svg';
+import Logo from '/assets/images/logo.svg';
 
 function Header() {
     const [isOpenMenu, setOpenMenu] = useState(false);
@@ -56,7 +56,7 @@ function Header() {
         >
             <div className='mx-auto flex h-full max-w-400 items-center justify-between'>
                 <Link to='/' className='z-2' onClick={closeMenu} prefetch='intent'>
-                    <img src={Logo} alt='Logo EduIA' loading='lazy' className='h-5 sm:h-6' />
+                    <img src={Logo} alt='Logo EduIA' loading='lazy' className='h-7 sm:h-9' />
                 </Link>
                 <nav className={isOpenMenu ? 'nav-header' : 'hidden sm:block'}>
                     <ul className='flex items-center gap-8'>
