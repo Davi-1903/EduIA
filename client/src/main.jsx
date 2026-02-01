@@ -10,6 +10,7 @@ const SignUp = lazy(() => import('./pages/unprotected/signup'));
 const SignIn = lazy(() => import('./pages/unprotected/signin'));
 const LandingPage = lazy(() => import('./pages/unprotected/landingpage'));
 const Error404 = lazy(() => import('./pages/errors/error404'));
+const Dashboard = lazy(() => import('./pages/protected/dash'));
 
 import './globals.css';
 
@@ -26,7 +27,14 @@ const router = createBrowserRouter([
                     </Suspense>
                 ),
             },
-            { path: 'dash', element: <h1>Dashboard</h1> },
+            {
+                path: 'dash',
+                element: (
+                    <Suspense fallback={<Loading />}>
+                        <Dashboard />
+                    </Suspense>
+                ),
+            },
             { path: 'perfil', element: <h1>Perfil</h1> },
             { path: 'historico', element: <h1>Historico</h1> },
             { path: 'sobre', element: <h1>Sobre</h1> },
