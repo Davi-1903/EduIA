@@ -38,7 +38,14 @@ const router = createBrowserRouter([
             },
             { path: 'perfil', element: <h1>Perfil</h1> },
             { path: 'historico', element: <h1>Historico</h1> },
-            { path: 'sobre', element: <About /> },
+            {
+                path: 'sobre',
+                element: (
+                    <Suspense fallback={<Loading />}>
+                        <About />
+                    </Suspense>
+                ),
+            },
             { path: 'config', element: <h1>Config</h1> },
             {
                 path: '*',

@@ -80,6 +80,7 @@
     }
 
     @supports (-webkit-touch-callout: none) {
+
         input,
         textarea,
         select {
@@ -207,6 +208,10 @@
     animation: animate-progress 10s linear forwards;
 }
 
+@utility animate-floating {
+    animation: floating 4s ease-in-out infinite;
+}
+
 @keyframes animate-carrossel {
     from {
         transform: translateX(0);
@@ -295,15 +300,14 @@
     }
 }
 
-@utility animate-floating {
-  animation: floating 4s ease-in-out infinite;
-}
-
 @keyframes floating {
-  0%, 100% {
-    transform: translateY(0);
-  }
-  50% {
-    transform: translateY(-15px);
-  }
+
+    0%,
+    100% {
+        transform: translateY(0);
+    }
+
+    50% {
+        transform: translateY(-15px);
+    }
 }
