@@ -85,7 +85,7 @@ export default function Dashboard() {
             <div className='wrapper'>
                 <RenderMessages />
 
-                <main className='from-color4-200 mt-(--height-header) min-h-screen bg-linear-to-br to-indigo-100'>
+                <main className='from-color4-200 min-h-screen bg-linear-to-br to-indigo-100 pt-(--height-header)'>
                     <section className='mx-auto max-w-7xl space-y-24 px-6 py-16'>
                         <div className='max-w-3xl'>
                             <h1 className='text-color1-100 text-4xl leading-tight font-bold md:text-5xl'>

@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { Link } from 'react-router-dom';
 import Mascote from '/assets/images/mascote/landingpage_sobre.webp';
 
 export default function LandingPageAbout() {
@@ -37,6 +38,11 @@ export default function LandingPageAbout() {
                     - campus Caicó. O sistema visa reduzir o tempo gasto por alunos e professores, gerando materiais de
                     estudo e de aula.
                 </p>
+                <Link to='/sobre'>
+                    <button className='bg-button text-color4-200 font-primary hover:shadow-lg-hard mt-4 cursor-pointer rounded-xl px-6 py-4 text-xl transition-all duration-200'>
+                        Saiba mais
+                    </button>
+                </Link>
             </article>
             <article
                 className={`hidden max-w-200 flex-1 basis-80 opacity-0 lg:block ${isEmerge ? 'animate-emerge-right' : ''}`}
