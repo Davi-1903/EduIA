@@ -1,8 +1,9 @@
 import { Helmet } from 'react-helmet-async';
+import ProtectedRoute from '../../../components/protectedRoute';
 
 export default function About() {
     return (
-        <div className='wrapper'>
+        <ProtectedRoute isPrivate={false}>
             <Helmet>
                 <title>EduIA | Sobre</title>
                 <meta name='description' content='Página de sobre, explicando sobre o que é p EduIA' />
@@ -79,6 +80,6 @@ export default function About() {
                     />
                 </article>
             </main>
-        </div>
+        </ProtectedRoute>
     );
 }
