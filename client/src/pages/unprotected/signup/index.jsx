@@ -10,12 +10,12 @@ import {
     IconUser,
 } from '@tabler/icons-react';
 import { Helmet } from 'react-helmet-async';
-import getCSRF from '../../../api/csrf';
 import Footer from '../../../components/footer';
 import ProtectedRoute from '../../../components/protectedRoute';
 import { useAuthenticated } from '../../../context/authContext';
 import { useMessages } from '../../../context/messagesContext';
 import RenderMessages from '../../../components/renderMessages';
+import { POST } from '../../../api/auth';
 
 export default function SignUp() {
     const [mode, setMode] = useState(null);
@@ -36,24 +36,12 @@ export default function SignUp() {
 
     async function handleRegister(e) {
         e.preventDefault();
-        const csrf = await getCSRF();
 
         try {
-            const response = await fetch('/api/auth/register', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': csrf,
-                },
-                credentials: 'include',
-                body: JSON.stringify({ nome, email, password, type: mode }),
-            });
-            const data = await response.json();
-
+            const data = await POST('/api/auth/register', { nome, email, password, type: mode });
             if (!data.ok) {
                 throw new Error(data.message);
             }
-
             setAuthenticated(true);
             navigate(data.redirect);
         } catch (err) {
@@ -143,6 +131,7 @@ export default function SignUp() {
                                             className='bg-color4-100 min-h-12 w-full rounded-lg pr-12 pl-4 outline-0'
                                             placeholder='Qual o seu nome?'
                                             required
+                                            autoFocus
                                         />
                                         <label
                                             htmlFor='nome'

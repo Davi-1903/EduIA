@@ -2,12 +2,12 @@ import { useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
 import { IconArrowLeft, IconEye, IconEyeOff, IconMail } from '@tabler/icons-react';
 import { Helmet } from 'react-helmet-async';
-import getCSRF from '../../../api/csrf';
 import Footer from '../../../components/footer';
 import ProtectedRoute from '../../../components/protectedRoute';
 import { useAuthenticated } from '../../../context/authContext';
 import { useMessages } from '../../../context/messagesContext';
 import RenderMessages from '../../../components/renderMessages';
+import { POST } from '../../../api/auth';
 
 export default function SignIn() {
     const [showPassword, setShowPassword] = useState(false);
@@ -23,24 +23,12 @@ export default function SignIn() {
 
     async function submit(e) {
         e.preventDefault();
-        const csrf = await getCSRF();
 
         try {
-            const response = await fetch('/api/auth/login', {
-                method: 'POST',
-                headers: {
-                    'Content-Type': 'application/json',
-                    'X-CSRFToken': csrf,
-                },
-                credentials: 'include',
-                body: JSON.stringify({ email, senha }),
-            });
-            const data = await response.json();
-
+            const data = await POST('/api/auth/login', { email, senha });
             if (!data.ok) {
                 throw new Error(data.message);
             }
-
             setAuthenticated(true);
             navigate(data.redirect);
         } catch (err) {
@@ -83,6 +71,7 @@ export default function SignIn() {
                                         type='email'
                                         id='email'
                                         required
+                                        autoFocus
                                         value={email}
                                         onChange={e => setEmail(e.target.value)}
                                         className='bg-color4-100 min-h-12 w-full rounded-lg pr-12 pl-4 outline-0'
