@@ -2,6 +2,7 @@ import { memo, useCallback, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { IconMenu3, IconX } from '@tabler/icons-react';
 import Logo from '/assets/images/logo.svg';
+import clsx from 'clsx';
 
 function Header() {
     const [isOpenMenu, setOpenMenu] = useState(false);
@@ -52,7 +53,10 @@ function Header() {
 
     return (
         <header
-            className={`bg-color4-400/75 h-header fixed z-5 w-full px-4 shadow-lg backdrop-blur-lg transition-all duration-250 sm:px-8 ${dropHeader ? 'top-0' : '-top-(--height-header)'}`}
+            className={clsx(
+                'bg-color4-400/75 h-header fixed z-5 w-full px-4 shadow-lg backdrop-blur-lg transition-all duration-250 sm:px-8',
+                dropHeader ? 'top-0' : '-top-(--height-header)',
+            )}
         >
             <div className='mx-auto flex h-full max-w-400 items-center justify-between'>
                 <Link to='/' className='z-2' onClick={closeMenu} prefetch='intent'>

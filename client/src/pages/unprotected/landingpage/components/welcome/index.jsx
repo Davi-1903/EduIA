@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Mascote from '/assets/images/mascote/landingpage_welcome.webp';
+import clsx from 'clsx';
 
 export default function LandingPageWelcome() {
     const [isEmerge, setEmerge] = useState(false);
@@ -25,7 +26,7 @@ export default function LandingPageWelcome() {
             ref={sectionRef}
             className='from-color1-400/15 to-color4-200 flex w-full items-center justify-center bg-radial-[at_top_right] to-60% p-8 pt-24 md:min-h-screen md:bg-radial-[at_75%] md:px-16 md:py-32'
         >
-            <article className={`opacity-0 ${isEmerge ? 'animate-emerge-left' : ''}`}>
+            <article className={clsx('opacity-0', isEmerge && 'animate-emerge-left')}>
                 <h1 className='font-primary from-color1-200 via-color1-400 to-color4-25 mb-4 max-w-300 bg-linear-to-br from-25% bg-clip-text pb-2 text-4xl font-bold text-balance text-transparent md:text-5xl md:font-semibold lg:text-6xl'>
                     Aprenda de forma inteligente e personalizada
                 </h1>
@@ -39,7 +40,7 @@ export default function LandingPageWelcome() {
                     </button>
                 </Link>
             </article>
-            <article className={`hidden opacity-0 xl:block ${isEmerge ? 'animate-emerge-right' : ''}`}>
+            <article className={clsx('hidden opacity-0 xl:block', isEmerge && 'animate-emerge-right')}>
                 <img src={Mascote} alt='Mascote' loading='lazy' className='animate-floating mx-auto max-w-130' />
             </article>
         </section>

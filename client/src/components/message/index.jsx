@@ -1,6 +1,7 @@
 import { IconAlertCircle, IconCircleCheck, IconX } from '@tabler/icons-react';
 import { useState } from 'react';
 import { useMessages } from '../../context/messagesContext';
+import clsx from 'clsx';
 
 export default function Message({ id, message, type }) {
     const [close, setClose] = useState(false);
@@ -19,7 +20,11 @@ export default function Message({ id, message, type }) {
 
     return (
         <article
-            className={`pointer-events-auto relative flex w-sm items-center gap-4 overflow-hidden rounded-lg p-4 backdrop-blur-lg ${type === 'ok' ? 'bg-green-600/75' : 'bg-red-600/75'} ${close ? 'animate-delete-message' : 'animate-new-message'}`}
+            className={clsx(
+                'pointer-events-auto relative flex w-sm items-center gap-4 overflow-hidden rounded-lg p-4 backdrop-blur-lg',
+                type === 'ok' ? 'bg-green-600/75' : 'bg-red-600/75',
+                close ? 'animate-delete-message' : 'animate-new-message',
+            )}
             onAnimationEnd={() => handleAnimationEnd(id)}
         >
             <div className='h-fit'>
@@ -30,7 +35,7 @@ export default function Message({ id, message, type }) {
                 )}
             </div>
             <div className='h-fit flex-1'>
-                <span className='font-secundary text-base/normal text-color4-200'>{message}</span>
+                <span className='font-secundary text-color4-200 text-base/normal'>{message}</span>
             </div>
             <div className='self-start'>
                 <button

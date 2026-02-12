@@ -1,5 +1,6 @@
-import { IconPlus } from '@tabler/icons-react';
 import { useState } from 'react';
+import { IconPlus } from '@tabler/icons-react';
+import clsx from 'clsx';
 
 export default function Question({ question, answer }) {
     const [open, setOpen] = useState(false);
@@ -16,10 +17,15 @@ export default function Question({ question, answer }) {
                     role='button'
                     size={28}
                     strokeWidth={1.5}
-                    className={`bg-button stroke-color4-100 box-content shrink-0 rounded-full p-1 transition-all duration-150 ${open ? 'rotate-45' : ''}`}
+                    className={clsx(
+                        'bg-button stroke-color4-100 box-content shrink-0 rounded-full p-1 transition-all duration-150',
+                        open && 'rotate-45',
+                    )}
                 />
             </div>
-            <div className={`grid pt-2 transition-all duration-150 ${open ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]'}`}>
+            <div
+                className={clsx('grid pt-2 transition-all duration-150', open ? 'grid-rows-[1fr]' : 'grid-rows-[0fr]')}
+            >
                 <div className='overflow-hidden pt-0'>
                     <p className='font-secundary text-color3-100 text-lg/normal'>{answer}</p>
                 </div>

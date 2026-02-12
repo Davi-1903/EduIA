@@ -1,6 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Mascote from '/assets/images/mascote/landingpage_sobre.webp';
+import clsx from 'clsx';
 
 export default function LandingPageAbout() {
     const [isEmerge, setEmerge] = useState(false);
@@ -28,7 +29,7 @@ export default function LandingPageAbout() {
             ref={sectionRef}
             className='from-color1-400/15 to-color4-200 flex flex-wrap items-center justify-center gap-8 bg-radial-[at_right] to-60% px-8 py-32 md:min-h-screen md:bg-radial-[at_75%] md:p-24 md:pt-0'
         >
-            <article className={`max-w-200 flex-2 basis-80 opacity-0 ${isEmerge ? 'animate-emerge-left' : ''}`}>
+            <article className={clsx('max-w-200 flex-2 basis-80 opacity-0', isEmerge && 'animate-emerge-left')}>
                 <h2 className='from-color1-100 to-color4-25 font-primary mb-4 bg-linear-10 bg-clip-text text-4xl font-bold text-transparent md:text-5xl'>
                     O que é o EduIA?
                 </h2>
@@ -45,7 +46,10 @@ export default function LandingPageAbout() {
                 </Link>
             </article>
             <article
-                className={`hidden max-w-200 flex-1 basis-80 opacity-0 lg:block ${isEmerge ? 'animate-emerge-right' : ''}`}
+                className={clsx(
+                    'hidden max-w-200 flex-1 basis-80 opacity-0 lg:block',
+                    isEmerge && 'animate-emerge-right',
+                )}
             >
                 <img src={Mascote} alt='Mascote' loading='lazy' className='mx-auto max-w-130' />
             </article>
