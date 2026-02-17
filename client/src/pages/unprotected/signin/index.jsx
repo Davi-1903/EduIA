@@ -51,19 +51,19 @@ export default function SignIn() {
             </Helmet>
             <div className='wrapper'>
                 <RenderMessages />
-                <main className='bg-color4-200 grid min-h-screen grid-cols-1 p-4 lg:grid-cols-[2fr_3fr]'>
+                <main className='grid min-h-screen grid-cols-1 bg-color4-200 p-4 lg:grid-cols-[2fr_3fr]'>
                     <article className='grid place-items-center p-4'>
                         <Link to='/' className='absolute top-4 left-4' aria-label='Voltar para a página inicial'>
-                            <button className='hover:bg-color4-100 cursor-pointer gap-2 rounded-lg p-2 transition-all duration-75'>
+                            <button className='cursor-pointer gap-2 rounded-lg p-2 transition-all duration-75 hover:bg-color4-100'>
                                 <IconArrowLeft className='stroke-color1-100' />
                             </button>
                         </Link>
                         <form onSubmit={submit} className='box-content flex w-full max-w-80 flex-col gap-4'>
-                            <h2 className='font-primary from-color1-100 via-color1-400 to-color4-25 bg-linear-to-tr bg-clip-text text-[2.5rem]/[50px] font-bold text-transparent'>
+                            <h2 className='bg-linear-to-tr from-color1-100 via-color1-400 to-color4-25 bg-clip-text font-primary text-[2.5rem]/[50px] font-bold text-transparent'>
                                 Login
                             </h2>
                             <div>
-                                <label htmlFor='email' className='text-color1-100 block'>
+                                <label htmlFor='email' className='block text-color1-100'>
                                     Email
                                 </label>
                                 <div className='relative'>
@@ -74,19 +74,19 @@ export default function SignIn() {
                                         autoFocus
                                         value={email}
                                         onChange={e => setEmail(e.target.value)}
-                                        className='bg-color4-100 min-h-12 w-full rounded-lg pr-12 pl-4 outline-0'
+                                        className='min-h-12 w-full rounded-lg bg-color4-100 pr-12 pl-4 outline-0'
                                         placeholder='exemplo@gmail.com'
                                     />
                                     <label
                                         htmlFor='email'
-                                        className='hover:bg-color4-50 absolute top-[0.3rem] right-[0.3rem] grid aspect-square h-[2.4rem] cursor-text place-items-center rounded-sm'
+                                        className='absolute top-[0.3rem] right-[0.3rem] grid aspect-square h-[2.4rem] cursor-text place-items-center rounded-sm hover:bg-color4-50'
                                     >
                                         <IconMail size={26} className='text-color1-100' />
                                     </label>
                                 </div>
                             </div>
                             <div>
-                                <label htmlFor='senha' className='text-color1-100 block'>
+                                <label htmlFor='senha' className='block text-color1-100'>
                                     Senha
                                 </label>
                                 <div className='relative'>
@@ -96,12 +96,12 @@ export default function SignIn() {
                                         required
                                         value={senha}
                                         onChange={e => setSenha(e.target.value)}
-                                        className='bg-color4-100 min-h-12 w-full rounded-lg pr-12 pl-4 outline-0'
+                                        className='min-h-12 w-full rounded-lg bg-color4-100 pr-12 pl-4 outline-0'
                                         placeholder='Sua senha secreta...'
                                     />
                                     <button
                                         type='button'
-                                        className='hover:bg-color4-50 absolute top-[0.3rem] right-[0.3rem] grid aspect-square h-[2.4rem] cursor-pointer place-items-center rounded-sm'
+                                        className='absolute top-[0.3rem] right-[0.3rem] grid aspect-square h-[2.4rem] cursor-pointer place-items-center rounded-sm hover:bg-color4-50'
                                         onClick={toggleShowPassword}
                                     >
                                         {showPassword ? (
@@ -111,7 +111,7 @@ export default function SignIn() {
                                         )}
                                     </button>
                                     <p className='text-right'>
-                                        <Link className='text-color1-400 text-sm font-semibold hover:underline'>
+                                        <Link className='text-sm font-semibold text-color1-400 hover:underline'>
                                             Esqueceu sua senha?
                                         </Link>
                                     </p>
@@ -119,13 +119,13 @@ export default function SignIn() {
                             </div>
                             <button
                                 type='submit'
-                                className='bg-button text-color4-100 hover:shadow-lg-hard mt-2 min-h-12 cursor-pointer rounded-lg text-xl transition-all duration-150'
+                                className='mt-2 min-h-12 cursor-pointer rounded-lg bg-button text-xl text-color4-100 transition-all duration-150 hover:shadow-lg-hard'
                             >
                                 Entrar
                             </button>
-                            <p className='text-color3-25 mt-1 text-center'>
+                            <p className='mt-1 text-center text-color3-25'>
                                 Não tem uma conta?{' '}
-                                <Link to='/cadastro' className='text-color1-400 font-bold hover:underline'>
+                                <Link to='/cadastro' className='font-bold text-color1-400 hover:underline'>
                                     Cadastro
                                 </Link>
                             </p>

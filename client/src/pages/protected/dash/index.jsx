@@ -85,20 +85,20 @@ export default function Dashboard() {
             <div className='wrapper'>
                 <RenderMessages />
 
-                <main className='from-color4-200 min-h-screen bg-linear-to-br to-indigo-100 pt-(--height-header)'>
+                <main className='min-h-screen bg-linear-to-br from-color4-200 to-indigo-100 pt-(--height-header)'>
                     <section className='mx-auto max-w-7xl space-y-24 px-6 py-16'>
                         <div className='max-w-3xl'>
-                            <h1 className='text-color1-100 text-4xl leading-tight font-bold md:text-5xl'>
+                            <h1 className='text-4xl leading-tight font-bold text-color1-100 md:text-5xl'>
                                 Aprenda de forma inteligente <br /> e personalizada
                             </h1>
-                            <p className='text-color3-200 mt-6 text-lg'>
+                            <p className='mt-6 text-lg text-color3-200'>
                                 Use o EduIA para criar materiais, exercícios e conteúdos adaptados ao seu ritmo de
                                 aprendizado.
                             </p>
                         </div>
 
                         <section>
-                            <h2 className='text-color1-100 mb-8 text-2xl font-semibold'>O que você quer criar hoje?</h2>
+                            <h2 className='mb-8 text-2xl font-semibold text-color1-100'>O que você quer criar hoje?</h2>
 
                             <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>
                                 {cards.map(card => (
@@ -108,7 +108,7 @@ export default function Dashboard() {
                         </section>
 
                         <section>
-                            <h2 className='text-color1-100 mb-8 text-2xl font-semibold'>Continue de onde parou</h2>
+                            <h2 className='mb-8 text-2xl font-semibold text-color1-100'>Continue de onde parou</h2>
 
                             <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>
                                 {history.map(item => (

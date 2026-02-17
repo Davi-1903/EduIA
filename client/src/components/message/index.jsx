@@ -35,18 +35,18 @@ export default function Message({ id, message, type }) {
                 )}
             </div>
             <div className='h-fit flex-1'>
-                <span className='font-secundary text-color4-200 text-base/normal'>{message}</span>
+                <span className='font-secundary text-base/normal text-color4-200'>{message}</span>
             </div>
             <div className='self-start'>
                 <button
-                    className='hover:bg-color4-200/25 cursor-pointer rounded-sm p-1 transition-all duration-100'
+                    className='cursor-pointer rounded-sm p-1 transition-all duration-100 hover:bg-color4-200/25'
                     onClick={() => setClose(true)}
                 >
                     <IconX size={24} className='stroke-color4-200' />
                 </button>
             </div>
             <div
-                className='animate-progress bg-color4-200/50 absolute bottom-0 left-0 h-1 w-0 rounded-full'
+                className='absolute bottom-0 left-0 h-1 w-0 animate-progress rounded-full bg-color4-200/50'
                 onAnimationEnd={() => setClose(true)}
             ></div>
         </article>
