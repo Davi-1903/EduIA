@@ -1,9 +1,12 @@
 import { memo } from 'react';
 import { Link } from 'react-router-dom';
 import { IconArrowUp, IconBrandGithub } from '@tabler/icons-react';
+import { useAuthenticated } from '../../context/authContext';
 import Logo from '/assets/images/logo_dark.svg';
+import clsx from 'clsx';
 
 function Footer() {
+    const { isAuthenticated } = useAuthenticated();
     const funcionalidades = [
         'Questões',
         'Formulários',
@@ -18,7 +21,7 @@ function Footer() {
     ];
 
     return (
-        <footer className='bg-color4-400'>
+        <footer className={clsx('bg-color4-400', isAuthenticated && 'col-start-2')}>
             <div className='mx-auto flex max-w-360 flex-col justify-between gap-4 p-4 sm:p-12 lg:flex-row'>
                 <article className='lg:max-w-md'>
                     <Link to='/' prefetch='intent'>
