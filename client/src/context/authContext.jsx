@@ -4,13 +4,12 @@ import Loading from '../components/loading';
 const AuthenticatedContext = createContext();
 
 export function AuthenticatedProvider({ children }) {
-    const [isAuthenticated, setAuthenticated] = useState(true);
+    const [isAuthenticated, setAuthenticated] = useState(false);
     const [loading, setLoading] = useState(true);
 
     useEffect(() => {
         fetch('/api/auth/check', { credentials: 'include' })
-            // .then(res => setAuthenticated(res.status === 200))
-            .then(res => setAuthenticated(true))
+            .then(res => setAuthenticated(res.status === 200))
             .catch(() => setAuthenticated(false))
             .finally(() => setLoading(false));
     }, []);
