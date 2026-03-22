@@ -21,7 +21,7 @@ function Footer() {
     ];
 
     return (
-        <footer className={clsx('bg-color4-400', isAuthenticated && 'col-start-2')}>
+        <footer className='z-1 col-span-2 bg-color4-400'>
             <div className='mx-auto flex max-w-360 flex-col justify-between gap-4 p-4 sm:p-12 lg:flex-row'>
                 <article className='lg:max-w-md'>
                     <Link to='/' prefetch='intent'>
