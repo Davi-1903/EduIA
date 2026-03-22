@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { memo, useEffect, useRef } from 'react';
 import {
     IconBook2,
     IconClock,
@@ -15,7 +15,7 @@ import clsx from 'clsx';
 const links = [
     {
         id: 1,
-        path: '#',
+        path: '/dash',
         name: 'Dashboard',
         icon: <IconDashboard size={28} className='stroke-color1-100' />,
     },
@@ -39,15 +39,32 @@ const links = [
     },
 ];
 
-export default function Sidebar() {
-    const [isOpen, setOpen] = useState(false);
+function SidebarModel({ isOpen, setOpen }) {
+    const sidebarRef = useRef(null);
+
+    useEffect(() => {
+        const handleClick = event => {
+            if (isOpen && !sidebarRef.current?.contains(event.target)) {
+                setOpen(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClick);
+        return () => document.removeEventListener('mousedown', handleClick);
+    }, [isOpen, setOpen]);
 
     return (
-        <div>
+        <div
+            className={clsx(
+                'fixed z-3 not-sm:inset-0 sm:static',
+                isOpen ? 'pointer-events-auto bg-color3-100/20' : 'not-sm:pointer-events-none',
+            )}
+        >
             <div
+                ref={sidebarRef}
                 className={clsx(
-                    'sticky top-0 flex h-screen flex-col gap-4 bg-color4-200 p-4 shadow-[0.25rem_0rem_1rem] shadow-color3-100/25 transition-all duration-500',
-                    isOpen ? 'w-60' : 'w-18',
+                    'sticky top-0 flex h-screen -translate-x-full flex-col gap-4 bg-color4-200 p-4 shadow-[0.25rem_0rem_1rem] shadow-color3-100/25 transition-all duration-500 sm:translate-x-0',
+                    isOpen ? 'w-4/5 translate-x-0 sm:w-60' : 'sm:w-18',
                 )}
             >
                 <div
@@ -114,3 +131,5 @@ export default function Sidebar() {
         </div>
     );
 }
+
+export default memo(SidebarModel);

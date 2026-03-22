@@ -1,6 +1,6 @@
 import { memo } from 'react';
 import { Outlet } from 'react-router-dom';
-import Sidebar from '../../components/sidebar/components/desk';
+import Sidebar from '../../components/sidebar';
 
 function ProtectedLayout() {
     return (

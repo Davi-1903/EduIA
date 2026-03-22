@@ -1,12 +1,9 @@
 import { memo } from 'react';
 import { Link } from 'react-router-dom';
 import { IconArrowUp, IconBrandGithub } from '@tabler/icons-react';
-import { useAuthenticated } from '../../context/authContext';
 import Logo from '/assets/images/logo_dark.svg';
-import clsx from 'clsx';
 
 function Footer() {
-    const { isAuthenticated } = useAuthenticated();
     const funcionalidades = [
         'Questões',
         'Formulários',
