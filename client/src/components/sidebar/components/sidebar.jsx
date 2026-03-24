@@ -11,6 +11,8 @@ import {
 } from '@tabler/icons-react';
 import Logo from '/assets/images/logo.svg';
 import clsx from 'clsx';
+import getCSRF from '../../../api/csrf';
+import { useAuthenticated } from '../../../context/authContext';
 
 const links = [
     {
@@ -41,6 +43,7 @@ const links = [
 
 function SidebarModel({ isOpen, setOpen }) {
     const sidebarRef = useRef(null);
+    const { setAuthenticated } = useAuthenticated();
 
     useEffect(() => {
         const handleClick = event => {
@@ -52,6 +55,24 @@ function SidebarModel({ isOpen, setOpen }) {
         document.addEventListener('mousedown', handleClick);
         return () => document.removeEventListener('mousedown', handleClick);
     }, [isOpen, setOpen]);
+
+    async function handleLogout(e) {
+        e.preventDefault();
+
+        const csrf = await getCSRF();
+
+        const response = await fetch('/api/auth/logout', {
+            method: 'POST',
+            credentials: 'include',
+            headers: { 'X-CSRFToken': csrf },
+        });
+
+        if (response.ok) {
+            setAuthenticated(false);
+        } else {
+            console.error('Erro ao deslogar');
+        }
+    }
 
     return (
         <div
@@ -115,6 +136,7 @@ function SidebarModel({ isOpen, setOpen }) {
                         </li>
                         <li>
                             <a
+                                onClick={handleLogout}
                                 href='#'
                                 className='flex items-center gap-2 overflow-x-hidden rounded-md p-1.5 transition-colors duration-150 hover:bg-color3-100/20'
                                 target='_parent'
