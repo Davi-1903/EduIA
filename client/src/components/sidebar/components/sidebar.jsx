@@ -13,6 +13,7 @@ import Logo from '/assets/images/logo.svg';
 import clsx from 'clsx';
 import getCSRF from '../../../api/csrf';
 import { useAuthenticated } from '../../../context/authContext';
+import { useNavigate } from 'react-router-dom';
 
 const links = [
     {
@@ -43,6 +44,7 @@ const links = [
 
 function SidebarModel({ isOpen, setOpen }) {
     const sidebarRef = useRef(null);
+    const navigate = useNavigate();
     const { setAuthenticated } = useAuthenticated();
 
     useEffect(() => {
@@ -58,19 +60,24 @@ function SidebarModel({ isOpen, setOpen }) {
 
     async function handleLogout(e) {
         e.preventDefault();
-
         const csrf = await getCSRF();
 
+        const confirmed = confirm('Deseja continuar?');
+        if (!confirmed) return;
+        
         const response = await fetch('/api/auth/logout', {
             method: 'POST',
             credentials: 'include',
             headers: { 'X-CSRFToken': csrf },
         });
+        
+        const data = await response.json();
 
         if (response.ok) {
             setAuthenticated(false);
+            navigate(data.redirected);
         } else {
-            console.error('Erro ao deslogar');
+            alert('Erro ao deslogar!');
         }
     }
 
