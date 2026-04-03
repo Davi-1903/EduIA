@@ -1,4 +1,5 @@
 import { Helmet } from 'react-helmet-async';
+import { Link } from 'react-router-dom';
 import ProtectedRoute from '../../../components/protectedRoute';
 import Cards from './cards';
 
@@ -7,51 +8,61 @@ export default function Dashboard() {
         {
             id: 1,
             title: 'Gerar Questão',
+            url: '/',
             description: 'Crie listas de exercícios personalizadas.',
         },
         {
             id: 2,
             title: 'Gerar Formulários',
+            url: '/',
             description: 'Gere formulários para avaliações.',
         },
         {
             id: 3,
             title: 'Gerar Quiz',
+            url: '/',
             description: 'Monte quizzes com tempo e pontuação.',
         },
         {
             id: 4,
             title: 'Gerar Flashcards',
+            url: '/flashcards',
             description: 'Crie cartões para memorização.',
         },
         {
             id: 5,
             title: 'Gerar Resumo',
+            url: '/',
             description: 'Resumos claros e objetivos.',
         },
         {
             id: 6,
             title: 'Gerar Explicação',
+            url: '/',
             description: 'Explicações adaptadas ao seu nível.',
         },
         {
             id: 7,
             title: 'Gerar Exercícios Guiados',
+            url: '/',
             description: 'Passo a passo completo.',
         },
         {
             id: 8,
             title: 'Gerar Plano de Aula',
+            url: '/',
             description: 'Planeje suas aulas facilmente.',
         },
         {
             id: 9,
             title: 'Gerar Roteiro de Estudo',
+            url: '/',
             description: 'Organize seus estudos.',
         },
         {
             id: 10,
             title: 'Gerar Desafios',
+            url: '/',
             description: 'Teste seus conhecimentos.',
         },
     ];
@@ -97,7 +108,9 @@ export default function Dashboard() {
 
                         <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>
                             {cards.map(card => (
-                                <Cards key={card.id} title={card.title} description={card.description} />
+                                <Link to={card.url}>
+                                    <Cards key={card.id} title={card.title} description={card.description} />
+                                </Link>
                             ))}
                         </div>
                     </section>
