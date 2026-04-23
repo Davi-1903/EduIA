@@ -12,6 +12,7 @@ const About = lazy(() => import('./pages/unprotected/about'));
 const LandingPage = lazy(() => import('./pages/unprotected/landingpage'));
 const Error404 = lazy(() => import('./pages/errors/error404'));
 const Dashboard = lazy(() => import('./pages/protected/dash'));
+const Flashcard = lazy(() => import('./pages/protected/tools/flashcards'));
 
 import './globals.css';
 
@@ -43,6 +44,14 @@ const router = createBrowserRouter([
                 element: (
                     <Suspense fallback={<Loading />}>
                         <About />
+                    </Suspense>
+                ),
+            },
+            {
+                path: 'flashcards',
+                element: (
+                    <Suspense fallback={<Loading />}>
+                        <Flashcard />
                     </Suspense>
                 ),
             },

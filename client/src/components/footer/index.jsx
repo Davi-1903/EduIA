@@ -18,13 +18,13 @@ function Footer() {
     ];
 
     return (
-        <footer className='bg-color4-400'>
+        <footer className='z-1 col-span-2 bg-color4-400'>
             <div className='mx-auto flex max-w-360 flex-col justify-between gap-4 p-4 sm:p-12 lg:flex-row'>
                 <article className='lg:max-w-md'>
                     <Link to='/' prefetch='intent'>
                         <img src={Logo} alt='Logo EduIA' loading='lazy' className='my-4 h-6 sm:h-9' />
                     </Link>
-                    <p className='font-primary text-color1-100 text-base/normal text-balance'>
+                    <p className='font-primary text-base/normal text-balance text-color1-100'>
                         Sistema de geração inteligente de materiais de aula e de estudo. Desenvolvido por estudantes do
                         ensino médio técnico integrado do <strong>IFRN</strong> - Campus Caicó.
                     </p>
@@ -38,13 +38,13 @@ function Footer() {
                                 <IconBrandGithub
                                     size={32}
                                     strokeWidth={2}
-                                    className='stroke-color1-100 hover:bg-color4-50 box-content rounded-lg p-2'
+                                    className='box-content rounded-lg stroke-color1-100 p-2 hover:bg-color4-50'
                                 />
                             </Link>
                         </li>
                     </ul>
                     <button
-                        className='border-color1-100 hover:bg-button text-color1-100 hover:stroke-color3-100 stroke-color1-100 hover:text-color4-100 flex cursor-pointer gap-2 rounded-lg border-3 px-4 py-2 transition-all duration-100'
+                        className='flex cursor-pointer gap-2 rounded-lg border-3 border-color1-100 stroke-color1-100 px-4 py-2 text-color1-100 transition-all duration-100 hover:bg-button hover:stroke-color3-100 hover:text-color4-100'
                         onClick={() => window.scroll({ top: 0, behavior: 'smooth' })}
                     >
                         <span className='font-primary font-medium'>Voltar para o topo</span>
@@ -53,7 +53,7 @@ function Footer() {
                 </article>
                 <div className='flex flex-col gap-4 md:flex-row lg:w-160'>
                     <article className='flex-1'>
-                        <h2 className='font-primary text-color1-100 mb-2 text-xl font-bold md:text-2xl'>
+                        <h2 className='mb-2 font-primary text-xl font-bold text-color1-100 md:text-2xl'>
                             Funcionalidades
                         </h2>
                         <ul>
@@ -67,7 +67,7 @@ function Footer() {
                         </ul>
                     </article>
                     <article className='flex-1'>
-                        <h2 className='font-primary text-color1-100 mb-2 text-xl font-bold md:text-2xl'>
+                        <h2 className='mb-2 font-primary text-xl font-bold text-color1-100 md:text-2xl'>
                             Institucional
                         </h2>
                         <ul>
@@ -93,7 +93,7 @@ function Footer() {
                     </article>
                 </div>
             </div>
-            <p className='font-primary bg-color1-50 text-color4-100 p-4 text-center text-sm'>
+            <p className='bg-color1-50 p-4 text-center font-primary text-sm text-color4-100'>
                 Copyright &copy; {new Date().getFullYear()} <strong>EduIA</strong> | Todos os direitos reservados.
             </p>
         </footer>

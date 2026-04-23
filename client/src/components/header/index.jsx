@@ -2,6 +2,7 @@ import { memo, useCallback, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { IconMenu3, IconX } from '@tabler/icons-react';
 import Logo from '/assets/images/logo.svg';
+import clsx from 'clsx';
 
 function Header() {
     const [isOpenMenu, setOpenMenu] = useState(false);
@@ -52,7 +53,10 @@ function Header() {
 
     return (
         <header
-            className={`bg-color4-400/75 h-header fixed z-5 w-full px-4 shadow-lg backdrop-blur-lg transition-all duration-250 sm:px-8 ${dropHeader ? 'top-0' : '-top-(--height-header)'}`}
+            className={clsx(
+                'fixed z-5 h-header w-full bg-color4-400/75 px-4 shadow-lg backdrop-blur-lg transition-all duration-250 sm:px-8',
+                dropHeader ? 'top-0' : '-top-(--height-header)',
+            )}
         >
             <div className='mx-auto flex h-full max-w-400 items-center justify-between'>
                 <Link to='/' className='z-2' onClick={closeMenu} prefetch='intent'>
@@ -63,7 +67,7 @@ function Header() {
                         <li>
                             <Link
                                 to='/sobre'
-                                className='font-primary text-color1-100 text-sm font-medium'
+                                className='font-primary text-sm font-medium text-color1-100'
                                 onClick={closeMenu}
                                 prefetch='intent'
                             >
@@ -73,7 +77,7 @@ function Header() {
                         <li>
                             <Link
                                 to='/login'
-                                className='font-primary border-color1-100 text-color1-100 hover:bg-button hover:text-color4-100 cursor-pointer rounded-lg border-2 px-4 py-2 text-sm font-medium transition-all duration-150'
+                                className='cursor-pointer rounded-lg border-2 border-color1-100 px-4 py-2 font-primary text-sm font-medium text-color1-100 transition-all duration-150 hover:bg-button hover:text-color4-100'
                                 onClick={closeMenu}
                                 prefetch='intent'
                             >
@@ -83,7 +87,7 @@ function Header() {
                         <li>
                             <Link
                                 to='/cadastro'
-                                className='font-primary border-color1-100 text-color4-100 bg-button hover:shadow-link cursor-pointer rounded-lg border-2 px-4 py-2 text-sm font-medium transition-all duration-150'
+                                className='cursor-pointer rounded-lg border-2 border-color1-100 bg-button px-4 py-2 font-primary text-sm font-medium text-color4-100 transition-all duration-150 hover:shadow-link'
                                 onClick={closeMenu}
                                 prefetch='intent'
                             >
@@ -93,7 +97,7 @@ function Header() {
                     </ul>
                 </nav>
                 <button
-                    className='hover:bg-color4-50 z-2 block cursor-pointer rounded-md p-2 sm:hidden'
+                    className='z-2 block cursor-pointer rounded-md p-2 hover:bg-color4-50 sm:hidden'
                     onClick={toggleMenu}
                     aria-label='Abrir menu'
                 >

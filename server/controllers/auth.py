@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from flask_login import login_required, login_user
+from flask_login import login_required, login_user, logout_user
 from argon2 import PasswordHasher
 from argon2.exceptions import VerifyMismatchError
 from flask_wtf.csrf import generate_csrf
@@ -76,3 +76,9 @@ def check():
 @bp_auth.route('/csrf')
 def get_csrf():
     return jsonify({'csrfToken': generate_csrf()}), 200
+
+@bp_auth.route('/logout', methods=['POST'])
+@login_required
+def logout():
+    logout_user()
+    return jsonify({'ok': True, 'redirect': '/auth'}), 200

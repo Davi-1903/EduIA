@@ -1,6 +1,7 @@
 import { IconAlertCircle, IconCircleCheck, IconX } from '@tabler/icons-react';
 import { useState } from 'react';
 import { useMessages } from '../../context/messagesContext';
+import clsx from 'clsx';
 
 export default function Message({ id, message, type }) {
     const [close, setClose] = useState(false);
@@ -19,7 +20,11 @@ export default function Message({ id, message, type }) {
 
     return (
         <article
-            className={`pointer-events-auto relative flex w-sm items-center gap-4 overflow-hidden rounded-lg p-4 backdrop-blur-lg ${type === 'ok' ? 'bg-green-600/75' : 'bg-red-600/75'} ${close ? 'animate-delete-message' : 'animate-new-message'}`}
+            className={clsx(
+                'pointer-events-auto relative flex w-sm items-center gap-4 overflow-hidden rounded-lg p-4 backdrop-blur-lg',
+                type === 'ok' ? 'bg-green-600/75' : 'bg-red-600/75',
+                close ? 'animate-delete-message' : 'animate-new-message',
+            )}
             onAnimationEnd={() => handleAnimationEnd(id)}
         >
             <div className='h-fit'>
@@ -34,14 +39,14 @@ export default function Message({ id, message, type }) {
             </div>
             <div className='self-start'>
                 <button
-                    className='hover:bg-color4-200/25 cursor-pointer rounded-sm p-1 transition-all duration-100'
+                    className='cursor-pointer rounded-sm p-1 transition-all duration-100 hover:bg-color4-200/25'
                     onClick={() => setClose(true)}
                 >
                     <IconX size={24} className='stroke-color4-200' />
                 </button>
             </div>
             <div
-                className='animate-progress bg-color4-200/50 absolute bottom-0 left-0 h-1 w-0 rounded-full'
+                className='absolute bottom-0 left-0 h-1 w-0 animate-progress rounded-full bg-color4-200/50'
                 onAnimationEnd={() => setClose(true)}
             ></div>
         </article>

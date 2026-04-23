@@ -15,13 +15,13 @@
 :root {
     --height-header: 60px;
 
-    --base-color1: #011F5B;
-    --base-color2: #071D39;
-    --base-color3: #3A3A4A;
-    --base-color4: #EBEBEF;
+    --base-color1: #011f5b;
+    --base-color2: #071d39;
+    --base-color3: #3a3a4a;
+    --base-color4: #ebebef;
 
     --font-primary: 'Inter';
-    --font-secundary: 'Roboto'
+    --font-secundary: 'Roboto';
 }
 
 @theme inline {
@@ -80,11 +80,10 @@
     }
 
     @supports (-webkit-touch-callout: none) {
-
         input,
         textarea,
         select {
-            @apply text-base;
+            font-size: 16px;
         }
     }
 }
@@ -97,7 +96,7 @@
         width: 100vw;
         background-color: var(--color-color4-400);
 
-        &>ul {
+        & > ul {
             margin-top: calc(var(--height-header) + 1rem);
             height: calc(100% - var(--height-header) - 1rem);
             flex-direction: column;
@@ -153,7 +152,7 @@
 }
 
 @utility bg-button {
-    background-image: linear-gradient(to top right, var(--base-color1), var(--color-color1-400))
+    background-image: linear-gradient(to top right, var(--base-color1), var(--color-color1-400));
 }
 
 @utility shadow-link {
@@ -301,7 +300,6 @@
 }
 
 @keyframes floating {
-
     0%,
     100% {
         transform: translateY(0);
@@ -310,4 +308,20 @@
     50% {
         transform: translateY(-15px);
     }
+}
+
+.perspective {
+  perspective: 1000px;
+}
+
+.transform-style-preserve-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
 }

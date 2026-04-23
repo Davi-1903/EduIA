@@ -1,12 +1,11 @@
 import { memo } from 'react';
-import Header from '../../components/header';
 import { Outlet } from 'react-router-dom';
+import Sidebar from '../../components/sidebar';
 
 function ProtectedLayout() {
     return (
         <>
-            {/* Será um sidebar, mas por enquanto ficará o header */}
-            <Header />
+            <Sidebar />
             <Outlet />
         </>
     );
