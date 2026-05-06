@@ -1,4 +1,4 @@
-import { IconLayoutSidebarLeftCollapse, IconLayoutSidebarLeftExpand } from '@tabler/icons-react';
+import { IconLayoutSidebarLeftExpand } from '@tabler/icons-react';
 
 export default function OpenButton({ setOpen }) {
     return (
