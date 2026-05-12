@@ -21,8 +21,16 @@ function Footer() {
         <footer className='z-1 col-span-2 bg-color4-400 sm:z-4'>
             <div className='mx-auto flex max-w-360 flex-col justify-between gap-4 p-4 sm:p-12 lg:flex-row'>
                 <article className='lg:max-w-md'>
-                    <Link to='/' prefetch='intent'>
-                        <img src={Logo} alt='Logo EduIA' loading='lazy' className='my-4 h-6 sm:h-9' />
+                    <Link
+                        to='/'
+                        prefetch='intent'
+                    >
+                        <img
+                            src={Logo}
+                            alt='Logo EduIA'
+                            loading='lazy'
+                            className='my-4 h-6 sm:h-9'
+                        />
                     </Link>
                     <p className='font-primary text-base/normal text-balance text-color1-100'>
                         Sistema de geração inteligente de materiais de aula e de estudo. Desenvolvido por estudantes do
@@ -59,7 +67,10 @@ function Footer() {
                         <ul>
                             {funcionalidades.map((material, idx) => (
                                 <li key={idx}>
-                                    <Link to='/sobre' className='font-primary text-color1-100 hover:underline'>
+                                    <Link
+                                        to='/sobre'
+                                        className='font-primary text-color1-100 hover:underline'
+                                    >
                                         Gerar {material}
                                     </Link>
                                 </li>

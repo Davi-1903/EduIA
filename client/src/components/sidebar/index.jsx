@@ -16,8 +16,14 @@ export default function SideBar() {
 
     return (
         <>
-            <OpenButton isOpen={isOpen} setOpen={setOpen} />
-            <SidebarModel isOpen={isOpen} setOpen={setOpen} />
+            <OpenButton
+                isOpen={isOpen}
+                setOpen={setOpen}
+            />
+            <SidebarModel
+                isOpen={isOpen}
+                setOpen={setOpen}
+            />
         </>
     );
 }

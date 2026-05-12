@@ -75,14 +75,21 @@ export default function SignUp() {
         <ProtectedRoute isPrivate={false}>
             <Helmet>
                 <title>EduIA | Cadastro</title>
-                <meta name='description' content='Página de cadastro de usuários do sistema EduIA' />
+                <meta
+                    name='description'
+                    content='Página de cadastro de usuários do sistema EduIA'
+                />
             </Helmet>
             <div className='wrapper'>
                 <RenderMessages />
                 <main className='grid min-h-screen grid-cols-1 bg-color4-200 p-4 lg:grid-cols-[2fr_3fr]'>
                     <article className='grid place-items-center p-4 md:p-12'>
                         {/* Talvez fazer um botão que volte ao estado anterior, para a opções de escolher o tipo da conta */}
-                        <Link to='/' className='absolute top-4 left-4' aria-label='Voltar para a página inicial'>
+                        <Link
+                            to='/'
+                            className='absolute top-4 left-4'
+                            aria-label='Voltar para a página inicial'
+                        >
                             <button className='cursor-pointer gap-2 rounded-lg p-2 transition-all duration-75 hover:bg-color4-100'>
                                 <IconArrowLeft className='stroke-color1-100' />
                             </button>
@@ -99,27 +106,39 @@ export default function SignUp() {
                                 <div className='flex flex-wrap gap-4'>
                                     <button
                                         className='flex min-h-12 w-full flex-1 basis-50 cursor-pointer items-center justify-center gap-4 rounded-xl bg-button py-4 transition-all duration-150 hover:shadow-lg-hard'
-                                        onClick={() => setMode('Student')}
+                                        onClick={() => setMode('aluno')}
                                     >
-                                        <IconSchool size={26} className='stroke-color4-200' />
+                                        <IconSchool
+                                            size={26}
+                                            className='stroke-color4-200'
+                                        />
                                         <span className='text-lg font-semibold text-color4-200'>Aluno</span>
                                     </button>
                                     <button
                                         className='flex min-h-12 w-full flex-1 basis-50 cursor-pointer items-center justify-center gap-4 rounded-xl bg-button py-4 transition-all duration-150 hover:shadow-lg-hard'
-                                        onClick={() => setMode('Teacher')}
+                                        onClick={() => setMode('professor')}
                                     >
-                                        <IconChalkboardTeacher size={26} className='stroke-color4-200' />
+                                        <IconChalkboardTeacher
+                                            size={26}
+                                            className='stroke-color4-200'
+                                        />
                                         <span className='text-lg font-semibold text-color4-200'>Professor</span>
                                     </button>
                                 </div>
                             </article>
                         ) : (
-                            <form className='flex w-full max-w-80 flex-col gap-4' onSubmit={handleRegister}>
+                            <form
+                                className='flex w-full max-w-80 flex-col gap-4'
+                                onSubmit={handleRegister}
+                            >
                                 <h2 className='bg-linear-to-tr from-color1-100 via-color1-400 to-color4-25 bg-clip-text font-primary text-4xl font-bold text-transparent'>
                                     Cadastro
                                 </h2>
                                 <div>
-                                    <label htmlFor='nome' className='block text-color1-100'>
+                                    <label
+                                        htmlFor='nome'
+                                        className='block text-color1-100'
+                                    >
                                         Nome
                                     </label>
                                     <div className='relative'>
@@ -137,12 +156,18 @@ export default function SignUp() {
                                             htmlFor='nome'
                                             className='absolute top-[0.3rem] right-[0.3rem] grid aspect-square h-[2.4rem] cursor-text place-items-center rounded-sm hover:bg-color4-50'
                                         >
-                                            <IconUser size={26} className='stroke-color1-100' />
+                                            <IconUser
+                                                size={26}
+                                                className='stroke-color1-100'
+                                            />
                                         </label>
                                     </div>
                                 </div>
                                 <div>
-                                    <label htmlFor='email' className='block text-color1-100'>
+                                    <label
+                                        htmlFor='email'
+                                        className='block text-color1-100'
+                                    >
                                         Email
                                     </label>
                                     <div className='relative'>
@@ -159,12 +184,18 @@ export default function SignUp() {
                                             htmlFor='email'
                                             className='absolute top-[0.3rem] right-[0.3rem] grid aspect-square h-[2.4rem] cursor-text place-items-center rounded-sm hover:bg-color4-50'
                                         >
-                                            <IconMail size={26} className='text-color1-100' />
+                                            <IconMail
+                                                size={26}
+                                                className='text-color1-100'
+                                            />
                                         </label>
                                     </div>
                                 </div>
                                 <div>
-                                    <label htmlFor='senha' className='block text-color1-100'>
+                                    <label
+                                        htmlFor='senha'
+                                        className='block text-color1-100'
+                                    >
                                         Senha
                                     </label>
                                     <div className='relative'>
@@ -183,9 +214,15 @@ export default function SignUp() {
                                             onClick={toggleShowPassword}
                                         >
                                             {showPassword ? (
-                                                <IconEye size={26} className='stroke-color1-100' />
+                                                <IconEye
+                                                    size={26}
+                                                    className='stroke-color1-100'
+                                                />
                                             ) : (
-                                                <IconEyeOff size={26} className='stroke-color1-100' />
+                                                <IconEyeOff
+                                                    size={26}
+                                                    className='stroke-color1-100'
+                                                />
                                             )}
                                         </button>
                                     </div>
@@ -212,7 +249,10 @@ export default function SignUp() {
                                 <div className='text-center'>
                                     <p className='mt-1 text-center text-color3-25'>
                                         Já tem uma conta?{' '}
-                                        <Link to='/login' className='font-bold text-color1-400 hover:underline'>
+                                        <Link
+                                            to='/login'
+                                            className='font-bold text-color1-400 hover:underline'
+                                        >
                                             Login
                                         </Link>
                                     </p>

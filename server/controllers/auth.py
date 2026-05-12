@@ -3,7 +3,7 @@ from flask_login import login_required, login_user, logout_user
 from argon2 import PasswordHasher
 from argon2.exceptions import VerifyMismatchError
 from flask_wtf.csrf import generate_csrf
-from models.user import User, Aluno, Professor
+from models.user import UserType, Usuario, Aluno, Professor
 from database import SessionLocal
 
 
@@ -19,14 +19,14 @@ def register():
             if not data:
                 return jsonify({'ok': False, 'message': 'Dados não recebidos'}), 400
             
-            user = session.query(User).filter_by(email=data['email']).first()
+            user = session.query(Usuario).filter_by(email=data['email']).first()
 
             if user:
                 return jsonify({'ok': False, 'message': 'Usuário já existe'}), 409
             
-            if data['type'] == 'Student':
+            if data['type'] == UserType.ALUNO.value:
                 new_user = Aluno(name=data['nome'], email=data['email'], password=senha_hasher.hash(data['password']))
-            elif data['type'] == 'Teacher':
+            elif data['type'] == UserType.PROFESSOR.value:
                 new_user = Professor(name=data['nome'], email=data['email'], password=senha_hasher.hash(data['password']))
             else:
                 return jsonify({'ok': False, 'message': 'Tipo inválido'}), 400
@@ -50,8 +50,7 @@ def login():
             if not data:
                 return jsonify({'ok': False, 'message': 'Dados não recebidos'}), 400
 
-            user_exist = session.query(User).filter_by(email=data['email']).first()
-
+            user_exist = session.query(Usuario).filter_by(email=data['email']).first()
             if not user_exist:
                 return jsonify({'ok': False, 'message': 'Este email não está cadastrado no sistema'}), 401
 
