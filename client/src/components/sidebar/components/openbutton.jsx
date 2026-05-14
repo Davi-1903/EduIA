@@ -1,4 +1,4 @@
-import { IconLayoutSidebarLeftCollapse, IconLayoutSidebarLeftExpand } from '@tabler/icons-react';
+import { IconLayoutSidebarLeftExpand } from '@tabler/icons-react';
 
 export default function OpenButton({ setOpen }) {
     return (
@@ -8,7 +8,10 @@ export default function OpenButton({ setOpen }) {
         >
             <div className='absolute top-0 -right-2 aspect-square w-2 bg-color4-400 mask-radial-from-transparent mask-radial-from-2 mask-radial-to-black mask-radial-to-2 mask-radial-at-bottom-right'></div>
             <div className='absolute -bottom-2 left-0 aspect-square w-2 bg-color4-400 mask-radial-from-transparent mask-radial-from-2 mask-radial-to-black mask-radial-to-2 mask-radial-at-bottom-right'></div>
-            <IconLayoutSidebarLeftExpand size={30} className='stroke-color1-100' />
+            <IconLayoutSidebarLeftExpand
+                size={30}
+                className='stroke-color1-100'
+            />
         </button>
     );
 }

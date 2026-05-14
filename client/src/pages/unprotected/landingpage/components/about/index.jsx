@@ -51,7 +51,12 @@ export default function LandingPageAbout() {
                     isEmerge && 'animate-emerge-right',
                 )}
             >
-                <img src={Mascote} alt='Mascote' loading='lazy' className='mx-auto max-w-130' />
+                <img
+                    src={Mascote}
+                    alt='Mascote'
+                    loading='lazy'
+                    className='mx-auto max-w-130'
+                />
             </article>
         </section>
     );

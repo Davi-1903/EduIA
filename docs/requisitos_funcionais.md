@@ -10,7 +10,7 @@
 | **RF04** | Fazer integração com API do SUAP                                                  | Importante | 🔧 Em desenvolvimento |
 | **RF05** | O usuário poderá fazer login com email e senha cadastrados                        | Essencial  | ✅ Implementado       |
 | **RF06** | O sistema permitirá a recuperação de senhas                                       | Desejável  | 🔧 Em desenvolvimento |
-| **RF07** | O usuário poderá fazer logout                                                     | Essencial  | 🔧 Em desenvolvimento |
+| **RF07** | O usuário poderá fazer logout                                                     | Essencial  | ✅ Implementado       |
 
 <!-- O RF01 e RF02 nós vamos deixar de lado por enquanto. No finalzinho do projeto nós os implementamos -->
 

@@ -29,9 +29,15 @@ export default function Message({ id, message, type }) {
         >
             <div className='h-fit'>
                 {type === 'ok' ? (
-                    <IconCircleCheck size={26} className='stroke-color4-200' />
+                    <IconCircleCheck
+                        size={26}
+                        className='stroke-color4-200'
+                    />
                 ) : (
-                    <IconAlertCircle size={26} className='stroke-color4-200' />
+                    <IconAlertCircle
+                        size={26}
+                        className='stroke-color4-200'
+                    />
                 )}
             </div>
             <div className='h-fit flex-1'>
@@ -42,7 +48,10 @@ export default function Message({ id, message, type }) {
                     className='cursor-pointer rounded-sm p-1 transition-all duration-100 hover:bg-color4-200/25'
                     onClick={() => setClose(true)}
                 >
-                    <IconX size={24} className='stroke-color4-200' />
+                    <IconX
+                        size={24}
+                        className='stroke-color4-200'
+                    />
                 </button>
             </div>
             <div

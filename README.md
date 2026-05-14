@@ -97,7 +97,7 @@ Para executar o projeto, há duas formas:
     ```bash
     # Backend
     cd ../server
-    python app.py
+    flask run --debug
 
     # Frontend
     cd ../client

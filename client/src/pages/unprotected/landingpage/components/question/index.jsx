@@ -11,7 +11,10 @@ export default function Question({ question, answer }) {
 
     return (
         <article className='mb-2 overflow-hidden border-b-2 border-b-color3-400/25 p-4'>
-            <div className='flex cursor-pointer items-center justify-between gap-4' onClick={toggleOpen}>
+            <div
+                className='flex cursor-pointer items-center justify-between gap-4'
+                onClick={toggleOpen}
+            >
                 <span className='font-primary text-xl font-semibold text-balance text-color1-100'>{question}</span>
                 <IconPlus
                     role='button'

@@ -20,25 +20,45 @@ const links = [
         id: 1,
         path: '/dash',
         name: 'Dashboard',
-        icon: <IconDashboard size={28} className='stroke-color1-100' />,
+        icon: (
+            <IconDashboard
+                size={28}
+                className='stroke-color1-100'
+            />
+        ),
     },
     {
         id: 2,
         path: '#',
         name: 'Meus materiais',
-        icon: <IconBook2 size={28} className='stroke-color1-100' />,
+        icon: (
+            <IconBook2
+                size={28}
+                className='stroke-color1-100'
+            />
+        ),
     },
     {
         id: 3,
         path: '#',
         name: 'Histórico',
-        icon: <IconClock size={28} className='stroke-color1-100' />,
+        icon: (
+            <IconClock
+                size={28}
+                className='stroke-color1-100'
+            />
+        ),
     },
     {
         id: 4,
         path: '#',
         name: 'Configurações',
-        icon: <IconSettings size={28} className='stroke-color1-100' />,
+        icon: (
+            <IconSettings
+                size={28}
+                className='stroke-color1-100'
+            />
+        ),
     },
 ];
 
@@ -64,13 +84,13 @@ function SidebarModel({ isOpen, setOpen }) {
 
         const confirmed = confirm('Deseja continuar?');
         if (!confirmed) return;
-        
+
         const response = await fetch('/api/auth/logout', {
             method: 'POST',
             credentials: 'include',
             headers: { 'X-CSRFToken': csrf },
         });
-        
+
         const data = await response.json();
 
         if (response.ok) {
@@ -100,20 +120,30 @@ function SidebarModel({ isOpen, setOpen }) {
                     role='button'
                     onClick={() => setOpen(!isOpen)}
                 >
-                    <img src={Logo} alt='Logo' className='w-full group-hover:hidden' />
+                    <img
+                        src={Logo}
+                        alt='Logo'
+                        className='w-full group-hover:hidden'
+                    />
                     {isOpen ? (
                         <IconLayoutSidebarLeftCollapse
                             size={32}
                             className='hidden stroke-color1-100 group-hover:block'
                         />
                     ) : (
-                        <IconLayoutSidebarLeftExpand size={32} className='hidden stroke-color1-100 group-hover:block' />
+                        <IconLayoutSidebarLeftExpand
+                            size={32}
+                            className='hidden stroke-color1-100 group-hover:block'
+                        />
                     )}
                 </div>
                 <div className='flex-1'>
                     <ul>
                         {links.map(link => (
-                            <li key={link.id} className='not-last:mb-4'>
+                            <li
+                                key={link.id}
+                                className='not-last:mb-4'
+                            >
                                 <a
                                     href={link.path}
                                     className='flex items-center gap-2 overflow-x-hidden rounded-md p-1.5 transition-colors duration-150 hover:bg-color3-100/20'
@@ -136,7 +166,10 @@ function SidebarModel({ isOpen, setOpen }) {
                                 target='_parent'
                             >
                                 <div>
-                                    <IconUser size={28} className='stroke-color1-100' />
+                                    <IconUser
+                                        size={28}
+                                        className='stroke-color1-100'
+                                    />
                                 </div>
                                 <span className='font-secundary text-nowrap text-color1-100'>Perfil</span>
                             </a>
@@ -149,7 +182,10 @@ function SidebarModel({ isOpen, setOpen }) {
                                 target='_parent'
                             >
                                 <div>
-                                    <IconLogout size={28} className='stroke-red-800' />
+                                    <IconLogout
+                                        size={28}
+                                        className='stroke-red-800'
+                                    />
                                 </div>
                                 <span className='font-secundary text-nowrap text-red-800'>Sair</span>
                             </a>

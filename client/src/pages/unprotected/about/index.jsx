@@ -6,7 +6,10 @@ export default function About() {
         <ProtectedRoute isPrivate={false}>
             <Helmet>
                 <title>EduIA | Sobre</title>
-                <meta name='description' content='Página de sobre, explicando sobre o que é p EduIA' />
+                <meta
+                    name='description'
+                    content='Página de sobre, explicando sobre o que é p EduIA'
+                />
             </Helmet>
             <main className='flex flex-col items-center gap-15 bg-[linear-gradient(135deg,#e0e9fb_0%,#f4f7ff_100%)]'>
                 <div className='flex w-full flex-wrap items-center justify-center rounded-bl-[20%] bg-[#F7F8F8] pt-32 pb-24'>

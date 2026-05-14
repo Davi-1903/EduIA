@@ -5,6 +5,9 @@ from sqlalchemy import Engine, create_engine
 from sqlalchemy.exc import OperationalError
 
 
+__all__ = ['get_env', 'get_connection']
+
+
 def get_env(key: str) -> str:
     load_dotenv()
 
@@ -24,6 +27,3 @@ def get_connection(DATABASE_URI: str) -> Engine:
         except OperationalError:
             sleep(3)
     raise RuntimeError('Não foi possível estabeler uma conexão com o banco de dados')
-
-
-__all__ = ['get_env', 'get_connection']

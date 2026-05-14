@@ -55,11 +55,19 @@ export default function LandingPageQuestions() {
                 <h2 className='bg-linear-0 from-color1-100 via-color1-400 to-color4-25 bg-clip-text pb-1 text-center font-primary text-3xl font-semibold text-transparent md:text-4xl'>
                     Perguntas frequentes
                 </h2>
-                <img src={Mascote} alt='Mascote' loading='lazy' className='mx-auto hidden max-w-sm lg:block' />
+                <img
+                    src={Mascote}
+                    alt='Mascote'
+                    loading='lazy'
+                    className='mx-auto hidden max-w-sm lg:block'
+                />
             </article>
             <article className={clsx('flex-2 opacity-0', emerge && 'animate-emerge-right')}>
                 {questions.map(question => (
-                    <Question key={question.id} {...question} />
+                    <Question
+                        key={question.id}
+                        {...question}
+                    />
                 ))}
             </article>
         </section>

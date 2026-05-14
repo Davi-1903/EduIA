@@ -89,7 +89,10 @@ export default function Dashboard() {
         <ProtectedRoute isPrivate={true}>
             <Helmet>
                 <title>EduIA | Dashboard</title>
-                <meta name='description' content='Dashboard do sistema EduIA' />
+                <meta
+                    name='description'
+                    content='Dashboard do sistema EduIA'
+                />
             </Helmet>
             <main className='min-h-screen bg-linear-to-br from-color4-200 to-indigo-100'>
                 <section className='mx-auto max-w-7xl space-y-24 px-6 py-16'>
@@ -109,7 +112,11 @@ export default function Dashboard() {
                         <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>
                             {cards.map(card => (
                                 <Link to={card.url}>
-                                    <Cards key={card.id} title={card.title} description={card.description} />
+                                    <Cards
+                                        key={card.id}
+                                        title={card.title}
+                                        description={card.description}
+                                    />
                                 </Link>
                             ))}
                         </div>
@@ -120,7 +127,11 @@ export default function Dashboard() {
 
                         <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>
                             {history.map(item => (
-                                <Cards key={item.id} title={item.title} description={item.description} />
+                                <Cards
+                                    key={item.id}
+                                    title={item.title}
+                                    description={item.description}
+                                />
                             ))}
                         </div>
                     </section>

@@ -59,8 +59,18 @@ function Header() {
             )}
         >
             <div className='mx-auto flex h-full max-w-400 items-center justify-between'>
-                <Link to='/' className='z-2' onClick={closeMenu} prefetch='intent'>
-                    <img src={Logo} alt='Logo EduIA' loading='lazy' className='h-7 sm:h-9' />
+                <Link
+                    to='/'
+                    className='z-2'
+                    onClick={closeMenu}
+                    prefetch='intent'
+                >
+                    <img
+                        src={Logo}
+                        alt='Logo EduIA'
+                        loading='lazy'
+                        className='h-7 sm:h-9'
+                    />
                 </Link>
                 <nav className={isOpenMenu ? 'nav-header' : 'hidden sm:block'}>
                     <ul className='flex items-center gap-8'>
@@ -102,9 +112,15 @@ function Header() {
                     aria-label='Abrir menu'
                 >
                     {isOpenMenu ? (
-                        <IconX size={22} className='stroke-color1-100' />
+                        <IconX
+                            size={22}
+                            className='stroke-color1-100'
+                        />
                     ) : (
-                        <IconMenu3 size={22} className='stroke-color1-100' />
+                        <IconMenu3
+                            size={22}
+                            className='stroke-color1-100'
+                        />
                     )}
                 </button>
             </div>

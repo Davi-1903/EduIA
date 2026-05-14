@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import clsx from 'clsx';
 
 export default function FlashcardModal({ isOpen, onClose }) {
     const [flipped, setFlipped] = useState(false);
@@ -6,51 +7,35 @@ export default function FlashcardModal({ isOpen, onClose }) {
     if (!isOpen) return null;
 
     return (
-        <div className="fixed inset-0 z-50 flex items-center justify-center ">
-
+        <div className='fixed inset-0 z-50 flex items-center justify-center'>
             <div
-                className="absolute inset-0 bg-black/30 backdrop-blur-sm"
+                className='absolute inset-0 bg-black/30 backdrop-blur-sm'
                 onClick={onClose}
             />
-
-            <div className="relative flex flex-col items-center gap-6">
-
-                <h2 className="text-white text-xl font-semibold">
-                    Flashcard
-                </h2>
-
+            <div className='relative flex flex-col items-center gap-6'>
+                <h2 className='text-xl font-semibold text-white'>Flashcard</h2>
                 <div
-                    className="w-[30vw] max-w-2xl h-[200px] md:h-[300px] perspective cursor-pointer"
+                    className='h-[200px] w-[30vw] max-w-2xl cursor-pointer perspective-distant md:h-[300px]'
                     onClick={() => setFlipped(!flipped)}
                 >
                     <div
-                        className={`relative w-full h-full duration-500 transform-style-preserve-3d ${
-                            flipped ? 'rotate-y-180' : ''
-                        }`}
+                        className={clsx('relative h-full w-full duration-500 transform-3d', flipped && 'rotate-y-180')}
                     >
-
-                        <div className="absolute w-full h-full backface-hidden bg-white rounded-2xl shadow-xl flex items-center justify-center p-6 text-center">
-                            <p className="text-gray-800 font-medium">
-                                O que é fotossíntese?
-                            </p>
+                        <div className='absolute flex h-full w-full items-center justify-center rounded-2xl bg-white p-6 text-center shadow-xl backface-hidden'>
+                            <p className='font-medium text-gray-800'>O que é fotossíntese?</p>
                         </div>
 
-                        <div className="absolute w-full h-full backface-hidden rotate-y-180 bg-color1-400 text-white rounded-2xl shadow-xl flex items-center justify-center p-6 text-center">
-                            <p>
-                                Processo em que plantas convertem luz em energia química.
-                            </p>
+                        <div className='absolute flex h-full w-full rotate-y-180 items-center justify-center rounded-2xl bg-color1-400 p-6 text-center text-white shadow-xl backface-hidden'>
+                            <p>Processo em que plantas convertem luz em energia química.</p>
                         </div>
-
                     </div>
                 </div>
-
                 <button
                     onClick={onClose}
-                    className="bg-white/90 hover:bg-white text-color1-400 px-6 py-2 rounded-lg font-semibold transition"
+                    className='rounded-lg bg-white/90 px-6 py-2 font-semibold text-color1-400 transition hover:bg-white'
                 >
                     Fechar
                 </button>
-
             </div>
         </div>
     );

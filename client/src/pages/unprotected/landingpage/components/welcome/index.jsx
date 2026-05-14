@@ -41,7 +41,12 @@ export default function LandingPageWelcome() {
                 </Link>
             </article>
             <article className={clsx('hidden opacity-0 xl:block', isEmerge && 'animate-emerge-right')}>
-                <img src={Mascote} alt='Mascote' loading='lazy' className='mx-auto max-w-130 animate-floating' />
+                <img
+                    src={Mascote}
+                    alt='Mascote'
+                    loading='lazy'
+                    className='mx-auto max-w-130 animate-floating'
+                />
             </article>
         </section>
     );

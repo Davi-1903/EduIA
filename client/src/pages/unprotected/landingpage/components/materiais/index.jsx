@@ -88,7 +88,10 @@ export default function LandingPageMateriais() {
     return (
         <>
             {/* Não sei se ficou muito bom. Tem alguns detalhes para alterar */}
-            <section ref={sectionRef} className='bg-color4-200 p-8 md:p-16 md:pt-0'>
+            <section
+                ref={sectionRef}
+                className='bg-color4-200 p-8 md:p-16 md:pt-0'
+            >
                 <article className={clsx('mb-16 opacity-0', isEmerge && 'animate-emerge-up')}>
                     <h2 className='bg-linear-to-tr from-color1-100 via-color1-400 to-color4-25 bg-clip-text font-primary text-4xl font-semibold text-transparent md:text-center md:text-5xl'>
                         Gere materiais de forma rápida e fácil
@@ -98,19 +101,31 @@ export default function LandingPageMateriais() {
                     <article className='scrollbar-hide flex overflow-x-auto'>
                         <article className='flex w-fit animate-carrossel gap-4 pr-4'>
                             {materiais.map(material => (
-                                <Card key={material.id} {...material} />
+                                <Card
+                                    key={material.id}
+                                    {...material}
+                                />
                             ))}
                         </article>
-                        <article aria-hidden className='pointer-events-none flex w-fit animate-carrossel gap-4 pr-4'>
+                        <article
+                            aria-hidden
+                            className='pointer-events-none flex w-fit animate-carrossel gap-4 pr-4'
+                        >
                             {materiais.map(material => (
-                                <Card key={`${material.id}-clone`} {...material} />
+                                <Card
+                                    key={`${material.id}-clone`}
+                                    {...material}
+                                />
                             ))}
                         </article>
                     </article>
                     <article className='mt-4 scrollbar-hide flex overflow-x-auto'>
                         <article className='flex w-fit animate-carrossel-reverse gap-4 pl-4'>
                             {materiais.map(material => (
-                                <Card key={`${material.id}-rev`} {...material} />
+                                <Card
+                                    key={`${material.id}-rev`}
+                                    {...material}
+                                />
                             ))}
                         </article>
                         <article
@@ -118,7 +133,10 @@ export default function LandingPageMateriais() {
                             className='pointer-events-none flex w-fit animate-carrossel-reverse gap-4 pl-4'
                         >
                             {materiais.map(material => (
-                                <Card key={`${material.id}-rev-clone`} {...material} />
+                                <Card
+                                    key={`${material.id}-rev-clone`}
+                                    {...material}
+                                />
                             ))}
                         </article>
                     </article>
