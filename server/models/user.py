@@ -15,8 +15,8 @@ class Usuario(Base, UserMixin):
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     name: Mapped[str] = mapped_column(String(30), nullable=False)
-    email: Mapped[str] = mapped_column(unique=True, nullable=False)
-    password: Mapped[str] = mapped_column(nullable=False)
+    email: Mapped[str] = mapped_column(String(150), unique=True, nullable=False)
+    password: Mapped[str] = mapped_column(String(255), nullable=False)
     type: Mapped[UserType] = mapped_column(Enum(UserType), nullable=False)
 
     __mapper_args__ = {
@@ -31,8 +31,8 @@ class Professor(Usuario):
     id: Mapped[int] = mapped_column(ForeignKey('usuarios.id'), primary_key=True)
 
     # Por enquanto, os campos abaixo vão poder aceitar valores nulos pois ainda não temos páginas para o usuário indicar esses dados
-    materia: Mapped[str] = mapped_column(nullable=True)
-    turma: Mapped[str] = mapped_column(nullable=True)
+    materia: Mapped[str] = mapped_column(String(100), nullable=True)
+    turma: Mapped[str] = mapped_column(String(20), nullable=True)
 
     __mapper_args__ = {
         'polymorphic_identity': UserType.PROFESSOR
@@ -45,7 +45,7 @@ class Aluno(Usuario):
     id: Mapped[int] = mapped_column(ForeignKey('usuarios.id'), primary_key=True)
 
     # Por enquanto, o campo abaixo vai poder aceitar valores nulos pois ainda não temos páginas para o usuário indicar esses dados
-    turma: Mapped[str] = mapped_column(nullable=True)
+    turma: Mapped[str] = mapped_column(String(20), nullable=True)
 
     __mapper_args__ = {
         'polymorphic_identity': UserType.ALUNO
