@@ -76,6 +76,7 @@ def check():
 def get_csrf():
     return jsonify({'csrfToken': generate_csrf()}), 200
 
+
 @bp_auth.route('/logout', methods=['POST'])
 @login_required
 def logout():
