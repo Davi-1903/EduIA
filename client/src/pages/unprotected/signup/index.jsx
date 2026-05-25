@@ -23,7 +23,7 @@ export default function SignUp() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
-    const { setAuthenticated } = useAuthenticated();
+    const { setAuthenticated, setUser } = useAuthenticated();
     const { setMessages } = useMessages();
     const navigate = useNavigate();
     const passwordClassifications = [
@@ -43,6 +43,7 @@ export default function SignUp() {
                 throw new Error(data.message);
             }
             setAuthenticated(true);
+            setUser(data.user);
             navigate(data.redirect);
         } catch (err) {
             setMessages(prev => [

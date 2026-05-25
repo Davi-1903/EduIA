@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from flask_login import login_required, login_user, logout_user
+from flask_login import login_required, login_user, logout_user, current_user
 from argon2 import PasswordHasher
 from argon2.exceptions import VerifyMismatchError
 from flask_wtf.csrf import generate_csrf
@@ -35,7 +35,16 @@ def register():
             session.commit()
             login_user(new_user)
 
-            return jsonify({'ok': True, 'redirect': '/dash'}), 201
+            return jsonify({
+                'ok': True,
+                'redirect': '/dash',
+                'user': {
+                    'id': new_user.id,
+                    'nome': new_user.name,
+                    'email': new_user.email,
+                    'tipo': new_user.type.value
+                }
+            }), 201
 
         except:
             session.rollback()
@@ -57,7 +66,16 @@ def login():
             senha_hasher.verify(user_exist.password, data['senha'])
             login_user(user_exist)
 
-            return jsonify({'ok': True, 'redirect': '/dash'}), 200
+            return jsonify({
+                'ok': True,
+                'redirect': '/dash',
+                'user': {
+                    'id': user_exist.id,
+                    'nome': user_exist.name,
+                    'email': user_exist.email,
+                    'tipo': user_exist.type.value
+                }
+            }), 200
 
         except VerifyMismatchError:
             return jsonify({'ok': False, 'message': 'Senha incorreta'}), 401
@@ -65,11 +83,18 @@ def login():
         except:
             return jsonify({'ok': False, 'message': 'Ocorreu um erro interno'}), 500
 
-
 @bp_auth.route('/check')
 @login_required
 def check():
-    return jsonify({'ok': True}), 200
+    return jsonify({
+        'ok': True,
+        'user': {
+            'id': current_user.id,
+            'nome': current_user.name,
+            'email': current_user.email,
+            'tipo': current_user.type.value
+        }
+    }), 200
 
 
 @bp_auth.route('/csrf')
