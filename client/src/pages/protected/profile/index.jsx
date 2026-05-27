@@ -1,6 +1,7 @@
 import { Helmet } from 'react-helmet-async';
 import ProtectedRoute from '../../../components/protectedRoute';
 import { useAuthenticated } from '../../../context/authContext';
+import { IconMail, IconSchool, IconChalkboardTeacher } from '@tabler/icons-react';
 
 export default function Profile() {
     const { user } = useAuthenticated();
@@ -21,12 +22,30 @@ export default function Profile() {
                             <h1 className='font-primary text-xl font-bold text-color2-100'>
                                 {user?.nome?.toUpperCase()}
                             </h1>
-                            <p className='pl-3 font-secundary opacity-65 text-sm'>
-                                {user?.tipo}
-                            </p>
-                            <p className='pl-3 font-secundary opacity-65 text-sm'>
-                                {user?.email}
-                            </p>
+                            <div className='flex intems-center gap-1 pl-3'>
+                                {
+                                    user?.tipo === 'professor' ? (
+                                        <IconChalkboardTeacher
+                                            size={19}
+                                            className='stroke-color2-100'
+                                        />
+                                    ) : (
+                                        <IconSchool
+                                            size={19}
+                                            className='stroke-color2-100'
+                                        />
+                                    )
+                                }
+                                <p className='font-secundary opacity-65 text-sm'>
+                                    {user?.tipo}
+                                </p>
+                            </div>
+                            <div className='flex intems-center gap-1 pl-3'>
+                                <IconMail size={18} className='stroke-color2-100'/>
+                                <p className='font-secundary opacity-65 text-sm'>
+                                    {user?.email}
+                                </p>
+                            </div>
                             <span className='bg-color2-100 text-color4-200 px-1.5 py-0.5 text-sm rounded-full text-center mt-1'>
                                 Nível intermediário
                             </span>
