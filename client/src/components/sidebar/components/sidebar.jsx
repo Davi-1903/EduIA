@@ -13,7 +13,7 @@ import Logo from '/assets/images/logo.svg';
 import clsx from 'clsx';
 import getCSRF from '../../../api/csrf';
 import { useAuthenticated } from '../../../context/authContext';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, Link } from 'react-router-dom';
 
 const links = [
     {
@@ -160,19 +160,17 @@ function SidebarModel({ isOpen, setOpen }) {
                 <div>
                     <ul>
                         <li>
-                            <a
-                                href='#'
+                            <Link
+                                to='/perfil'
                                 className='mb-4 flex items-center gap-2 overflow-x-hidden rounded-md p-1.5 transition-colors duration-150 hover:bg-color3-100/20'
-                                target='_parent'
                             >
                                 <div>
-                                    <IconUser
-                                        size={28}
-                                        className='stroke-color1-100'
-                                    />
+                                    <IconUser size={28} className='stroke-color1-100' />
                                 </div>
-                                <span className='font-secundary text-nowrap text-color1-100'>Perfil</span>
-                            </a>
+                                <span className='font-secundary text-nowrap text-color1-100'>
+                                    Perfil
+                                </span>
+                            </Link>
                         </li>
                         <li>
                             <a

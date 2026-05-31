@@ -13,10 +13,10 @@ export default function SignIn() {
     const [showPassword, setShowPassword] = useState(false);
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
-    const { setAuthenticated } = useAuthenticated();
+    const { setAuthenticated, setUser } = useAuthenticated();
     const { setMessages } = useMessages();
     const navigate = useNavigate();
-
+    
     function toggleShowPassword() {
         setShowPassword(!showPassword);
     }
@@ -29,6 +29,7 @@ export default function SignIn() {
             if (!data.ok) {
                 throw new Error(data.message);
             }
+            setUser(data.user);
             setAuthenticated(true);
             navigate(data.redirect);
         } catch (err) {

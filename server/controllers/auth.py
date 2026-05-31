@@ -1,14 +1,12 @@
 from flask import Blueprint, jsonify, request
-from flask_login import login_required, login_user, logout_user
-from argon2 import PasswordHasher
-from argon2.exceptions import VerifyMismatchError
+from flask_login import login_required, login_user, logout_user, current_user
 from flask_wtf.csrf import generate_csrf
 from models.user import UserType, Usuario, Aluno, Professor
 from database import SessionLocal
+from utils import create_hash, verify_hash
 
 
 bp_auth = Blueprint('auth', __name__, url_prefix='/api/auth')
-senha_hasher = PasswordHasher()
 
 
 @bp_auth.route('/register', methods=['POST'])
@@ -20,14 +18,13 @@ def register():
                 return jsonify({'ok': False, 'message': 'Dados não recebidos'}), 400
             
             user = session.query(Usuario).filter_by(email=data['email']).first()
-
             if user:
-                return jsonify({'ok': False, 'message': 'Usuário já existe'}), 409
+                return jsonify({'ok': False, 'message': 'Credenciais inválidas'}), 401
             
             if data['type'] == UserType.ALUNO.value:
-                new_user = Aluno(name=data['nome'], email=data['email'], password=senha_hasher.hash(data['password']))
+                new_user = Aluno(name=data['nome'], email=data['email'], password=create_hash(data['password']))
             elif data['type'] == UserType.PROFESSOR.value:
-                new_user = Professor(name=data['nome'], email=data['email'], password=senha_hasher.hash(data['password']))
+                new_user = Professor(name=data['nome'], email=data['email'], password=create_hash(data['password']))
             else:
                 return jsonify({'ok': False, 'message': 'Tipo inválido'}), 400
             
@@ -35,7 +32,16 @@ def register():
             session.commit()
             login_user(new_user)
 
-            return jsonify({'ok': True, 'redirect': '/dash'}), 201
+            return jsonify({
+                'ok': True,
+                'redirect': '/dash',
+                'user': {
+                    'id': new_user.id,
+                    'nome': new_user.name,
+                    'email': new_user.email,
+                    'tipo': new_user.type.value
+                }
+            }), 201
 
         except:
             session.rollback()
@@ -51,25 +57,38 @@ def login():
                 return jsonify({'ok': False, 'message': 'Dados não recebidos'}), 400
 
             user_exist = session.query(Usuario).filter_by(email=data['email']).first()
-            if not user_exist:
-                return jsonify({'ok': False, 'message': 'Este email não está cadastrado no sistema'}), 401
+            if not user_exist or not verify_hash(user_exist.password, data['senha']):
+                return jsonify({'ok': False, 'message': 'Credenciais inválidas'}), 401
 
-            senha_hasher.verify(user_exist.password, data['senha']) # type: ignore
             login_user(user_exist)
+            return jsonify({
+                'ok': True,
+                'redirect': '/dash',
+                'user': {
+                    'id': user_exist.id,
+                    'nome': user_exist.name,
+                    'email': user_exist.email,
+                    'tipo': user_exist.type.value
+                }
+            }), 200
 
-            return jsonify({'ok': True, 'redirect': '/dash'}), 200
-
-        except VerifyMismatchError:
-            return jsonify({'ok': False, 'message': 'Senha incorreta'}), 401
-
-        except:
+        except Exception as e:
+            print(e)
             return jsonify({'ok': False, 'message': 'Ocorreu um erro interno'}), 500
 
 
 @bp_auth.route('/check')
 @login_required
 def check():
-    return jsonify({'ok': True}), 200
+    return jsonify({
+        'ok': True,
+        'user': {
+            'id': current_user.id,
+            'nome': current_user.name,
+            'email': current_user.email,
+            'tipo': current_user.type.value
+        }
+    }), 200
 
 
 @bp_auth.route('/csrf')
