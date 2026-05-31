@@ -1,46 +1,52 @@
+import enum
 from flask_login import UserMixin
-from sqlalchemy import Column, Integer, String, ForeignKey
+from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy import String, ForeignKey, Enum
 from database import Base
 
 
-class User(Base, UserMixin):
-    __tablename__ = 'users'
+class UserType(enum.Enum):
+    PROFESSOR = 'professor'
+    ALUNO = 'aluno'
 
-    id = Column(Integer, primary_key=True, autoincrement=True)
-    name = Column(String(100), nullable=False)
-    email = Column(String(100), unique=True, nullable=False)
-    password = Column(String(200), nullable=False)
-    type = Column(String(50))
+
+class Usuario(Base, UserMixin):
+    __tablename__ = 'usuarios'
+
+    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+    name: Mapped[str] = mapped_column(String(30), nullable=False)
+    email: Mapped[str] = mapped_column(String(150), unique=True, nullable=False)
+    password: Mapped[str] = mapped_column(String(255), nullable=False)
+    type: Mapped[UserType] = mapped_column(Enum(UserType), nullable=False)
 
     __mapper_args__ = {
-        'polymorphic_identity': 'user',
+        'polymorphic_identity': 'usuario',
         'polymorphic_on': type
     }
 
-    def get_id(self):
-        return str(self.id)
 
-
-class Professor(User):
+class Professor(Usuario):
     __tablename__ = 'professores'
 
-    id = Column(Integer, ForeignKey('users.id'), primary_key=True)
-    # por enquanto, os campos abaixo vão poder aceitar valores nulos pois ainda não temos páginas para o usuário indicar esses dados
-    materia = Column(String(100), nullable=True)
-    turma = Column(String(100), nullable=True)
+    id: Mapped[int] = mapped_column(ForeignKey('usuarios.id'), primary_key=True)
+
+    # Por enquanto, os campos abaixo vão poder aceitar valores nulos pois ainda não temos páginas para o usuário indicar esses dados
+    materia: Mapped[str] = mapped_column(String(100), nullable=True)
+    turma: Mapped[str] = mapped_column(String(20), nullable=True)
 
     __mapper_args__ = {
-        'polymorphic_identity': 'professor'
+        'polymorphic_identity': UserType.PROFESSOR
     }
 
 
-class Aluno(User):
+class Aluno(Usuario):
     __tablename__ = 'alunos'
 
-    id = Column(Integer, ForeignKey('users.id'), primary_key=True)
-    # por enquanto, o campo abaixo vai poder aceitar valores nulos pois ainda não temos páginas para o usuário indicar esses dados
-    turma = Column(String(100), nullable=True)
+    id: Mapped[int] = mapped_column(ForeignKey('usuarios.id'), primary_key=True)
+
+    # Por enquanto, o campo abaixo vai poder aceitar valores nulos pois ainda não temos páginas para o usuário indicar esses dados
+    turma: Mapped[str] = mapped_column(String(20), nullable=True)
 
     __mapper_args__ = {
-        'polymorphic_identity': 'aluno'
+        'polymorphic_identity': UserType.ALUNO
     }

@@ -3,7 +3,7 @@ from flask_cors import CORS
 from flask_login import LoginManager
 from flask_wtf import CSRFProtect
 from database import SessionLocal, init_database
-from models.user import User
+from models.user import Usuario
 from utils import get_env
 
 
@@ -28,7 +28,7 @@ def login_config(app: Flask):
     @login_manager.user_loader
     def load_user(user_id: int):
         with SessionLocal() as session:
-            return session.get(User, int(user_id))
+            return session.get(Usuario, int(user_id))
 
     @login_manager.unauthorized_handler
     def unauthorized():

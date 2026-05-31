@@ -1,7 +1,8 @@
 import { memo, useCallback, useEffect, useRef, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { IconMenu3, IconX } from '@tabler/icons-react';
-import Logo from '/assets/images/logo_dark.svg';
+import Logo from '/assets/images/logo.svg';
+import clsx from 'clsx';
 
 function Header() {
     const [isOpenMenu, setOpenMenu] = useState(false);
@@ -52,18 +53,31 @@ function Header() {
 
     return (
         <header
-            className={`sm:h-header bg-color4-400/75 fixed z-5 h-[60px] w-full px-4 shadow-lg backdrop-blur-lg transition-all duration-250 sm:px-8 ${dropHeader ? 'top-0' : '-top-(--height-header)'}`}
+            className={clsx(
+                'fixed z-5 h-header w-full bg-color4-400/75 px-4 shadow-lg backdrop-blur-lg transition-all duration-250 sm:px-8',
+                dropHeader ? 'top-0' : '-top-(--height-header)',
+            )}
         >
             <div className='mx-auto flex h-full max-w-400 items-center justify-between'>
-                <Link to='/' className='z-2' onClick={closeMenu} prefetch='intent'>
-                    <img src={Logo} alt='Logo EduIA' loading='lazy' className='h-5 sm:h-6' />
+                <Link
+                    to='/'
+                    className='z-2'
+                    onClick={closeMenu}
+                    prefetch='intent'
+                >
+                    <img
+                        src={Logo}
+                        alt='Logo EduIA'
+                        loading='lazy'
+                        className='h-7 sm:h-9'
+                    />
                 </Link>
                 <nav className={isOpenMenu ? 'nav-header' : 'hidden sm:block'}>
                     <ul className='flex items-center gap-8'>
                         <li>
                             <Link
                                 to='/sobre'
-                                className='font-primary text-color1-100 text-sm font-medium'
+                                className='font-primary text-sm font-medium text-color1-100'
                                 onClick={closeMenu}
                                 prefetch='intent'
                             >
@@ -73,7 +87,7 @@ function Header() {
                         <li>
                             <Link
                                 to='/login'
-                                className='font-primary border-color1-100 text-color1-100 hover:bg-button hover:text-color4-100 cursor-pointer rounded-lg border-2 px-4 py-2 text-sm font-medium transition-all duration-150'
+                                className='cursor-pointer rounded-lg border-2 border-color1-100 px-4 py-2 font-primary text-sm font-medium text-color1-100 transition-all duration-150 hover:bg-button hover:text-color4-100'
                                 onClick={closeMenu}
                                 prefetch='intent'
                             >
@@ -83,7 +97,7 @@ function Header() {
                         <li>
                             <Link
                                 to='/cadastro'
-                                className='font-primary border-color1-100 text-color4-100 bg-button hover:shadow-link cursor-pointer rounded-lg border-2 px-4 py-2 text-sm font-medium transition-all duration-150'
+                                className='cursor-pointer rounded-lg border-2 border-color1-100 bg-button px-4 py-2 font-primary text-sm font-medium text-color4-100 transition-all duration-150 hover:shadow-link'
                                 onClick={closeMenu}
                                 prefetch='intent'
                             >
@@ -93,14 +107,20 @@ function Header() {
                     </ul>
                 </nav>
                 <button
-                    className='hover:bg-color4-50 z-2 block cursor-pointer rounded-md p-2 sm:hidden'
+                    className='z-2 block cursor-pointer rounded-md p-2 hover:bg-color4-50 sm:hidden'
                     onClick={toggleMenu}
                     aria-label='Abrir menu'
                 >
                     {isOpenMenu ? (
-                        <IconX size={22} className='stroke-color1-100' />
+                        <IconX
+                            size={22}
+                            className='stroke-color1-100'
+                        />
                     ) : (
-                        <IconMenu3 size={22} className='stroke-color1-100' />
+                        <IconMenu3
+                            size={22}
+                            className='stroke-color1-100'
+                        />
                     )}
                 </button>
             </div>

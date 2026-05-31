@@ -82,7 +82,7 @@
 | **NF31** | Login         | Autenticação do usuário                                                                   | Essencial  | ✅ Implementado       |
 | **NF32** | Cadastro      | Registro de novos usuários                                                                | Essencial  | ✅ Implementado       |
 | **NF33** | Dashboard     | Área principal: criação e visualização de materiais, grupos, entre outras funcionalidades | Essencial  | 🔧 Em desenvolvimento |
-| **NF34** | Perfil        | Visualização e edição do perfil do usuário                                                | Essencial  | 🔧 Em desenvolvimento |
+| **NF34** | Perfil        | Visualização e edição do perfil do usuário                                                | Essencial  | ✅ Implementado       |
 | **NF35** | Históricos    | Visualização dos históricos do usuário                                                    | Essencial  | 🔧 Em desenvolvimento |
 | **NF36** | Sobre         | Informações sobre a sistema                                                               | Essencial  | 🔧 Em desenvolvimento |
 | **NF37** | Configurações | Configurações do usuário e preferências da IA                                             | Essencial  | 🔧 Em desenvolvimento |

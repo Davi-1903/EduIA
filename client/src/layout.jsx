@@ -1,12 +1,17 @@
+import { useAuthenticated } from './context/authContext';
 import UnprotectedLayout from './pages/unprotected/layout';
-import Footer from './components/footer';
+import ProtectedLayout from './pages/protected/layout';
 import RenderMessages from './components/renderMessages';
+import Footer from './components/footer';
+import clsx from 'clsx';
 
 export default function Layout() {
+    const { isAuthenticated } = useAuthenticated();
+
     return (
-        <div className='wrapper'>
+        <div className={clsx('wrapper', isAuthenticated && 'grid grid-cols-[auto_1fr]')}>
             <RenderMessages />
-            <UnprotectedLayout />
+            {isAuthenticated ? <ProtectedLayout /> : <UnprotectedLayout />}
             <Footer />
         </div>
     );
