@@ -7,6 +7,8 @@ from sqlalchemy import Engine, create_engine
 from sqlalchemy.exc import OperationalError
 
 
+__all__ = ['get_env', 'get_connection', 'create_hash', 'verify_hash']
+
 load_dotenv()
 ph = PasswordHasher()
 
@@ -39,6 +41,3 @@ def verify_hash(hash: str, password: str) -> bool:
         return ph.verify(hash, password)
     except VerifyMismatchError:
         return False
-
-
-__all__ = ['get_env', 'get_connection']
