@@ -165,11 +165,12 @@ function SidebarModel({ isOpen, setOpen }) {
                                 className='mb-4 flex items-center gap-2 overflow-x-hidden rounded-md p-1.5 transition-colors duration-150 hover:bg-color3-100/20'
                             >
                                 <div>
-                                    <IconUser size={28} className='stroke-color1-100' />
+                                    <IconUser
+                                        size={28}
+                                        className='stroke-color1-100'
+                                    />
                                 </div>
-                                <span className='font-secundary text-nowrap text-color1-100'>
-                                    Perfil
-                                </span>
+                                <span className='font-secundary text-nowrap text-color1-100'>Perfil</span>
                             </Link>
                         </li>
                         <li>
