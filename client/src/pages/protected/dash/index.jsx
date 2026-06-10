@@ -1,8 +1,8 @@
 import { Helmet } from 'react-helmet-async';
-import { Link } from 'react-router-dom';
 import ProtectedRoute from '../../../components/protectedRoute';
 import GenerateQuestions from '../tools/questions';
 import GenerateQuizzes from '../tools/quizzes';
+import GenerateFlashCards from '../tools/flashcards';
 import Card from './cards';
 
 export default function Dashboard() {
@@ -28,7 +28,7 @@ export default function Dashboard() {
         {
             id: 4,
             title: 'Gerar Flashcards',
-            url: '/flashcards',
+            component: <GenerateFlashCards />,
             description: 'Crie cartões para memorização.',
         },
         {
