@@ -1,9 +1,11 @@
 import { useEffect, useState, useRef } from 'react';
 import clsx from 'clsx';
+import InputRange from '../../../../components/inputRange';
 
 export default function GenerateFlashCards({ setOpen }) {
     const articleRef = useRef(null); // vai servir para eu verificar se a pessoa está clicando dentro/fora do "pop-up"; useRef serve para eu reverenciar o fomulário
     const [isClose, setClose] = useState(false); // serve para verificar se o "pop-up" está aparecendo
+    const [quantidade, setQuantidade] = useState(5);
 
     function handleAnimationEnd() {
         // essa função serve para fazer "aparecer" ou "desaparecer" o formulário, entra no operador ternário dentro da div
@@ -81,11 +83,12 @@ export default function GenerateFlashCards({ setOpen }) {
                 </div>
                 <div className='flex flex-col gap-1'>
                     <label className='font-medium text-color1-100'>Quantidade</label>
-                    <input
-                        type='number'
-                        className='rounded-lg border border-gray-300 px-4 py-2 outline-none focus:ring-2 focus:ring-color1-400'
-                        min={1}
-                        required
+                    <InputRange
+                        value={quantidade}
+                        trueValue={quantidade}
+                        setValue={setQuantidade}
+                        min={5}
+                        max={50}
                     />
                 </div>
                 <button

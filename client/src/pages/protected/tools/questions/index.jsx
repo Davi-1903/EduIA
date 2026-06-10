@@ -1,9 +1,17 @@
 import { useEffect, useRef, useState } from 'react';
 import clsx from 'clsx';
+import InputRange from '../../../../components/inputRange';
 
 export default function GenerateQuestions({ setOpen }) {
     const articleRef = useRef(null);
+    const [dificuldade, setDificuldade] = useState(0);
+    const [quantidade, setQuantidade] = useState(5);
     const [isClose, setClose] = useState(false);
+    const dificuldades = ['Muito fácil', 'Fácil', 'Médio', 'Difícil', 'Muito difícil'];
+
+    function formatQuantidade(value) {
+        return String(value).padStart(2, '0');
+    }
 
     function handleAnimationEnd() {
         if (isClose) setOpen(false);
@@ -50,7 +58,7 @@ export default function GenerateQuestions({ setOpen }) {
                     </label>
                     <select
                         id='disciplina'
-                        className='h-12 w-full rounded-lg bg-color4-100 px-4 font-medium text-[#757575] outline-none'
+                        className='h-12 w-full rounded-lg border border-color4-25 px-4 font-medium text-[#757575] outline-none'
                     >
                         <option value='1'>Opção 1</option>
                         <option value='2'>Opção 2</option>
@@ -71,7 +79,7 @@ export default function GenerateQuestions({ setOpen }) {
                         type='text'
                         id='conteudo'
                         placeholder='Descreva o assunto das questões'
-                        className='h-12 w-full rounded-lg bg-color4-100 px-4 font-medium outline-none'
+                        className='h-12 w-full rounded-lg border border-color4-25 px-4 font-medium outline-none'
                         required
                     />
                 </div>
@@ -82,10 +90,13 @@ export default function GenerateQuestions({ setOpen }) {
                     >
                         Dificuldade
                     </label>
-                    <input
-                        type='range'
-                        id='dificuldade'
-                        className='w-full'
+                    <InputRange
+                        value={dificuldades[dificuldade]}
+                        trueValue={dificuldade}
+                        setValue={setDificuldade}
+                        steps={1}
+                        min={0}
+                        max={4}
                     />
                 </div>
                 <div>
@@ -95,10 +106,13 @@ export default function GenerateQuestions({ setOpen }) {
                     >
                         Quantidade
                     </label>
-                    <input
-                        type='range'
-                        id='dificuldade'
-                        className='w-full'
+                    <InputRange
+                        value={quantidade}
+                        trueValue={quantidade}
+                        setValue={setQuantidade}
+                        formatValue={formatQuantidade}
+                        max={50}
+                        min={5}
                     />
                 </div>
                 <div>
@@ -110,7 +124,7 @@ export default function GenerateQuestions({ setOpen }) {
                     </label>
                     <textarea
                         id='observacoes'
-                        className='h-24 w-full resize-none rounded-lg bg-color4-100 px-4 py-2 font-medium outline-none'
+                        className='h-24 w-full resize-none rounded-lg border border-color4-25 px-4 py-2 font-medium outline-none'
                         placeholder='Caso deseje, descreva aqui suas observações'
                     ></textarea>
                 </div>
