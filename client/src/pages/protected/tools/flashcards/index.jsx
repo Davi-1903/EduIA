@@ -1,6 +1,6 @@
 import { useEffect, useState, useRef } from 'react';
-import clsx from 'clsx';
 import InputRange from '../../../../components/inputRange';
+import clsx from 'clsx';
 
 export default function GenerateFlashCards({ setOpen }) {
     const articleRef = useRef(null); // vai servir para eu verificar se a pessoa está clicando dentro/fora do "pop-up"; useRef serve para eu reverenciar o fomulário
@@ -240,7 +240,7 @@ export default function GenerateFlashCards({ setOpen }) {
                 </div>
                 <button
                     type='submit'
-                    className='h-12 cursor-pointer rounded-lg bg-button text-xl text-color4-100'
+                    className='mt-4 rounded-lg bg-color2-200 bg-button py-2 font-semibold text-white transition-all duration-150 hover:shadow-lg-hard'
                 >
                     Gerar
                 </button>

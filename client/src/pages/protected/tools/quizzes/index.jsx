@@ -293,7 +293,9 @@ export default function GenerateQuizzes({ setOpen }) {
                         placeholder='Caso deseje, descreva aqui suas observações'
                     ></textarea>
                 </div>
-                <button className='h-12 cursor-pointer rounded-lg bg-button text-xl text-white'>Gerar</button>
+                <button className='h-12 cursor-pointer rounded-lg bg-button text-xl text-color4-100 transition-all duration-150 hover:shadow-lg-hard'>
+                    Gerar
+                </button>
             </form>
         </div>
     );

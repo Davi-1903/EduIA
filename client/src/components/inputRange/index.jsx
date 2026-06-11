@@ -9,7 +9,7 @@ function InputRange({ value, trueValue, setValue, id, min, max, steps = 1, forma
     return (
         <div className='group relative mx-[7px]'>
             <div
-                className='absolute -translate-x-1/2 -translate-y-9 rounded-sm bg-color4-400 px-1 pt-[3px] pb-0.5 font-secundary text-base font-medium text-color1-100 opacity-0 shadow-md transition-all duration-50 ease-[cubic-bezier(0.57,-0.01,0.59,1.12)] group-hover:opacity-100'
+                className='absolute -translate-x-1/2 -translate-y-9 rounded-sm bg-color4-400 px-1 pt-[3px] pb-0.5 font-secundary text-base font-medium text-color1-100 opacity-0 shadow-md transition-all duration-150 ease-[cubic-bezier(.65,.37,.55,1.28)] group-hover:opacity-100'
                 style={{
                     left: `calc(${((trueValue - min) / (max - min)) * 100}%)`,
                 }}
