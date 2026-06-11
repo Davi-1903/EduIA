@@ -3,7 +3,9 @@ import ProtectedRoute from '../../../components/protectedRoute';
 import GenerateQuestions from '../tools/questions';
 import GenerateQuizzes from '../tools/quizzes';
 import GenerateFlashCards from '../tools/flashcards';
+import GenerateResumes from '../tools/resumes';
 import Card from './cards';
+import GenerateExplanation from '../tools/explanation';
 
 export default function Dashboard() {
     const cards = [
@@ -34,13 +36,13 @@ export default function Dashboard() {
         {
             id: 5,
             title: 'Gerar Resumo',
-            component: null,
+            component: <GenerateResumes />,
             description: 'Resumos claros e objetivos.',
         },
         {
             id: 6,
             title: 'Gerar Explicação',
-            component: null,
+            component: <GenerateExplanation />,
             description: 'Explicações adaptadas ao seu nível.',
         },
         {
