@@ -84,7 +84,7 @@ export default function GenerateExplanation({ setOpen }) {
                             placeholder='Escreva aqui...'
                         ></textarea>
                     </div>
-                    <button className='mt-4 rounded-lg bg-color2-200 py-2 font-semibold text-white transition hover:bg-color1-400h-12 cursor-pointer rounded-lg bg-button text-xl text-color4-100'>Gerar</button>
+                    <button className='h-12 cursor-pointer rounded-lg bg-button text-xl text-color4-100 transition-all duration-150 hover:shadow-lg-hard'>Gerar</button>
                 </div>
             </form>
         </div>

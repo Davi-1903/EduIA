@@ -86,7 +86,7 @@ export default function GenerateResumes({ setOpen }) {
                         ></textarea>
                     </div>
                 </div>
-                <button className='h-12 cursor-pointer rounded-lg bg-button text-xl text-color4-100'>
+                <button className='h-12 cursor-pointer rounded-lg bg-button text-xl text-color4-100 transition-all duration-150 hover:shadow-lg-hard'>
                     Gerar
                 </button>
             </form>

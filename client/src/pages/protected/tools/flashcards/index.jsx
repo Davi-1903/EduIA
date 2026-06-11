@@ -240,7 +240,7 @@ export default function GenerateFlashCards({ setOpen }) {
                 </div>
                 <button
                     type='submit'
-                    className='mt-4 rounded-lg bg-color2-200 bg-button py-2 font-semibold text-white transition-all duration-150 hover:shadow-lg-hard'
+                    className='mt-4 h-12 cursor-pointer rounded-lg bg-button text-xl text-color4-100 transition-all duration-150 hover:shadow-lg-hard'
                 >
                     Gerar
                 </button>
