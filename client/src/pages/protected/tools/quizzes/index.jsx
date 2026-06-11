@@ -9,6 +9,149 @@ export default function GenerateQuizzes({ setOpen }) {
     const [quantidade, setQuantidade] = useState(5);
     const [time, setTime] = useState(10);
     const dificuldades = ['Muito fácil', 'Fácil', 'Médio', 'Difícil', 'Muito difícil'];
+    const disciplinas = [
+        {
+            nome: 'Disciplinas Comuns',
+            disciplinas: [
+                'Língua Portuguesa e Literatura',
+                'Inglês',
+                'Espanhol/Francês',
+                'Arte',
+                'Educação Física',
+                'Geografia',
+                'História',
+                'Filosofia',
+                'Sociologia',
+                'Matemática',
+                'Física',
+                'Química',
+                'Biologia',
+                'Informática',
+            ],
+        },
+        {
+            nome: 'Informática para Internet',
+            disciplinas: [
+                'Filosofia, Ciência e Tecnologia',
+                'Sociologia do Trabalho',
+                'Qualidade de Vida e Trabalho',
+                'Gestão Organizaciona',
+                'Fundamentos de Lógica e Algoritmo',
+                'Análise e Projeto Orientados a Objeto',
+                'Projeto de Desenvolvimento de Sistemas para Internet',
+                'Princípios de Design e Projeto Gráfica',
+                'Design Web e Arquitetura da Informação',
+                'Programação Estruturada e Orientada a Objetos',
+                'Banco de Dados',
+                'Programação de Sistemas para Internet',
+                'Instalação e Configuração de Servidores',
+                'Projeto de Interface do Usuário',
+                'Programação Orientada a Serviços',
+            ],
+        },
+        {
+            nome: 'Eletrotécnica',
+            disciplinas: [
+                'Segurança do Trabalho',
+                'Gestão Organizacional',
+                'Desenho Técnico',
+                'Desenho CAD',
+                'Noções de Mecânica',
+                'Eletricidade Básica',
+                'Circuitos Elétricos',
+                'Medidas Elétricas',
+                'Eletrônica Digital',
+                'Eletrônica Analógica',
+                'Instalações Elétricas de Baixa Tensão',
+                'Máquinas e Acionamentos Elétricos',
+                'Instalações Elétricas de Alta Tensão',
+                'Eletrônica Aplicado',
+                'Hidráulica e Pneumático',
+                'Controladores Lógicos Programáveil',
+                'Manutenção Elétrica Industrial',
+            ],
+        },
+        {
+            nome: 'Têxtil',
+            disciplinas: [
+                'Filosofia, Ciência e Tecnologia',
+                'Sociologia do Trabalho',
+                'Qualidade de Vida e Trabalho',
+                'Gestão e Psicologia das Organizações',
+                'Sistemas de Manutenção',
+                'Inglês Aplicado à Indústria Têxtil',
+                'Introdução à Tecnologia Têxtil',
+                'Tecnologia das Fibras Têxteil',
+                'Tecnologia da Fiação',
+                'Tecnologia da Preparação à Tecelagem',
+                'Desenvolvimento de Padronagens',
+                'Tecnologia da Tecelagem',
+                'Tecnologia da Produção de Não Tecido',
+                'Tecnologia do Beneficiamento Primário',
+                'Introdução à Colorimetria',
+                'Tecnologia do Beneficiamento Secundário',
+                'Tecnologia do Beneficiamento Terciário',
+                'Tecnologia da Estamparia',
+                'Controle de Qualidade na Indústria Têxtil',
+                'Lavanderia Industrial',
+                'Planejamento e Controle da Produção',
+                'Higiene e Segurança do Trabalho na Indústria Têxtil e de Confecções',
+                'Tecnologia e Meio Ambiente',
+                'Tecnologia da Malha',
+            ],
+        },
+        {
+            nome: 'Vestuário',
+            disciplinas: [
+                'Matemática Básica',
+                'Filosofia, Ciência e Tecnologia',
+                'Sociologia do Trabalho',
+                'Qualidade de Vida e Trabalho',
+                'Gestão e Psicologia das Organizações',
+                'Sistemas de Manutenção',
+                'Inglês Aplicado à Indústria Têxtil',
+                'Introdução à Tecnologia Têxtil',
+                'História da Indumentária',
+                'Introdução à Tecnologia da Costura',
+                'Introdução à Tecnologia do Enfesto e Corte',
+                'Tecnologia da Modelagem I',
+                'Tecnologia da Modelagem II',
+                'Empreendedorismo na Indústria da Confecção do Vestuário e de Acessórios',
+                'Tempos e Métodos do Processo Produtivo',
+                'Planejamento e Controle da Produção',
+                'Desenho Técnico do Vestuário',
+                'Planejamento e Criação de Coleção',
+                'Marketing e Moda',
+                'Estamparia Aplicada à Indústria do Vestuário',
+                'Lavanderia Industrial',
+                'Laboratório de CAD Aplicado ao Vestuário',
+                'Mecânica de Máquinas de Costura Industrial',
+                'Tecnologia e Meio Ambiente',
+                'Normas Técnicas e Controle de Qualidade na Confecção do Vestuário',
+                'Higiene e Segurança do Trabalho na Indústria Têxtil e de Confecções',
+            ],
+        },
+        {
+            nome: 'Disciplinas Compartilhadas entre Têxtil e Vestuário',
+            disciplinas: [
+                'Filosofia, Ciência e Tecnologia',
+                'Sociologia do Trabalho',
+                'Qualidade de Vida e Trabalho',
+                'Gestão e Psicologia das Organizações',
+                'Sistemas de Manutenção',
+                'Inglês Aplicado à Indústria Têxtil',
+                'Introdução à Tecnologia Têxtil',
+                'Planejamento e Controle da Produção',
+                'Lavanderia Industrial',
+                'Tecnologia e Meio Ambiente',
+                'Higiene e Segurança do Trabalho na Indústria Têxtil e de Confecções',
+            ],
+        },
+        {
+            nome: 'Disciplinas Compartilhadas entre Informática para Internet e Eletrotécnica',
+            disciplinas: ['Gestão Organizacional'],
+        },
+    ];
 
     function formatTime(value) {
         return `${value}s`;
@@ -65,12 +208,13 @@ export default function GenerateQuizzes({ setOpen }) {
                         id='disciplina'
                         className='h-12 w-full rounded-lg border border-color4-25 px-4 font-medium text-[#757575] outline-none'
                     >
-                        <option value='1'>Opção 1</option>
-                        <option value='2'>Opção 2</option>
-                        <option value='3'>Opção 3</option>
-                        <option value='4'>Opção 4</option>
-                        <option value='5'>Opção 5</option>
-                        <option value='6'>Opção 6</option>
+                        {disciplinas.map(disciplina => (
+                            <optgroup label={disciplina.nome}>
+                                {disciplina.disciplinas.map(value => (
+                                    <option value={value}>{value}</option>
+                                ))}
+                            </optgroup>
+                        ))}
                     </select>
                 </div>
                 <div>
