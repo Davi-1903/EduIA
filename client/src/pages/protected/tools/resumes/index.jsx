@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { disciplinasList } from '../../../../../public/assets/data/disciplinas';
 import clsx from 'clsx';
 
 export default function GenerateResumes({ setOpen }) {
@@ -55,7 +56,13 @@ export default function GenerateResumes({ setOpen }) {
                             id='discipina'
                             className='h-12 w-full rounded-lg border border-gray-300 px-4 font-medium text-color1-100 outline-none'
                         >
-                            <option value='1'>Opção 1</option>
+                            {Object.entries(disciplinasList).map(([key, disciplinas]) => (
+                                <optgroup label={key}>
+                                    {disciplinas.map(disciplina => (
+                                        <option value={disciplina}>{disciplina}</option>
+                                    ))}
+                                </optgroup>
+                            ))}
                         </select>
                     </div>
                     <div>

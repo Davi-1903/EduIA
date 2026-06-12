@@ -1,4 +1,5 @@
 import { useEffect, useRef, useState } from 'react';
+import { disciplinasList } from '../../../../../public/assets/data/disciplinas';
 import clsx from 'clsx';
 
 export default function GenerateExplanation({ setOpen }) {
@@ -54,7 +55,13 @@ export default function GenerateExplanation({ setOpen }) {
                             name='disciplina'
                             className='h-12 w-full rounded-lg border border-gray-300 px-4 font-medium text-color1-100 outline-none'
                         >
-                            <option value='1'>Opção 1</option>
+                            {Object.entries(disciplinasList).map(([key, disciplinas]) => (
+                                <optgroup label={key}>
+                                    {disciplinas.map(disciplina => (
+                                        <option value={disciplina}>{disciplina}</option>
+                                    ))}
+                                </optgroup>
+                            ))}
                         </select>
                     </div>
                     <div>
@@ -84,7 +91,9 @@ export default function GenerateExplanation({ setOpen }) {
                             placeholder='Escreva aqui...'
                         ></textarea>
                     </div>
-                    <button className='h-12 cursor-pointer rounded-lg bg-button text-xl text-color4-100 transition-all duration-150 hover:shadow-lg-hard'>Gerar</button>
+                    <button className='h-12 cursor-pointer rounded-lg bg-button text-xl text-color4-100 transition-all duration-150 hover:shadow-lg-hard'>
+                        Gerar
+                    </button>
                 </div>
             </form>
         </div>
