@@ -147,7 +147,7 @@ export default function GenerateQuizzes({ setOpen }) {
                     </label>
                     <textarea
                         id='observacoes'
-                        className='h-24 w-full resize-none rounded-lg border border-color4-25 px-4 py-2 font-medium outline-none'
+                        className='h-24 w-full resize-none rounded-lg border border-color4-25 px-4 py-2 outline-none'
                         placeholder='Caso deseje, descreva aqui suas observações'
                     ></textarea>
                 </div>

@@ -170,7 +170,7 @@
             border-radius: 50%;
             background: var(--color-color1-100);
             cursor: pointer;
-            margin-top: -6px;
+            margin-top: -4px;
         }
 
         &::-moz-range-thumb {

@@ -1,12 +1,13 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, login_user, logout_user, current_user
 from flask_wtf.csrf import generate_csrf
+from pwdlib import PasswordHash
 from models.user import UserType, Usuario, Aluno, Professor
 from database import SessionLocal
-from utils import create_hash, verify_hash
 
 
 bp_auth = Blueprint('auth', __name__, url_prefix='/api/auth')
+ph = PasswordHash.recommended()
 
 
 @bp_auth.route('/register', methods=['POST'])
@@ -22,9 +23,9 @@ def register():
                 return jsonify({'ok': False, 'message': 'Credenciais inválidas'}), 401
             
             if data['type'] == UserType.ALUNO.value:
-                new_user = Aluno(name=data['nome'], email=data['email'], password=create_hash(data['password']))
+                new_user = Aluno(name=data['nome'], email=data['email'], password=ph.hash(data['password']))
             elif data['type'] == UserType.PROFESSOR.value:
-                new_user = Professor(name=data['nome'], email=data['email'], password=create_hash(data['password']))
+                new_user = Professor(name=data['nome'], email=data['email'], password=ph.hash(data['password']))
             else:
                 return jsonify({'ok': False, 'message': 'Tipo inválido'}), 400
             
@@ -57,7 +58,7 @@ def login():
                 return jsonify({'ok': False, 'message': 'Dados não recebidos'}), 400
 
             user_exist = session.query(Usuario).filter_by(email=data['email']).first()
-            if not user_exist or not verify_hash(user_exist.password, data['senha']):
+            if not user_exist or not ph.verify(data['senha'], user_exist.password):
                 return jsonify({'ok': False, 'message': 'Credenciais inválidas'}), 401
 
             login_user(user_exist)
