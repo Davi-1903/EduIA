@@ -87,7 +87,7 @@ export default function GenerateExplanation({ setOpen }) {
                         </label>
                         <textarea
                             name='duvida'
-                            className='h-30 w-full resize-none rounded-lg bg-color4-200 p-3 outline-none focus:ring-2 focus:ring-color1-400'
+                            className='h-30 w-full resize-none rounded-lg border border-color4-25 p-3 outline-none focus:ring-2 focus:ring-color1-400'
                             placeholder='Escreva aqui...'
                         ></textarea>
                     </div>

@@ -89,7 +89,7 @@ export default function GenerateResumes({ setOpen }) {
                         <textarea
                             name='observacao'
                             placeholder='Caso deseje, escreva suas observações'
-                            className='block h-30 w-full resize-none rounded-lg bg-color4-200 p-3 outline-none focus:ring-2 focus:ring-color1-400'
+                            className='block h-30 w-full resize-none rounded-lg border border-color4-25 p-3 outline-none focus:ring-2 focus:ring-color1-400'
                         ></textarea>
                     </div>
                 </div>
