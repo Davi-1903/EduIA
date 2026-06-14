@@ -6,6 +6,7 @@ import GenerateFlashCards from '../tools/flashcards';
 import GenerateResumes from '../tools/resumes';
 import GenerateLessonPlan from '../tools/lesson_plan';
 import GenerateStudyGuide from '../tools/study_guide';
+import GenerateQuidedExercises from '../tools/guided_exercises';
 import Card from './cards';
 import GenerateExplanation from '../tools/explanation';
 
@@ -50,7 +51,7 @@ export default function Dashboard() {
         {
             id: 7,
             title: 'Gerar Exercícios Guiados',
-            component: null,
+            component: <GenerateQuidedExercises/>,
             description: 'Passo a passo completo.',
         },
         {
