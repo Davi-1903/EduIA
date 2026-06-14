@@ -4,6 +4,7 @@ import GenerateQuestions from '../tools/questions';
 import GenerateQuizzes from '../tools/quizzes';
 import GenerateFlashCards from '../tools/flashcards';
 import GenerateResumes from '../tools/resumes';
+import GenerateLessonPlan from '../tools/lesson_plan';
 import Card from './cards';
 import GenerateExplanation from '../tools/explanation';
 
@@ -54,7 +55,7 @@ export default function Dashboard() {
         {
             id: 8,
             title: 'Gerar Plano de Aula',
-            component: null,
+            component: <GenerateLessonPlan/>,
             description: 'Planeje suas aulas facilmente.',
         },
         {
