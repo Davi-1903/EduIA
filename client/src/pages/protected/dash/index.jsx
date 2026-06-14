@@ -5,6 +5,7 @@ import GenerateQuizzes from '../tools/quizzes';
 import GenerateFlashCards from '../tools/flashcards';
 import GenerateResumes from '../tools/resumes';
 import GenerateLessonPlan from '../tools/lesson_plan';
+import GenerateStudyGuide from '../tools/study_guide';
 import Card from './cards';
 import GenerateExplanation from '../tools/explanation';
 
@@ -61,7 +62,7 @@ export default function Dashboard() {
         {
             id: 9,
             title: 'Gerar Roteiro de Estudo',
-            component: null,
+            component: <GenerateStudyGuide/>,
             description: 'Organize seus estudos.',
         },
         {
