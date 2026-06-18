@@ -1,4 +1,5 @@
 import { Helmet } from 'react-helmet-async';
+import { useAuthenticated } from '../../../context/authContext';
 import ProtectedRoute from '../../../components/protectedRoute';
 import GenerateQuestions from '../tools/questions';
 import GenerateQuizzes from '../tools/quizzes';
@@ -9,8 +10,11 @@ import GenerateStudyGuide from '../tools/study_guide';
 import GenerateQuidedExercises from '../tools/guided_exercises';
 import Card from './cards';
 import GenerateExplanation from '../tools/explanation';
+import GenerateForms from '../tools/forms';
+import GenerateChallenge from '../tools/challenge';
 
 export default function Dashboard() {
+    const { user } = useAuthenticated();
     const cards = [
         {
             id: 1,
@@ -21,7 +25,7 @@ export default function Dashboard() {
         {
             id: 2,
             title: 'Gerar Formulários',
-            component: null,
+            component: <GenerateForms />,
             description: 'Gere formulários para avaliações.',
         },
         {
@@ -51,28 +55,32 @@ export default function Dashboard() {
         {
             id: 7,
             title: 'Gerar Exercícios Guiados',
-            component: <GenerateQuidedExercises/>,
+            component: <GenerateQuidedExercises />,
             description: 'Passo a passo completo.',
         },
         {
             id: 8,
             title: 'Gerar Plano de Aula',
-            component: <GenerateLessonPlan/>,
+            component: <GenerateLessonPlan />,
             description: 'Planeje suas aulas facilmente.',
         },
         {
             id: 9,
             title: 'Gerar Roteiro de Estudo',
-            component: <GenerateStudyGuide/>,
+            component: <GenerateStudyGuide />,
             description: 'Organize seus estudos.',
         },
         {
             id: 10,
             title: 'Gerar Desafios',
-            component: null,
+            component: <GenerateChallenge />,
             description: 'Teste seus conhecimentos.',
         },
     ];
+
+    function getCard(user, card) {
+        // code
+    }
 
     return (
         <ProtectedRoute isPrivate={true}>
