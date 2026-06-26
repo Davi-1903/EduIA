@@ -2,7 +2,10 @@ from flask import Blueprint, jsonify, request
 from flask_login import login_required, login_user, logout_user, current_user
 from flask_wtf.csrf import generate_csrf
 from pwdlib import PasswordHash
-from models.user import UserType, Usuario, Aluno, Professor
+from sqlalchemy.exc import IntegrityError
+from models.user import UserType, Usuario
+from models.professor import Professor
+from models.aluno import Aluno
 from database import SessionLocal
 
 
@@ -17,10 +20,6 @@ def register():
             data = request.get_json()
             if not data:
                 return jsonify({'ok': False, 'message': 'Dados não recebidos'}), 400
-            
-            user = session.query(Usuario).filter_by(email=data['email']).first()
-            if user:
-                return jsonify({'ok': False, 'message': 'Credenciais inválidas'}), 401
             
             if data['type'] == UserType.ALUNO.value:
                 new_user = Aluno(name=data['nome'], email=data['email'], password=ph.hash(data['password']))
@@ -44,7 +43,10 @@ def register():
                 }
             }), 201
 
-        except:
+        except IntegrityError:
+            return jsonify({'ok': False, 'message': 'Credenciais inválidas'}), 401
+
+        except Exception:
             session.rollback()
             return jsonify({'ok': False, 'message': 'Erro interno'}), 500
 
@@ -73,8 +75,7 @@ def login():
                 }
             }), 200
 
-        except Exception as e:
-            print(e)
+        except Exception:
             return jsonify({'ok': False, 'message': 'Ocorreu um erro interno'}), 500
 
 
