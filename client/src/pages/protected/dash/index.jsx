@@ -8,10 +8,10 @@ import GenerateResumes from '../tools/resumes';
 import GenerateLessonPlan from '../tools/lesson_plan';
 import GenerateStudyGuide from '../tools/study_guide';
 import GenerateQuidedExercises from '../tools/guided_exercises';
-import Card from './cards';
 import GenerateExplanation from '../tools/explanation';
 import GenerateForms from '../tools/forms';
 import GenerateChallenge from '../tools/challenge';
+import Card from './cards';
 
 export default function Dashboard() {
     const { user } = useAuthenticated();
@@ -78,8 +78,23 @@ export default function Dashboard() {
         },
     ];
 
-    function getCard(user, card) {
-        // code
+    function getCard(tipo, card) {
+        const exclusivoProfessores = ['Gerar Formulários', 'Gerar Plano de Aula'];
+        const exclusivoAlunos = ['Gerar Flashcards', 'Gerar Roteiro de Estudo'];
+
+        if (
+            (tipo === 'professor' && exclusivoAlunos.includes(card.title)) ||
+            (tipo === 'aluno' && exclusivoProfessores.includes(card.title))
+        )
+            return null;
+        return (
+            <Card
+                key={card.id}
+                title={card.title}
+                description={card.description}
+                component={card.component}
+            />
+        );
     }
 
     return (
@@ -105,14 +120,7 @@ export default function Dashboard() {
                     <section>
                         <h2 className='mb-8 text-2xl font-semibold text-color1-100'>O que você quer criar hoje?</h2>
                         <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>
-                            {cards.map(card => (
-                                <Card
-                                    key={card.id}
-                                    title={card.title}
-                                    description={card.description}
-                                    component={card.component}
-                                />
-                            ))}
+                            {cards.map(card => getCard(user.tipo, card))}
                         </div>
                     </section>
                 </section>
