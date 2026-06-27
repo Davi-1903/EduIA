@@ -1,4 +1,4 @@
-from . import user
+from . import user, professor, aluno
 
 
-__all__ = ['user']
+__all__ = ['user', 'professor', 'aluno']
