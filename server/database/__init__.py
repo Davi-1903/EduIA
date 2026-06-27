@@ -1,11 +1,8 @@
 from sqlalchemy.orm import sessionmaker, DeclarativeBase
-from utils import get_connection, get_env
+from utils import create_url, get_connection
 
 
-__all__ = ['engine', 'SessionLocal', 'Base', 'init_database']
-
-
-engine = get_connection(get_env('DATABASE_URI'))
+engine = get_connection(url=create_url(), echo=False)
 SessionLocal = sessionmaker(bind=engine)
 
 
