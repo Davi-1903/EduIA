@@ -19,7 +19,4 @@ class Usuario(Base, UserMixin):
     password: Mapped[str] = mapped_column(String(255), nullable=False)
     type: Mapped[UserType] = mapped_column(Enum(UserType), nullable=False)
 
-    __mapper_args__ = {
-        'polymorphic_identity': 'usuario',
-        'polymorphic_on': type
-    }
+    __mapper_args__ = {'polymorphic_identity': 'usuario', 'polymorphic_on': type}

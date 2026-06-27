@@ -8,6 +8,7 @@
 		"vscode": {
 			"extensions": [
 				"ms-python.python",
+				"charliermarsh.ruff",
 				"ms-python.vscode-pylance",
 				"esbenp.prettier-vscode",
 				"dbaeumer.vscode-eslint",

@@ -20,28 +20,30 @@ def register():
             data = request.get_json()
             if not data:
                 return jsonify({'ok': False, 'message': 'Dados não recebidos'}), 400
-            
+
             if data['type'] == UserType.ALUNO.value:
                 new_user = Aluno(name=data['nome'], email=data['email'], password=ph.hash(data['password']))
             elif data['type'] == UserType.PROFESSOR.value:
                 new_user = Professor(name=data['nome'], email=data['email'], password=ph.hash(data['password']))
             else:
                 return jsonify({'ok': False, 'message': 'Tipo inválido'}), 400
-            
+
             session.add(new_user)
             session.commit()
             login_user(new_user)
 
-            return jsonify({
-                'ok': True,
-                'redirect': '/dash',
-                'user': {
-                    'id': new_user.id,
-                    'nome': new_user.name,
-                    'email': new_user.email,
-                    'tipo': new_user.type.value
+            return jsonify(
+                {
+                    'ok': True,
+                    'redirect': '/dash',
+                    'user': {
+                        'id': new_user.id,
+                        'nome': new_user.name,
+                        'email': new_user.email,
+                        'tipo': new_user.type.value,
+                    },
                 }
-            }), 201
+            ), 201
 
         except IntegrityError:
             return jsonify({'ok': False, 'message': 'Credenciais inválidas'}), 401
@@ -64,16 +66,18 @@ def login():
                 return jsonify({'ok': False, 'message': 'Credenciais inválidas'}), 401
 
             login_user(user_exist)
-            return jsonify({
-                'ok': True,
-                'redirect': '/dash',
-                'user': {
-                    'id': user_exist.id,
-                    'nome': user_exist.name,
-                    'email': user_exist.email,
-                    'tipo': user_exist.type.value
+            return jsonify(
+                {
+                    'ok': True,
+                    'redirect': '/dash',
+                    'user': {
+                        'id': user_exist.id,
+                        'nome': user_exist.name,
+                        'email': user_exist.email,
+                        'tipo': user_exist.type.value,
+                    },
                 }
-            }), 200
+            ), 200
 
         except Exception:
             return jsonify({'ok': False, 'message': 'Ocorreu um erro interno'}), 500
@@ -82,15 +86,17 @@ def login():
 @bp_auth.route('/check')
 @login_required
 def check():
-    return jsonify({
-        'ok': True,
-        'user': {
-            'id': current_user.id,
-            'nome': current_user.name,
-            'email': current_user.email,
-            'tipo': current_user.type.value
+    return jsonify(
+        {
+            'ok': True,
+            'user': {
+                'id': current_user.id,
+                'nome': current_user.name,
+                'email': current_user.email,
+                'tipo': current_user.type.value,
+            },
         }
-    }), 200
+    ), 200
 
 
 @bp_auth.route('/csrf')
