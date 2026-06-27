@@ -85,11 +85,15 @@ Para executar o projeto, há duas formas:
 3. **Crie um arquivo `.env` na raiz do projeto para as variáveis de ambiente e adicione**
 
     ```.env
-    SECRET_KEY="<CHAVE SECRETA>"
-    DATABASE_URI="mysql+pymysql://root@localhost:<PORTA>/db_eduia"
+    # ---------------------- Autenticação ----------------------
+    SECRET_KEY=<SUA-CHAVE-SECRETA>
 
-    # Caso o banco use uma senha
-    DATABASE_URI="mysql+pymysql://root:<SENHA>@localhost:<PORTA>/db_eduia"
+    # --------------------- Banco de dados ---------------------
+    DB_USER=root
+    DB_PASSWORD=<SENHA>
+    DB_HOST=database
+    DB_PORT=3306
+    DB_NAME=db_eduia
     ```
 
 4. **Inicie ambos os servidores**
@@ -124,8 +128,15 @@ Após finalizar esse passo a passo, a aplicação iniciará em seu navegador pad
 2. **Crie um arquivo `.env` na raiz do projeto para as variáveis de ambiente e adicione**
 
     ```.env
-    SECRET_KEY="<CHAVE SECRETA>"
-    DATABASE_URI="mysql+pymysql://root@database:3306/db_eduia"
+    # ---------------------- Autenticação ----------------------
+    SECRET_KEY=<SUA-CHAVE-SECRETA>
+
+    # --------------------- Banco de dados ---------------------
+    DB_USER=root
+    DB_PASSWORD=<SENHA>
+    DB_HOST=database
+    DB_PORT=3306
+    DB_NAME=db_eduia
     ```
 
 3. **Crie e inicie os `contêineres Docker`**
