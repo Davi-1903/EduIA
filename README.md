@@ -75,27 +75,38 @@ Para executar o projeto, há duas formas:
     code EduIA
     ```
 
-3. **Entre na branch `develop`**
+3. **Crie um arquivo `.env` na raiz do projeto**
+
+    ```.env
+    # ---------------------- Autenticação ----------------------
+    SECRET_KEY=<SUA-CHAVE-SECRETA>
+
+    # --------------------- Banco de dados ---------------------
+    DB_USER=root
+    DB_HOST=database
+    DB_PORT=3306
+    DB_NAME=db_eduia
+    ```
+
+4. **Entre na branch `develop`**
 
     ```git
     git switch develop
     ```
 
-4. **Certifique-se que a extensão `Dev Containers` está instalada**
+5. **Certifique-se que a extensão `Dev Containers` está instalada**
 
     - [Link para a extensão](https://marketplace.visualstudio.com/items?itemName=ms-vscode-remote.remote-containers)
 
-5. **Abra o container de desenvolvimento**
+6. **Abra o container de desenvolvimento**
 
     - Pressione `Ctrl` + `Shift` + `P` e digite `Dev Containers: Reopen in Container`. Após isso, aguarde a construção do container.
 
-6. **Caso deseje mudar o container de desenvolvimento, use o arquivo [`.devcontainer/devcontainer.json`](.devcontainer/devcontainer.json)**
+7. **Caso deseje mudar o container de desenvolvimento, use o arquivo [`.devcontainer/devcontainer.json`](.devcontainer/devcontainer.json)**
 
     ```json
     {
-        ...
         "service": "server" -> "client" // Por exemplo, para abrir o container do frontend
-        ...
     }
     ```
 
@@ -122,8 +133,14 @@ Após finalizar esse passo a passo, o container de desenvolvimento estará abert
 3. **Crie um arquivo `.env` na raiz do projeto para as variáveis de ambiente e adicione**
 
     ```.env
-    SECRET_KEY="<CHAVE SECRETA>"
-    DATABASE_URI="mysql+pymysql://root@database:3306/db_eduia"
+    # ---------------------- Autenticação ----------------------
+    SECRET_KEY=<SUA-CHAVE-SECRETA>
+
+    # --------------------- Banco de dados ---------------------
+    DB_USER=root
+    DB_HOST=database
+    DB_PORT=3306
+    DB_NAME=db_eduia
     ```
 
 4. **Crie e inicie os `contêineres Docker`**
