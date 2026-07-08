@@ -12,6 +12,4 @@ class Professor(Usuario):
     materia: Mapped[str] = mapped_column(String(100), nullable=True)
     turma: Mapped[str] = mapped_column(String(20), nullable=True)
 
-    __mapper_args__ = {
-        'polymorphic_identity': UserType.PROFESSOR
-    }
+    __mapper_args__ = {'polymorphic_identity': UserType.PROFESSOR}

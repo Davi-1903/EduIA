@@ -11,6 +11,4 @@ class Aluno(Usuario):
     # Por enquanto, o campo abaixo vai poder aceitar valores nulos pois ainda não temos páginas para o usuário indicar esses dados
     turma: Mapped[str] = mapped_column(String(20), nullable=True)
 
-    __mapper_args__ = {
-        'polymorphic_identity': UserType.ALUNO
-    }
+    __mapper_args__ = {'polymorphic_identity': UserType.ALUNO}

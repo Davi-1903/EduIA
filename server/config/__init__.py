@@ -11,10 +11,7 @@ def config_app(app: Flask):
     SECRET_KEY = get_env('SECRET_KEY')
 
     app.config.update(
-        SECRET_KEY=SECRET_KEY,
-        SESSION_COOKIE_HTTPONLY=True,
-        SESSION_COOKIE_SECURE=False,
-        SESSION_COOKIE_SAMESITE='Lax'
+        SECRET_KEY=SECRET_KEY, SESSION_COOKIE_HTTPONLY=True, SESSION_COOKIE_SECURE=False, SESSION_COOKIE_SAMESITE='Lax'
     )
     CORS(app, supports_credentials=True, origins=['http://localhost:3000'])
     csrf = CSRFProtect()
