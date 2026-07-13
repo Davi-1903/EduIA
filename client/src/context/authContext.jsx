@@ -7,8 +7,9 @@ export function AuthenticatedProvider({ children }) {
     const [isAuthenticated, setAuthenticated] = useState(false);
     const [loading, setLoading] = useState(true);
     const [user, setUser] = useState(null);
+
     useEffect(() => {
-        fetch('/api/auth/check', { credentials: 'include' })
+        fetch('/api/user', { credentials: 'include' })
             .then(res => res.json())
             .then(data => {
                 if (data.ok) {

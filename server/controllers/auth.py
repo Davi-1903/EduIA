@@ -1,5 +1,5 @@
 from flask import Blueprint, jsonify, request
-from flask_login import login_required, login_user, logout_user, current_user
+from flask_login import login_required, login_user, logout_user
 from flask_wtf.csrf import generate_csrf
 from pwdlib import PasswordHash
 from sqlalchemy.exc import IntegrityError
@@ -81,22 +81,6 @@ def login():
 
         except Exception:
             return jsonify({'ok': False, 'message': 'Ocorreu um erro interno'}), 500
-
-
-@bp_auth.route('/check')
-@login_required
-def check():
-    return jsonify(
-        {
-            'ok': True,
-            'user': {
-                'id': current_user.id,
-                'nome': current_user.name,
-                'email': current_user.email,
-                'tipo': current_user.type.value,
-            },
-        }
-    ), 200
 
 
 @bp_auth.route('/csrf')
