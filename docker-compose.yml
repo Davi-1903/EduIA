@@ -12,6 +12,7 @@ services:
         container_name: server
         environment:
             - SECRET_KEY=${SECRET_KEY}
+            - CORS_ORIGINS=${CORS_ORIGINS}
             - DB_USER=${DB_USER}
             - DB_PASSWORD=${DB_PASSWORD}
             - DB_HOST=${DB_HOST}

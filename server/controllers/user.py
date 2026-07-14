@@ -5,7 +5,7 @@ from flask_login import current_user, login_required
 bp_user = Blueprint('user', __name__, url_prefix='/api/user')
 
 
-@bp_user.route('/', methods=['GET'])
+@bp_user.route('', methods=['GET'])
 @login_required
 def get_user():
     return jsonify(

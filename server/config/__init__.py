@@ -15,10 +15,12 @@ def config_app(app: Flask):
         SECRET_KEY=get_env('SECRET_KEY'),
         SESSION_COOKIE_HTTPONLY=True,
         SESSION_COOKIE_SECURE=False,
-        SESSION_COOKIE_SAMESITE='Lax'
+        SESSION_COOKIE_SAMESITE='Lax',
     )
-    CORS(app, supports_credentials=True, origins=['http://localhost:3000', 'http://localhost:4173'])
+    origins = get_env('CORS_ORIGINS', 'http://localhost:3000,http://localhost:4173').split(',')
+    CORS(app, supports_credentials=True, origins=origins)
     csrf = CSRFProtect()
+    csrf.init_app(app)
 
     login_config(app)
     init_database()

@@ -75,6 +75,8 @@ Para executar o projeto, há duas formas:
     ```bash
     # Backend
     cd server
+    uv sync
+    # OU
     pip install -r requirements.txt
 
     # Frontend
@@ -85,13 +87,14 @@ Para executar o projeto, há duas formas:
 3. **Crie um arquivo `.env` na raiz do projeto para as variáveis de ambiente e adicione**
 
     ```.env
-    # ---------------------- Autenticação ----------------------
+    # =====================< Autenticação >=====================
     SECRET_KEY=<SUA-CHAVE-SECRETA>
+    CORS_ORIGINS=http://localhost:3000,http://localhost:4173
 
-    # --------------------- Banco de dados ---------------------
+    # ====================< Banco de dados >====================
     DB_USER=root
     DB_PASSWORD=<SENHA>
-    DB_HOST=database
+    DB_HOST=localhost
     DB_PORT=3306
     DB_NAME=db_eduia
     ```
@@ -128,10 +131,11 @@ Após finalizar esse passo a passo, a aplicação iniciará em seu navegador pad
 2. **Crie um arquivo `.env` na raiz do projeto para as variáveis de ambiente e adicione**
 
     ```.env
-    # ---------------------- Autenticação ----------------------
+    # =====================< Autenticação >=====================
     SECRET_KEY=<SUA-CHAVE-SECRETA>
+    CORS_ORIGINS=http://localhost:3000,http://localhost:4173
 
-    # --------------------- Banco de dados ---------------------
+    # ====================< Banco de dados >====================
     DB_USER=root
     DB_PASSWORD=<SENHA>
     DB_HOST=database
