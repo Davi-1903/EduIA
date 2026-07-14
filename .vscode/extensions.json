@@ -4,6 +4,9 @@
 		"charliermarsh.ruff",
 		"esbenp.prettier-vscode",
 		"dbaeumer.vscode-eslint",
-		"bradlc.vscode-tailwindcss"
+		"bradlc.vscode-tailwindcss",
+		"ms-azuretools.vscode-containers",
+		"ms-vscode-remote.remote-containers"
 	]
 }
+

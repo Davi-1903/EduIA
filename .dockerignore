@@ -1,0 +1,53 @@
+# Diretórios de controle de versão e de configuração
+.git
+.gitignore
+.gitkeep
+.dockerignore
+
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Variáveis de ambiente e ambiente virtual
+.env*
+env/
+.env/
+venv/
+.venv/
+ENV/
+
+# Arquivos binários
+.ruff_cache/
+__pycache__/
+*.pyc
+
+# Editor directories and files
+.vscode
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Databases
+*.db
+
+# Documentação
+documents/*
+docs/*
+*.pdf
+*.docx
+*.md
+LICENSE

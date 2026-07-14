@@ -1,0 +1,39 @@
+services:
+    client:
+        build: ./client
+        container_name: client
+        ports:
+            - '3000:80'
+        depends_on:
+            - server
+
+    server:
+        build: ./server
+        container_name: server
+        environment:
+            - SECRET_KEY=${SECRET_KEY}
+            - DB_USER=${DB_USER}
+            - DB_PASSWORD=${DB_PASSWORD}
+            - DB_HOST=${DB_HOST}
+            - DB_PORT=${DB_PORT}
+            - DB_NAME=${DB_NAME}
+        depends_on:
+            - database
+
+    database:
+        image: mysql:8
+        container_name: database
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+            MYSQL_DATABASE: db_eduia
+        volumes:
+            - db_data:/var/lib/mysql
+        healthcheck:
+            test: ['CMD', 'mysqladmin', 'ping', '-h', 'localhost']
+            interval: 5s
+            timeout: 5s
+            retries: 10
+
+volumes:
+    db_data:

@@ -1,11 +1,8 @@
-from sqlalchemy import create_engine
 from sqlalchemy.orm import sessionmaker, DeclarativeBase
-from utils import get_env
+from utils import create_url, get_connection
 
 
-DATABASE_URI = get_env('DATABASE_URI')
-
-engine = create_engine(DATABASE_URI, echo=False)
+engine = get_connection(url=create_url(), echo=False)
 SessionLocal = sessionmaker(bind=engine)
 
 

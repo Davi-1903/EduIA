@@ -85,11 +85,15 @@ Para executar o projeto, há duas formas:
 3. **Crie um arquivo `.env` na raiz do projeto para as variáveis de ambiente e adicione**
 
     ```.env
-    SECRET_KEY="<CHAVE SECRETA>"
-    DATABASE_URI="mysql+pymysql://root@localhost:<PORTA>/db_eduia"
+    # ---------------------- Autenticação ----------------------
+    SECRET_KEY=<SUA-CHAVE-SECRETA>
 
-    # Caso o banco use uma senha
-    DATABASE_URI="mysql+pymysql://root:<SENHA>@localhost:<PORTA>/db_eduia"
+    # --------------------- Banco de dados ---------------------
+    DB_USER=root
+    DB_PASSWORD=<SENHA>
+    DB_HOST=database
+    DB_PORT=3306
+    DB_NAME=db_eduia
     ```
 
 4. **Inicie ambos os servidores**
@@ -111,7 +115,37 @@ Após finalizar esse passo a passo, a aplicação iniciará em seu navegador pad
 
 ### 🐋 Modo deploy com `Docker`
 
-Em breve... 🙃
+> [!IMPORTANT]
+> É necessário ter o Docker e o Docker Compose instalados
+
+1. **Clone o repositório e acesse-o**
+
+    ```git
+    git clone https://github.com/Davi-1903/EduIA.git
+    cd EduIA
+    ```
+
+2. **Crie um arquivo `.env` na raiz do projeto para as variáveis de ambiente e adicione**
+
+    ```.env
+    # ---------------------- Autenticação ----------------------
+    SECRET_KEY=<SUA-CHAVE-SECRETA>
+
+    # --------------------- Banco de dados ---------------------
+    DB_USER=root
+    DB_PASSWORD=<SENHA>
+    DB_HOST=database
+    DB_PORT=3306
+    DB_NAME=db_eduia
+    ```
+
+3. **Crie e inicie os `contêineres Docker`**
+
+    ```powershell
+    docker compose up -d
+    ```
+
+Após finalizar esse passo a passo, a aplicação estará executando em [`http://localhost:3000`](http://localhost:3000)
 
 ---
 
