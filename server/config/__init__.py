@@ -13,7 +13,7 @@ def config_app(app: Flask):
     app.config.update(
         SECRET_KEY=SECRET_KEY, SESSION_COOKIE_HTTPONLY=True, SESSION_COOKIE_SECURE=False, SESSION_COOKIE_SAMESITE='Lax'
     )
-    CORS(app, supports_credentials=True, origins=['http://localhost:3000'])
+    CORS(app, supports_credentials=True, origins=['http://localhost:3000', 'http://localhost:4173'])
     csrf = CSRFProtect()
 
     login_config(app)
