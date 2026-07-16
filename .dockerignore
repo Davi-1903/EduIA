@@ -27,6 +27,7 @@ venv/
 ENV/
 
 # Arquivos binários
+.ruff_cache/
 __pycache__/
 *.pyc
 

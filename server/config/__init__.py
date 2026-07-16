@@ -7,15 +7,22 @@ from models.user import Usuario
 from utils import get_env
 
 
+__all__ = ["config_app"]
+
+
 def config_app(app: Flask):
     app.config.update(
-        SECRET_KEY=get_env('SECRET_KEY'),
+        SECRET_KEY=get_env("SECRET_KEY"),
         SESSION_COOKIE_HTTPONLY=True,
         SESSION_COOKIE_SECURE=False,
-        SESSION_COOKIE_SAMESITE='Lax',
+        SESSION_COOKIE_SAMESITE="Lax",
     )
-    CORS(app, supports_credentials=True, origins=['http://localhost:3000'])
+    origins = get_env(
+        "CORS_ORIGINS", "http://localhost:3000,http://localhost:4173"
+    ).split(",")
+    CORS(app, supports_credentials=True, origins=origins)
     csrf = CSRFProtect()
+    csrf.init_app(app)
 
     login_config(app)
     init_database()
@@ -32,7 +39,4 @@ def login_config(app: Flask):
 
     @login_manager.unauthorized_handler
     def unauthorized():
-        return jsonify({'ok': False, 'message': 'Permissão negada'}), 401
-
-
-__all__ = ['config_app']
+        return jsonify({"ok": False, "message": "Permissão negada"}), 401

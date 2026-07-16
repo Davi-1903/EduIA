@@ -33,7 +33,7 @@ export default function GenerateExplanation({ setOpen }) {
             onAnimationEnd={handleAnimatedEnd}
             className={clsx(
                 'fixed inset-0 z-7 grid place-items-center bg-gray-800/20 backdrop-blur-sm',
-                isClose ? 'animate-fade-out' : 'animated-fade-in',
+                isClose ? 'animate-fade-out' : 'animate-fade-in',
             )}
         >
             <form

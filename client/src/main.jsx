@@ -65,6 +65,14 @@ const router = createBrowserRouter([
             },
             { path: 'config', element: <h1>Config</h1> },
             {
+                path: 'config',
+                element: (
+                    <Suspense fallback={<Loading />}>
+                        <Settings />
+                    </Suspense>
+                ),
+            },
+            {
                 path: '*',
                 element: (
                     <Suspense fallback={<Loading />}>

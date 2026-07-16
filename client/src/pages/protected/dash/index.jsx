@@ -117,12 +117,14 @@ export default function Dashboard() {
                             aprendizado.
                         </p>
                     </div>
-                    <section>
-                        <h2 className='mb-8 text-2xl font-semibold text-color1-100'>O que você quer criar hoje?</h2>
-                        <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>
-                            {cards.map(card => getCard(user.tipo, card))}
-                        </div>
-                    </section>
+                    {user && (
+                        <section>
+                            <h2 className='mb-8 text-2xl font-semibold text-color1-100'>O que você quer criar hoje?</h2>
+                            <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>
+                                {cards.map(card => getCard(user.tipo, card))}
+                            </div>
+                        </section>
+                    )}
                 </section>
             </main>
         </ProtectedRoute>
