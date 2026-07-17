@@ -29,7 +29,7 @@ const links = [
     },
     {
         id: 2,
-        path: '#',
+        path: '/materials',
         name: 'Meus materiais',
         icon: (
             <IconBook2
@@ -51,7 +51,7 @@ const links = [
     },
     {
         id: 4,
-        path: '#',
+        path: '/settings',
         name: 'Configurações',
         icon: (
             <IconSettings
