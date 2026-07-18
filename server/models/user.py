@@ -26,4 +26,4 @@ class Usuario(Base, UserMixin):
 
     materials: Mapped[list['Material']] = relationship(back_populates='user')
 
-    __mapper_args__ = {'polymorphic_identity': 'usuario', 'polymorphic_on': type}
+    __mapper_args__ = {'polymorphic_identity': 'usuario', 'polymorphic_on': 'type'}

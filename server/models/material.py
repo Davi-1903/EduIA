@@ -1,12 +1,27 @@
 import enum
 from typing import TYPE_CHECKING, Any
 from datetime import datetime
-from sqlalchemy import JSON, DateTime, ForeignKey, String, func
-from sqlalchemy.orm import Mapped, declared_attr, mapped_column, relationship
+from sqlalchemy import JSON, DateTime, Enum, ForeignKey, String, func
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.ext.mutable import MutableDict
+from database import Base
+
 
 if TYPE_CHECKING:
     from models.user import Usuario
+
+
+class MaterialType(enum.Enum):
+    DESAFIO = 'desafio'
+    EXERCICIO_GUIADO = 'exercicio guiado'
+    EXPLICACAO = 'explicacao'
+    FLASHCARD = 'flashcard'
+    FORMULARIO = 'formulario'
+    PLANO_DE_AULA = 'plano e aula'
+    QUESTOES = 'questoes'
+    QUIZ = 'quiz'
+    RESUMO = 'resumo'
+    ROTEIRO = 'roteiro'
 
 
 class Difficulty(enum.Enum):
@@ -17,33 +32,17 @@ class Difficulty(enum.Enum):
     MUITO_DIFICIL = 'Muito difícil'
 
 
-class Material:
-    __abstract__ = True
+class Material(Base):
+    __tablename__ = 'materiais'
 
-    @declared_attr
-    def id(cls) -> Mapped[int]:
-        return mapped_column(primary_key=True, autoincrement=True)
+    id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
+    user_id: Mapped[int] = mapped_column(ForeignKey('usuarios.id'), nullable=False)
+    discipline: Mapped[str] = mapped_column(String(100), nullable=False)
+    subject: Mapped[str] = mapped_column(String(150), nullable=False)
+    created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now(), nullable=False)
+    content: Mapped[dict[str, Any]] = mapped_column(MutableDict.as_mutable(JSON), nullable=False)
+    type: Mapped[MaterialType] = mapped_column(Enum(MaterialType), nullable=False)
 
-    @declared_attr
-    def user_id(cls) -> Mapped[int]:
-        return mapped_column(ForeignKey('usuarios.id'), nullable=False)
+    user: Mapped['Usuario'] = relationship(back_populates='materials')
 
-    @declared_attr
-    def discipline(cls) -> Mapped[str]:
-        return mapped_column(String(100), nullable=False)
-
-    @declared_attr
-    def subject(cls) -> Mapped[str]:
-        return mapped_column(String(150), nullable=False)
-
-    @declared_attr
-    def created_at(cls) -> Mapped[datetime]:
-        return mapped_column(DateTime(timezone=True), server_default=func.now(), nullable=False)
-
-    @declared_attr
-    def content(cls) -> Mapped[dict[str, Any]]:
-        return mapped_column(MutableDict.as_mutable(JSON), nullable=False)
-
-    @declared_attr
-    def user(cls) -> Mapped['Usuario']:
-        return relationship(back_populates='materials')
+    __mapper_args__ = {'polymorphic_identity': 'usuario', 'polymorphic_on': 'type'}
