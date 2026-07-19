@@ -23,6 +23,7 @@ export default function SignUp() {
     const [email, setEmail] = useState('');
     const [password, setPassword] = useState('');
     const [showPassword, setShowPassword] = useState(false);
+    const [isLoading, setLoading] = useState(false);
     const { setAuthenticated, setUser } = useAuthenticated();
     const { setMessages } = useMessages();
     const navigate = useNavigate();
@@ -36,6 +37,7 @@ export default function SignUp() {
 
     async function handleRegister(e) {
         e.preventDefault();
+        setLoading(true);
 
         try {
             const data = await POST('/api/auth/register', { nome, email, password, type: mode });
@@ -54,6 +56,8 @@ export default function SignUp() {
                     type: 'danger',
                 },
             ]);
+        } finally {
+            setLoading(false);
         }
     }
 
@@ -243,7 +247,8 @@ export default function SignUp() {
                                 </div>
                                 <button
                                     type='submit'
-                                    className='min-h-12 cursor-pointer rounded-lg bg-button text-xl text-color4-100 transition-all duration-150 hover:shadow-lg-hard'
+                                    className='min-h-12 cursor-pointer rounded-lg bg-button text-xl text-color4-100 transition-all duration-150 not-disabled:hover:shadow-lg-hard disabled:cursor-not-allowed disabled:opacity-60'
+                                    disabled={isLoading}
                                 >
                                     Entrar
                                 </button>

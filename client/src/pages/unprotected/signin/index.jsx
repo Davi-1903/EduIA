@@ -13,6 +13,7 @@ export default function SignIn() {
     const [showPassword, setShowPassword] = useState(false);
     const [email, setEmail] = useState('');
     const [senha, setSenha] = useState('');
+    const [isLoading, setLoading] = useState(false);
     const { setAuthenticated, setUser } = useAuthenticated();
     const { setMessages } = useMessages();
     const navigate = useNavigate();
@@ -23,6 +24,7 @@ export default function SignIn() {
 
     async function submit(e) {
         e.preventDefault();
+        setLoading(true);
 
         try {
             const data = await POST('/api/auth/login', { email, senha });
@@ -41,6 +43,8 @@ export default function SignIn() {
                     type: 'danger',
                 },
             ]);
+        } finally {
+            setLoading(false);
         }
     }
 
@@ -145,7 +149,8 @@ export default function SignIn() {
                             </div>
                             <button
                                 type='submit'
-                                className='mt-2 min-h-12 cursor-pointer rounded-lg bg-button text-xl text-color4-100 transition-all duration-150 hover:shadow-lg-hard'
+                                className='mt-2 min-h-12 cursor-pointer rounded-lg bg-button text-xl text-color4-100 transition-all duration-150 not-disabled:hover:shadow-lg-hard disabled:cursor-not-allowed disabled:opacity-60'
+                                disabled={isLoading}
                             >
                                 Entrar
                             </button>
