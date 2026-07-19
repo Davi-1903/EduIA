@@ -86,7 +86,7 @@ export default function GenerateQuizzes({ setOpen }) {
                         type='text'
                         id='conteudo'
                         placeholder='Descreva o assunto das questões'
-                        className='h-12 w-full rounded-lg focus:ring-2 focus:ring-color1-400 border border-color4-25 px-4 font-medium outline-none'
+                        className='h-12 w-full rounded-lg border border-color4-25 px-4 font-medium outline-none focus:ring-2 focus:ring-color1-400'
                         required
                     />
                 </div>
