@@ -1,0 +1,164 @@
+{
+	"files": [
+		{
+			"path": "client/src/globals.css",
+			"bookmarks": [
+				{
+					"line": 22,
+					"column": 0,
+					"label": "Mudar fontes"
+				},
+				{
+					"line": 24,
+					"column": 0,
+					"label": "Talvez usar #EFEFEB como color 4"
+				}
+			]
+		},
+		{
+			"path": "README.md",
+			"bookmarks": [
+				{
+					"line": 13,
+					"column": 0,
+					"label": "Lembrar de adicionar uma imagem"
+				}
+			]
+		},
+		{
+			"path": "client/src/components/loading/index.jsx",
+			"bookmarks": [
+				{
+					"line": 2,
+					"column": 0,
+					"label": "Loading provisório. Vamos fazer com skeletons"
+				}
+			]
+		},
+		{
+			"path": "client/src/pages/unprotected/landingpage/index.jsx",
+			"bookmarks": [
+				{
+					"line": 14,
+					"column": 0,
+					"label": "Adicionar perguntas e respostas com FAQ"
+				}
+			]
+		},
+		{
+			"path": "client/src/layout.jsx",
+			"bookmarks": [
+				{
+					"line": 7,
+					"column": 0,
+					"label": "Padronizar as páginas"
+				}
+			]
+		},
+		{
+			"path": "client/src/pages/protected/dash/index.jsx",
+			"bookmarks": [
+				{
+					"line": 119,
+					"column": 0,
+					"label": "Rapaz... Fica feio, mas vou resolver"
+				}
+			]
+		},
+		{
+			"path": "server/models/formularios.py",
+			"bookmarks": [
+				{
+					"line": 9,
+					"column": 0,
+					"label": "Avaliar deixar dificuldade nos formulários"
+				}
+			]
+		},
+		{
+			"path": "server/models/flashcards.py",
+			"bookmarks": [
+				{
+					"line": 5,
+					"column": 0,
+					"label": "Adicionar dificuldade"
+				}
+			]
+		},
+		{
+			"path": "server/models/roteiros.py",
+			"bookmarks": [
+				{
+					"line": 5,
+					"column": 0,
+					"label": "Talvez adicionar o tempo (dia, tempo dos dia...)"
+				}
+			]
+		},
+		{
+			"path": "server/schemas/formularios.py",
+			"bookmarks": [
+				{
+					"line": 8,
+					"column": 0,
+					"label": "Ok, estou com dúvidas o que são esses formulários"
+				}
+			]
+		},
+		{
+			"path": "server/controllers/auth.py",
+			"bookmarks": [
+				{
+					"line": 63,
+					"column": 0,
+					"label": "Mudar \"selects\""
+				}
+			]
+		},
+		{
+			"path": "server/schemas/planos_de_aula.py",
+			"bookmarks": [
+				{
+					"line": 5,
+					"column": 0,
+					"label": "Acho que não precisar ser um dicionário, uma string já basta"
+				}
+			]
+		},
+		{
+			"path": "client/src/pages/protected/materials/index.jsx",
+			"bookmarks": [
+				{
+					"line": 17,
+					"column": 0,
+					"label": "Adicionar loading durante o fetching"
+				},
+				{
+					"line": 46,
+					"column": 0,
+					"label": "Esses backgrounds..."
+				},
+				{
+					"line": 51,
+					"column": 0,
+					"label": "Adicionar filtros"
+				},
+				{
+					"line": 68,
+					"column": 0,
+					"label": "Rapaz, vou deixar. Ficou até bom"
+				}
+			]
+		},
+		{
+			"path": "client/src/pages/protected/materials/components/material.jsx",
+			"bookmarks": [
+				{
+					"line": 52,
+					"column": 0,
+					"label": "Trocar icone por tag, pois fica difícil de identificar o tipo do material"
+				}
+			]
+		}
+	]
+}
