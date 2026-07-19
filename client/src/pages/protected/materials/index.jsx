@@ -5,6 +5,7 @@ import { useMessages } from '../../../context/messagesContext';
 import { GET } from '../../../api/materials';
 import MaterialCard from './components/material';
 import Pagination from './components/pagination';
+import Mascote from '/assets/images/mascote/mascote-materiais.png';
 
 export default function Materials() {
     const { setMessages } = useMessages();
@@ -16,6 +17,7 @@ export default function Materials() {
     useEffect(() => {
         GET(`/api/materials?cursor=${cursor}&limit=${limit}`)
             .then(data => {
+                if (data.status === 401) return;
                 if (data.status !== 200) throw new Error('Não foi possível carregar os materiais');
                 setMaterials(data.materials);
                 setTotal(data.total);
@@ -45,7 +47,6 @@ export default function Materials() {
             <main className='min-h-screen bg-linear-to-br from-color4-200 to-indigo-100 not-sm:col-span-2'>
                 <section className='mx-auto max-w-7xl space-y-12 px-6 py-16 pt-16'>
                     <h1 className='text-4xl leading-tight font-bold text-color1-100 md:text-5xl'>Meus materiais</h1>
-
                     {materials?.length > 0 ? (
                         <>
                             <div>Filtros...</div>
@@ -65,9 +66,16 @@ export default function Materials() {
                             />
                         </>
                     ) : (
-                        <div>
-                            <h2>Não há materiais</h2>
-                            <h3>Inicie seu aprendizado gerando materiais para qualquer assunto</h3>
+                        <div className='pt-12'>
+                            <h2 className='text-center font-secundary text-3xl font-semibold text-color3-400'>
+                                Não há materiais ainda...
+                            </h2>
+                            <img
+                                src={Mascote}
+                                alt='Mascote'
+                                loading='lazy'
+                                className='mx-auto w-full max-w-120'
+                            />
                         </div>
                     )}
                 </section>
