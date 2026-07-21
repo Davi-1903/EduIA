@@ -1,12 +1,9 @@
 from . import (
-    user,
-    professor,
-    aluno,
+    formularios,
     desafios,
     exercicios_guiados,
     explicacoes,
     flashcards,
-    formularios,
     planos_de_aula,
     questoes,
     quizzes,
@@ -16,14 +13,11 @@ from . import (
 
 
 __all__ = [
-    'user',
-    'professor',
-    'aluno',
+    'formularios',
     'desafios',
     'exercicios_guiados',
     'explicacoes',
     'flashcards',
-    'formularios',
     'planos_de_aula',
     'questoes',
     'quizzes',

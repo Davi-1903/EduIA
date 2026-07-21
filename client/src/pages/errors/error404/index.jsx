@@ -11,7 +11,7 @@ export default function Error404() {
             <Helmet>
                 <title>EduIA | Not found</title>
             </Helmet>
-            <main className='flex min-h-screen items-center justify-center gap-8 bg-color4-200 p-8 md:p-24'>
+            <main className='flex min-h-screen items-center justify-center gap-8 bg-color4-200 p-8 not-sm:col-span-2 md:p-24'>
                 <article className='hidden flex-1 lg:block'>
                     <img
                         src={Mascote}

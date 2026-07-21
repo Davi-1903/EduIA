@@ -7,7 +7,7 @@ export default function GenerateForms({ setOpen }) {
     const articleRef = useRef(null);
     const [isClose, setClose] = useState(false);
     const [quantidade, setQuantidade] = useState(1);
-    
+
     function handleAnimationEnd() {
         if (isClose) setOpen(false);
     }
@@ -76,7 +76,9 @@ export default function GenerateForms({ setOpen }) {
                         />
                     </div>
                     <div className='flex flex-col gap-1'>
-                        <label className='block font-secundary text-base font-bold text-color1-100'>Quantidade de campos</label>
+                        <label className='block font-secundary text-base font-bold text-color1-100'>
+                            Quantidade de campos
+                        </label>
                         <InputRange
                             value={quantidade}
                             trueValue={quantidade}

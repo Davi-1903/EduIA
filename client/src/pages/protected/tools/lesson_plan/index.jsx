@@ -42,10 +42,10 @@ export default function GenerateLessonPlan({ setOpen }) {
             )}
         >
             <form
-                className='flex w-xl flex-col gap-4 2xl:gap-6 rounded-2xl bg-color4-200 px-6 py-4 2xl:py-12'
+                className='flex w-xl flex-col gap-4 rounded-2xl bg-color4-200 px-6 py-4 2xl:gap-6 2xl:py-12'
                 ref={articleRef}
             >
-                <h2 className='bg-linear-to-tr from-color1-100 to-color4-100 bg-clip-text font-primary text-3xl 2xl:text-4xl font-bold text-transparent'>
+                <h2 className='bg-linear-to-tr from-color1-100 to-color4-100 bg-clip-text font-primary text-3xl font-bold text-transparent 2xl:text-4xl'>
                     Plano de aula
                 </h2>
                 <div>
@@ -141,7 +141,7 @@ export default function GenerateLessonPlan({ setOpen }) {
                         </label>
                     </div>
                 </div>
-                <button className='h-10 2xl:h-12 cursor-pointer rounded-lg bg-button text-xl text-color4-100 transition-all duration-150 hover:shadow-lg-hard'>
+                <button className='h-10 cursor-pointer rounded-lg bg-button text-xl text-color4-100 transition-all duration-150 hover:shadow-lg-hard 2xl:h-12'>
                     Gerar
                 </button>
             </form>
