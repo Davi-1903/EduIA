@@ -14,7 +14,8 @@ pip install langchain langchain-community langchain-core huggingface_hub Pydanti
 Aqui está a implementação completa estruturando a geração dos flashcards:
 
 ```python
-import osfrom pydantic import BaseModel, Fieldfrom list import List # Apenas se usar versões antigas do Python, caso contrário use list
+import os
+from pydantic import BaseModel, Field
 from langchain_core.pydantic_v1 import BaseModel as BaseModelV1, Field as FieldV1
 from langchain_community.llms import HuggingFaceEndpoint
 from langchain_core.prompts import PromptTemplate
