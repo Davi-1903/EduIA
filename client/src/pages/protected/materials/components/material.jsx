@@ -52,12 +52,12 @@ export default function MaterialCard({ title, discipline, difficulty, amount, da
             <div className='flex items-center justify-end gap-3 border-b-2 border-color4-25 p-2 pl-3'>
                 <span>{getIcon(type)}</span>
                 <h3 className='flex-1 font-primary text-xl font-medium text-color2-100'>{title}</h3>
-                <button className='rounded-sm p-1 transition-all hover:bg-color4-25'>
+                {/* <button className='rounded-sm p-1 transition-all hover:bg-color4-25'>
                     <IconTrash
                         stroke={1.5}
                         className='stroke-red-800'
                     />
-                </button>
+                </button> */}
             </div>
             <div className='flex-1 p-3 text-color2-100'>
                 <p className='font-secundary'>

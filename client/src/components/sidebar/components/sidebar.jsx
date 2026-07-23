@@ -111,7 +111,7 @@ function SidebarModel({ isOpen, setOpen }) {
             <div
                 ref={sidebarRef}
                 className={clsx(
-                    'sticky top-0 flex h-screen -translate-x-full flex-col gap-4 bg-color4-200 p-4 shadow-[0.25rem_0rem_1rem] shadow-color3-100/25 transition-all duration-500 sm:translate-x-0',
+                    'sticky top-0 flex h-screen -translate-x-full flex-col gap-4 bg-color4-200 p-4 shadow-[0.25rem_0rem_1rem] shadow-color3-100/25 transition-all duration-250 sm:translate-x-0',
                     isOpen ? 'w-4/5 translate-x-0 sm:w-60' : 'sm:w-18',
                 )}
             >

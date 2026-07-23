@@ -59,6 +59,11 @@
 			"path": "client/src/pages/protected/dash/index.jsx",
 			"bookmarks": [
 				{
+					"line": 108,
+					"column": 0,
+					"label": "Adicionar breve visualização dos materiais no dashboard"
+				},
+				{
 					"line": 119,
 					"column": 0,
 					"label": "Rapaz... Fica feio, mas vou resolver"
@@ -129,22 +134,37 @@
 			"path": "client/src/pages/protected/materials/index.jsx",
 			"bookmarks": [
 				{
-					"line": 17,
+					"line": 22,
 					"column": 0,
 					"label": "Adicionar loading durante o fetching"
 				},
 				{
-					"line": 46,
+					"line": 40,
 					"column": 0,
-					"label": "Esses backgrounds..."
+					"label": "Evitar fazer uma consulta para cada digitação, o melhor é esperar um tempo após a digitação"
 				},
 				{
 					"line": 51,
 					"column": 0,
-					"label": "Adicionar filtros"
+					"label": "Esses backgrounds..."
 				},
 				{
-					"line": 68,
+					"line": 52,
+					"column": 0,
+					"label": "Resolver a responsividade"
+				},
+				{
+					"line": 54,
+					"column": 0,
+					"label": "Mostrar os filtros mesmo quando não há materiais?"
+				},
+				{
+					"line": 64,
+					"column": 0,
+					"label": "Adicionar 2 formas de visualização, em cards ou em linhas, tipo tabela"
+				},
+				{
+					"line": 82,
 					"column": 0,
 					"label": "Rapaz, vou deixar. Ficou até bom"
 				}
@@ -157,6 +177,21 @@
 					"line": 52,
 					"column": 0,
 					"label": "Trocar icone por tag, pois fica difícil de identificar o tipo do material"
+				},
+				{
+					"line": 54,
+					"column": 0,
+					"label": "Adicionar a opção de deletar material quando clicar com botão direito, talvez"
+				}
+			]
+		},
+		{
+			"path": "server/controllers/materials.py",
+			"bookmarks": [
+				{
+					"line": 17,
+					"column": 0,
+					"label": "Resolver esse problema, pois nem todos os materiais tem a atributo difficulty"
 				}
 			]
 		}
