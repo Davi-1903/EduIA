@@ -45,4 +45,4 @@ class Material(Base):
 
     user: Mapped['Usuario'] = relationship(back_populates='materials')
 
-    __mapper_args__ = {'polymorphic_identity': 'usuario', 'polymorphic_on': 'type'}
+    __mapper_args__ = {'polymorphic_identity': None, 'polymorphic_on': 'type'}

@@ -54,10 +54,18 @@ export default function Filters({
                     onChange={e => setDiscipline(e.target.value)}
                 >
                     <option value='all'>Todas as disciplinas</option>
-                    {Object.entries(disciplinasList).map(([key, disciplinas]) => (
-                        <optgroup label={key}>
-                            {disciplinas.map(disciplina => (
-                                <option value={disciplina}>{disciplina}</option>
+                    {Object.entries(disciplinasList).map(([key, disciplinas], idx) => (
+                        <optgroup
+                            key={idx}
+                            label={key}
+                        >
+                            {disciplinas.map((disciplina, idx) => (
+                                <option
+                                    key={idx}
+                                    value={disciplina}
+                                >
+                                    {disciplina}
+                                </option>
                             ))}
                         </optgroup>
                     ))}

@@ -77,6 +77,11 @@
 					"line": 9,
 					"column": 0,
 					"label": "Avaliar deixar dificuldade nos formulários"
+				},
+				{
+					"line": 10,
+					"column": 0,
+					"label": "Adicionar min e max para valores inteiros"
 				}
 			]
 		},
