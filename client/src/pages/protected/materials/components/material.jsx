@@ -13,7 +13,19 @@ import {
     IconTrash,
 } from '@tabler/icons-react';
 
-export default function MaterialCard({ title, discipline, difficulty, amount, datetime, type }) {
+export default function MaterialCard({
+    title,
+    discipline,
+    difficulty,
+    amount,
+    grade,
+    chalkboard,
+    projector,
+    printed,
+    digital,
+    datetime,
+    type,
+}) {
     function formatarHora(datetime) {
         const data = new Date(datetime);
         const horas = String(data.getHours()).padStart(2, '0');
@@ -48,7 +60,7 @@ export default function MaterialCard({ title, discipline, difficulty, amount, da
     }
 
     return (
-        <article className='flex min-h-48 cursor-pointer flex-col rounded-lg bg-color4-200 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg'>
+        <article className='flex min-h-48 cursor-pointer flex-col rounded-lg bg-color4-400 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg'>
             <div className='flex items-center justify-end gap-3 border-b-2 border-color4-25 p-2 pl-3'>
                 <span>{getIcon(type)}</span>
                 <h3 className='flex-1 font-primary text-xl font-medium text-color2-100'>{title}</h3>
@@ -71,6 +83,27 @@ export default function MaterialCard({ title, discipline, difficulty, amount, da
                 {difficulty && (
                     <p className='font-secundary'>
                         Dificuldade: <span className='font-medium'>{difficulty}</span>
+                    </p>
+                )}
+                {grade && (
+                    <p className='font-secundary'>
+                        Série: <span className='font-medium'>{grade}</span>
+                    </p>
+                )}
+                {(chalkboard || projector || printed || digital) && (
+                    <p className='font-secundary'>
+                        Recursos de ensino:{' '}
+                        <span className='font-medium'>
+                            {[
+                                { check: chalkboard, name: 'Quadro' },
+                                { check: projector, name: 'Projetor' },
+                                { check: printed, name: 'Impresso' },
+                                { check: digital, name: 'Digital' },
+                            ]
+                                .filter(resource => resource.check)
+                                .map(resource => resource.name)
+                                .join(', ')}
+                        </span>
                     </p>
                 )}
             </div>

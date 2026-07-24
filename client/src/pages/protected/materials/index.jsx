@@ -1,34 +1,58 @@
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import ProtectedRoute from '../../../components/protectedRoute';
+import { useAuthenticated } from '../../../context/authContext';
 import { useMessages } from '../../../context/messagesContext';
 import { GET } from '../../../api/materials';
-import MaterialCard from './components/material';
 import Pagination from './components/pagination';
+import EmptyMaterials from './components/empty';
 import Filters from './components/filters';
-import Mascote from '/assets/images/mascote/mascote-materiais.png';
+import CardsView from './components/cardsView';
 
 export default function Materials() {
+    const { user } = useAuthenticated();
     const { setMessages } = useMessages();
     const [materials, setMaterials] = useState(null);
     const [type, setType] = useState('all');
     const [discipline, setDiscipline] = useState('all');
     const [search, setSearch] = useState('');
-    const [difficulty, setDifficulty] = useState('all')
+    const [debouncedSearch, setDebouncedSearch] = useState('');
+    const [difficulty, setDifficulty] = useState('all');
     const [total, setTotal] = useState(0);
     const [cursor, setCursor] = useState(0);
+    const [isLoading, setIsLoading] = useState(true);
     const limit = 50;
 
     useEffect(() => {
-        GET(`/api/materials?cursor=${cursor}&limit=${limit}&search=${search}&type=${type}&discipline=${discipline}&difficulty=${difficulty}`)
-            .then(data => {
+        const timer = setTimeout(() => setDebouncedSearch(search), 500);
+        return () => clearTimeout(timer);
+    }, [search]);
+
+    useEffect(() => {
+        setCursor(0);
+    }, [type, discipline, difficulty, debouncedSearch]);
+
+    const fetchMaterials = useCallback(
+        async signal => {
+            setIsLoading(true);
+            try {
+                const params = new URLSearchParams({
+                    cursor: String(cursor),
+                    limit: String(limit),
+                    search: debouncedSearch,
+                    type,
+                    discipline,
+                    difficulty,
+                });
+                const data = await GET(`/api/materials?${params.toString()}`, { signal });
                 if (data.status === 401) return;
                 if (data.status !== 200) throw new Error('Não foi possível carregar os materiais');
                 setMaterials(data.materials);
                 setTotal(data.total);
-            })
-            .catch(err => {
+            } catch (err) {
+                if (err.name === 'AbortError') return;
                 setMaterials(null);
+                setTotal(0);
                 setMessages(prev => [
                     ...prev,
                     {
@@ -37,8 +61,27 @@ export default function Materials() {
                         type: 'danger',
                     },
                 ]);
-            });
-    }, [cursor, type, discipline, search, difficulty, setMessages]);
+            } finally {
+                setIsLoading(false);
+            }
+        },
+        [cursor, difficulty, discipline, debouncedSearch, setMessages, type],
+    );
+
+    function clearFilters() {
+        if (!confirm('Deseja limpar todos os filtros')) return;
+
+        setDebouncedSearch('');
+        setDifficulty('all');
+        setDiscipline('all');
+        setType('all');
+    }
+
+    useEffect(() => {
+        const controller = new AbortController();
+        fetchMaterials(controller.signal);
+        return () => controller.abort();
+    }, [fetchMaterials]);
 
     return (
         <ProtectedRoute isPrivate={true}>
@@ -53,6 +96,7 @@ export default function Materials() {
                 <section className='mx-auto space-y-12 px-6 py-16 pt-16'>
                     <h1 className='text-4xl leading-tight font-bold text-color1-100 md:text-5xl'>Meus materiais</h1>
                     <Filters
+                        user={user.tipo}
                         type={type}
                         discipline={discipline}
                         search={search}
@@ -61,17 +105,13 @@ export default function Materials() {
                         setDiscipline={setDiscipline}
                         setSearch={setSearch}
                         setDifficulty={setDifficulty}
+                        clearFilters={clearFilters}
                     />
-                    {total > 0 ? (
+                    {isLoading && !materials ? (
+                        <p className='pt-12 text-center text-xl font-bold text-color3-400'>Carregando materiais...</p>
+                    ) : total > 0 && materials ? (
                         <>
-                            <div className='grid grid-cols-1 gap-8 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4'>
-                                {materials.map(material => (
-                                    <MaterialCard
-                                        key={material.id}
-                                        {...material}
-                                    />
-                                ))}
-                            </div>
+                            <CardsView materials={materials} />
                             <Pagination
                                 cursor={cursor}
                                 setCursor={setCursor}
@@ -80,17 +120,7 @@ export default function Materials() {
                             />
                         </>
                     ) : (
-                        <div className='pt-12'>
-                            <h2 className='text-center font-secundary text-3xl font-semibold text-color3-400'>
-                                Não há materiais ainda...
-                            </h2>
-                            <img
-                                src={Mascote}
-                                alt='Mascote'
-                                loading='lazy'
-                                className='mx-auto w-full max-w-120 select-none'
-                            />
-                        </div>
+                        <EmptyMaterials />
                     )}
                 </section>
             </main>

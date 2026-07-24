@@ -64,6 +64,11 @@
 					"label": "Adicionar breve visualização dos materiais no dashboard"
 				},
 				{
+					"line": 109,
+					"column": 0,
+					"label": "Deixar background com uma única cor"
+				},
+				{
 					"line": 119,
 					"column": 0,
 					"label": "Rapaz... Fica feio, mas vou resolver"
@@ -139,39 +144,19 @@
 			"path": "client/src/pages/protected/materials/index.jsx",
 			"bookmarks": [
 				{
-					"line": 22,
-					"column": 0,
-					"label": "Adicionar loading durante o fetching"
-				},
-				{
-					"line": 40,
-					"column": 0,
-					"label": "Evitar fazer uma consulta para cada digitação, o melhor é esperar um tempo após a digitação"
-				},
-				{
-					"line": 51,
+					"line": 94,
 					"column": 0,
 					"label": "Esses backgrounds..."
 				},
 				{
-					"line": 52,
-					"column": 0,
-					"label": "Resolver a responsividade"
-				},
-				{
-					"line": 54,
+					"line": 97,
 					"column": 0,
 					"label": "Mostrar os filtros mesmo quando não há materiais?"
 				},
 				{
-					"line": 64,
+					"line": 99,
 					"column": 0,
-					"label": "Adicionar 2 formas de visualização, em cards ou em linhas, tipo tabela"
-				},
-				{
-					"line": 82,
-					"column": 0,
-					"label": "Rapaz, vou deixar. Ficou até bom"
+					"label": "Adicionar aviso que não há materiais para filtros especificados"
 				}
 			]
 		},
@@ -179,24 +164,14 @@
 			"path": "client/src/pages/protected/materials/components/material.jsx",
 			"bookmarks": [
 				{
-					"line": 52,
+					"line": 64,
 					"column": 0,
 					"label": "Trocar icone por tag, pois fica difícil de identificar o tipo do material"
 				},
 				{
-					"line": 54,
+					"line": 66,
 					"column": 0,
 					"label": "Adicionar a opção de deletar material quando clicar com botão direito, talvez"
-				}
-			]
-		},
-		{
-			"path": "server/controllers/materials.py",
-			"bookmarks": [
-				{
-					"line": 17,
-					"column": 0,
-					"label": "Resolver esse problema, pois nem todos os materiais tem a atributo difficulty"
 				}
 			]
 		}

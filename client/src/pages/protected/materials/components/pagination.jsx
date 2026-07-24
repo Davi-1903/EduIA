@@ -26,20 +26,20 @@ export default function Pagination({ cursor, setCursor, limit, length }) {
     }
 
     return (
-        <div className='flex w-full items-center justify-center gap-4'>
+        <div className='flex w-full items-center justify-center gap-2'>
             <button
                 className='rounded-lg p-2 transition-all not-disabled:cursor-pointer not-disabled:hover:bg-color4-25 disabled:opacity-50 disabled:saturate-50'
                 onClick={previous}
                 disabled={currentPage === 0}
             >
-                <IconArrowLeft className='stroke-color2-100' />
+                <IconArrowLeft className='w-5 stroke-color2-100 md:w-6' />
             </button>
             {pageItems.map((item, i) =>
                 typeof item === 'string' ? (
                     <button
                         key={`${item}-${i}`}
                         disabled
-                        className='aspect-square h-10 rounded-lg font-secundary text-lg font-medium text-color2-100 opacity-50'
+                        className='aspect-square h-10 rounded-lg font-secundary font-medium text-color2-100 opacity-50 md:text-lg'
                     >
                         ...
                     </button>
@@ -49,7 +49,7 @@ export default function Pagination({ cursor, setCursor, limit, length }) {
                         onClick={() => setCursor(item * limit)}
                         disabled={item === currentPage}
                         className={clsx(
-                            'aspect-square h-10 cursor-pointer rounded-lg bg-linear-to-br from-color4-100 to-color4-400 font-secundary text-lg font-medium text-color1-400 shadow-lg transition-all disabled:from-color1-400 disabled:to-color1-100 disabled:text-color4-100',
+                            'aspect-square h-9 cursor-pointer rounded-lg bg-linear-to-br from-color4-100 to-color4-400 font-secundary font-medium text-color1-400 shadow-lg transition-all disabled:from-color1-400 disabled:to-color1-100 disabled:text-color4-100 md:h-10 md:text-lg',
                             item === currentPage && 'scale-110 shadow-lg-hard',
                         )}
                     >
@@ -62,7 +62,7 @@ export default function Pagination({ cursor, setCursor, limit, length }) {
                 onClick={next}
                 disabled={currentPage + 1 >= totalPages}
             >
-                <IconArrowRight className='stroke-color2-100' />
+                <IconArrowRight className='w-5 stroke-color2-100 md:w-6' />
             </button>
         </div>
     );
