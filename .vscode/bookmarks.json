@@ -56,26 +56,6 @@
 			]
 		},
 		{
-			"path": "client/src/pages/protected/dash/index.jsx",
-			"bookmarks": [
-				{
-					"line": 108,
-					"column": 0,
-					"label": "Adicionar breve visualização dos materiais no dashboard"
-				},
-				{
-					"line": 109,
-					"column": 0,
-					"label": "Deixar background com uma única cor"
-				},
-				{
-					"line": 119,
-					"column": 0,
-					"label": "Rapaz... Fica feio, mas vou resolver"
-				}
-			]
-		},
-		{
 			"path": "server/models/formularios.py",
 			"bookmarks": [
 				{

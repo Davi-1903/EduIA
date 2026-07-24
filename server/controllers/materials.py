@@ -1,5 +1,3 @@
-from time import sleep
-
 from flask import Blueprint, jsonify, request
 from flask_login import current_user, login_required
 from sqlalchemy import or_, select, func

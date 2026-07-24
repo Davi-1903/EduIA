@@ -93,7 +93,7 @@ export default function Materials() {
                 />
             </Helmet>
             <main className='min-h-screen bg-color4-200 not-sm:col-span-2'>
-                <section className='mx-auto space-y-12 px-6 py-16 pt-16'>
+                <section className='mx-auto max-w-400 space-y-12 px-6 py-16'>
                     <h1 className='text-4xl leading-tight font-bold text-color1-100 md:text-5xl'>Meus materiais</h1>
                     <Filters
                         user={user.tipo}

@@ -45,25 +45,25 @@ export default function MaterialCard({
 
     function getIcon(type) {
         const icons = {
-            desafio: <IconLaurelWreath1 className='stroke-color2-100' />,
-            'exercicio guiado': <IconArrowBigUp className='stroke-color2-100' />,
-            explicacao: <IconChalkboardTeacher className='stroke-color2-100' />,
-            flashcards: <IconCards className='stroke-color2-100' />,
-            formulario: <IconListDetails className='stroke-color2-100' />,
-            'plano de aula': <IconChalkboard className='stroke-color2-100' />,
-            questoes: <IconListLetters className='stroke-color2-100' />,
-            quiz: <IconTimeDuration10 className='stroke-color2-100' />,
-            resumo: <IconFileDescription className='stroke-color2-100' />,
-            roteiro: <IconReorder className='stroke-color2-100' />,
+            desafio: <IconLaurelWreath1 className='stroke-color1-100' />,
+            'exercicio guiado': <IconArrowBigUp className='stroke-color1-100' />,
+            explicacao: <IconChalkboardTeacher className='stroke-color1-100' />,
+            flashcards: <IconCards className='stroke-color1-100' />,
+            formulario: <IconListDetails className='stroke-color1-100' />,
+            'plano de aula': <IconChalkboard className='stroke-color1-100' />,
+            questoes: <IconListLetters className='stroke-color1-100' />,
+            quiz: <IconTimeDuration10 className='stroke-color1-100' />,
+            resumo: <IconFileDescription className='stroke-color1-100' />,
+            roteiro: <IconReorder className='stroke-color1-100' />,
         };
-        return icons[type] || <IconFile className='stroke-color2-100' />;
+        return icons[type] || <IconFile className='stroke-color1-100' />;
     }
 
     return (
         <article className='flex min-h-48 cursor-pointer flex-col rounded-lg bg-color4-400 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg'>
             <div className='flex items-center justify-end gap-3 border-b-2 border-color4-25 p-2 pl-3'>
                 <span>{getIcon(type)}</span>
-                <h3 className='flex-1 font-primary text-xl font-medium text-color2-100'>{title}</h3>
+                <h3 className='flex-1 font-primary text-xl font-medium text-color1-100'>{title}</h3>
                 {/* <button className='rounded-sm p-1 transition-all hover:bg-color4-25'>
                     <IconTrash
                         stroke={1.5}

@@ -1,4 +1,8 @@
+import { useEffect, useState } from 'react';
+import { Link } from 'react-router-dom';
+import { GET } from '../../../api/materials';
 import { Helmet } from 'react-helmet-async';
+import { useMessages } from '../../../context/messagesContext';
 import { useAuthenticated } from '../../../context/authContext';
 import ProtectedRoute from '../../../components/protectedRoute';
 import GenerateQuestions from '../tools/questions';
@@ -11,10 +15,14 @@ import GenerateQuidedExercises from '../tools/guided_exercises';
 import GenerateExplanation from '../tools/explanation';
 import GenerateForms from '../tools/forms';
 import GenerateChallenge from '../tools/challenge';
+import MaterialCard from '../materials/components/material';
 import Card from './cards';
+import { IconCirclePlus } from '@tabler/icons-react';
 
 export default function Dashboard() {
     const { user } = useAuthenticated();
+    const { setMessages } = useMessages();
+    const [materials, setMaterials] = useState(null);
     const cards = [
         {
             id: 1,
@@ -90,12 +98,30 @@ export default function Dashboard() {
         return (
             <Card
                 key={card.id}
-                title={card.title}
-                description={card.description}
-                component={card.component}
+                {...card}
             />
         );
     }
+
+    useEffect(() => {
+        GET('/api/materials?limit=4')
+            .then(data => {
+                if (data.status === 401) return;
+                if (data.status !== 200) throw new Error('Não foi possível carregar os materiais');
+                setMaterials(data.materials);
+            })
+            .catch(err => {
+                setMaterials(null);
+                setMessages(prev => [
+                    ...prev,
+                    {
+                        id: prev.length + 1,
+                        message: err.message,
+                        type: 'danger',
+                    },
+                ]);
+            });
+    }, [setMessages]);
 
     return (
         <ProtectedRoute isPrivate={true}>
@@ -106,21 +132,42 @@ export default function Dashboard() {
                     content='Dashboard do sistema EduIA'
                 />
             </Helmet>
-            <main className='min-h-screen bg-linear-to-br from-color4-200 to-indigo-100'>
-                <section className='mx-auto max-w-7xl space-y-24 px-6 py-16 pt-24'>
+            <main className='min-h-svh bg-color4-200'>
+                <section className='mx-auto max-w-400 space-y-12 px-6 py-16'>
                     <div className='max-w-3xl'>
-                        <h1 className='text-4xl leading-tight font-bold text-color1-100 md:text-5xl'>
-                            Aprenda de forma inteligente <br /> e personalizada
-                        </h1>
+                        <div>
+                            <h1 className='text-4xl leading-tight font-bold text-color1-100 md:text-5xl'>
+                                Aprenda de forma inteligente <br /> e personalizada
+                            </h1>
+                        </div>
                         <p className='mt-6 text-lg text-color3-200'>
                             Use o EduIA para criar materiais, exercícios e conteúdos adaptados ao seu ritmo de
                             aprendizado.
                         </p>
                     </div>
+                    {materials?.length > 0 && (
+                        <div>
+                            <h2 className='mb-6 font-primary text-2xl font-semibold text-color1-100'>
+                                Materiais recentes
+                            </h2>
+                            <div className='grid grid-cols-[repeat(auto-fit,minmax(18rem,1fr))] gap-6'>
+                                {materials.map((material, idx) => (
+                                    <Link
+                                        to='/materials'
+                                        key={idx}
+                                    >
+                                        <MaterialCard {...material} />
+                                    </Link>
+                                ))}
+                            </div>
+                        </div>
+                    )}
                     {user && (
                         <section>
-                            <h2 className='mb-8 text-2xl font-semibold text-color1-100'>O que você quer criar hoje?</h2>
-                            <div className='grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3'>
+                            <h2 className='mb-6 font-primary text-2xl font-semibold text-color1-100'>
+                                O que você quer criar hoje?
+                            </h2>
+                            <div className='grid grid-cols-[repeat(auto-fit,minmax(18rem,1fr))] gap-6'>
                                 {cards.map(card => getCard(user.tipo, card))}
                             </div>
                         </section>
