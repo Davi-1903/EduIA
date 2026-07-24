@@ -42,7 +42,7 @@ export default function GenerateLessonPlan({ setOpen }) {
             )}
         >
             <form
-                className='flex w-xl flex-col gap-4 rounded-2xl bg-color4-200 px-6 py-4 2xl:gap-6 2xl:py-12'
+                className='flex w-full max-w-xl flex-col gap-6 rounded-2xl bg-color4-200 px-4 py-8 lg:px-6'
                 ref={articleRef}
             >
                 <h2 className='bg-linear-to-tr from-color1-100 to-color4-100 bg-clip-text font-primary text-3xl font-bold text-transparent 2xl:text-4xl'>

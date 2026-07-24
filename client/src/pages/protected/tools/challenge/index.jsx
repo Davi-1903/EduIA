@@ -38,7 +38,7 @@ export default function GenerateChallenge({ setOpen }) {
         >
             <form
                 ref={articleRef}
-                className='flex w-xl flex-col gap-6 rounded-2xl bg-color4-200 px-6 py-12'
+                className='flex w-full max-w-xl flex-col gap-6 rounded-2xl bg-color4-200 px-4 py-8 lg:px-6'
             >
                 <h2 className='bg-linear-to-tr from-color1-100 to-color4-100 bg-clip-text font-primary text-4xl font-bold text-transparent'>
                     Desafio
