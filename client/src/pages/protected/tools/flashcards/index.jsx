@@ -6,7 +6,9 @@ import clsx from 'clsx';
 export default function GenerateFlashCards({ setOpen }) {
     const articleRef = useRef(null); // vai servir para eu verificar se a pessoa está clicando dentro/fora do "pop-up"; useRef serve para eu reverenciar o fomulário
     const [isClose, setClose] = useState(false); // serve para verificar se o "pop-up" está aparecendo
+    const [dificuldade, setDificuldade] = useState(0);
     const [quantidade, setQuantidade] = useState(5);
+    const dificuldades = ['Muito fácil', 'Fácil', 'Médio', 'Difícil', 'Muito difícil'];
 
     function handleAnimationEnd() {
         // essa função serve para fazer "aparecer" ou "desaparecer" o formulário, entra no operador ternário dentro da div
@@ -83,6 +85,17 @@ export default function GenerateFlashCards({ setOpen }) {
                             placeholder='Descreva o assunto'
                             className='w-full rounded-lg border border-gray-300 px-4 py-2 outline-none focus:ring-2 focus:ring-color1-400'
                             required
+                        />
+                    </div>
+                    <div className='flex flex-col gap-1'>
+                        <label className='block font-secundary text-base font-bold text-color1-100'>Dificuldade</label>
+                        <InputRange
+                            value={dificuldades[dificuldade]}
+                            trueValue={dificuldade}
+                            setValue={setDificuldade}
+                            steps={1}
+                            min={0}
+                            max={4}
                         />
                     </div>
                     <div className='flex flex-col gap-1'>

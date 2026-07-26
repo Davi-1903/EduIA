@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request
 from flask_login import login_required, login_user, logout_user
 from flask_wtf.csrf import generate_csrf
 from pwdlib import PasswordHash
+from sqlalchemy import select
 from sqlalchemy.exc import IntegrityError
 from models.user import UserType, Usuario
 from models.professor import Professor
@@ -61,20 +62,20 @@ def login():
             if not data:
                 return jsonify({'ok': False, 'message': 'Dados não recebidos'}), 400
 
-            user_exist = session.query(Usuario).filter_by(email=data['email']).first()
-            if not user_exist or not ph.verify(data['senha'], user_exist.password):
+            user = session.execute(select(Usuario).where(Usuario.email == data['email'])).scalar()
+            if not user or not ph.verify(data['senha'], user.password):
                 return jsonify({'ok': False, 'message': 'Credenciais inválidas'}), 401
 
-            login_user(user_exist)
+            login_user(user)
             return jsonify(
                 {
                     'ok': True,
                     'redirect': '/dash',
                     'user': {
-                        'id': user_exist.id,
-                        'nome': user_exist.name,
-                        'email': user_exist.email,
-                        'tipo': user_exist.type.value,
+                        'id': user.id,
+                        'nome': user.name,
+                        'email': user.email,
+                        'tipo': user.type.value,
                     },
                 }
             ), 200

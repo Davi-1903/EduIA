@@ -19,4 +19,4 @@ class ExercicioGuiado(Material):
     note: Mapped[str] = mapped_column(Text, nullable=False)
 
     __mapper_args__ = {'polymorphic_identity': MaterialType.EXERCICIO_GUIADO}
-    __table_args__ = {CheckConstraint('amount >= 5 AND amount <= 50', name='check_amount_range')}
+    __table_args__ = (CheckConstraint('amount >= 5 AND amount <= 50', name='check_amount_range'),)

@@ -56,26 +56,6 @@
 			]
 		},
 		{
-			"path": "server/models/formularios.py",
-			"bookmarks": [
-				{
-					"line": 9,
-					"column": 0,
-					"label": "Avaliar deixar dificuldade nos formulários"
-				}
-			]
-		},
-		{
-			"path": "server/models/flashcards.py",
-			"bookmarks": [
-				{
-					"line": 5,
-					"column": 0,
-					"label": "Adicionar dificuldade"
-				}
-			]
-		},
-		{
 			"path": "server/models/roteiros.py",
 			"bookmarks": [
 				{
@@ -92,16 +72,6 @@
 					"line": 8,
 					"column": 0,
 					"label": "Ok, estou com dúvidas o que são esses formulários"
-				}
-			]
-		},
-		{
-			"path": "server/controllers/auth.py",
-			"bookmarks": [
-				{
-					"line": 63,
-					"column": 0,
-					"label": "Mudar \"selects\""
 				}
 			]
 		},

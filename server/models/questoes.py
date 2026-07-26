@@ -12,4 +12,4 @@ class Questoes(Material):
     note: Mapped[str] = mapped_column(Text, nullable=False)
 
     __mapper_args__ = {'polymorphic_identity': MaterialType.QUESTOES}
-    __table_args__ = {CheckConstraint('amount >= 5 AND amount <= 50', name='check_amount_range')}
+    __table_args__ = (CheckConstraint('amount >= 5 AND amount <= 50', name='check_amount_range'),)
