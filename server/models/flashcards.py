@@ -1,4 +1,4 @@
-from sqlalchemy import ForeignKey, Text
+from sqlalchemy import CheckConstraint, ForeignKey, Text
 from sqlalchemy.orm import Mapped, mapped_column
 from models.material import Material, MaterialType
 
@@ -11,3 +11,4 @@ class FlashCards(Material):
     note: Mapped[str] = mapped_column(Text, nullable=False)
 
     __mapper_args__ = {'polymorphic_identity': MaterialType.FLASHCARD}
+    __table_args__ = {CheckConstraint('amount >= 5 AND amount <= 50', name='check_amount_range')}

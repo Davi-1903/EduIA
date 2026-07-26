@@ -1,4 +1,4 @@
-from sqlalchemy import Enum, ForeignKey, Text
+from sqlalchemy import CheckConstraint, Enum, ForeignKey, Text
 from sqlalchemy.orm import Mapped, mapped_column
 from models.material import Difficulty, Material, MaterialType
 
@@ -12,3 +12,4 @@ class Formulario(Material):
     note: Mapped[str] = mapped_column(Text, nullable=False)
 
     __mapper_args__ = {'polymorphic_identity': MaterialType.FORMULARIO}
+    __table_args__ = {CheckConstraint('amount >= 5 AND amount <= 50', name='check_amount_range')}

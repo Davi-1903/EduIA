@@ -49,7 +49,7 @@ export default function GenerateQuidedExercises({ setOpen }) {
                 ref={articleRef}
             >
                 <h2 className='bg-linear-to-tr from-color1-100 to-color4-100 bg-clip-text font-primary text-4xl font-bold text-transparent'>
-                    Plano de aula
+                    Exercício guiado
                 </h2>
                 <div>
                     <label className='font-secundary font-bold text-color1-100'>Disciplina</label>
