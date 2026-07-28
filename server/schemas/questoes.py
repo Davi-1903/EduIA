@@ -1,5 +1,4 @@
-from typing import Any
-from pydantic import BaseModel, ValidationError
+from pydantic import BaseModel
 
 
 class Answer(BaseModel):
@@ -13,13 +12,3 @@ class QuestoesJSON(BaseModel):
     answers: list[Answer]
     correctAnswerId: int
     explanation: str
-
-    @classmethod
-    def check(cls, questions: list[dict[str, Any]]) -> bool:
-        try:
-            for question in questions:
-                cls(**question)
-            return True
-
-        except ValidationError:
-            return False

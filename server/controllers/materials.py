@@ -1,12 +1,15 @@
 from flask import Blueprint, jsonify, request
 from flask_login import current_user, login_required
-from sqlalchemy import or_, select, func
+from sqlalchemy import func, or_, select
 from sqlalchemy.orm import with_polymorphic
+
+from controllers.questions import bp_materials_questions
 from database import SessionLocal
 from models.material import Difficulty, Material, MaterialType
 
 
 bp_materials = Blueprint('materials', __name__, url_prefix='/api/materials')
+bp_materials.register_blueprint(bp_materials_questions)
 
 
 @bp_materials.route('', methods=['GET'])
@@ -79,7 +82,7 @@ def get_materials():
                         'projector': material.projector if hasattr(material, 'projector') else None,  # type: ignore
                         'printed': material.printed if hasattr(material, 'printed') else None,  # type: ignore
                         'digital': material.digital if hasattr(material, 'digital') else None,  # type: ignore
-                        'datetime': material.created_at,
+                        'created_at': material.created_at,
                         'type': material.type.value,
                     }
                     for material in materials

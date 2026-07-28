@@ -26,21 +26,21 @@ export default function MaterialCard({
     projector,
     printed,
     digital,
-    datetime,
+    created_at,
     type,
 }) {
     const [menu, setMenu] = useState(null);
 
-    function formatarHora(datetime) {
-        const data = new Date(datetime);
+    function formatarHora(created_at) {
+        const data = new Date(created_at);
         const horas = String(data.getHours()).padStart(2, '0');
         const minutos = String(data.getMinutes()).padStart(2, '0');
 
         return `${horas}:${minutos}`;
     }
 
-    function formatarData(datetime) {
-        const data = new Date(datetime);
+    function formatarData(created_at) {
+        const data = new Date(created_at);
         const dia = String(data.getDate()).padStart(2, '0');
         const mes = String(data.getMonth() + 1).padStart(2, '0');
         const ano = data.getFullYear();
@@ -122,8 +122,8 @@ export default function MaterialCard({
                     )}
                 </div>
                 <div className='flex items-center justify-between border-t-2 border-color4-25 px-2 py-1'>
-                    <span className='font-secundary text-color2-100'>{formatarHora(datetime)}</span>
-                    <span className='font-secundary text-color2-100'>{formatarData(datetime)}</span>
+                    <span className='font-secundary text-color2-100'>{formatarHora(created_at)}</span>
+                    <span className='font-secundary text-color2-100'>{formatarData(created_at)}</span>
                 </div>
             </article>
         </>

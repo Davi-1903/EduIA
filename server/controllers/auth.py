@@ -47,6 +47,7 @@ def register():
             ), 201
 
         except IntegrityError:
+            session.rollback()
             return jsonify({'ok': False, 'message': 'Credenciais inválidas'}), 401
 
         except Exception:

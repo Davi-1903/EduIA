@@ -14,5 +14,6 @@ class PlanoDeAula(Material):
     projector: Mapped[bool] = mapped_column(nullable=False)
     printed: Mapped[bool] = mapped_column(nullable=False)
     digital: Mapped[bool] = mapped_column(nullable=False)
+    note: Mapped[str] = mapped_column(Text, nullable=True)
 
     __mapper_args__ = {'polymorphic_identity': MaterialType.PLANO_DE_AULA}
