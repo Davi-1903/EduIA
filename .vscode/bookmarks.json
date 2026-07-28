@@ -7,11 +7,6 @@
 					"line": 22,
 					"column": 0,
 					"label": "Mudar fontes"
-				},
-				{
-					"line": 24,
-					"column": 0,
-					"label": "Talvez usar #EFEFEB como color 4"
 				}
 			]
 		},
@@ -89,9 +84,9 @@
 			"path": "client/src/pages/protected/materials/index.jsx",
 			"bookmarks": [
 				{
-					"line": 94,
+					"line": 96,
 					"column": 0,
-					"label": "Esses backgrounds..."
+					"label": "Adicionar gradiente nesses títulos..."
 				},
 				{
 					"line": 97,
@@ -99,9 +94,19 @@
 					"label": "Mostrar os filtros mesmo quando não há materiais?"
 				},
 				{
+					"line": 98,
+					"column": 0,
+					"label": "Isso está retornando um erro feio"
+				},
+				{
 					"line": 99,
 					"column": 0,
 					"label": "Adicionar aviso que não há materiais para filtros especificados"
+				},
+				{
+					"line": 108,
+					"column": 0,
+					"label": "Adicionar funcionalidade de selecionar e lixeira"
 				}
 			]
 		},
@@ -127,16 +132,6 @@
 					"line": 10,
 					"column": 0,
 					"label": "Não estou entendendo o porquê da quantidade"
-				}
-			]
-		},
-		{
-			"path": "server/models/questoes.py",
-			"bookmarks": [
-				{
-					"line": 11,
-					"column": 0,
-					"label": "Notas podem ser nullas"
 				}
 			]
 		},
