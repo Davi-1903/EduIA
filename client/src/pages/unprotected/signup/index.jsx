@@ -52,7 +52,8 @@ export default function SignUp() {
                 ...prev,
                 {
                     id: prev.length + 1,
-                    message: err.message,
+                    message:
+                        err.name === 'SyntaxError' ? 'Ocorreu um problema com a resposta do servidor' : err.message,
                     type: 'danger',
                 },
             ]);

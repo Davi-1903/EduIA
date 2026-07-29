@@ -10,6 +10,13 @@ function Header() {
     const [dropHeader, setDropHeader] = useState(true);
     const lastY = useRef(null);
 
+    const closeMenu = useCallback(() => {
+        if (isOpenMenu) {
+            setOpenMenu(false);
+            setLockScroll(false);
+        }
+    }, [isOpenMenu]);
+
     function toggleMenu() {
         if (!isOpenMenu) {
             setOpenMenu(true);
@@ -18,13 +25,6 @@ function Header() {
             closeMenu();
         }
     }
-
-    const closeMenu = useCallback(() => {
-        if (isOpenMenu) {
-            setOpenMenu(false);
-            setLockScroll(false);
-        }
-    }, [isOpenMenu]);
 
     useEffect(() => {
         function handleEscape(event) {

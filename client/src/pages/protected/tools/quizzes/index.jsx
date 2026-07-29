@@ -37,7 +37,7 @@ export default function GenerateQuizzes({ setOpen }) {
         setLoading(true);
 
         try {
-            const response = await POST('/api/materials/quiz', {
+            const response = await POST('/api/materials/quiz/', {
                 discipline,
                 subject,
                 difficulty: difficulties[difficulty],
@@ -46,6 +46,7 @@ export default function GenerateQuizzes({ setOpen }) {
                 note,
             });
             if (response.status !== 201) throw new Error(response.message);
+            document.body.style.overflowY = 'auto';
             navigate(response.redirect);
             setMessages(prev => [
                 ...prev,

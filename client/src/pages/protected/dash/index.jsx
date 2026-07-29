@@ -116,7 +116,8 @@ export default function Dashboard() {
                     ...prev,
                     {
                         id: prev.length + 1,
-                        message: err.message,
+                        message:
+                            err.name === 'SyntaxError' ? 'Ocorreu um problema com a resposta do servidor' : err.message,
                         type: 'danger',
                     },
                 ]);
@@ -134,10 +135,10 @@ export default function Dashboard() {
             </Helmet>
             <main className='min-h-svh bg-color4-200'>
                 <section className='mx-auto max-w-400 space-y-12 px-6 py-16'>
-                    <div className='max-w-3xl'>
+                    <div className='max-w-2xl'>
                         <div>
-                            <h1 className='text-4xl leading-tight font-bold text-color1-100 md:text-5xl'>
-                                Aprenda de forma inteligente <br /> e personalizada
+                            <h1 className='bg-linear-to-tr from-color1-100 from-45% to-color4-100 bg-clip-text text-4xl leading-tight font-bold text-transparent md:text-5xl'>
+                                Aprenda de forma inteligente e personalizada
                             </h1>
                         </div>
                         <p className='mt-6 text-lg text-color3-200'>
@@ -156,7 +157,10 @@ export default function Dashboard() {
                                         to='/materials'
                                         key={idx}
                                     >
-                                        <MaterialCard {...material} />
+                                        <MaterialCard
+                                            {...material}
+                                            canOpenMenu={false}
+                                        />
                                     </Link>
                                 ))}
                             </div>

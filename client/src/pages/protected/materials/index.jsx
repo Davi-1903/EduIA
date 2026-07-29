@@ -47,6 +47,7 @@ export default function Materials() {
                 const data = await GET(`/api/materials?${params.toString()}`, { signal });
                 if (data.status === 401) return;
                 if (data.status !== 200) throw new Error('Não foi possível carregar os materiais');
+
                 setMaterials(data.materials);
                 setTotal(data.total);
             } catch (err) {
@@ -57,7 +58,8 @@ export default function Materials() {
                     ...prev,
                     {
                         id: prev.length + 1,
-                        message: err.message,
+                        message:
+                            err.name === 'SyntaxError' ? 'Ocorreu um problema com a resposta do servidor' : err.message,
                         type: 'danger',
                     },
                 ]);
@@ -94,7 +96,9 @@ export default function Materials() {
             </Helmet>
             <main className='min-h-screen bg-color4-200 not-sm:col-span-2'>
                 <section className='mx-auto max-w-400 space-y-12 px-6 py-16'>
-                    <h1 className='text-4xl leading-tight font-bold text-color1-100 md:text-5xl'>Meus materiais</h1>
+                    <h1 className='bg-linear-to-tr from-color1-100 to-color4-100 bg-clip-text text-4xl leading-tight font-bold text-transparent md:text-5xl'>
+                        Meus materiais
+                    </h1>
                     <Filters
                         user={user?.tipo}
                         type={type}

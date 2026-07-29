@@ -32,7 +32,7 @@ export default function GenerateQuestions({ setOpen }) {
         setLoading(true);
 
         try {
-            const response = await POST('/api/materials/question', {
+            const response = await POST('/api/materials/questoes/', {
                 discipline,
                 subject,
                 difficulty: difficulties[difficulty],
@@ -40,6 +40,7 @@ export default function GenerateQuestions({ setOpen }) {
                 note,
             });
             if (response.status !== 201) throw new Error(response.message);
+            document.body.style.overflowY = 'auto';
             navigate(response.redirect);
             setMessages(prev => [
                 ...prev,

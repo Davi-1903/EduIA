@@ -7,10 +7,10 @@ from models.questoes import Questoes
 from models.material import Difficulty
 
 
-bp_materials_questions = Blueprint('questions', __name__, url_prefix='/question')
+bp_materials_questoes = Blueprint('questoes', __name__, url_prefix='/questoes')
 
 
-@bp_materials_questions.route('/', methods=['GET'])
+@bp_materials_questoes.route('/', methods=['GET'])
 @login_required
 def get_questions():
     cursor = request.args.get('cursor', 0, type=int)
@@ -49,7 +49,7 @@ def get_questions():
         ), 200
 
 
-@bp_materials_questions.route('/<int:id>', methods=['GET'])
+@bp_materials_questoes.route('/<int:id>', methods=['GET'])
 @login_required
 def get_question(id: int):
     with SessionLocal() as session:
@@ -74,7 +74,7 @@ def get_question(id: int):
         ), 200
 
 
-@bp_materials_questions.route('/', methods=['POST'])
+@bp_materials_questoes.route('/', methods=['POST'])
 @login_required
 def create_questions():
     data = request.get_json(silent=True)

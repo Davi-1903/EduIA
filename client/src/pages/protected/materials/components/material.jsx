@@ -28,6 +28,7 @@ export default function MaterialCard({
     digital,
     created_at,
     type,
+    canOpenMenu = true,
 }) {
     const [menu, setMenu] = useState(null);
 
@@ -71,7 +72,7 @@ export default function MaterialCard({
 
     return (
         <>
-            {menu && (
+            {canOpenMenu && menu && (
                 <MenuCard
                     {...menu}
                     setMenu={setMenu}

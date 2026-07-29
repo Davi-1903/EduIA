@@ -3,14 +3,14 @@ from flask_login import current_user, login_required
 from sqlalchemy import func, or_, select
 from sqlalchemy.orm import with_polymorphic
 
-from controllers.questions import bp_materials_questions
+from controllers.questoes import bp_materials_questoes
 from controllers.quiz import bp_materials_quiz
 from database import SessionLocal
 from models.material import Difficulty, Material, MaterialType
 
 
 bp_materials = Blueprint('materials', __name__, url_prefix='/api/materials')
-bp_materials.register_blueprint(bp_materials_questions)
+bp_materials.register_blueprint(bp_materials_questoes)
 bp_materials.register_blueprint(bp_materials_quiz)
 
 
