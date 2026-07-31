@@ -13,8 +13,9 @@ const LandingPage = lazy(() => import('./pages/unprotected/landingpage'));
 const Error404 = lazy(() => import('./pages/errors/error404'));
 const Dashboard = lazy(() => import('./pages/protected/dash'));
 const Materials = lazy(() => import('./pages/protected/materials'));
-const Settings = lazy(() => import('./pages/protected/config'));
 const Profile = lazy(() => import('./pages/protected/profile/index'));
+const Flashcard = lazy(() => import('./pages/protected/tools/flashcards'));
+const Configuracoes = lazy(() => import('./pages/protected/configuracoes'));
 
 import './globals.css';
 
@@ -57,10 +58,18 @@ const router = createBrowserRouter([
                 ),
             },
             {
-                path: 'settings',
+                path: 'flashcards',
                 element: (
                     <Suspense fallback={<Loading />}>
-                        <Settings />
+                        <Flashcard />
+                    </Suspense>
+                ),
+            },
+            {
+                path: 'configuracoes',
+                element: (
+                    <Suspense fallback={<Loading />}>
+                        <Configuracoes />
                     </Suspense>
                 ),
             },
