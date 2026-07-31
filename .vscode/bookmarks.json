@@ -149,6 +149,16 @@
 					"label": "Por enquanto, cria um material sem conteúdo"
 				}
 			]
+		},
+		{
+			"path": "server/models/material.py",
+			"bookmarks": [
+				{
+					"line": 34,
+					"column": 0,
+					"label": "Adicionar FULLTEXT SEARCH"
+				}
+			]
 		}
 	]
 }
