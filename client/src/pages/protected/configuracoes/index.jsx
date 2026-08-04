@@ -9,11 +9,11 @@ import ProtectedRoute from '../../../components/protectedRoute';
 
 export default function Configuracoes() {
     return (
-        <ProtectedRoute isPrivate={true}>
-            <section className='mt-15 flex flex-row justify-between'>
+        <section className='mt-15 bg-[#E9EEFD] p-8'>
+            <div className='flex flex-row justify-between rounded-2xl bg-white shadow-lg backdrop-blur-lg'>
                 <div className='flex flex-row items-center'>
                     <Helmet>
-                        <title>EduIA | Perfil</title>
+                        <title>EduIA | Configurações</title>
                         <meta
                             name='configuracoes'
                             content='Página de configurações'
@@ -22,7 +22,7 @@ export default function Configuracoes() {
                     <div>
                         <main className='flex flex-col gap-6.25 px-8 py-12'>
                             <TituloDaPagina />
-                            <div className='relative flex w-fit flex-col gap-6.25 px-4.5'>
+                            <div className='relative flex w-fit flex-col gap-5'>
                                 <DadosPessoais />
                                 <Aparencia />
                                 <OutrasOpcoes />
@@ -30,14 +30,14 @@ export default function Configuracoes() {
                         </main>
                     </div>
                 </div>
-                <div className='sticky top-0 flex h-screen flex-1 items-center justify-center'>                
+                <div className='sticky top-0 flex h-screen flex-1 items-center justify-center'>
                     <img
                         src='/assets/images/mascote/dudu-configuracoes.webp'
                         alt='Mascote do EduIA para configurações'
-                        className='mx-auto max-w-100 max-h-100 animate-floating'
+                        className='mx-auto max-h-100 max-w-100 animate-floating'
                     />
                 </div>
-            </section>
-        </ProtectedRoute>
+            </div>
+        </section>
     );
 }

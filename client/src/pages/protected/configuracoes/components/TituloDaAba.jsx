@@ -1,13 +1,15 @@
 export default function TituloDaAba(props) {
     return (
-        <div className="relative flex w-fit items-center gap-1.5 font-bold after:absolute after:right-0 after:bottom-0 after:left-0 after:h-0.75 after:bg-[rgba(5,25,51,0.15)] after:content-['']">
-            <h2 className="font-['Inter',sans-serif] leading-[1.2] flex items-center gap-1.5 text-3xl text-[#051933]">{props.titulo}</h2>
-
+        <div className='relative flex w-fit items-center gap-1.5 font-bold'>
             <props.Icon
-                size={24}
-                className='text-[#051933]'
+                size={40}
+                className='text-[#011F5B]'
                 stroke={2}
             />
+
+            <h2 className="flex items-center font-['Inter',sans-serif] text-3xl leading-[1.2] text-[#011F5B]">
+                {props.titulo}
+            </h2>
         </div>
     );
 }
