@@ -1,10 +1,54 @@
 import { useEffect, useRef, useState } from 'react';
 import { disciplinasList } from '../../../../../public/assets/data/disciplinas';
+import { POST } from '../../../../api/materials';
 import clsx from 'clsx';
+import { useNavigate } from 'react-router-dom';
+import { useMessages } from '../../../../context/messagesContext';
 
 export default function GenerateResumes({ setOpen }) {
     const articleRef = useRef(null);
     const [isClose, setClose] = useState(null);
+    const navigate = useNavigate();
+    const { setMessages } = useMessages();
+    const [isLoading, setLoading] = useState(false);
+    const [discipline, setDiscipline] = useState('Língua Portuguesa e Literatura');
+    const [subject, setSubject] = useState('');
+    const [note, setNote] = useState('');
+
+    async function handleSubmit(e) {
+        e.preventDefault();
+        setLoading(true);
+
+        try {
+            const response = await POST('api/materials/resumos', {
+                discipline,
+                subject,
+                note,
+            });
+            if (response.status !== 201) throw new Error(response.message);
+            document.body.style.overflowY = 'auto';
+            navigate(response.redirect);
+            setMessages(prev => [
+                ...prev,
+                {
+                    id: prev.lenght + 1,
+                    message: 'Resumo criado com sucesso!',
+                    type: 'ok',
+                },
+            ]);
+        } catch (err) {
+            setMessages(prev => [
+                ...prev,
+                {
+                    id: prev.lenght + 1,
+                    message: err.message,
+                    type: 'danger',
+                },
+            ]);
+        } finally {
+            setLoading(false);
+        }
+    }
 
     function handleAnimatedEnd() {
         if (isClose) setOpen(false);
@@ -39,6 +83,7 @@ export default function GenerateResumes({ setOpen }) {
             <form
                 ref={articleRef}
                 className='flex w-full max-w-xl flex-col gap-6 rounded-2xl bg-color4-200 px-4 py-8 lg:px-6'
+                onSubmit={handleSubmit}
             >
                 <h2 className='bg-linear-to-tr from-color1-100 to-color4-100 bg-clip-text font-primary text-4xl font-bold text-transparent'>
                     Resumos
@@ -55,6 +100,8 @@ export default function GenerateResumes({ setOpen }) {
                             name='disciplina'
                             id='discipina'
                             className='h-12 w-full rounded-lg border border-gray-300 px-4 font-medium text-color1-100 outline-none'
+                            value={discipline}
+                            onChange={e => setDiscipline(e.target.value)}
                         >
                             {Object.entries(disciplinasList).map(([key, disciplinas]) => (
                                 <optgroup label={key}>
@@ -76,6 +123,8 @@ export default function GenerateResumes({ setOpen }) {
                             type='text'
                             placeholder='Descreva o assunto'
                             className='w-full rounded-lg border border-gray-300 px-4 py-2 outline-none focus:ring-2 focus:ring-color1-400'
+                            value={subject}
+                            onChange={e => setSubject(e.target.value)}
                             required
                         />
                     </div>
@@ -90,10 +139,15 @@ export default function GenerateResumes({ setOpen }) {
                             name='observacao'
                             placeholder='Caso deseje, escreva suas observações'
                             className='block h-30 w-full resize-none rounded-lg border border-color4-25 p-3 outline-none focus:ring-2 focus:ring-color1-400'
+                            value={note}
+                            onChange={e => setNote(e.target.value)}
                         ></textarea>
                     </div>
                 </div>
-                <button className='h-12 cursor-pointer rounded-lg bg-button text-xl text-color4-100 transition-all duration-150 hover:shadow-lg-hard'>
+                <button
+                    className='h-12 cursor-pointer rounded-lg bg-button text-xl text-color4-100 transition-all duration-150 hover:shadow-lg-hard'
+                    disabled={isLoading}
+                >
                     Gerar
                 </button>
             </form>

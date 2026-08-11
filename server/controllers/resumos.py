@@ -1,26 +1,25 @@
-from flask import Blueprint, request, jsonify
-from flask_login import current_user, login_required
-from sqlalchemy import select, func
+from flask import Blueprint, jsonify, request
+from flask_login import login_required, current_user
 from database import SessionLocal
-from models.explicacoes import Explicacao
+from models.resumos import Resumo 
+from sqlalchemy import select, func
 
+bp_materials_resumo = Blueprint('resumos', __name__, url_prefix='/resumos')
 
-bp_materials_explicacao = Blueprint('explicacoes', __name__, url_prefix='/explicacoes')
-
-@bp_materials_explicacao.route('/', methods=['GET'])
+@bp_materials_resumo.route('/', methods=['GET'])
 @login_required
-def get_explanations():
+def get_resumes():
     cursor = request.args.get('cursor', 0, type=int)
     limit = request.args.get('limit', 50, type=int)
 
     with SessionLocal() as session:
-        count_stmt = select(func.count()).select_from(Explicacao).where(Explicacao.user_id == current_user.id)
+        count_stmt = select(func.count()).select_from(Resumo).where(Resumo.user_id == current_user.id)
         statement = (
-            select(Explicacao)
-            .where(Explicacao.user_id == current_user.id)
+            select(Resumo)
+            .where(Resumo.user_id == current_user.id)
             .offset(cursor)
             .limit(limit)
-            .order_by(Explicacao.created_at.desc())
+            .order_by(Resumo.created_at.desc())
         )
 
         total = session.execute(count_stmt).scalar() or 0
@@ -35,6 +34,7 @@ def get_explanations():
                         'id': material.id,
                         'title': material.subject,
                         'discipline': material.discipline,
+                        'note': material.note,
                         'created_at': material.created_at,
                         'content': material.content,
                         'type': material.type.value,
@@ -44,33 +44,35 @@ def get_explanations():
             }
         ), 200
     
-@bp_materials_explicacao.route('/<int:id>', methods=['GET'])
+@bp_materials_resumo.route('/<int:id>', methods=['GET'])
 @login_required
-def get_explanation(id: int):
+def get_resume(id: int):
     with SessionLocal() as session:
-        material = session.get(Explicacao, id)
+        material = session.get(Resumo, id)
         if material is None:
-            return jsonify({'ok': False, 'message': 'Explicação não encontrada'}), 404
+            return jsonify({'ok': False, 'message': 'Resume não encontrado'}), 404
 
         return jsonify(
             {
                 'ok': True,
-                'material': [
+                'materials': [
                     {
                         'id': material.id,
                         'title': material.subject,
                         'discipline': material.discipline,
-                        'content': material.content,
+                        'note': material.note,
                         'created_at': material.created_at,
+                        'content': material.content,
                         'type': material.type.value,
                     }
                 ],
             }
         ), 200
 
-@bp_materials_explicacao.route('/', methods=['POST'])
+
+@bp_materials_resumo.route('/', methods=['POST'])
 @login_required
-def create_explanation():
+def create_resume():
     data = request.get_json(silent=True)
 
     if data is None:
@@ -78,17 +80,16 @@ def create_explanation():
 
     with SessionLocal() as session:
         try:
-            explanation = Explicacao(
+            resume = Resumo(
                 user_id = current_user.id,
                 discipline = data['discipline'],
-                questions = data['questions'],
                 subject = data['subject'],
-                content={'content': 1}
+                content = {'content': 1},
+                note= data['note']
             )
-            session.add(explanation)
+            session.add(resume)
             session.commit()
             return jsonify({'ok': True, 'redirect': '/materials'}), 201
-
         except Exception:
             session.rollback()
             return jsonify({'ok': False, 'message': 'Ocorreu um erro interno'}), 500
