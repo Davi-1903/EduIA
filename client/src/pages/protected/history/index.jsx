@@ -4,7 +4,7 @@ import ProtectedRoute from '../../../components/protectedRoute';
 import { useMessages } from '../../../context/messagesContext';
 import { GET } from '../../../api/materials';
 import Pagination from './components/pagination';
-import EmptyMaterials from './components/empty';
+import EmptyHistory from './components/empty';
 import CardsView from './components/cardsView';
 
 export default function History() {
@@ -23,7 +23,7 @@ export default function History() {
                     cursor: String(cursor),
                     limit: String(limit),
                 });
-                const data = await GET(`/api/historico?${params.toString()}`, { signal });
+                const data = await GET(`/api/historico/?${params.toString()}`, { signal });
                 if (data.status === 401) return;
                 if (data.status !== 200) throw new Error('Não foi possível carregar o histórico');
 
@@ -73,7 +73,7 @@ export default function History() {
                         <p className='pt-12 text-center text-xl font-bold text-color3-400'>Carregando histórico...</p>
                     ) : total > 0 && historico ? (
                         <>
-                            <CardsView materials={historico} />
+                            <CardsView history={historico} />
                             <Pagination
                                 cursor={cursor}
                                 setCursor={setCursor}
@@ -82,7 +82,7 @@ export default function History() {
                             />
                         </>
                     ) : (
-                        <EmptyMaterials />
+                        <EmptyHistory />
                     )}
                 </section>
             </main>

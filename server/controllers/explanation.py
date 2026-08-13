@@ -3,9 +3,11 @@ from flask_login import current_user, login_required
 from sqlalchemy import select, func
 from database import SessionLocal
 from models.explicacoes import Explicacao
+from models.historico import Historico
 
 
 bp_materials_explicacao = Blueprint('explicacoes', __name__, url_prefix='/explicacoes')
+
 
 @bp_materials_explicacao.route('/', methods=['GET'])
 @login_required
@@ -23,8 +25,8 @@ def get_explanations():
             .order_by(Explicacao.created_at.desc())
         )
 
-        total = session.execute(count_stmt).scalar() or 0
-        materials = session.execute(statement).scalars().all()
+        total = session.scalar(count_stmt) or 0
+        materials = session.scalars(statement).all()
 
         return jsonify(
             {
@@ -43,7 +45,8 @@ def get_explanations():
                 ],
             }
         ), 200
-    
+
+
 @bp_materials_explicacao.route('/<int:id>', methods=['GET'])
 @login_required
 def get_explanation(id: int):
@@ -68,6 +71,7 @@ def get_explanation(id: int):
             }
         ), 200
 
+
 @bp_materials_explicacao.route('/', methods=['POST'])
 @login_required
 def create_explanation():
@@ -79,13 +83,15 @@ def create_explanation():
     with SessionLocal() as session:
         try:
             explanation = Explicacao(
-                user_id = current_user.id,
-                discipline = data['discipline'],
-                questions = data['questions'],
-                subject = data['subject'],
-                content={'content': 1}
+                user_id=current_user.id,
+                discipline=data['discipline'],
+                questions=data['questions'],
+                subject=data['subject'],
+                content={'content': 1},
             )
+            historico = Historico(material=explanation)
             session.add(explanation)
+            session.add(historico)
             session.commit()
             return jsonify({'ok': True, 'redirect': '/materials'}), 201
 

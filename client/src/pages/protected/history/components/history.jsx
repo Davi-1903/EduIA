@@ -12,8 +12,7 @@ import {
     IconTimeDuration10,
 } from '@tabler/icons-react';
 
-export default function MaterialCard({
-    id,
+export default function HistoryCard({
     title,
     discipline,
     difficulty,
@@ -26,7 +25,6 @@ export default function MaterialCard({
     created_at,
     type,
 }) {
-
     function formatarHora(created_at) {
         const data = new Date(created_at);
         const horas = String(data.getHours()).padStart(2, '0');
@@ -60,16 +58,8 @@ export default function MaterialCard({
         return icons[type] || <IconFile className='stroke-color1-100' />;
     }
 
-    function handleContextMenu(e, id) {
-        e.preventDefault();
-        setMenu({ x: e.clientX, y: e.clientY, id });
-    }
-
     return (
-        <article
-            className='flex min-h-48 cursor-pointer flex-col rounded-lg bg-color4-400 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg'
-            onContextMenu={e => handleContextMenu(e, id)}
-        >
+        <article className='flex min-h-48 cursor-pointer flex-col rounded-lg bg-color4-400 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg'>
             <div className='flex items-center justify-end gap-3 border-b-2 border-color4-25 p-2 pl-3'>
                 <span>{getIcon(type)}</span>
                 <h3 className='flex-1 font-primary text-xl font-medium text-color1-100'>{title}</h3>

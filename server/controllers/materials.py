@@ -17,6 +17,7 @@ bp_materials.register_blueprint(bp_materials_quiz)
 bp_materials.register_blueprint(bp_materials_explicacao)
 bp_materials.register_blueprint(bp_materials_resumo)
 
+
 @bp_materials.route('/', methods=['GET'])
 @login_required
 def get_materials():
@@ -68,8 +69,8 @@ def get_materials():
             statement = statement.where(MaterialPoly.subject.like(f'%{search}%'))
             count_stmt = count_stmt.where(MaterialPoly.subject.like(f'%{search}%'))
 
-        total = session.execute(count_stmt).scalar() or 0
-        materials = session.execute(statement).scalars().all()
+        total = session.scalar(count_stmt) or 0
+        materials = session.scalars(statement).all()
 
         return jsonify(
             {

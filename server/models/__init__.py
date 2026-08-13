@@ -12,7 +12,7 @@ from . import (
     questoes,
     quizzes,
     resumos,
-    roteiros
+    roteiros,
 )
 
 

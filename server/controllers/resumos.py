@@ -1,10 +1,13 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from database import SessionLocal
-from models.resumos import Resumo 
+from models.resumos import Resumo
+from models.historico import Historico
 from sqlalchemy import select, func
 
+
 bp_materials_resumo = Blueprint('resumos', __name__, url_prefix='/resumos')
+
 
 @bp_materials_resumo.route('/', methods=['GET'])
 @login_required
@@ -22,8 +25,8 @@ def get_resumes():
             .order_by(Resumo.created_at.desc())
         )
 
-        total = session.execute(count_stmt).scalar() or 0
-        materials = session.execute(statement).scalars().all()
+        total = session.scalar(count_stmt) or 0
+        materials = session.scalars(statement).all()
 
         return jsonify(
             {
@@ -43,7 +46,8 @@ def get_resumes():
                 ],
             }
         ), 200
-    
+
+
 @bp_materials_resumo.route('/<int:id>', methods=['GET'])
 @login_required
 def get_resume(id: int):
@@ -81,13 +85,15 @@ def create_resume():
     with SessionLocal() as session:
         try:
             resume = Resumo(
-                user_id = current_user.id,
-                discipline = data['discipline'],
-                subject = data['subject'],
-                content = {'content': 1},
-                note= data['note']
+                user_id=current_user.id,
+                discipline=data['discipline'],
+                subject=data['subject'],
+                content={'content': 1},
+                note=data['note'],
             )
+            historico = Historico(material=resume)
             session.add(resume)
+            session.add(historico)
             session.commit()
             return jsonify({'ok': True, 'redirect': '/materials'}), 201
         except Exception:

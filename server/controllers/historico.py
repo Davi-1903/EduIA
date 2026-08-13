@@ -26,14 +26,14 @@ def get_historico():
         statement = (
             select(Historico)
             .join(Historico.material)
-            .where(Historico.user_id == current_user.id)
+            .where(Material.user_id == current_user.id)
             .offset(cursor)
             .limit(limit)
-            .order_by(Historico.created_at.desc())
+            .order_by(Material.created_at.desc())
         )
 
-        total = session.execute(count_stmt).scalar() or 0
-        historico = session.execute(statement).scalars().all()
+        total = session.scalar(count_stmt) or 0
+        historico = session.scalars(statement).all()
 
         return jsonify(
             {
@@ -55,7 +55,7 @@ def get_historico():
                             'digital': item.material.digital if hasattr(item, 'digital') else None,  # type: ignore
                             'created_at': item.material.created_at,
                             'type': item.material.type.value,
-                        }
+                        },
                     }
                     for item in historico
                 ],

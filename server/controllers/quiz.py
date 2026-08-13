@@ -5,6 +5,7 @@ from sqlalchemy import func, select
 from database import SessionLocal
 from models.quizzes import Quiz
 from models.material import Difficulty
+from models.historico import Historico
 
 
 bp_materials_quiz = Blueprint('quiz', __name__, url_prefix='/quiz')
@@ -26,8 +27,8 @@ def get_quizzes():
             .order_by(Quiz.created_at.desc())
         )
 
-        total = session.execute(count_stmt).scalar() or 0
-        materials = session.execute(statement).scalars().all()
+        total = session.scalar(count_stmt) or 0
+        materials = session.scalars(statement).all()
 
         return jsonify(
             {
@@ -97,7 +98,9 @@ def create_quiz():
                 amount=data['amount'],
                 note=data['note'] if data['note'] != '' else None,
             )
+            historico = Historico(material=quiz)
             session.add(quiz)
+            session.add(historico)
             session.commit()
             return jsonify({'ok': True, 'redirect': '/materials'}), 201
 

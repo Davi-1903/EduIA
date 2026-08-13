@@ -1,12 +1,12 @@
-import MaterialCard from './material';
+import HistoryCard from './history';
 
-export default function CardsView({ materials }) {
+export default function CardsView({ history }) {
     return (
         <div className='grid grid-cols-[repeat(auto-fit,minmax(18rem,1fr))] gap-8'>
-            {materials.map(material => (
-                <MaterialCard
-                    key={material.id}
-                    {...material}
+            {history.map(item => (
+                <HistoryCard
+                    key={item.id}
+                    {...item.material}
                 />
             ))}
         </div>
