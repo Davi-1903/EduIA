@@ -1,4 +1,5 @@
 from . import (
+    historico,
     user,
     professor,
     aluno,
@@ -11,11 +12,12 @@ from . import (
     questoes,
     quizzes,
     resumos,
-    roteiros,
+    roteiros
 )
 
 
 __all__ = [
+    'historico',
     'user',
     'professor',
     'aluno',

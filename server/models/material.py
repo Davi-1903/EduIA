@@ -9,6 +9,7 @@ from database import Base
 
 if TYPE_CHECKING:
     from models.user import Usuario
+    from models.historico import Historico
 
 
 class MaterialType(enum.Enum):
@@ -44,5 +45,6 @@ class Material(Base):
     type: Mapped[MaterialType] = mapped_column(Enum(MaterialType), nullable=False)
 
     user: Mapped['Usuario'] = relationship(back_populates='materials')
+    historico: Mapped['Historico'] = relationship(back_populates='material')
 
     __mapper_args__ = {'polymorphic_identity': None, 'polymorphic_on': 'type'}

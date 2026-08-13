@@ -17,7 +17,7 @@ bp_materials.register_blueprint(bp_materials_quiz)
 bp_materials.register_blueprint(bp_materials_explicacao)
 bp_materials.register_blueprint(bp_materials_resumo)
 
-@bp_materials.route('', methods=['GET'])
+@bp_materials.route('/', methods=['GET'])
 @login_required
 def get_materials():
     cursor = request.args.get('cursor', 0, type=int)
