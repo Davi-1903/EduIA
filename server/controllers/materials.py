@@ -1,3 +1,5 @@
+from datetime import datetime
+
 from flask import Blueprint, jsonify, request
 from flask_login import current_user, login_required
 from sqlalchemy import func, or_, select
@@ -17,7 +19,8 @@ bp_materials.register_blueprint(bp_materials_quiz)
 bp_materials.register_blueprint(bp_materials_explicacao)
 bp_materials.register_blueprint(bp_materials_resumo)
 
-@bp_materials.route('', methods=['GET'])
+
+@bp_materials.route('/', methods=['GET'])
 @login_required
 def get_materials():
     cursor = request.args.get('cursor', 0, type=int)
@@ -30,10 +33,16 @@ def get_materials():
     with SessionLocal() as session:
         MaterialPoly = with_polymorphic(Material, '*')
 
-        count_stmt = select(func.count()).select_from(MaterialPoly).where(MaterialPoly.user_id == current_user.id)
+        count_stmt = (
+            select(func.count())
+            .select_from(MaterialPoly)
+            .where(MaterialPoly.user_id == current_user.id)
+            .where(MaterialPoly.deleted_at.is_(None))
+        )
         statement = (
             select(MaterialPoly)
             .where(MaterialPoly.user_id == current_user.id)
+            .where(MaterialPoly.deleted_at.is_(None))
             .offset(cursor)
             .limit(limit)
             .order_by(MaterialPoly.created_at.desc())
@@ -92,5 +101,39 @@ def get_materials():
                     }
                     for material in materials
                 ],
+            }
+        ), 200
+
+
+@bp_materials.route('/<int:id>', methods=['DELETE'])
+@login_required
+def delete_material(id: int):
+    with SessionLocal() as session:
+        material = session.get(Material, id)
+        if material is None or material.deleted_at is not None:
+            return jsonify({'ok': False, 'message': 'Material não encontrado'}), 404
+
+        material.deleted_at = datetime.now()
+        session.commit()
+        session.refresh(material)
+
+        return jsonify(
+            {
+                'ok': True,
+                'material': {
+                    'id': material.id,
+                    'title': material.subject,
+                    'discipline': material.discipline,
+                    'difficulty': material.difficulty.value if hasattr(material, 'difficulty') else None,  # type: ignore
+                    'amount': material.amount if hasattr(material, 'amount') else None,  # type: ignore
+                    'grade': material.grade if hasattr(material, 'grade') else None,  # type: ignore
+                    'chalkboard': material.chalkboard if hasattr(material, 'chalkboard') else None,  # type: ignore
+                    'projector': material.projector if hasattr(material, 'projector') else None,  # type: ignore
+                    'printed': material.printed if hasattr(material, 'printed') else None,  # type: ignore
+                    'digital': material.digital if hasattr(material, 'digital') else None,  # type: ignore
+                    'created_at': material.created_at,
+                    'deleted_at': material.deleted_at,
+                    'type': material.type.value,
+                },
             }
         ), 200

@@ -17,10 +17,16 @@ def get_questions():
     limit = request.args.get('limit', 50, type=int)
 
     with SessionLocal() as session:
-        count_stmt = select(func.count()).select_from(Questoes).where(Questoes.user_id == current_user.id)
+        count_stmt = (
+            select(func.count())
+            .select_from(Questoes)
+            .where(Questoes.user_id == current_user.id)
+            .where(Questoes.deleted_at.is_(None))
+        )
         statement = (
             select(Questoes)
             .where(Questoes.user_id == current_user.id)
+            .where(Questoes.deleted_at.is_(None))
             .offset(cursor)
             .limit(limit)
             .order_by(Questoes.created_at.desc())
@@ -54,7 +60,7 @@ def get_questions():
 def get_question(id: int):
     with SessionLocal() as session:
         material = session.get(Questoes, id)
-        if material is None:
+        if material is None or material.deleted_at is not None:
             return jsonify({'ok': False, 'message': 'Questões não encontradas'}), 404
 
         return jsonify(

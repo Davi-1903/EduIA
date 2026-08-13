@@ -17,10 +17,16 @@ def get_quizzes():
     limit = request.args.get('limit', 50, type=int)
 
     with SessionLocal() as session:
-        count_stmt = select(func.count()).select_from(Quiz).where(Quiz.user_id == current_user.id)
+        count_stmt = (
+            select(func.count())
+            .select_from(Quiz)
+            .where(Quiz.user_id == current_user.id)
+            .where(Quiz.deleted_at.is_(None))
+        )
         statement = (
             select(Quiz)
             .where(Quiz.user_id == current_user.id)
+            .where(Quiz.deleted_at.is_(None))
             .offset(cursor)
             .limit(limit)
             .order_by(Quiz.created_at.desc())
@@ -55,7 +61,7 @@ def get_quizzes():
 def get_quiz(id: int):
     with SessionLocal() as session:
         material = session.get(Quiz, id)
-        if material is None:
+        if material is None or material is not None:
             return jsonify({'ok': False, 'message': 'Quiz não encontradas'}), 404
 
         return jsonify(

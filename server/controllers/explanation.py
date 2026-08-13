@@ -7,6 +7,7 @@ from models.explicacoes import Explicacao
 
 bp_materials_explicacao = Blueprint('explicacoes', __name__, url_prefix='/explicacoes')
 
+
 @bp_materials_explicacao.route('/', methods=['GET'])
 @login_required
 def get_explanations():
@@ -14,10 +15,16 @@ def get_explanations():
     limit = request.args.get('limit', 50, type=int)
 
     with SessionLocal() as session:
-        count_stmt = select(func.count()).select_from(Explicacao).where(Explicacao.user_id == current_user.id)
+        count_stmt = (
+            select(func.count())
+            .select_from(Explicacao)
+            .where(Explicacao.user_id == current_user.id)
+            .where(Explicacao.deleted_at.is_(None))
+        )
         statement = (
             select(Explicacao)
             .where(Explicacao.user_id == current_user.id)
+            .where(Explicacao.deleted_at.is_(None))
             .offset(cursor)
             .limit(limit)
             .order_by(Explicacao.created_at.desc())
@@ -43,13 +50,14 @@ def get_explanations():
                 ],
             }
         ), 200
-    
+
+
 @bp_materials_explicacao.route('/<int:id>', methods=['GET'])
 @login_required
 def get_explanation(id: int):
     with SessionLocal() as session:
         material = session.get(Explicacao, id)
-        if material is None:
+        if material is None or material is not None:
             return jsonify({'ok': False, 'message': 'Explicação não encontrada'}), 404
 
         return jsonify(
@@ -68,6 +76,7 @@ def get_explanation(id: int):
             }
         ), 200
 
+
 @bp_materials_explicacao.route('/', methods=['POST'])
 @login_required
 def create_explanation():
@@ -79,11 +88,11 @@ def create_explanation():
     with SessionLocal() as session:
         try:
             explanation = Explicacao(
-                user_id = current_user.id,
-                discipline = data['discipline'],
-                questions = data['questions'],
-                subject = data['subject'],
-                content={'content': 1}
+                user_id=current_user.id,
+                discipline=data['discipline'],
+                questions=data['questions'],
+                subject=data['subject'],
+                content={'content': 1},
             )
             session.add(explanation)
             session.commit()

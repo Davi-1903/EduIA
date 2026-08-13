@@ -1,10 +1,12 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from database import SessionLocal
-from models.resumos import Resumo 
+from models.resumos import Resumo
 from sqlalchemy import select, func
 
+
 bp_materials_resumo = Blueprint('resumos', __name__, url_prefix='/resumos')
+
 
 @bp_materials_resumo.route('/', methods=['GET'])
 @login_required
@@ -13,10 +15,16 @@ def get_resumes():
     limit = request.args.get('limit', 50, type=int)
 
     with SessionLocal() as session:
-        count_stmt = select(func.count()).select_from(Resumo).where(Resumo.user_id == current_user.id)
+        count_stmt = (
+            select(func.count())
+            .select_from(Resumo)
+            .where(Resumo.user_id == current_user.id)
+            .where(Resumo.deleted_at.is_(None))
+        )
         statement = (
             select(Resumo)
             .where(Resumo.user_id == current_user.id)
+            .where(Resumo.deleted_at.is_(None))
             .offset(cursor)
             .limit(limit)
             .order_by(Resumo.created_at.desc())
@@ -43,13 +51,14 @@ def get_resumes():
                 ],
             }
         ), 200
-    
+
+
 @bp_materials_resumo.route('/<int:id>', methods=['GET'])
 @login_required
 def get_resume(id: int):
     with SessionLocal() as session:
         material = session.get(Resumo, id)
-        if material is None:
+        if material is None or material is not None:
             return jsonify({'ok': False, 'message': 'Resume não encontrado'}), 404
 
         return jsonify(
@@ -81,11 +90,11 @@ def create_resume():
     with SessionLocal() as session:
         try:
             resume = Resumo(
-                user_id = current_user.id,
-                discipline = data['discipline'],
-                subject = data['subject'],
-                content = {'content': 1},
-                note= data['note']
+                user_id=current_user.id,
+                discipline=data['discipline'],
+                subject=data['subject'],
+                content={'content': 1},
+                note=data['note'],
             )
             session.add(resume)
             session.commit()

@@ -1,7 +1,10 @@
 import { useEffect, useRef } from 'react';
 import { IconFolderOpen, IconTrash } from '@tabler/icons-react';
+import { useMessages } from '../../../../context/messagesContext';
+import { DELETE } from '../../../../api/materials';
 
 export default function MenuCard({ x, y, id, setMenu }) {
+    const { setMessages } = useMessages();
     const menuRef = useRef(null);
 
     function handleOpen() {
@@ -11,7 +14,17 @@ export default function MenuCard({ x, y, id, setMenu }) {
 
     function handleDelete() {
         setMenu(null);
-        alert('Funcionalidade ainda não implementada');
+        DELETE(`/api/materials/${id}`)
+            .then(data => {
+                if (data.status !== 200) throw new Error(data.message);
+                setMessages(prev => [
+                    ...prev,
+                    { id: prev.length + 1, message: 'Arquivo movido para a lixeira', type: 'ok' },
+                ]);
+            })
+            .catch(err =>
+                setMessages(prev => [...prev, { id: prev.length + 1, message: err.message, type: 'danger' }]),
+            );
     }
 
     useEffect(() => {

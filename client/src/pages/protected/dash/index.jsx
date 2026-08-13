@@ -104,7 +104,7 @@ export default function Dashboard() {
     }
 
     useEffect(() => {
-        GET('/api/materials?limit=4')
+        GET('/api/materials/?limit=4')
             .then(data => {
                 if (data.status === 401) return;
                 if (data.status !== 200) throw new Error('Não foi possível carregar os materiais');

@@ -42,6 +42,7 @@ class Material(Base):
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now(), nullable=False)
     content: Mapped[dict[str, Any]] = mapped_column(MutableDict.as_mutable(JSON), nullable=False)
     type: Mapped[MaterialType] = mapped_column(Enum(MaterialType), nullable=False)
+    deleted_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
 
     user: Mapped['Usuario'] = relationship(back_populates='materials')
 

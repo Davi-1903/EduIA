@@ -149,7 +149,7 @@
 			"path": "server/controllers/questoes.py",
 			"bookmarks": [
 				{
-					"line": 78,
+					"line": 84,
 					"column": 0,
 					"label": "Por enquanto, cria um material sem conteúdo"
 				}
@@ -162,6 +162,16 @@
 					"line": 34,
 					"column": 0,
 					"label": "Adicionar FULLTEXT SEARCH"
+				}
+			]
+		},
+		{
+			"path": "client/src/pages/protected/materials/components/menu.jsx",
+			"bookmarks": [
+				{
+					"line": 14,
+					"column": 0,
+					"label": "Recarregar materiais ao apagar material"
 				}
 			]
 		}
