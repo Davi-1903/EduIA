@@ -15,6 +15,7 @@ const Dashboard = lazy(() => import('./pages/protected/dash'));
 const Materials = lazy(() => import('./pages/protected/materials'));
 const Settings = lazy(() => import('./pages/protected/config'));
 const Profile = lazy(() => import('./pages/protected/profile/index'));
+const History = lazy(() => import('./pages/protected/history'));
 
 import './globals.css';
 
@@ -47,7 +48,14 @@ const router = createBrowserRouter([
                     </Suspense>
                 ),
             },
-            { path: 'historico', element: <h1>Historico</h1> },
+            {
+                path: 'historico',
+                element: (
+                    <Suspense fallback={<Loading />}>
+                        <History />
+                    </Suspense>
+                ),
+            },
             {
                 path: 'sobre',
                 element: (

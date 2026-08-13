@@ -1,10 +1,10 @@
-from flask import Blueprint, jsonify
+from flask import Blueprint, jsonify, request
 from flask_login import current_user, login_required
 from sqlalchemy import func, select
 
 from database import SessionLocal
 from models.historico import Historico
-from server.models.material import Material
+from models.material import Material
 
 
 bp_historico = Blueprint('historico', __name__, url_prefix='/api/historico')
@@ -13,6 +13,9 @@ bp_historico = Blueprint('historico', __name__, url_prefix='/api/historico')
 @bp_historico.route('/', methods=['GET'])
 @login_required
 def get_historico():
+    cursor = request.args.get('cursor', 0, type=int)
+    limit = request.args.get('limit', 50, type=int)
+
     with SessionLocal() as session:
         count_stmt = (
             select(func.count())
@@ -24,6 +27,8 @@ def get_historico():
             select(Historico)
             .join(Historico.material)
             .where(Historico.user_id == current_user.id)
+            .offset(cursor)
+            .limit(limit)
             .order_by(Historico.created_at.desc())
         )
 

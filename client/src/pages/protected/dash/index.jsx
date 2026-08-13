@@ -17,7 +17,6 @@ import GenerateForms from '../tools/forms';
 import GenerateChallenge from '../tools/challenge';
 import MaterialCard from '../materials/components/material';
 import Card from './cards';
-import { IconCirclePlus } from '@tabler/icons-react';
 
 export default function Dashboard() {
     const { user } = useAuthenticated();

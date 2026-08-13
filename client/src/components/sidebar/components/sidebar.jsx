@@ -40,7 +40,7 @@ const links = [
     },
     {
         id: 3,
-        path: '#',
+        path: '/historico',
         name: 'Histórico',
         icon: (
             <IconClock
