@@ -13,7 +13,9 @@ import {
     IconTimeDuration10,
 } from '@tabler/icons-react';
 import QuestionForm from './tools/question';
-import QuizFrom from './tools/quiz';
+import QuizForm from './tools/quiz';
+import ResumesForm from './tools/resume';
+import ExplanationForm from './tools/explanation';
 
 export default function HistoryCard({
     title,
@@ -27,6 +29,7 @@ export default function HistoryCard({
     printed,
     digital,
     created_at,
+    questions,
     note,
     type,
 }) {
@@ -69,7 +72,14 @@ export default function HistoryCard({
         const forms = {
             desafio: null,
             'exercicio guiado': null,
-            explicacao: null,
+            explicacao: (
+                <ExplanationForm
+                    discipline={discipline}
+                    subject={title}
+                    questions={questions}
+                    setOpen={setOpen}
+                />
+            ),
             flashcards: null,
             formulario: null,
             'plano de aula': null,
@@ -84,7 +94,7 @@ export default function HistoryCard({
                 />
             ),
             quiz: (
-                <QuizFrom
+                <QuizForm
                     discipline={discipline}
                     subject={title}
                     difficulty={difficulty}
@@ -94,7 +104,14 @@ export default function HistoryCard({
                     setOpen={setOpen}
                 />
             ),
-            resumo: null,
+            resumo: (
+                <ResumesForm
+                    discipline={discipline}
+                    subject={title}
+                    note={note}
+                    setOpen={setOpen}
+                />
+            ),
             roteiro: null,
         };
         return forms[type];

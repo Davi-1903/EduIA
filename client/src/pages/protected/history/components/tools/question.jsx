@@ -1,5 +1,4 @@
 import { useEffect, useRef, useState } from 'react';
-import { disciplinasList } from '../../../../../../public/assets/data/disciplinas';
 import InputRange from '../../../../../components/inputRange';
 import clsx from 'clsx';
 
@@ -55,19 +54,13 @@ export default function QuestionForm({ discipline, subject, difficulty, amount, 
                     >
                         Disciplina
                     </label>
-                    <select
+                    <input
+                        type='text'
                         id='disciplina'
                         className='h-12 w-full rounded-lg border border-color4-25 px-4 font-medium text-color1-100 outline-none'
+                        readOnly
                         value={discipline}
-                    >
-                        {Object.entries(disciplinasList).map(([key, disciplinas]) => (
-                            <optgroup label={key}>
-                                {disciplinas.map(disciplina => (
-                                    <option value={disciplina}>{disciplina}</option>
-                                ))}
-                            </optgroup>
-                        ))}
-                    </select>
+                    />
                 </div>
                 <div>
                     <label
@@ -128,14 +121,11 @@ export default function QuestionForm({ discipline, subject, difficulty, amount, 
                     <textarea
                         id='observacoes'
                         className='h-24 w-full resize-none rounded-lg border border-color4-25 px-4 py-2 outline-none focus:ring-2 focus:ring-color1-400'
-                        placeholder='Caso deseje, descreva aqui suas observações'
+                        placeholder='Nenhuma observação'
                         readOnly
                         value={note}
                     ></textarea>
                 </div>
-                <button className='h-12 cursor-pointer rounded-lg bg-button text-xl text-color4-100 transition-all duration-150 not-disabled:hover:shadow-lg-hard disabled:cursor-not-allowed disabled:opacity-60'>
-                    Gerar
-                </button>
             </article>
         </div>
     );

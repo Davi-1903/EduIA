@@ -58,6 +58,7 @@ def get_historico():
                             'printed': item.material.printed if hasattr(item.material, 'printed') else None,  # type: ignore
                             'digital': item.material.digital if hasattr(item.material, 'digital') else None,  # type: ignore
                             'note': item.material.note if hasattr(item.material, 'note') else None,  # type: ignore
+                            'questions': item.material.questions if hasattr(item.material, 'questions') else None,  # type: ignore
                             'created_at': item.material.created_at,
                             'type': item.material.type.value,
                         },

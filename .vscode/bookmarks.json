@@ -164,16 +164,6 @@
 					"label": "Adicionar FULLTEXT SEARCH"
 				}
 			]
-		},
-		{
-			"path": "client/src/pages/protected/history/components/tools/question.jsx",
-			"bookmarks": [
-				{
-					"line": 127,
-					"column": 0,
-					"label": "Alterar placeholders"
-				}
-			]
 		}
 	]
 }
