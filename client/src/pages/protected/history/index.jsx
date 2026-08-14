@@ -15,7 +15,7 @@ export default function History() {
     const [isLoading, setIsLoading] = useState(true);
     const limit = 50;
 
-    const fetchMaterials = useCallback(
+    const fetchHistory = useCallback(
         async signal => {
             setIsLoading(true);
             try {
@@ -51,9 +51,9 @@ export default function History() {
 
     useEffect(() => {
         const controller = new AbortController();
-        fetchMaterials(controller.signal);
+        fetchHistory(controller.signal);
         return () => controller.abort();
-    }, [fetchMaterials]);
+    }, [fetchHistory]);
 
     return (
         <ProtectedRoute isPrivate={true}>
@@ -66,9 +66,14 @@ export default function History() {
             </Helmet>
             <main className='min-h-screen bg-color4-200 not-sm:col-span-2'>
                 <section className='mx-auto max-w-400 space-y-12 px-6 py-16'>
-                    <h1 className='bg-linear-to-tr from-color1-100 to-color4-100 bg-clip-text text-4xl leading-tight font-bold text-transparent md:text-5xl'>
-                        Histórico
-                    </h1>
+                    <div>
+                        <h1 className='bg-linear-to-tr from-color1-100 to-color4-100 bg-clip-text text-4xl leading-tight font-bold text-transparent md:text-5xl'>
+                            Histórico
+                        </h1>
+                        <p className='mt-6 text-lg text-color3-200'>
+                            Aqui você pode visualizar todos os materiais que gerou durante seu uso da plataforma.
+                        </p>
+                    </div>
                     {isLoading && !historico ? (
                         <p className='pt-12 text-center text-xl font-bold text-color3-400'>Carregando histórico...</p>
                     ) : total > 0 && historico ? (

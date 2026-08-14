@@ -16,6 +16,7 @@ import QuestionForm from './tools/question';
 import QuizForm from './tools/quiz';
 import ResumesForm from './tools/resume';
 import ExplanationForm from './tools/explanation';
+import ChallengeForm from './tools/desafio';
 
 export default function HistoryCard({
     title,
@@ -70,7 +71,14 @@ export default function HistoryCard({
 
     function getForm(type) {
         const forms = {
-            desafio: null,
+            desafio: (
+                <ChallengeForm
+                    discipline={discipline}
+                    subject={title}
+                    note={note}
+                    setOpen={setOpen}
+                />
+            ),
             'exercicio guiado': null,
             explicacao: (
                 <ExplanationForm
