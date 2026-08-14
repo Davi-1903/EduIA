@@ -149,7 +149,7 @@
 			"path": "server/controllers/questoes.py",
 			"bookmarks": [
 				{
-					"line": 79,
+					"line": 78,
 					"column": 0,
 					"label": "Por enquanto, cria um material sem conteúdo"
 				}
@@ -166,12 +166,12 @@
 			]
 		},
 		{
-			"path": "client/src/pages/protected/history/index.jsx",
+			"path": "client/src/pages/protected/history/components/tools/question.jsx",
 			"bookmarks": [
 				{
-					"line": 66,
+					"line": 127,
 					"column": 0,
-					"label": "Adicionar funcionalidade de limpar histórico?"
+					"label": "Alterar placeholders"
 				}
 			]
 		}

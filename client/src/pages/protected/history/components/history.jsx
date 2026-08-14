@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import {
     IconArrowBigUp,
     IconCards,
@@ -11,20 +12,26 @@ import {
     IconReorder,
     IconTimeDuration10,
 } from '@tabler/icons-react';
+import QuestionForm from './tools/question';
+import QuizFrom from './tools/quiz';
 
 export default function HistoryCard({
     title,
     discipline,
     difficulty,
     amount,
+    time,
     grade,
     chalkboard,
     projector,
     printed,
     digital,
     created_at,
+    note,
     type,
 }) {
+    const [isOpen, setOpen] = useState(false);
+
     function formatarHora(created_at) {
         const data = new Date(created_at);
         const horas = String(data.getHours()).padStart(2, '0');
@@ -58,52 +65,93 @@ export default function HistoryCard({
         return icons[type] || <IconFile className='stroke-color1-100' />;
     }
 
+    function getForm(type) {
+        const forms = {
+            desafio: null,
+            'exercicio guiado': null,
+            explicacao: null,
+            flashcards: null,
+            formulario: null,
+            'plano de aula': null,
+            questoes: (
+                <QuestionForm
+                    discipline={discipline}
+                    subject={title}
+                    difficulty={difficulty}
+                    amount={amount}
+                    note={note}
+                    setOpen={setOpen}
+                />
+            ),
+            quiz: (
+                <QuizFrom
+                    discipline={discipline}
+                    subject={title}
+                    difficulty={difficulty}
+                    time={time}
+                    amount={amount}
+                    note={note}
+                    setOpen={setOpen}
+                />
+            ),
+            resumo: null,
+            roteiro: null,
+        };
+        return forms[type];
+    }
+
     return (
-        <article className='flex min-h-48 cursor-pointer flex-col rounded-lg bg-color4-400 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg'>
-            <div className='flex items-center justify-end gap-3 border-b-2 border-color4-25 p-2 pl-3'>
-                <span>{getIcon(type)}</span>
-                <h3 className='flex-1 font-primary text-xl font-medium text-color1-100'>{title}</h3>
-            </div>
-            <div className='flex-1 p-3 text-color2-100'>
-                <p className='font-secundary'>
-                    Disciplina: <span className='font-medium'>{discipline}</span>
-                </p>
-                {amount && (
+        <>
+            {isOpen && getForm(type)}
+            <article
+                className='flex min-h-48 cursor-pointer flex-col rounded-lg bg-color4-400 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg'
+                onDoubleClick={() => setOpen(true)}
+            >
+                <div className='flex items-center justify-end gap-3 border-b-2 border-color4-25 p-2 pl-3'>
+                    <span>{getIcon(type)}</span>
+                    <h3 className='flex-1 font-primary text-xl font-medium text-color1-100'>{title}</h3>
+                </div>
+                <div className='flex-1 p-3 text-color2-100'>
                     <p className='font-secundary'>
-                        Quantidade: <span className='font-medium'>{amount}</span>
+                        Disciplina: <span className='font-medium'>{discipline}</span>
                     </p>
-                )}
-                {difficulty && (
-                    <p className='font-secundary'>
-                        Dificuldade: <span className='font-medium'>{difficulty}</span>
-                    </p>
-                )}
-                {grade && (
-                    <p className='font-secundary'>
-                        Série: <span className='font-medium'>{grade}</span>
-                    </p>
-                )}
-                {(chalkboard || projector || printed || digital) && (
-                    <p className='font-secundary'>
-                        Recursos de ensino:{' '}
-                        <span className='font-medium'>
-                            {[
-                                { check: chalkboard, name: 'Quadro' },
-                                { check: projector, name: 'Projetor' },
-                                { check: printed, name: 'Impresso' },
-                                { check: digital, name: 'Digital' },
-                            ]
-                                .filter(resource => resource.check)
-                                .map(resource => resource.name)
-                                .join(', ')}
-                        </span>
-                    </p>
-                )}
-            </div>
-            <div className='flex items-center justify-between border-t-2 border-color4-25 px-2 py-1'>
-                <span className='font-secundary text-color2-100'>{formatarHora(created_at)}</span>
-                <span className='font-secundary text-color2-100'>{formatarData(created_at)}</span>
-            </div>
-        </article>
+                    {amount && (
+                        <p className='font-secundary'>
+                            Quantidade: <span className='font-medium'>{amount}</span>
+                        </p>
+                    )}
+                    {difficulty && (
+                        <p className='font-secundary'>
+                            Dificuldade: <span className='font-medium'>{difficulty}</span>
+                        </p>
+                    )}
+                    {grade && (
+                        <p className='font-secundary'>
+                            Série: <span className='font-medium'>{grade}</span>
+                        </p>
+                    )}
+                    {(chalkboard || projector || printed || digital) && (
+                        <p className='font-secundary'>
+                            Recursos de ensino:{' '}
+                            <span className='font-medium'>
+                                {[
+                                    { check: chalkboard, name: 'Quadro' },
+                                    { check: projector, name: 'Projetor' },
+                                    { check: printed, name: 'Impresso' },
+                                    { check: digital, name: 'Digital' },
+                                ]
+                                    .filter(resource => resource.check)
+                                    .map(resource => resource.name)
+                                    .join(', ')}
+                            </span>
+                        </p>
+                    )}
+                </div>
+                <div className='flex items-center justify-between border-t-2 border-color4-25 px-2 py-1'>
+                    <span className='font-secundary text-color2-100'>{formatarHora(created_at)}</span>
+                    <span className='font-secundary text-color2-100'>{formatarData(created_at)}</span>
+                </div>
+            </article>
+        </>
     );
 }
