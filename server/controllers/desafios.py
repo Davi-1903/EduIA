@@ -4,6 +4,7 @@ from sqlalchemy import func, select
 
 from database import SessionLocal
 from models.desafios import Desafio
+from models.material import Difficulty
 
 
 bp_materials_desafio = Blueprint('desafios', __name__, url_prefix='/desafios')
@@ -51,7 +52,6 @@ def get_desafios():
 @bp_materials_desafio.route('/<int:id>', methods=['GET'])
 @login_required
 def get_desafio(id: int):
-
     with SessionLocal() as session:
         material = session.get(Desafio, id)
         if material is None:
@@ -68,12 +68,10 @@ def get_desafio(id: int):
                     'content': material.content,
                     'note': material.note,
                     'created_at': material.created_at,
-                    'type': 
-                        material.type.value
+                    'type': material.type.value,
                 },
             },
         ), 200
-
 
 
 @bp_materials_desafio.route('/', methods=['POST'])
@@ -92,7 +90,7 @@ def create_desafio():
                 discipline=data['discipline'],
                 subject=data['subject'],
                 content={'content': 1},
-                difficulty='MUITO DIFICIL',
+                difficulty=Difficulty.MUITO_DIFICIL,
                 note=data['note'] if data['note'] != '' else None,
             )
 
