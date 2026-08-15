@@ -164,6 +164,16 @@
 					"label": "Adicionar FULLTEXT SEARCH"
 				}
 			]
+		},
+		{
+			"path": "docs/requisitos_nao_funcionais.md",
+			"bookmarks": [
+				{
+					"line": 21,
+					"column": 0,
+					"label": "Alterar prioridade"
+				}
+			]
 		}
 	]
 }
