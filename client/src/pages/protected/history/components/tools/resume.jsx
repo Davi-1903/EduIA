@@ -53,7 +53,7 @@ export default function ResumesForm({ discipline, subject, note, setOpen }) {
                         <input
                             type='text'
                             id='disciplina'
-                            className='h-12 w-full rounded-lg border border-gray-300 px-4 font-medium text-color1-100 outline-none'
+                            className='h-12 w-full rounded-lg border border-gray-300 px-4 font-medium outline-none'
                             readOnly
                             value={discipline}
                         />
@@ -68,7 +68,7 @@ export default function ResumesForm({ discipline, subject, note, setOpen }) {
                         <input
                             type='text'
                             placeholder='Descreva o assunto'
-                            className='w-full rounded-lg border border-gray-300 px-4 py-2 outline-none focus:ring-2 focus:ring-color1-400'
+                            className='w-full rounded-lg border border-gray-300 px-4 py-2 outline-none'
                             readOnly
                             value={subject}
                             required
@@ -84,7 +84,7 @@ export default function ResumesForm({ discipline, subject, note, setOpen }) {
                         <textarea
                             name='observacao'
                             placeholder='Nenhuma observação'
-                            className='block h-30 w-full resize-none rounded-lg border border-color4-25 p-3 outline-none focus:ring-2 focus:ring-color1-400'
+                            className='block h-30 w-full resize-none rounded-lg border border-color4-25 p-3 outline-none'
                             readOnly
                             value={note}
                         ></textarea>

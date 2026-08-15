@@ -53,7 +53,7 @@ export default function ExplanationForm({ discipline, subject, questions, setOpe
                         <input
                             type='text'
                             id='disciplina'
-                            className='h-12 w-full rounded-lg border border-gray-300 px-4 font-medium text-color1-100 outline-none'
+                            className='h-12 w-full rounded-lg border border-gray-300 px-4 font-medium outline-none'
                             readOnly
                             value={discipline}
                         />
@@ -69,7 +69,7 @@ export default function ExplanationForm({ discipline, subject, questions, setOpe
                             type='text'
                             name='subject'
                             placeholder='Descreva o assunto'
-                            className='w-full rounded-lg border border-gray-300 px-4 py-2 font-medium outline-none focus:ring-2 focus:ring-color1-400'
+                            className='w-full rounded-lg border border-gray-300 px-4 py-2 font-medium outline-none'
                             readOnly
                             value={subject}
                             required
@@ -84,7 +84,7 @@ export default function ExplanationForm({ discipline, subject, questions, setOpe
                         </label>
                         <textarea
                             name='questions'
-                            className='h-30 w-full resize-none rounded-lg border border-color4-25 p-3 outline-none focus:ring-2 focus:ring-color1-400'
+                            className='h-30 w-full resize-none rounded-lg border border-color4-25 p-3 outline-none'
                             placeholder='Nenhuma dúvida fornecida'
                             readOnly
                             value={questions}

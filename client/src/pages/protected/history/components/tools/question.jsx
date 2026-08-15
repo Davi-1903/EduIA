@@ -57,7 +57,7 @@ export default function QuestionForm({ discipline, subject, difficulty, amount, 
                     <input
                         type='text'
                         id='disciplina'
-                        className='h-12 w-full rounded-lg border border-color4-25 px-4 font-medium text-color1-100 outline-none'
+                        className='h-12 w-full rounded-lg border border-color4-25 px-4 font-medium outline-none'
                         readOnly
                         value={discipline}
                     />
@@ -73,7 +73,7 @@ export default function QuestionForm({ discipline, subject, difficulty, amount, 
                         type='text'
                         id='conteudo'
                         placeholder='Descreva o assunto das questões'
-                        className='h-12 w-full rounded-lg border border-color4-25 px-4 font-medium outline-none focus:ring-2 focus:ring-color1-400'
+                        className='h-12 w-full rounded-lg border border-color4-25 px-4 font-medium outline-none'
                         readOnly
                         value={subject}
                         required
@@ -120,7 +120,7 @@ export default function QuestionForm({ discipline, subject, difficulty, amount, 
                     </label>
                     <textarea
                         id='observacoes'
-                        className='h-24 w-full resize-none rounded-lg border border-color4-25 px-4 py-2 outline-none focus:ring-2 focus:ring-color1-400'
+                        className='h-24 w-full resize-none rounded-lg border border-color4-25 px-4 py-2 outline-none'
                         placeholder='Nenhuma observação'
                         readOnly
                         value={note}

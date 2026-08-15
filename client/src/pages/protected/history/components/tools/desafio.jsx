@@ -52,7 +52,7 @@ export default function ChallengeForm({ discipline, subject, note, setOpen }) {
                         type='text'
                         id='disciplina'
                         value={discipline}
-                        className='h-12 w-full rounded-lg border border-color4-25 px-4 font-medium text-color1-100 outline-none'
+                        className='h-12 w-full rounded-lg border border-color4-25 px-4 font-medium outline-none'
                         readOnly
                     />
                 </div>
@@ -68,7 +68,7 @@ export default function ChallengeForm({ discipline, subject, note, setOpen }) {
                         id='conteudo'
                         value={subject}
                         placeholder='Descreva o assunto das questões'
-                        className='h-12 w-full rounded-lg border border-color4-25 px-4 font-medium outline-none focus:ring-2 focus:ring-color1-400'
+                        className='h-12 w-full rounded-lg border border-color4-25 px-4 font-medium outline-none'
                         readOnly
                         required
                     />
@@ -82,7 +82,7 @@ export default function ChallengeForm({ discipline, subject, note, setOpen }) {
                     </label>
                     <textarea
                         id='observacoes'
-                        className='h-24 w-full resize-none rounded-lg border border-color4-25 px-4 py-2 outline-none focus:ring-2 focus:ring-color1-400'
+                        className='h-24 w-full resize-none rounded-lg border border-color4-25 px-4 py-2 outline-none'
                         placeholder='Nenhuma observação'
                         readOnly
                         value={note}

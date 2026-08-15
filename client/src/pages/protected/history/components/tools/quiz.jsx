@@ -77,7 +77,7 @@ export default function QuizForm({ discipline, subject, difficulty, time, amount
                         type='text'
                         id='conteudo'
                         placeholder='Descreva o assunto das questões'
-                        className='h-12 w-full rounded-lg border border-color4-25 px-4 font-medium outline-none focus:ring-2 focus:ring-color1-400'
+                        className='h-12 w-full rounded-lg border border-color4-25 px-4 font-medium outline-none'
                         readOnly
                         value={subject}
                         required
@@ -140,7 +140,7 @@ export default function QuizForm({ discipline, subject, difficulty, time, amount
                     </label>
                     <textarea
                         id='observacoes'
-                        className='h-24 w-full resize-none rounded-lg border border-color4-25 px-4 py-2 outline-none focus:ring-2 focus:ring-color1-400'
+                        className='h-24 w-full resize-none rounded-lg border border-color4-25 px-4 py-2 outline-none'
                         placeholder='Nenhuma observação'
                         readOnly
                         value={note}

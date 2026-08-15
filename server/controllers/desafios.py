@@ -27,8 +27,8 @@ def get_desafios():
             .order_by(Desafio.created_at.desc())
         )
 
-        total = session.execute(count_stmt).scalar() or 0
-        materials = session.execute(statement).scalars().all()
+        total = session.scalar(count_stmt) or 0
+        materials = session.scalars(statement).all()
 
         return jsonify(
             {
