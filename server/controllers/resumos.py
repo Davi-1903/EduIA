@@ -1,10 +1,11 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from database import SessionLocal
-from models.resumos import Resumo 
+from models.resumos import Resumo
 from sqlalchemy import select, func
 
 bp_materials_resumo = Blueprint('resumos', __name__, url_prefix='/resumos')
+
 
 @bp_materials_resumo.route('/', methods=['GET'])
 @login_required
@@ -43,7 +44,8 @@ def get_resumes():
                 ],
             }
         ), 200
-    
+
+
 @bp_materials_resumo.route('/<int:id>', methods=['GET'])
 @login_required
 def get_resume(id: int):
@@ -81,11 +83,11 @@ def create_resume():
     with SessionLocal() as session:
         try:
             resume = Resumo(
-                user_id = current_user.id,
-                discipline = data['discipline'],
-                subject = data['subject'],
-                content = {'content': 1},
-                note= data['note']
+                user_id=current_user.id,
+                discipline=data['discipline'],
+                subject=data['subject'],
+                content={'content': 1},
+                note=data['note'],
             )
             session.add(resume)
             session.commit()

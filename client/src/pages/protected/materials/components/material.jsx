@@ -33,11 +33,13 @@ export default function MaterialCard({
     const [menu, setMenu] = useState(null);
 
     function formatarHora(created_at) {
-        const data = new Date(created_at);
-        const horas = String(data.getHours()).padStart(2, '0');
-        const minutos = String(data.getMinutes()).padStart(2, '0');
-
-        return `${horas}:${minutos}`;
+        const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
+        const formatador = new Intl.DateTimeFormat('pt-BR', {
+            hour: '2-digit',
+            minute: '2-digit',
+            timeZone: userTimeZone,
+        });
+        return formatador.format(new Date(created_at));
     }
 
     function formatarData(created_at) {

@@ -104,12 +104,7 @@
 			"path": "client/src/pages/protected/materials/components/material.jsx",
 			"bookmarks": [
 				{
-					"line": 34,
-					"column": 4,
-					"label": "tem algo errado na exibição da hr"
-				},
-				{
-					"line": 85,
+					"line": 87,
 					"column": 1,
 					"label": "Talvez trocar ícone por tag, acho que fica mais fácil de identificar o material"
 				}

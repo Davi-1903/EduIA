@@ -7,6 +7,7 @@ from models.explicacoes import Explicacao
 
 bp_materials_explicacao = Blueprint('explicacoes', __name__, url_prefix='/explicacoes')
 
+
 @bp_materials_explicacao.route('/', methods=['GET'])
 @login_required
 def get_explanations():
@@ -43,7 +44,8 @@ def get_explanations():
                 ],
             }
         ), 200
-    
+
+
 @bp_materials_explicacao.route('/<int:id>', methods=['GET'])
 @login_required
 def get_explanation(id: int):
@@ -68,6 +70,7 @@ def get_explanation(id: int):
             }
         ), 200
 
+
 @bp_materials_explicacao.route('/', methods=['POST'])
 @login_required
 def create_explanation():
@@ -79,11 +82,11 @@ def create_explanation():
     with SessionLocal() as session:
         try:
             explanation = Explicacao(
-                user_id = current_user.id,
-                discipline = data['discipline'],
-                questions = data['questions'],
-                subject = data['subject'],
-                content={'content': 1}
+                user_id=current_user.id,
+                discipline=data['discipline'],
+                questions=data['questions'],
+                subject=data['subject'],
+                content={'content': 1},
             )
             session.add(explanation)
             session.commit()
