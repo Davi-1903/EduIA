@@ -19,11 +19,19 @@ export default defineConfig({
         },
     },
     build: {
-        rollupOptions: {
+        rolldownOptions: {
             output: {
-                manualChunks: {
-                    vendor: ['react', 'react-dom', 'react-helmet-async', 'react-router-dom', 'tailwindcss'],
-                    ui: ['@tabler/icons-react'],
+                codeSplitting: {
+                    groups: [
+                        {
+                            test: /node_modules\/(react|react-dom|react-helmet-async|react-router-dom)/,
+                            name: 'vendor',
+                        },
+                        {
+                            test: /node_modules\/@tabler\/icons-react/,
+                            name: 'ui',
+                        },
+                    ],
                 },
             },
         },
