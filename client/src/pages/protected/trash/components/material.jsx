@@ -26,32 +26,23 @@ export default function MaterialCard({
     projector,
     printed,
     digital,
-    created_at,
+    deleted_at,
     type,
     canOpenMenu = true,
     fetchMaterials,
 }) {
     const [menu, setMenu] = useState(null);
 
-    function formatarHora(created_at) {
-        const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-        const formatador = new Intl.DateTimeFormat('pt-BR', {
-            hour: '2-digit',
-            minute: '2-digit',
-            timeZone: userTimeZone,
-        });
-        return formatador.format(new Date(created_at));
-    }
+    function getTimeRemaining(deleted_at) {
+        const deleted = new Date(deleted_at);
+        deleted.setDate(deleted.getDate() + 30);
+        const today = new Date();
 
-    function formatarData(created_at) {
-        const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
-        const formatador = new Intl.DateTimeFormat('pt-BR', {
-            day: '2-digit',
-            month: '2-digit',
-            year: 'numeric',
-            timeZone: userTimeZone,
-        });
-        return formatador.format(new Date(created_at));
+        return (
+            <span className='font-secundary text-red-800'>
+                {Math.floor((deleted - today) / (1000 * 60 * 60 * 24))} dias restantes
+            </span>
+        );
     }
 
     function getIcon(type) {
@@ -128,10 +119,7 @@ export default function MaterialCard({
                         </p>
                     )}
                 </div>
-                <div className='flex items-center justify-between border-t-2 border-color4-25 px-2 py-1'>
-                    <span className='font-secundary text-color2-100'>{formatarHora(created_at)}</span>
-                    <span className='font-secundary text-color2-100'>{formatarData(created_at)}</span>
-                </div>
+                <div className='border-t-2 border-color4-25 px-2 py-1 text-right'>{getTimeRemaining(deleted_at)}</div>
             </article>
         </>
     );

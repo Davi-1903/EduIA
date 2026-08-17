@@ -174,16 +174,6 @@
 					"label": "Fazer um mascote com uma expressão de \"UFA!\". Acho que deu para entender"
 				}
 			]
-		},
-		{
-			"path": "client/src/pages/protected/trash/components/material.jsx",
-			"bookmarks": [
-				{
-					"line": 130,
-					"column": 0,
-					"label": "Adicionar indicativo de tempo restante antes dos 30 dias"
-				}
-			]
 		}
 	]
 }
