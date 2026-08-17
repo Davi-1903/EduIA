@@ -147,7 +147,7 @@ export default function GenerateQuidedExercises({ setOpen }) {
                         className='resize-none rounded-lg border border-gray-300 bg-color4-200 px-4 py-2 outline-none focus:ring-2 focus:ring-color1-400'
                     ></textarea>
                 </div>
-                <button className='h-10 cursor-pointer rounded-lg bg-button text-xl text-color4-100 transition-all duration-150 hover:shadow-lg-hard 2xl:h-12'>
+                <button className='h-12 cursor-pointer rounded-lg bg-button text-xl text-color4-100 transition-all duration-150 not-disabled:hover:shadow-lg-hard disabled:cursor-not-allowed disabled:opacity-60'>
                     Gerar
                 </button>
             </form>

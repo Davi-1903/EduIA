@@ -144,10 +144,10 @@ export default function GenerateExplanation({ setOpen }) {
                         ></textarea>
                     </div>
                     <button
-                        className='h-12 cursor-pointer rounded-lg bg-button text-xl text-color4-100 transition-all duration-150 hover:shadow-lg-hard'
+                        className='h-12 cursor-pointer rounded-lg bg-button text-xl text-color4-100 transition-all duration-150 not-disabled:hover:shadow-lg-hard disabled:cursor-not-allowed disabled:opacity-60'
                         disabled={isLoading}
                     >
-                        Gerar
+                        {isLoading ? 'Gerando...' : 'Gerar'}
                     </button>
                 </div>
             </form>

@@ -213,7 +213,7 @@ export default function GenerateForms({ setOpen }) {
                 <button
                     type='submit'
                     disabled={loading}
-                    className='h-12 cursor-pointer rounded-lg bg-button text-xl text-color4-100 transition-all duration-150 hover:shadow-lg-hard disabled:opacity-50'
+                    className='h-12 cursor-pointer rounded-lg bg-button text-xl text-color4-100 transition-all duration-150 not-disabled:hover:shadow-lg-hard disabled:cursor-not-allowed disabled:opacity-60'
                 >
                     {loading ? 'Gerando...' : 'Gerar'}
                 </button>

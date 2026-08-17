@@ -4,6 +4,8 @@ from sqlalchemy import func, select
 
 from database import SessionLocal
 from models.formularios import Formulario
+from models.material import Difficulty
+
 
 bp_materials_formulario = Blueprint('formularios', __name__, url_prefix='/formularios')
 
@@ -88,7 +90,7 @@ def create_formulario():
                 discipline=data['discipline'],
                 subject=data['subject'],
                 content=data['content'],
-                difficulty=data['difficulty'],
+                difficulty=Difficulty(data['difficulty']),
                 amount=data['amount'],
                 note=data['note'] if data['note'] != '' else None,
             )
