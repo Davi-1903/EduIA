@@ -1,4 +1,4 @@
-import Mascote from '/assets/images/mascote/mascote-materiais.png';
+import Mascote from '/assets/images/mascote/lixeira.webp';
 
 export default function EmptyMaterials() {
     return (
