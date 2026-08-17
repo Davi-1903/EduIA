@@ -82,7 +82,6 @@ const router = createBrowserRouter([
             },
         ],
     },
-    // Procurar fazer uma gambiarra para esse layout diferente :)
     {
         path: 'login',
         element: (

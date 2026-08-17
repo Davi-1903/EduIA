@@ -9,7 +9,7 @@
 | **NF03** | Usar `HTML`           | Linguagem de marcação de hiper-textos utilizada na construção do site                                                            | Essencial  | ✅ Implementado       |
 | **NF04** | Usar `CSS`            | Linguagem utilizada na estilização do site                                                                                       | Essencial  | ✅ Implementado       |
 | **NF05** | Usar `ReactJS`        | Biblioteca `JavaScript` para a criação de interfaces                                                                             | Essencial  | ✅ Implementado       |
-| **NF06** | Usar `MySQL`          | Tipo de banco de dados relacional utilizado para armazenar informações                                                           | Essencial  | 🔧 Em desenvolvimento |
+| **NF06** | Usar `MySQL`          | Tipo de banco de dados relacional utilizado para armazenar informações                                                           | Essencial  | ✅ Implementado       |
 | **NF07** | Usar `Git` e `GitHub` | Ferramentas utilizadas para versionamento e compartilhamento do projeto para melhorar e otimizar o desenvolvimento da plataforma | Importante | ✅ Implementado       |
 | **NF08** | Usar `Figma`          | Plataforma utilizada na criação do design das páginas antes na estilização com CSS                                               | Importante | ✅ Implementado       |
 | **NF09** | Usar `LangChain`      | Framework para integrar a API da LLM                                                                                             | Essencial  | ⏳ Planejando         |
