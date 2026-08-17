@@ -23,6 +23,21 @@ export async function POST(url, data) {
     return result;
 }
 
+export async function PATCH(url) {
+    const csrf = await getCSRF();
+    const response = await fetch(url, {
+        method: 'PATCH',
+        credentials: 'include',
+        headers: {
+            'Content-Type': 'application/json',
+            'X-CSRFToken': csrf,
+        },
+    });
+    const result = await response.json();
+    result.status = response.status;
+    return result;
+}
+
 export async function DELETE(url) {
     const csrf = await getCSRF();
     const response = await fetch(url, {

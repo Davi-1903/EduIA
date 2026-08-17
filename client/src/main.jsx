@@ -15,6 +15,7 @@ const Dashboard = lazy(() => import('./pages/protected/dash'));
 const Materials = lazy(() => import('./pages/protected/materials'));
 const Settings = lazy(() => import('./pages/protected/config'));
 const Profile = lazy(() => import('./pages/protected/profile/index'));
+const Trash = lazy(() => import('./pages/protected/trash'));
 
 import './globals.css';
 
@@ -69,6 +70,14 @@ const router = createBrowserRouter([
                 element: (
                     <Suspense fallback={<Loading />}>
                         <Materials />
+                    </Suspense>
+                ),
+            },
+            {
+                path: 'trash',
+                element: (
+                    <Suspense fallback={<Loading />}>
+                        <Trash />
                     </Suspense>
                 ),
             },

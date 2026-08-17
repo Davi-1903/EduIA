@@ -92,11 +92,6 @@
 					"line": 103,
 					"column": 0,
 					"label": "Adicionar aviso que não há materiais para filtros especificados?"
-				},
-				{
-					"line": 112,
-					"column": 0,
-					"label": "Adicionar funcionalidade de lixeira. Selecionar? Talvez"
 				}
 			]
 		},
@@ -144,7 +139,7 @@
 			"path": "server/controllers/questoes.py",
 			"bookmarks": [
 				{
-					"line": 84,
+					"line": 78,
 					"column": 0,
 					"label": "Por enquanto, cria um material sem conteúdo"
 				}
@@ -161,22 +156,32 @@
 			]
 		},
 		{
-			"path": "client/src/pages/protected/materials/components/menu.jsx",
-			"bookmarks": [
-				{
-					"line": 14,
-					"column": 0,
-					"label": "Recarregar materiais ao apagar material"
-				}
-			]
-		},
-		{
 			"path": "docs/requisitos_nao_funcionais.md",
 			"bookmarks": [
 				{
 					"line": 21,
 					"column": 0,
 					"label": "Alterar prioridade"
+				}
+			]
+		},
+		{
+			"path": "client/src/pages/protected/trash/components/empty.jsx",
+			"bookmarks": [
+				{
+					"line": 9,
+					"column": 0,
+					"label": "Fazer um mascote com uma expressão de \"UFA!\". Acho que deu para entender"
+				}
+			]
+		},
+		{
+			"path": "client/src/pages/protected/trash/components/material.jsx",
+			"bookmarks": [
+				{
+					"line": 130,
+					"column": 0,
+					"label": "Adicionar indicativo de tempo restante antes dos 30 dias"
 				}
 			]
 		}
