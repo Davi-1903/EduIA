@@ -2,6 +2,7 @@ from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from database import SessionLocal
 from models.resumos import Resumo
+from models.historico import Historico
 from sqlalchemy import select, func
 
 
@@ -30,8 +31,8 @@ def get_resumes():
             .order_by(Resumo.created_at.desc())
         )
 
-        total = session.execute(count_stmt).scalar() or 0
-        materials = session.execute(statement).scalars().all()
+        total = session.scalar(count_stmt) or 0
+        materials = session.scalars(statement).all()
 
         return jsonify(
             {
@@ -96,7 +97,9 @@ def create_resume():
                 content={'content': 1},
                 note=data['note'],
             )
+            historico = Historico(material=resume)
             session.add(resume)
+            session.add(historico)
             session.commit()
             return jsonify({'ok': True, 'redirect': '/materials'}), 201
         except Exception:

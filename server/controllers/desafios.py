@@ -3,6 +3,7 @@ from flask_login import current_user, login_required
 from sqlalchemy import func, select
 
 from database import SessionLocal
+from models.historico import Historico
 from models.desafios import Desafio
 from models.material import Difficulty
 
@@ -26,8 +27,8 @@ def get_desafios():
             .order_by(Desafio.created_at.desc())
         )
 
-        total = session.execute(count_stmt).scalar() or 0
-        materials = session.execute(statement).scalars().all()
+        total = session.scalar(count_stmt) or 0
+        materials = session.scalars(statement).all()
 
         return jsonify(
             {
@@ -93,8 +94,9 @@ def create_desafio():
                 difficulty=Difficulty.MUITO_DIFICIL,
                 note=data['note'] if data['note'] != '' else None,
             )
-
+            historico = Historico(material=desafio)
             session.add(desafio)
+            session.add(historico)
             session.commit()
             return jsonify({'ok': True, 'redirect': '/materials'}), 201
 

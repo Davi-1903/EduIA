@@ -79,8 +79,8 @@ def get_materials():
             statement = statement.where(MaterialPoly.subject.like(f'%{search}%'))
             count_stmt = count_stmt.where(MaterialPoly.subject.like(f'%{search}%'))
 
-        total = session.execute(count_stmt).scalar() or 0
-        materials = session.execute(statement).scalars().all()
+        total = session.scalar(count_stmt) or 0
+        materials = session.scalars(statement).all()
 
         return jsonify(
             {

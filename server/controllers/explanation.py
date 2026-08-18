@@ -3,6 +3,7 @@ from flask_login import current_user, login_required
 from sqlalchemy import select, func
 from database import SessionLocal
 from models.explicacoes import Explicacao
+from models.historico import Historico
 
 
 bp_materials_explicacao = Blueprint('explicacoes', __name__, url_prefix='/explicacoes')
@@ -30,8 +31,8 @@ def get_explanations():
             .order_by(Explicacao.created_at.desc())
         )
 
-        total = session.execute(count_stmt).scalar() or 0
-        materials = session.execute(statement).scalars().all()
+        total = session.scalar(count_stmt) or 0
+        materials = session.scalars(statement).all()
 
         return jsonify(
             {
@@ -94,7 +95,9 @@ def create_explanation():
                 subject=data['subject'],
                 content={'content': 1},
             )
+            historico = Historico(material=explanation)
             session.add(explanation)
+            session.add(historico)
             session.commit()
             return jsonify({'ok': True, 'redirect': '/materials'}), 201
 

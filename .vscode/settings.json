@@ -2,6 +2,7 @@
 	"editor.formatOnSave": true,
 	"python.analysis.autoImportCompletions": true,
 	"python.analysis.typeCheckingMode": "standard",
+	"python-envs.defaultEnvManager": "ms-python.python:venv",
 	"bookmarks.saveBookmarksInProject": true,
 	"[javascript]": {
 		"editor.defaultFormatter": "esbenp.prettier-vscode"
