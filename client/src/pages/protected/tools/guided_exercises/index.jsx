@@ -2,6 +2,7 @@ import { useEffect, useState, useRef } from 'react';
 import { disciplinasList } from '../../../../../public/assets/data/disciplinas';
 import { useMessages } from '../../../../context/messagesContext';
 import { POST } from '../../../../api/materials';
+import { useNavigate } from 'react-router-dom';
 import InputRange from '../../../../components/inputRange';
 import clsx from 'clsx';
 
@@ -18,6 +19,7 @@ export default function GenerateQuidedExercises({ setOpen }) {
     const [note, setNote] = useState('');
     const [isClose, setClose] = useState(false);
     const [isLoading, setLoading] = useState(false);
+    const navigate = useNavigate();
 
     const dificuldades = ['Muito fácil', 'Fácil', 'Médio', 'Difícil', 'Muito difícil'];
 
@@ -34,7 +36,7 @@ export default function GenerateQuidedExercises({ setOpen }) {
         setLoading(true);
 
         try {
-            const response = await POST('/api/materials/exercicio_guiado/', {
+            const response = await POST('/api/materials/exercicio_guiado', {
                 discipline,
                 subject,
                 difficulty: dificuldades[difficulty],
@@ -50,9 +52,8 @@ export default function GenerateQuidedExercises({ setOpen }) {
             });
 
             if (response.status !== 201) throw new Error(response.message);
-
             document.body.style.overflowY = 'auto';
-            setOpen(false);
+            navigate(response.redirect);
 
             setMessages(prev => [
                 ...prev,
@@ -112,9 +113,7 @@ export default function GenerateQuidedExercises({ setOpen }) {
                 </h2>
 
                 <div>
-                    <label className='font-secundary font-bold text-color1-100'>
-                        Disciplina
-                    </label>
+                    <label className='font-secundary font-bold text-color1-100'>Disciplina</label>
 
                     <select
                         id='disciplina'
@@ -125,9 +124,7 @@ export default function GenerateQuidedExercises({ setOpen }) {
                         {Object.entries(disciplinasList).map(([key, disciplinas]) => (
                             <optgroup label={key}>
                                 {disciplinas.map(disciplina => (
-                                    <option value={disciplina}>
-                                        {disciplina}
-                                    </option>
+                                    <option value={disciplina}>{disciplina}</option>
                                 ))}
                             </optgroup>
                         ))}
@@ -135,9 +132,7 @@ export default function GenerateQuidedExercises({ setOpen }) {
                 </div>
 
                 <div className='flex flex-col'>
-                    <label className='font-secundary font-bold text-color1-100'>
-                        Conteúdo
-                    </label>
+                    <label className='font-secundary font-bold text-color1-100'>Conteúdo</label>
 
                     <input
                         type='text'
@@ -186,9 +181,7 @@ export default function GenerateQuidedExercises({ setOpen }) {
                 </div>
 
                 <div>
-                    <label className='font-secundary font-bold text-color1-100'>
-                        Formato dos exercícios
-                    </label>
+                    <label className='font-secundary font-bold text-color1-100'>Formato dos exercícios</label>
 
                     <div className='grid grid-cols-2 gap-x-8 pl-2'>
                         <label className='flex items-center gap-2 font-secundary text-sm text-color1-100'>
@@ -227,9 +220,7 @@ export default function GenerateQuidedExercises({ setOpen }) {
                 </div>
 
                 <div className='flex flex-col'>
-                    <label className='font-secundary font-bold text-color1-100'>
-                        Observação
-                    </label>
+                    <label className='font-secundary font-bold text-color1-100'>Observação</label>
 
                     <textarea
                         placeholder='Escreva algo específico que deseja nos exercícios...'
