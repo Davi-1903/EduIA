@@ -47,12 +47,12 @@ def get_deleted_materials():
                         'title': material.subject,
                         'discipline': material.discipline,
                         'difficulty': material.difficulty.value if hasattr(material, 'difficulty') else None,  # type: ignore
-                        'amount': material.amount if hasattr(material, 'amount') else None,  # type: ignore
-                        'grade': material.grade if hasattr(material, 'grade') else None,  # type: ignore
-                        'chalkboard': material.chalkboard if hasattr(material, 'chalkboard') else None,  # type: ignore
-                        'projector': material.projector if hasattr(material, 'projector') else None,  # type: ignore
-                        'printed': material.printed if hasattr(material, 'printed') else None,  # type: ignore
-                        'digital': material.digital if hasattr(material, 'digital') else None,  # type: ignore
+                        'amount': getattr(material, 'amount', None),
+                        'grade': getattr(material, 'grade', None),
+                        'chalkboard': getattr(material, 'chalkboard', None),
+                        'projector': getattr(material, 'projector', None),
+                        'printed': getattr(material, 'printed', None),
+                        'digital': getattr(material, 'digital', None),
                         'created_at': material.created_at,
                         'deleted_at': material.deleted_at,
                         'type': material.type.value,

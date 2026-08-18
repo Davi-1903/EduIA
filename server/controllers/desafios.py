@@ -18,10 +18,16 @@ def get_desafios():
     limit = request.args.get('limit', 50, type=int)
 
     with SessionLocal() as session:
-        count_stmt = select(func.count()).select_from(Desafio).where(Desafio.user_id == current_user.id)
+        count_stmt = (
+            select(func.count())
+            .select_from(Desafio)
+            .where(Desafio.user_id == current_user.id)
+            .where(Desafio.deleted_at.is_(None))
+        )
         statement = (
             select(Desafio)
             .where(Desafio.user_id == current_user.id)
+            .where(Desafio.deleted_at.is_(None))
             .offset(cursor)
             .limit(limit)
             .order_by(Desafio.created_at.desc())
@@ -55,7 +61,7 @@ def get_desafios():
 def get_desafio(id: int):
     with SessionLocal() as session:
         material = session.get(Desafio, id)
-        if material is None:
+        if material is None or material.deleted_at is not None:
             return jsonify({'ok': False, 'message': 'Desafio não encontrado'}), 404
 
         return jsonify(

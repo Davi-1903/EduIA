@@ -50,15 +50,15 @@ def get_historico():
                             'title': item.material.subject,
                             'discipline': item.material.discipline,
                             'difficulty': item.material.difficulty.value if hasattr(item.material, 'difficulty') else None,  # type: ignore
-                            'amount': item.material.amount if hasattr(item.material, 'amount') else None,  # type: ignore
-                            'time': item.material.time_per_question if hasattr(item.material, 'time_per_question') else None,  # type: ignore
-                            'grade': item.material.grade if hasattr(item.material, 'grade') else None,  # type: ignore
-                            'chalkboard': item.material.chalkboard if hasattr(item.material, 'chalkboard') else None,  # type: ignore
-                            'projector': item.material.projector if hasattr(item.material, 'projector') else None,  # type: ignore
-                            'printed': item.material.printed if hasattr(item.material, 'printed') else None,  # type: ignore
-                            'digital': item.material.digital if hasattr(item.material, 'digital') else None,  # type: ignore
-                            'note': item.material.note if hasattr(item.material, 'note') else None,  # type: ignore
-                            'questions': item.material.questions if hasattr(item.material, 'questions') else None,  # type: ignore
+                            'amount': getattr(item.material, 'amount', None),
+                            'time': getattr(item.material, 'time', None),
+                            'grade': getattr(item.material, 'grade', None),
+                            'chalkboard': getattr(item.material, 'chalkboard', None),
+                            'projector': getattr(item.material, 'projector', None),
+                            'printed': getattr(item.material, 'printed', None),
+                            'digital': getattr(item.material, 'digital', None),
+                            'note': getattr(item.material, 'note', None),
+                            'questions': getattr(item.material, 'questions', None),
                             'created_at': item.material.created_at,
                             'type': item.material.type.value,
                         },

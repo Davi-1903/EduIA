@@ -97,6 +97,7 @@ Para executar o projeto, há duas formas:
     DB_HOST=localhost
     DB_PORT=3306
     DB_NAME=db_eduia
+    TRASH_RETENTION_DAYS=30
     ```
 
 4. **Inicie ambos os servidores**
@@ -141,6 +142,7 @@ Após finalizar esse passo a passo, a aplicação iniciará em seu navegador pad
     DB_HOST=database
     DB_PORT=3306
     DB_NAME=db_eduia
+    TRASH_RETENTION_DAYS=30
     ```
 
 3. **Crie e inicie os `contêineres Docker`**

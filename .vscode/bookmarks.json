@@ -92,6 +92,11 @@
 					"line": 103,
 					"column": 0,
 					"label": "Adicionar aviso que não há materiais para filtros especificados?"
+				},
+				{
+					"line": 112,
+					"column": 0,
+					"label": "Adicionar funcionalidade de lixeira. Selecionar? Talvez"
 				}
 			]
 		},
@@ -99,7 +104,12 @@
 			"path": "client/src/pages/protected/materials/components/material.jsx",
 			"bookmarks": [
 				{
-					"line": 89,
+					"line": 34,
+					"column": 4,
+					"label": "tem algo errado na exibição da hr"
+				},
+				{
+					"line": 85,
 					"column": 1,
 					"label": "Talvez trocar ícone por tag, acho que fica mais fácil de identificar o material"
 				}
@@ -152,16 +162,11 @@
 					"line": 34,
 					"column": 0,
 					"label": "Adicionar FULLTEXT SEARCH"
-				}
-			]
-		},
-		{
-			"path": "docs/requisitos_nao_funcionais.md",
-			"bookmarks": [
+				},
 				{
-					"line": 21,
+					"line": 51,
 					"column": 0,
-					"label": "Alterar prioridade"
+					"label": "O cascade é provisório"
 				}
 			]
 		}
