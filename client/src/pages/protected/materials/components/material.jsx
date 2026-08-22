@@ -83,7 +83,7 @@ export default function MaterialCard({
                 />
             )}
             <article
-                className='flex min-h-48 cursor-pointer flex-col rounded-lg bg-color4-400 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg'
+                className='flex h-full min-h-48 cursor-pointer flex-col rounded-lg bg-color4-400 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg'
                 onContextMenu={e => handleContextMenu(e, id)}
             >
                 <div className='flex items-center justify-end gap-3 border-b-2 border-color4-25 p-2 pl-3'>
