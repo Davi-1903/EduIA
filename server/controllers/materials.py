@@ -1,9 +1,11 @@
 from datetime import datetime, timezone
+import re
 
 from flask import Blueprint, jsonify, request
 from flask_login import current_user, login_required
 from sqlalchemy import func, or_, select
 from sqlalchemy.orm import with_polymorphic
+from sqlalchemy.dialects.mysql import match
 
 from controllers.questoes import bp_materials_questoes
 from controllers.quiz import bp_materials_quiz
@@ -28,6 +30,13 @@ bp_materials.register_blueprint(bp_materials_formulario)
 bp_materials.register_blueprint(bp_materials_plano_de_aula)
 bp_materials.register_blueprint(bp_materials_exercicio_guiado)
 bp_materials.register_blueprint(bp_study_guide)
+
+
+def to_boolean_prefix_search(term: str) -> str:
+    sanitized = re.sub(r'[+\-<>()~*"@]', ' ', term)
+    words = sanitized.split()
+    return ' '.join(f'+{w}*' for w in words)
+
 
 @bp_materials.route('/', methods=['GET'])
 @login_required
@@ -76,15 +85,18 @@ def get_materials():
                 statement = statement.where(or_(*conditions))
                 count_stmt = count_stmt.where(or_(*conditions))
             except ValueError:
-                return jsonify({'ok': False, 'message': f'Dificuldade inválida: {type_}'}), 400
+                return jsonify({'ok': False, 'message': f'Dificuldade inválida: {difficulty}'}), 400
 
         if discipline != 'all':
             statement = statement.where(MaterialPoly.discipline == discipline)
             count_stmt = count_stmt.where(MaterialPoly.discipline == discipline)
 
         if search != '':
-            statement = statement.where(MaterialPoly.subject.like(f'%{search}%'))
-            count_stmt = count_stmt.where(MaterialPoly.subject.like(f'%{search}%'))
+            search_term = to_boolean_prefix_search(search)
+            if search_term:
+                score = match(MaterialPoly.discipline, MaterialPoly.subject, against=search_term, in_boolean_mode=True)
+                statement = statement.where(score).order_by(score.desc())
+                count_stmt = count_stmt.where(score)
 
         total = session.scalar(count_stmt) or 0
         materials = session.scalars(statement).all()

@@ -1,7 +1,7 @@
 import enum
 from typing import TYPE_CHECKING, Any
 from datetime import datetime
-from sqlalchemy import JSON, DateTime, Enum, ForeignKey, String, func
+from sqlalchemy import JSON, DateTime, Enum, ForeignKey, Index, String, func
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.ext.mutable import MutableDict
 from database import Base
@@ -54,3 +54,4 @@ class Material(Base):
     )
 
     __mapper_args__ = {'polymorphic_identity': None, 'polymorphic_on': 'type'}
+    __table_args__ = (Index('ix_materials_fulltext', 'discipline', 'subject', mysql_prefix='FULLTEXT'),)
