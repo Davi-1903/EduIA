@@ -1,4 +1,5 @@
 from . import (
+    historico,
     user,
     professor,
     aluno,
@@ -16,6 +17,7 @@ from . import (
 
 
 __all__ = [
+    'historico',
     'user',
     'professor',
     'aluno',

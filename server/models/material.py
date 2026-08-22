@@ -9,6 +9,7 @@ from database import Base
 
 if TYPE_CHECKING:
     from models.user import Usuario
+    from models.historico import Historico
 
 
 class MaterialType(enum.Enum):
@@ -42,7 +43,14 @@ class Material(Base):
     created_at: Mapped[datetime] = mapped_column(DateTime(timezone=True), server_default=func.now(), nullable=False)
     content: Mapped[dict[str, Any]] = mapped_column(MutableDict.as_mutable(JSON), nullable=False)
     type: Mapped[MaterialType] = mapped_column(Enum(MaterialType), nullable=False)
+    deleted_at: Mapped[datetime | None] = mapped_column(DateTime(timezone=True), nullable=True)
 
     user: Mapped['Usuario'] = relationship(back_populates='materials')
+
+    # Não foi definido ainda se o histórico será apagado junto com o material ou será mantido, então por enquanto
+    # terá um cascade delete para manter a integridade referencial, mas isso pode ser alterado no futuro.
+    historico: Mapped['Historico'] = relationship(
+        back_populates='material', uselist=False, cascade='all, delete-orphan'
+    )
 
     __mapper_args__ = {'polymorphic_identity': None, 'polymorphic_on': 'type'}

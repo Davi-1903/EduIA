@@ -7,6 +7,7 @@ import {
     IconLayoutSidebarLeftExpand,
     IconLogout,
     IconSettings,
+    IconTrash,
     IconUser,
 } from '@tabler/icons-react';
 import Logo from '/assets/images/logo.svg';
@@ -40,7 +41,7 @@ const links = [
     },
     {
         id: 3,
-        path: '#',
+        path: '/historico',
         name: 'Histórico',
         icon: (
             <IconClock
@@ -56,6 +57,17 @@ const links = [
         icon: (
             <IconSettings
                 size={28}
+                className='stroke-color1-100'
+            />
+        ),
+    },
+    {
+        id: 5,
+        path: '/trash',
+        name: 'Lixeira',
+        icon: (
+            <IconTrash
+                size={26}
                 className='stroke-color1-100'
             />
         ),

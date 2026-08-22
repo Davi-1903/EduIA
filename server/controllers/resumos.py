@@ -2,7 +2,9 @@ from flask import Blueprint, jsonify, request
 from flask_login import login_required, current_user
 from database import SessionLocal
 from models.resumos import Resumo
+from models.historico import Historico
 from sqlalchemy import select, func
+
 
 bp_materials_resumo = Blueprint('resumos', __name__, url_prefix='/resumos')
 
@@ -14,17 +16,23 @@ def get_resumes():
     limit = request.args.get('limit', 50, type=int)
 
     with SessionLocal() as session:
-        count_stmt = select(func.count()).select_from(Resumo).where(Resumo.user_id == current_user.id)
+        count_stmt = (
+            select(func.count())
+            .select_from(Resumo)
+            .where(Resumo.user_id == current_user.id)
+            .where(Resumo.deleted_at.is_(None))
+        )
         statement = (
             select(Resumo)
             .where(Resumo.user_id == current_user.id)
+            .where(Resumo.deleted_at.is_(None))
             .offset(cursor)
             .limit(limit)
             .order_by(Resumo.created_at.desc())
         )
 
-        total = session.execute(count_stmt).scalar() or 0
-        materials = session.execute(statement).scalars().all()
+        total = session.scalar(count_stmt) or 0
+        materials = session.scalars(statement).all()
 
         return jsonify(
             {
@@ -51,7 +59,7 @@ def get_resumes():
 def get_resume(id: int):
     with SessionLocal() as session:
         material = session.get(Resumo, id)
-        if material is None:
+        if material is None or material is not None:
             return jsonify({'ok': False, 'message': 'Resume não encontrado'}), 404
 
         return jsonify(
@@ -89,7 +97,9 @@ def create_resume():
                 content={'content': 1},
                 note=data['note'],
             )
+            historico = Historico(material=resume)
             session.add(resume)
+            session.add(historico)
             session.commit()
             return jsonify({'ok': True, 'redirect': '/materials'}), 201
         except Exception:

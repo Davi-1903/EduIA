@@ -1,31 +1,38 @@
 import { useEffect, useRef } from 'react';
-import { IconFolderOpen, IconTrash } from '@tabler/icons-react';
+import { IconRestore, IconTrash } from '@tabler/icons-react';
 import { useNavigate } from 'react-router-dom';
 import { useMessages } from '../../../../context/messagesContext';
-import { DELETE } from '../../../../api/materials';
+import { DELETE, PATCH } from '../../../../api/materials';
 
-export default function MenuCard({ x, y, id, setMenu }) {
+export default function MenuCard({ x, y, id, setMenu, fetchMaterials }) {
     const { setMessages } = useMessages();
     const menuRef = useRef(null);
     const navigate = useNavigate();
 
-    function handleOpen() {
+    function handleRestore() {
+        if (!confirm('Você tem certeza?')) return;
+
         setMenu(null);
-        alert('Funcionalidade ainda não implementada');
+        PATCH(`/api/materials/${id}/restore`)
+            .then(data => {
+                if (data.status !== 200) throw new Error(data.message);
+                setMessages(prev => [...prev, { id: prev.length + 1, message: 'Arquivo restaurado', type: 'ok' }]);
+                navigate('/materials');
+            })
+            .catch(err =>
+                setMessages(prev => [...prev, { id: prev.length + 1, message: err.message, type: 'danger' }]),
+            );
     }
 
     function handleDelete() {
-        if (!confirm('Você tem certeza? Deseja mesmo mover esse material para a lixeira?')) return;
+        if (!confirm('Você tem certeza? Essa ação é irreverssível')) return;
 
         setMenu(null);
-        DELETE(`/api/materials/${id}`)
+        DELETE(`/api/materials/${id}/trash`)
             .then(data => {
                 if (data.status !== 200) throw new Error(data.message);
-                setMessages(prev => [
-                    ...prev,
-                    { id: prev.length + 1, message: 'Arquivo movido para a lixeira', type: 'ok' },
-                ]);
-                navigate('/trash');
+                setMessages(prev => [...prev, { id: prev.length + 1, message: 'Arquivo apagado', type: 'ok' }]);
+                fetchMaterials();
             })
             .catch(err =>
                 setMessages(prev => [...prev, { id: prev.length + 1, message: err.message, type: 'danger' }]),
@@ -62,10 +69,10 @@ export default function MenuCard({ x, y, id, setMenu }) {
         >
             <button
                 className='flex items-center gap-2 rounded-sm px-2 py-1 hover:bg-color4-100'
-                onClick={handleOpen}
+                onClick={handleRestore}
             >
-                <IconFolderOpen className='stroke-color1-100' />
-                <span className='font-secundary font-medium text-color1-100'>Abrir</span>
+                <IconRestore className='stroke-color1-100' />
+                <span className='font-secundary font-medium text-color1-100'>Restaurar</span>
             </button>
             <hr className='border border-color4-25' />
             <button
@@ -73,7 +80,7 @@ export default function MenuCard({ x, y, id, setMenu }) {
                 onClick={handleDelete}
             >
                 <IconTrash className='stroke-red-800' />
-                <span className='font-secundary font-medium text-red-800'>Mover para lixeira</span>
+                <span className='font-secundary font-medium text-red-800'>Apagar material</span>
             </button>
         </div>
     );

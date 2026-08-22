@@ -4,7 +4,7 @@ export default function EmptyMaterials() {
     return (
         <div className='pt-12'>
             <h2 className='text-center font-secundary text-2xl font-semibold text-color3-400 lg:text-3xl'>
-                Não há materiais ainda...
+                Histórico vazio...
             </h2>
             <img
                 src={Mascote}

@@ -17,7 +17,6 @@ import GenerateForms from '../tools/forms';
 import GenerateChallenge from '../tools/challenge';
 import MaterialCard from '../materials/components/material';
 import Card from './cards';
-import { IconCirclePlus } from '@tabler/icons-react';
 
 export default function Dashboard() {
     const { user } = useAuthenticated();
@@ -104,7 +103,7 @@ export default function Dashboard() {
     }
 
     useEffect(() => {
-        GET('/api/materials?limit=4')
+        GET('/api/materials/?limit=4')
             .then(data => {
                 if (data.status === 401) return;
                 if (data.status !== 200) throw new Error('Não foi possível carregar os materiais');

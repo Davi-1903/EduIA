@@ -63,7 +63,7 @@ def login():
             if not data:
                 return jsonify({'ok': False, 'message': 'Dados não recebidos'}), 400
 
-            user = session.execute(select(Usuario).where(Usuario.email == data['email'])).scalar()
+            user = session.scalar(select(Usuario).where(Usuario.email == data['email']))
             if not user or not ph.verify(data['senha'], user.password):
                 return jsonify({'ok': False, 'message': 'Credenciais inválidas'}), 401
 

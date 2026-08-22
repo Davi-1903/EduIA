@@ -18,6 +18,7 @@ services:
             - DB_HOST=${DB_HOST}
             - DB_PORT=${DB_PORT}
             - DB_NAME=${DB_NAME}
+            - TRASH_RETENTION_DAYS=${TRASH_RETENTION_DAYS}
         depends_on:
             - database
 

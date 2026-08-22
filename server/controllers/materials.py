@@ -1,3 +1,5 @@
+from datetime import datetime, timezone
+
 from flask import Blueprint, jsonify, request
 from flask_login import current_user, login_required
 from sqlalchemy import func, or_, select
@@ -27,7 +29,7 @@ bp_materials.register_blueprint(bp_materials_plano_de_aula)
 bp_materials.register_blueprint(bp_materials_exercicio_guiado)
 bp_materials.register_blueprint(bp_study_guide)
 
-@bp_materials.route('', methods=['GET'])
+@bp_materials.route('/', methods=['GET'])
 @login_required
 def get_materials():
     cursor = request.args.get('cursor', 0, type=int)
@@ -40,10 +42,16 @@ def get_materials():
     with SessionLocal() as session:
         MaterialPoly = with_polymorphic(Material, '*')
 
-        count_stmt = select(func.count()).select_from(MaterialPoly).where(MaterialPoly.user_id == current_user.id)
+        count_stmt = (
+            select(func.count())
+            .select_from(MaterialPoly)
+            .where(MaterialPoly.user_id == current_user.id)
+            .where(MaterialPoly.deleted_at.is_(None))
+        )
         statement = (
             select(MaterialPoly)
             .where(MaterialPoly.user_id == current_user.id)
+            .where(MaterialPoly.deleted_at.is_(None))
             .offset(cursor)
             .limit(limit)
             .order_by(MaterialPoly.created_at.desc())
@@ -78,8 +86,8 @@ def get_materials():
             statement = statement.where(MaterialPoly.subject.like(f'%{search}%'))
             count_stmt = count_stmt.where(MaterialPoly.subject.like(f'%{search}%'))
 
-        total = session.execute(count_stmt).scalar() or 0
-        materials = session.execute(statement).scalars().all()
+        total = session.scalar(count_stmt) or 0
+        materials = session.scalars(statement).all()
 
         return jsonify(
             {
@@ -91,12 +99,12 @@ def get_materials():
                         'title': material.subject,
                         'discipline': material.discipline,
                         'difficulty': material.difficulty.value if hasattr(material, 'difficulty') else None,  # type: ignore
-                        'amount': material.amount if hasattr(material, 'amount') else None,  # type: ignore
-                        'grade': material.grade if hasattr(material, 'grade') else None,  # type: ignore
-                        'chalkboard': material.chalkboard if hasattr(material, 'chalkboard') else None,  # type: ignore
-                        'projector': material.projector if hasattr(material, 'projector') else None,  # type: ignore
-                        'printed': material.printed if hasattr(material, 'printed') else None,  # type: ignore
-                        'digital': material.digital if hasattr(material, 'digital') else None,  # type: ignore
+                        'amount': getattr(material, 'amount', None),
+                        'grade': getattr(material, 'grade', None),
+                        'chalkboard': getattr(material, 'chalkboard', None),
+                        'projector': getattr(material, 'projector', None),
+                        'printed': getattr(material, 'printed', None),
+                        'digital': getattr(material, 'digital', None),
                         'created_at': material.created_at,
                         'type': material.type.value,
                     }
@@ -104,3 +112,45 @@ def get_materials():
                 ],
             }
         ), 200
+
+
+@bp_materials.route('/<int:id>', methods=['DELETE'])
+@login_required
+def soft_delete_material(id: int):
+    with SessionLocal() as session:
+        material = session.get(Material, id)
+        if material is None or material.deleted_at is not None:
+            return jsonify({'ok': False, 'message': 'Material não encontrado'}), 404
+
+        material.deleted_at = datetime.now(timezone.utc)
+        session.commit()
+
+        return jsonify({'ok': True}), 200
+
+
+@bp_materials.route('/<int:id>/restore', methods=['PATCH'])
+@login_required
+def restore_material(id: int):
+    with SessionLocal() as session:
+        material = session.get(Material, id)
+        if material is None or material.deleted_at is None:
+            return jsonify({'ok': False, 'message': 'Material não encontrado'}), 404
+
+        material.deleted_at = None
+        session.commit()
+
+        return jsonify({'ok': True}), 200
+
+
+@bp_materials.route('/<int:id>/trash', methods=['DELETE'])
+@login_required
+def hard_delete_material(id: int):
+    with SessionLocal() as session:
+        material = session.get(Material, id)
+        if material is None or material.deleted_at is None:
+            return jsonify({'ok': False, 'message': 'Material não encontrado'}), 404
+
+        session.delete(material)
+        session.commit()
+
+        return jsonify({'ok': True}), 200

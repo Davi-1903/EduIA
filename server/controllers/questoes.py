@@ -3,6 +3,7 @@ from flask_login import current_user, login_required
 from sqlalchemy import func, select
 
 from database import SessionLocal
+from models.historico import Historico
 from models.questoes import Questoes
 from models.material import Difficulty
 
@@ -17,17 +18,23 @@ def get_questions():
     limit = request.args.get('limit', 50, type=int)
 
     with SessionLocal() as session:
-        count_stmt = select(func.count()).select_from(Questoes).where(Questoes.user_id == current_user.id)
+        count_stmt = (
+            select(func.count())
+            .select_from(Questoes)
+            .where(Questoes.user_id == current_user.id)
+            .where(Questoes.deleted_at.is_(None))
+        )
         statement = (
             select(Questoes)
             .where(Questoes.user_id == current_user.id)
+            .where(Questoes.deleted_at.is_(None))
             .offset(cursor)
             .limit(limit)
             .order_by(Questoes.created_at.desc())
         )
 
-        total = session.execute(count_stmt).scalar() or 0
-        materials = session.execute(statement).scalars().all()
+        total = session.scalar(count_stmt) or 0
+        materials = session.scalars(statement).all()
 
         return jsonify(
             {
@@ -54,7 +61,7 @@ def get_questions():
 def get_question(id: int):
     with SessionLocal() as session:
         material = session.get(Questoes, id)
-        if material is None:
+        if material is None or material.deleted_at is not None:
             return jsonify({'ok': False, 'message': 'Questões não encontradas'}), 404
 
         return jsonify(
@@ -94,7 +101,9 @@ def create_questions():
                 amount=data['amount'],
                 note=data['note'] if data['note'] != '' else None,
             )
+            historico = Historico(material=questions)
             session.add(questions)
+            session.add(historico)
             session.commit()
             return jsonify({'ok': True, 'redirect': '/materials'}), 201
 
