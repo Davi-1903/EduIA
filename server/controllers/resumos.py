@@ -59,7 +59,7 @@ def get_resumes():
 def get_resume(id: int):
     with SessionLocal() as session:
         material = session.get(Resumo, id)
-        if material is None or material is not None:
+        if material is None or material.deleted_at is not None:
             return jsonify({'ok': False, 'message': 'Resume não encontrado'}), 404
 
         return jsonify(

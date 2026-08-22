@@ -62,7 +62,7 @@ def get_quizzes():
 def get_quiz(id: int):
     with SessionLocal() as session:
         material = session.get(Quiz, id)
-        if material is None or material is not None:
+        if material is None or material.deleted_at is not None:
             return jsonify({'ok': False, 'message': 'Quiz não encontradas'}), 404
 
         return jsonify(

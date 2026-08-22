@@ -58,7 +58,7 @@ def get_explanations():
 def get_explanation(id: int):
     with SessionLocal() as session:
         material = session.get(Explicacao, id)
-        if material is None or material is not None:
+        if material is None or material.deleted_at is not None:
             return jsonify({'ok': False, 'message': 'Explicação não encontrada'}), 404
 
         return jsonify(
