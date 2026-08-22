@@ -4,13 +4,10 @@ from sqlalchemy import func, select
 
 from database import SessionLocal
 from models.planos_de_aula import PlanoDeAula
+from models.historico import Historico
 
 
-bp_materials_plano_de_aula = Blueprint(
-    'plano_de_aula',
-    __name__,
-    url_prefix='/plano_de_aula'
-)
+bp_materials_plano_de_aula = Blueprint('plano_de_aula', __name__, url_prefix='/plano_de_aula')
 
 
 @bp_materials_plano_de_aula.route('/', methods=['GET'])
@@ -24,18 +21,19 @@ def get_lesson_plans():
             select(func.count())
             .select_from(PlanoDeAula)
             .where(PlanoDeAula.user_id == current_user.id)
+            .where(PlanoDeAula.deleted_at.is_(None))
         )
-
         statement = (
             select(PlanoDeAula)
             .where(PlanoDeAula.user_id == current_user.id)
+            .where(PlanoDeAula.deleted_at.is_(None))
             .offset(cursor)
             .limit(limit)
             .order_by(PlanoDeAula.created_at.desc())
         )
 
-        total = session.execute(count_stmt).scalar() or 0
-        materials = session.execute(statement).scalars().all()
+        total = session.scalar(count_stmt) or 0
+        materials = session.scalars(statement).all()
 
         return jsonify(
             {
@@ -62,12 +60,8 @@ def get_lesson_plans():
 def get_lesson_plan(id: int):
     with SessionLocal() as session:
         material = session.get(PlanoDeAula, id)
-
-        if material is None:
-            return jsonify({
-                'ok': False,
-                'message': 'Plano de aula não encontrado'
-            }), 404
+        if material is None or material.deleted_at is not None:
+            return jsonify({'ok': False, 'message': 'Plano de aula não encontrado'}), 404
 
         return jsonify(
             {
@@ -96,12 +90,8 @@ def get_lesson_plan(id: int):
 @login_required
 def create_lesson_plan():
     data = request.get_json(silent=True)
-
     if data is None:
-        return jsonify({
-            'ok': False,
-            'message': 'Dados não recebidos'
-        }), 400
+        return jsonify({'ok': False, 'message': 'Dados não recebidos'}), 400
 
     # Lógica da IA...
 
@@ -121,19 +111,12 @@ def create_lesson_plan():
                 digital=data['digital'],
                 note=data['note'] if data['note'] != '' else None,
             )
-
+            historico = Historico(material=lesson_plan)
             session.add(lesson_plan)
+            session.add(historico)
             session.commit()
-
-            return jsonify({
-                'ok': True,
-                'redirect': '/materials'
-            }), 201
+            return jsonify({'ok': True, 'redirect': '/materials'}), 201
 
         except Exception:
             session.rollback()
-
-            return jsonify({
-                'ok': False,
-                'message': 'Ocorreu um erro interno'
-            }), 500
+            return jsonify({'ok': False, 'message': 'Ocorreu um erro interno'}), 500

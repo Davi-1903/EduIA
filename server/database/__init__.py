@@ -1,13 +1,12 @@
+import os
 import atexit
 from datetime import datetime, timedelta, timezone
-import os
 from typing import TYPE_CHECKING
-
 from sqlalchemy import select
 from sqlalchemy.orm import sessionmaker, DeclarativeBase
 from apscheduler.schedulers.background import BackgroundScheduler
-
 from utils import create_url, get_connection, get_env
+
 
 if TYPE_CHECKING:
     from models.material import Material

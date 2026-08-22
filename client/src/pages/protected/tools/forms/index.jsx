@@ -14,9 +14,10 @@ export default function GenerateForms({ setOpen }) {
     const [discipline, setDiscipline] = useState('Língua Portuguesa e Literatura');
     const [subject, setSubject] = useState('');
     const [note, setNote] = useState('');
-    const [difficulty, setDifficulty] = useState('MEDIO');
+    const [difficulty, setDifficulty] = useState(0);
     const [loading, setLoading] = useState(false);
     const navigate = useNavigate();
+    const difficulties = ['Muito fácil', 'Fácil', 'Médio', 'Difícil', 'Muito difícil'];
 
     function handleAnimationEnd() {
         if (isClose) setOpen(false);
@@ -31,7 +32,7 @@ export default function GenerateForms({ setOpen }) {
                 discipline,
                 subject,
                 content: {},
-                difficulty,
+                difficulty: difficulties[difficulty],
                 amount: quantidade,
                 note,
             });
@@ -155,6 +156,24 @@ export default function GenerateForms({ setOpen }) {
                     <div>
                         <label
                             className='block font-secundary text-base font-bold text-color1-100'
+                            htmlFor='dificuldade'
+                        >
+                            Dificuldade
+                        </label>
+
+                        <InputRange
+                            value={difficulties[difficulty]}
+                            trueValue={difficulty}
+                            setValue={setDifficulty}
+                            steps={1}
+                            min={0}
+                            max={4}
+                        />
+                    </div>
+
+                    <div>
+                        <label
+                            className='block font-secundary text-base font-bold text-color1-100'
                             htmlFor='quantidade'
                         >
                             Quantidade de campos
@@ -167,29 +186,6 @@ export default function GenerateForms({ setOpen }) {
                             min={5}
                             max={50}
                         />
-                    </div>
-
-                    <div>
-                        <label
-                            className='block font-secundary text-base font-bold text-color1-100'
-                            htmlFor='dificuldade'
-                        >
-                            Dificuldade
-                        </label>
-
-                        <select
-                            id='dificuldade'
-                            value={difficulty}
-                            onChange={e => setDifficulty(e.target.value)}
-                            className='h-12 w-full rounded-lg border border-color4-25 px-4 font-medium text-color1-100 outline-none'
-                            required
-                        >
-                            <option value='MUITO_FACIL'>Muito fácil</option>
-                            <option value='FACIL'>Fácil</option>
-                            <option value='MEDIO'>Médio</option>
-                            <option value='DIFICIL'>Difícil</option>
-                            <option value='MUITO_DIFICIL'>Muito difícil</option>
-                        </select>
                     </div>
 
                     <div>

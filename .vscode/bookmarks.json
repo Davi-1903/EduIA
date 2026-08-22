@@ -104,12 +104,7 @@
 			"path": "client/src/pages/protected/materials/components/material.jsx",
 			"bookmarks": [
 				{
-					"line": 34,
-					"column": 4,
-					"label": "tem algo errado na exibição da hr"
-				},
-				{
-					"line": 85,
+					"line": 89,
 					"column": 1,
 					"label": "Talvez trocar ícone por tag, acho que fica mais fácil de identificar o material"
 				}
@@ -156,17 +151,12 @@
 			]
 		},
 		{
-			"path": "server/models/material.py",
+			"path": "docs/requisitos_nao_funcionais.md",
 			"bookmarks": [
 				{
-					"line": 34,
+					"line": 21,
 					"column": 0,
-					"label": "Adicionar FULLTEXT SEARCH"
-				},
-				{
-					"line": 51,
-					"column": 0,
-					"label": "O cascade é provisório"
+					"label": "Alterar prioridade"
 				}
 			]
 		}

@@ -5,13 +5,10 @@ from sqlalchemy import func, select
 from database import SessionLocal
 from models.exercicios_guiados import ExercicioGuiado
 from models.material import Difficulty
+from models.historico import Historico
 
 
-bp_materials_exercicio_guiado = Blueprint(
-    'exercicio_guiado',
-    __name__,
-    url_prefix='/exercicio_guiado'
-)
+bp_materials_exercicio_guiado = Blueprint('exercicio_guiado', __name__, url_prefix='/exercicio_guiado')
 
 
 @bp_materials_exercicio_guiado.route('/', methods=['GET'])
@@ -25,18 +22,19 @@ def get_guided_exercises():
             select(func.count())
             .select_from(ExercicioGuiado)
             .where(ExercicioGuiado.user_id == current_user.id)
+            .where(ExercicioGuiado.deleted_at.is_(None))
         )
-
         statement = (
             select(ExercicioGuiado)
             .where(ExercicioGuiado.user_id == current_user.id)
+            .where(ExercicioGuiado.deleted_at.is_(None))
             .offset(cursor)
             .limit(limit)
             .order_by(ExercicioGuiado.created_at.desc())
         )
 
-        total = session.execute(count_stmt).scalar() or 0
-        materials = session.execute(statement).scalars().all()
+        total = session.scalar(count_stmt) or 0
+        materials = session.scalars(statement).all()
 
         return jsonify(
             {
@@ -63,12 +61,8 @@ def get_guided_exercises():
 def get_guided_exercise(id: int):
     with SessionLocal() as session:
         material = session.get(ExercicioGuiado, id)
-
-        if material is None:
-            return jsonify({
-                'ok': False,
-                'message': 'Exercício guiado não encontrado'
-            }), 404
+        if material is None or material.deleted_at is not None:
+            return jsonify({'ok': False, 'message': 'Exercício guiado não encontrado'}), 404
 
         return jsonify(
             {
@@ -99,12 +93,8 @@ def get_guided_exercise(id: int):
 @login_required
 def create_guided_exercise():
     data = request.get_json(silent=True)
-
     if data is None:
-        return jsonify({
-            'ok': False,
-            'message': 'Dados não recebidos'
-        }), 400
+        return jsonify({'ok': False, 'message': 'Dados não recebidos'}), 400
 
     # Lógica da IA...
 
@@ -126,19 +116,12 @@ def create_guided_exercise():
                 code=data['code'],
                 note=data['note'] if data['note'] != '' else None,
             )
-
+            historico = Historico(material=guided_exercise)
             session.add(guided_exercise)
+            session.add(historico)
             session.commit()
-
-            return jsonify({
-                'ok': True,
-                'redirect': '/materials'
-            }), 201
+            return jsonify({'ok': True, 'redirect': '/materials'}), 201
 
         except Exception:
             session.rollback()
-
-            return jsonify({
-                'ok': False,
-                'message': 'Ocorreu um erro interno'
-            }), 500
+            return jsonify({'ok': False, 'message': 'Ocorreu um erro interno'}), 500

@@ -4,6 +4,7 @@ from sqlalchemy import func, select
 
 from database import SessionLocal
 from models.formularios import Formulario
+from models.historico import Historico
 from models.material import Difficulty
 
 
@@ -17,17 +18,23 @@ def get_formularios():
     limit = request.args.get('limit', 50, type=int)
 
     with SessionLocal() as session:
-        count_stmt = select(func.count()).select_from(Formulario).where(Formulario.user_id == current_user.id)
+        count_stmt = (
+            select(func.count())
+            .select_from(Formulario)
+            .where(Formulario.user_id == current_user.id)
+            .where(Formulario.deleted_at.is_(None))
+        )
         statement = (
             select(Formulario)
             .where(Formulario.user_id == current_user.id)
+            .where(Formulario.deleted_at.is_(None))
             .order_by(Formulario.created_at.desc())
             .offset(cursor)
             .limit(limit)
         )
 
-        total = session.execute(count_stmt).scalar() or 0
-        materials = session.execute(statement).scalars().all()
+        total = session.scalar(count_stmt) or 0
+        materials = session.scalars(statement).all()
 
         return jsonify(
             {
@@ -55,7 +62,7 @@ def get_formularios():
 def get_formulario(id: int):
     with SessionLocal() as session:
         material = session.get(Formulario, id)
-        if material is None:
+        if material is None or material.deleted_at is not None:
             return jsonify({'ok': False, 'message': 'Formulario não encontrado'}), 404
 
         return jsonify(
@@ -94,12 +101,12 @@ def create_formulario():
                 amount=data['amount'],
                 note=data['note'] if data['note'] != '' else None,
             )
-
+            historico = Historico(material=formulario)
             session.add(formulario)
+            session.add(historico)
             session.commit()
             return jsonify({'ok': True, 'redirect': '/materials'}), 201
 
-        except Exception as e:
+        except Exception:
             session.rollback()
-            print('ERRO AO CRIAR FORMULARIO:', e)
-            return jsonify({'ok': False, 'message': str(e)}), 500
+            return jsonify({'ok': False, 'message': 'Ocorreu um erro interno'}), 500

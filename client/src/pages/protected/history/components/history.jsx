@@ -17,6 +17,11 @@ import QuizForm from './tools/quiz';
 import ResumesForm from './tools/resume';
 import ExplanationForm from './tools/explanation';
 import ChallengeForm from './tools/desafio';
+import GuidedExercisesForm from './tools/guided_exercises';
+import FlashcardsForm from './tools/flashcards';
+import FormsForm from './tools/formulario';
+import LessonPlanForm from './tools/lesson_plan';
+import StudyGuideForm from './tools/study_guide';
 
 export default function HistoryCard({
     title,
@@ -29,6 +34,10 @@ export default function HistoryCard({
     projector,
     printed,
     digital,
+    multiple_choice,
+    true_or_false,
+    discursive,
+    objective,
     created_at,
     questions,
     note,
@@ -79,7 +88,19 @@ export default function HistoryCard({
                     setOpen={setOpen}
                 />
             ),
-            'exercicio guiado': null,
+            'exercicio guiado': (
+                <GuidedExercisesForm
+                    discipline={discipline}
+                    subject={title}
+                    difficulty={difficulty}
+                    amount={amount}
+                    note={note}
+                    multipleChoice={multiple_choice}
+                    trueOrFalse={true_or_false}
+                    discursive={discursive}
+                    setOpen={setOpen}
+                />
+            ),
             explicacao: (
                 <ExplanationForm
                     discipline={discipline}
@@ -88,9 +109,40 @@ export default function HistoryCard({
                     setOpen={setOpen}
                 />
             ),
-            flashcards: null,
-            formulario: null,
-            'plano de aula': null,
+            flashcards: (
+                <FlashcardsForm
+                    discipline={discipline}
+                    subject={title}
+                    difficulty={difficulty}
+                    amount={amount}
+                    setOpen={setOpen}
+                />
+            ),
+            formulario: (
+                <FormsForm
+                    discipline={discipline}
+                    subject={title}
+                    difficulty={difficulty}
+                    amount={amount}
+                    note={note}
+                    setOpen={setOpen}
+                />
+            ),
+            'plano de aula': (
+                <LessonPlanForm
+                    discipline={discipline}
+                    subject={title}
+                    grade={grade}
+                    objective={objective}
+                    time={time}
+                    chalkboard={chalkboard}
+                    projector={projector}
+                    printed={printed}
+                    digital={digital}
+                    note={note}
+                    setOpen={setOpen}
+                />
+            ),
             questoes: (
                 <QuestionForm
                     discipline={discipline}
@@ -120,7 +172,14 @@ export default function HistoryCard({
                     setOpen={setOpen}
                 />
             ),
-            roteiro: null,
+            roteiro: (
+                <StudyGuideForm
+                    discipline={discipline}
+                    subject={title}
+                    note={note}
+                    setOpen={setOpen}
+                />
+            ),
         };
         return forms[type];
     }
