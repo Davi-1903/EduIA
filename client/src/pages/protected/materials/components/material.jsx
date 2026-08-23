@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
     IconArrowBigUp,
     IconCards,
@@ -163,6 +163,10 @@ export default function MaterialCard({
                 setMessages(prev => [...prev, { id: prev.length + 1, message: err.message, type: 'danger' }]),
             );
     }
+
+    useEffect(() => {
+        document.body.style.overflow = content ? 'hidden' : 'auto';
+    }, [content]);
 
     return (
         <>
