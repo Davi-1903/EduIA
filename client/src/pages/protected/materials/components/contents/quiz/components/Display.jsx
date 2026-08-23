@@ -4,6 +4,7 @@ export default function Display({ currentQuestionId, questions, time, onAnimatio
             <div className='flex items-center gap-4 p-2'>
                 <div className='h-4 flex-1 overflow-hidden rounded-full bg-color4-100'>
                     <div
+                        key={currentQuestionId}
                         onAnimationEnd={onAnimationEnd}
                         className='timer-bar'
                         style={{
