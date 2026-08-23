@@ -14,6 +14,11 @@ export default function Questions({ content, setContent }) {
     const [answerId, setAnswerId] = useState(null);
     const [corrects, setCorrects] = useState(0);
 
+    function handleAnimationEnd(event) {
+        if (event.target !== event.currentTarget) return;
+        if (isClose) setContent(null);
+    }
+
     function nextQuestion() {
         setCurrentQuestionId(prev => prev + 1);
         setShowAnswer(false);
@@ -25,6 +30,7 @@ export default function Questions({ content, setContent }) {
         setShowAnswer(false);
         setAnswerId(null);
         setCorrects(0);
+        setShowExplanation(false);
     }
 
     function toRespond(id) {
@@ -37,10 +43,12 @@ export default function Questions({ content, setContent }) {
 
     useEffect(() => {
         function handleClick(event) {
+            if (showExplanation) return;
             if (!materialRef.current?.contains(event.target)) setClose(true);
         }
 
         function handleKey(event) {
+            if (showExplanation) return;
             if (event.key === 'Escape') setClose(true);
         }
 
@@ -50,11 +58,11 @@ export default function Questions({ content, setContent }) {
             document.removeEventListener('mousedown', handleClick);
             document.removeEventListener('keydown', handleKey);
         };
-    }, []);
+    }, [showExplanation]);
 
     return (
         <div
-            onAnimationEnd={() => isClose && setContent(null)}
+            onAnimationEnd={handleAnimationEnd}
             className={clsx(
                 'fixed inset-0 z-7 grid place-items-center bg-gray-800/20 backdrop-blur-sm',
                 isClose ? 'animate-fade-out' : 'animate-fade-in',

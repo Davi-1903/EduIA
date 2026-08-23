@@ -36,19 +36,26 @@ export default function MaterialCard({
     const { setMessages } = useMessages();
     const [content, setContent] = useState(null);
     const [menu, setMenu] = useState(null);
+    const [isOpening, setIsOpening] = useState(false);
     const navigate = useNavigate();
 
     function formatarHora(created_at) {
+        const data = new Date(created_at);
+        if (!created_at || Number.isNaN(data.getTime())) return '--:--';
+
         const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
         const formatador = new Intl.DateTimeFormat('pt-BR', {
             hour: '2-digit',
             minute: '2-digit',
             timeZone: userTimeZone,
         });
-        return formatador.format(new Date(created_at));
+        return formatador.format(data);
     }
 
     function formatarData(created_at) {
+        const data = new Date(created_at);
+        if (!created_at || Number.isNaN(data.getTime())) return '--/--/----';
+
         const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
         const formatador = new Intl.DateTimeFormat('pt-BR', {
             day: '2-digit',
@@ -56,7 +63,7 @@ export default function MaterialCard({
             year: 'numeric',
             timeZone: userTimeZone,
         });
-        return formatador.format(new Date(created_at));
+        return formatador.format(data);
     }
 
     function getContent(type) {
@@ -102,15 +109,29 @@ export default function MaterialCard({
     }
 
     function handleOpen() {
+        if (!getContent(type)) {
+            setMessages(prev => [
+                ...prev,
+                {
+                    id: prev.length + 1,
+                    message: 'Visualização deste tipo de material ainda não está disponível',
+                    type: 'danger',
+                },
+            ]);
+            return;
+        }
+
+        if (isOpening) return;
+
         setMenu(null);
+        setIsOpening(true);
         GET(`/api/materials/${type}/${id}`)
             .then(data => {
                 if (data.status !== 200) throw new Error(data.message);
                 setContent(data.material.content.content);
             })
-            .catch(err =>
-                setMessages(prev => [...prev, { id: prev.length + 1, message: err.message, type: 'danger' }]),
-            );
+            .catch(err => setMessages(prev => [...prev, { id: prev.length + 1, message: err.message, type: 'danger' }]))
+            .finally(() => setIsOpening(false));
     }
 
     function handleDelete() {

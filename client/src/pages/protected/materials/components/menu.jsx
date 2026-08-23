@@ -23,13 +23,15 @@ export default function MenuCard({ x, y, setMenu, handleOpen, handleDelete }) {
         };
     }, [setMenu]);
 
+    const estimatedMenuHeight = 110;
+
     return (
         <div
             ref={menuRef}
             className={'fixed z-8 flex flex-col gap-2 rounded-xl border-color4-25 bg-color4-400 p-2 shadow-lg'}
             style={{
                 left: x - Math.max(0, x - window.innerWidth + 200),
-                top: y,
+                top: y - Math.max(0, y - window.innerHeight + estimatedMenuHeight),
             }}
         >
             <button

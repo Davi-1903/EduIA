@@ -6,6 +6,11 @@ export default function Explanation({ explanation, setShowExplanation }) {
     const [isClose, setClose] = useState(false);
     const articleRef = useRef(null);
 
+    function handleAnimationEnd(event) {
+        event.stopPropagation();
+        if (isClose) setShowExplanation(false);
+    }
+
     async function copyExplanation() {
         try {
             await navigator.clipboard.writeText(explanation);
@@ -17,22 +22,30 @@ export default function Explanation({ explanation, setShowExplanation }) {
 
     useEffect(() => {
         function handleClick(event) {
-            if (!articleRef.current.contains(event.target)) {
+            if (!articleRef.current?.contains(event.target)) {
                 setClose(true);
             }
         }
 
+        function handleKey(event) {
+            if (event.key === 'Escape') setClose(true);
+        }
+
         document.addEventListener('mousedown', handleClick);
-        return () => document.removeEventListener('mousedown', handleClick);
+        document.addEventListener('keydown', handleKey);
+        return () => {
+            document.removeEventListener('mousedown', handleClick);
+            document.removeEventListener('keydown', handleKey);
+        };
     }, []);
 
     return (
         <section
+            onAnimationEnd={handleAnimationEnd}
             className={clsx(
                 'fixed inset-0 z-1 grid place-items-center bg-gray-800/20 backdrop-blur-sm',
-                isClose ? 'fade-out-animation' : 'fade-in-animation',
+                isClose ? 'animate-fade-out' : 'animate-fade-in',
             )}
-            onAnimationEnd={() => isClose && setShowExplanation(false)}
         >
             <article
                 ref={articleRef}

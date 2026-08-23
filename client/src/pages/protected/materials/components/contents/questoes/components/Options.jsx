@@ -33,7 +33,7 @@ export default function Options({
                             onClick={() => toRespond(options.id)}
                         >
                             <span className='text-color1-400'>
-                                {letters[options.id - 1]}
+                                {letters[options.id - 1] ?? options.id}
                                 {')'}{' '}
                             </span>
                             {options.text}
@@ -43,7 +43,7 @@ export default function Options({
             </ul>
             <div className='flex justify-end gap-4'>
                 <button
-                    className='cursor-pointer rounded-lg border-2 border-color1-100 px-6 py-2 font-primary text-lg text-color1-100 transition-all duration-250 not-disabled:hover:bg-button not-disabled:hover:text-color4-400 disabled:cursor-no-drop disabled:opacity-50'
+                    className='cursor-pointer rounded-lg border-3 border-color1-100 px-6 py-2 font-primary text-lg text-color1-100 transition-all duration-250 not-disabled:hover:bg-button not-disabled:hover:text-color4-400 disabled:cursor-no-drop disabled:opacity-50'
                     onClick={() => setShowExplanation(true)}
                     disabled={answerId === null}
                 >

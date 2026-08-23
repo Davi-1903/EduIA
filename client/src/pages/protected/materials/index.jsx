@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Helmet } from 'react-helmet-async';
 import ProtectedRoute from '../../../components/protectedRoute';
 import { useAuthenticated } from '../../../context/authContext';
@@ -21,7 +21,12 @@ export default function Materials() {
     const [total, setTotal] = useState(0);
     const [cursor, setCursor] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
+    const setMessagesRef = useRef(setMessages);
     const limit = 50;
+
+    useEffect(() => {
+        setMessagesRef.current = setMessages;
+    }, [setMessages]);
 
     useEffect(() => {
         const timer = setTimeout(() => setDebouncedSearch(search), 500);
@@ -54,7 +59,7 @@ export default function Materials() {
                 if (err.name === 'AbortError') return;
                 setMaterials(null);
                 setTotal(0);
-                setMessages(prev => [
+                setMessagesRef.current(prev => [
                     ...prev,
                     {
                         id: prev.length + 1,
@@ -67,7 +72,7 @@ export default function Materials() {
                 setIsLoading(false);
             }
         },
-        [cursor, difficulty, discipline, debouncedSearch, setMessages, type],
+        [cursor, difficulty, discipline, debouncedSearch, type],
     );
 
     function clearFilters() {
