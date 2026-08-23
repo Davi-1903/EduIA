@@ -61,20 +61,10 @@
 			]
 		},
 		{
-			"path": "server/schemas/formularios.py",
-			"bookmarks": [
-				{
-					"line": 7,
-					"column": 0,
-					"label": "Ok, estou com dúvidas o que são esses formulários"
-				}
-			]
-		},
-		{
 			"path": "server/schemas/planos_de_aula.py",
 			"bookmarks": [
 				{
-					"line": 5,
+					"line": 4,
 					"column": 0,
 					"label": "Acho que não precisar ser um dicionário, uma string já basta"
 				}
@@ -104,7 +94,7 @@
 			"path": "client/src/pages/protected/materials/components/material.jsx",
 			"bookmarks": [
 				{
-					"line": 89,
+					"line": 152,
 					"column": 1,
 					"label": "Talvez trocar ícone por tag, acho que fica mais fácil de identificar o material"
 				}

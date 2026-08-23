@@ -126,20 +126,132 @@ def obter_ou_criar_usuario(session, model, nome: str, email: str) -> Usuario:
     return usuario
 
 
+def criar_conteudo_estatico(material_type, disciplina: str) -> dict:
+    if material_type is Desafio:
+        return {
+            'content': (
+                f'## Desafio: {disciplina}\n\n'
+                f'Explique como os conceitos de **{disciplina}** aparecem em uma situação prática. '
+                'Apresente um exemplo, descreva as etapas da solução e justifique suas escolhas.'
+            )
+        }
+    if material_type is ExercicioGuiado:
+        return {
+            'content': (
+                f'## Exercício guiado: {disciplina}\n\n'
+                f'1. Defina o conceito principal de {disciplina}.\n'
+                '2. Liste duas características importantes.\n'
+                '3. Resolva um exemplo relacionado ao curso técnico.\n'
+                '4. Confira a resolução e explique o resultado com suas próprias palavras.'
+            )
+        }
+    if material_type is Explicacao:
+        return {
+            'content': (
+                f'# {disciplina}\n\n'
+                f'{disciplina} reúne conceitos fundamentais para compreender situações acadêmicas e profissionais.\n\n'
+                '## Ideias principais\n'
+                '- Identifique os conceitos e suas relações.\n'
+                '- Observe como eles são aplicados em exemplos reais.\n'
+                '- Compare os resultados e registre dúvidas para revisão.'
+            )
+        }
+    if material_type is FlashCards:
+        return {
+            'content': [
+                {
+                    'id': 1,
+                    'question': f'Qual é a ideia central de {disciplina}?',
+                    'answer': f'É o conjunto de conceitos e aplicações fundamentais de {disciplina}.',
+                }
+            ]
+        }
+    if material_type is Formulario:
+        return {
+            'content': [
+                {
+                    'id': 1,
+                    'question': f'Qual alternativa representa uma aplicação de {disciplina}?',
+                    'answers': [
+                        {'id': 1, 'text': f'Aplicar conceitos de {disciplina} em uma situação prática.'},
+                        {'id': 2, 'text': 'Ignorar os dados do problema.'},
+                        {'id': 3, 'text': 'Repetir uma resposta sem analisá-la.'},
+                        {'id': 4, 'text': 'Solicitar a solução para uma IA'},
+                    ],
+                    'correctAnswerId': 1,
+                }
+            ]
+        }
+    if material_type is PlanoDeAula:
+        return {
+            'content': (
+                f'# Plano de aula: {disciplina}\n\n'
+                '## Objetivo\n'
+                f'Compreender os fundamentos de {disciplina} e relacioná-los a uma aplicação prática.\n\n'
+                '## Etapas\n'
+                '1. Levantamento dos conhecimentos prévios.\n'
+                '2. Apresentação dos conceitos.\n'
+                '3. Atividade em dupla e discussão dos resultados.\n'
+                '4. Síntese e avaliação formativa.'
+            )
+        }
+    if material_type is Questoes:
+        return {
+            'content': [
+                {
+                    'id': 1,
+                    'question': f'Por que estudar {disciplina}?',
+                    'answers': [
+                        {'id': 1, 'text': 'Para compreender conceitos e resolver situações práticas.'},
+                        {'id': 2, 'text': 'Para evitar qualquer forma de análise.'},
+                        {'id': 3, 'text': 'Para memorizar respostas sem contexto.'},
+                        {'id': 4, 'text': 'Solicitar para uma IA explicar'},
+                    ],
+                    'correctAnswerId': 1,
+                    'explanation': f'O estudo de {disciplina} combina compreensão conceitual e aplicação prática.',
+                }
+            ]
+        }
+    if material_type is Quiz:
+        return {
+            'content': [
+                {
+                    'id': 1,
+                    'question': f'Qual é um bom primeiro passo ao estudar {disciplina}?',
+                    'answers': [
+                        {'id': 1, 'text': 'Relacionar o conceito a um exemplo.'},
+                        {'id': 2, 'text': 'Pular a leitura do enunciado.'},
+                        {'id': 3, 'text': 'Escolher uma resposta ao acaso.'},
+                        {'id': 4, 'text': 'Solicitar para uma IA explicar'},
+                    ],
+                    'correctAnswerId': 1,
+                }
+            ]
+        }
+    if material_type is Resumo:
+        return {
+            'content': (
+                f'# Resumo: {disciplina}\n\n'
+                f'{disciplina} envolve conceitos, métodos e aplicações que podem ser relacionados ao cotidiano. '
+                'Para revisar, destaque definições, relações entre ideias e exemplos de uso.'
+            )
+        }
+    return {
+        'content': (
+            f'# Roteiro de estudo: {disciplina}\n\n'
+            '## Sequência sugerida\n'
+            '1. Leia a definição do tema.\n'
+            '2. Registre os conceitos desconhecidos.\n'
+            '3. Resolva um exemplo prático.\n'
+            '4. Revise os pontos principais e produza uma síntese.'
+        )
+    }
+
+
 def criar_material(usuario: Usuario, indice: int) -> Material:
     grupo = random.choice(list(CATALOGO))
     disciplina = random.choice(CATALOGO[grupo])
     assunto = f'{disciplina}: conceitos e aplicações'
-    conteudo = {
-        'titulo': assunto,
-        'resumo': f'Material de desenvolvimento sobre {disciplina}, com foco em fundamentos e aplicações práticas.',
-        'pontos_chave': [
-            f'Conceitos fundamentais de {disciplina}',
-            'Exemplos relacionados ao curso técnico',
-            'Aplicações no cotidiano e no mercado de trabalho',
-        ],
-        'ordem': indice + 1,
-    }
     material_type = random.choice(
         [
             Desafio,
@@ -154,6 +266,7 @@ def criar_material(usuario: Usuario, indice: int) -> Material:
             Roteiro,
         ]
     )
+    conteudo = criar_conteudo_estatico(material_type, disciplina)
     campos_comuns = {
         'user_id': usuario.id,
         'discipline': disciplina,

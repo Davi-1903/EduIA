@@ -11,9 +11,12 @@ import {
     IconListLetters,
     IconReorder,
     IconTimeDuration10,
-    IconTrash,
 } from '@tabler/icons-react';
+import { useNavigate } from 'react-router-dom';
+import { useMessages } from '../../../../context/messagesContext';
+import { DELETE, GET } from '../../../../api/materials';
 import MenuCard from './menu';
+import Questions from './contents/questoes';
 
 export default function MaterialCard({
     id,
@@ -30,7 +33,10 @@ export default function MaterialCard({
     type,
     canOpenMenu = true,
 }) {
+    const { setMessages } = useMessages();
+    const [content, setContent] = useState(null);
     const [menu, setMenu] = useState(null);
+    const navigate = useNavigate();
 
     function formatarHora(created_at) {
         const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
@@ -51,6 +57,27 @@ export default function MaterialCard({
             timeZone: userTimeZone,
         });
         return formatador.format(new Date(created_at));
+    }
+
+    function getContent(type) {
+        const icons = {
+            desafio: null,
+            'exercicio guiado': null,
+            explicacao: null,
+            flashcards: null,
+            formulario: null,
+            'plano de aula': null,
+            questoes: (
+                <Questions
+                    content={content}
+                    setContent={setContent}
+                />
+            ),
+            quiz: null,
+            resumo: null,
+            roteiro: null,
+        };
+        return icons[type];
     }
 
     function getIcon(type) {
@@ -74,17 +101,53 @@ export default function MaterialCard({
         setMenu({ x: e.clientX, y: e.clientY, id });
     }
 
+    function handleOpen() {
+        setMenu(null);
+        GET(`/api/materials/${type}/${id}`)
+            .then(data => {
+                if (data.status !== 200) throw new Error(data.message);
+                setContent(data.material.content.content);
+            })
+            .catch(err =>
+                setMessages(prev => [...prev, { id: prev.length + 1, message: err.message, type: 'danger' }]),
+            );
+    }
+
+    function handleDelete() {
+        if (!confirm('Você tem certeza? Deseja mesmo mover esse material para a lixeira?')) return;
+
+        setMenu(null);
+        DELETE(`/api/materials/${id}`)
+            .then(data => {
+                if (data.status !== 200) throw new Error(data.message);
+                setMessages(prev => [
+                    ...prev,
+                    { id: prev.length + 1, message: 'Arquivo movido para a lixeira', type: 'ok' },
+                ]);
+                navigate('/trash');
+            })
+            .catch(err =>
+                setMessages(prev => [...prev, { id: prev.length + 1, message: err.message, type: 'danger' }]),
+            );
+    }
+
     return (
         <>
             {canOpenMenu && menu && (
                 <MenuCard
                     {...menu}
+                    type={type}
                     setMenu={setMenu}
+                    handleOpen={handleOpen}
+                    handleDelete={handleDelete}
+                    setContent={setContent}
                 />
             )}
+            {content && getContent(type)}
             <article
                 className='flex h-full min-h-48 cursor-pointer flex-col rounded-lg bg-color4-400 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg'
                 onContextMenu={e => handleContextMenu(e, id)}
+                onDoubleClick={handleOpen}
             >
                 <div className='flex items-center justify-end gap-3 border-b-2 border-color4-25 p-2 pl-3'>
                     <span>{getIcon(type)}</span>
