@@ -15,7 +15,7 @@ export default function Display({ questions, currentQuestionId }) {
                 </span>
             </div>
             <div className='grid flex-1 place-items-center'>
-                <p className='font-secundary text-2xl font-semibold text-color1-100'>
+                <p className='text-center font-secundary text-2xl font-semibold text-color1-100'>
                     {questions[currentQuestionId].question}
                 </p>
             </div>

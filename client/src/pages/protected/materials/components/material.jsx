@@ -17,6 +17,7 @@ import { useMessages } from '../../../../context/messagesContext';
 import { DELETE, GET } from '../../../../api/materials';
 import MenuCard from './menu';
 import Questions from './contents/questoes';
+import Quiz from './contents/quiz';
 
 export default function MaterialCard({
     id,
@@ -25,6 +26,7 @@ export default function MaterialCard({
     difficulty,
     amount,
     grade,
+    time,
     chalkboard,
     projector,
     printed,
@@ -82,7 +84,15 @@ export default function MaterialCard({
                     setContent={setContent}
                 />
             ),
-            quiz: null,
+            quiz: (
+                <Quiz
+                    subject={title}
+                    difficulty={difficulty}
+                    time={time}
+                    content={content}
+                    setContent={setContent}
+                />
+            ),
             resumo: null,
             roteiro: null,
         };

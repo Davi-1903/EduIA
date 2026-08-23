@@ -1,57 +1,54 @@
 import { useEffect, useRef, useState } from 'react';
-import Explanation from './components/Explanation';
+import Introduction from './components/Introduction';
 import Display from './components/Display';
 import Options from './components/Options';
 import End from './components/End';
 import clsx from 'clsx';
-import Introduction from './components/Introduction';
 
-export default function Questions({ subject, difficulty, content, setContent }) {
+export default function Quiz({ subject, difficulty, time, content, setContent }) {
     const materialRef = useRef(null);
     const [start, setStart] = useState(false);
     const [isClose, setClose] = useState(false);
-    const [currentQuestionId, setCurrentQuestionId] = useState(0);
-    const [showExplanation, setShowExplanation] = useState(false);
-    const [showAnswer, setShowAnswer] = useState(false);
-    const [answerId, setAnswerId] = useState(null);
-    const [corrects, setCorrects] = useState(0);
+    const [questionId, setQuestionId] = useState(0);
+    const [answeredId, setAnsweredId] = useState(null);
+    const [itsWrong, setWrong] = useState(false);
+    const [corrects, setCorrests] = useState(0);
 
     function handleAnimationEnd(event) {
         if (event.target !== event.currentTarget) return;
         if (isClose) setContent(null);
     }
 
-    function nextQuestion() {
-        setCurrentQuestionId(prev => prev + 1);
-        setShowAnswer(false);
-        setAnswerId(null);
+    function toRespond(isCorrect) {
+        setQuestionId(prev => prev + 1);
+        if (isCorrect && !itsWrong) setCorrests(prev => prev + 1);
+        setAnsweredId(null);
+        setWrong(false);
     }
 
     function handleRestart() {
-        setCurrentQuestionId(0);
-        setShowAnswer(false);
-        setAnswerId(null);
-        setCorrects(0);
-        setShowExplanation(false);
+        setQuestionId(0);
+        setCorrests(0);
+        setAnsweredId(null);
     }
 
-    function toRespond(id) {
-        if (answerId !== null) return;
+    function onAnimationEnd() {
+        if (answeredId === null) setWrong(true);
+        setAnsweredId(content[questionId].correctAnswerId);
+    }
 
-        setShowAnswer(true);
-        setAnswerId(id);
-        if (id === content[currentQuestionId].correctAnswerId) setCorrects(prev => prev + 1);
+    function handleClick(id) {
+        if (answeredId === null) setAnsweredId(id);
     }
 
     useEffect(() => {
         function handleClick(event) {
-            if (showExplanation) return;
             if (!materialRef.current?.contains(event.target)) setClose(true);
         }
 
         document.addEventListener('mousedown', handleClick);
         return () => document.removeEventListener('mousedown', handleClick);
-    }, [showExplanation]);
+    }, []);
 
     return (
         <div
@@ -61,12 +58,6 @@ export default function Questions({ subject, difficulty, content, setContent }) 
                 isClose ? 'animate-fade-out' : 'animate-fade-in',
             )}
         >
-            {showExplanation && (
-                <Explanation
-                    explanation={content[currentQuestionId].explanation}
-                    setShowExplanation={setShowExplanation}
-                />
-            )}
             <main
                 ref={materialRef}
                 className='flex h-170 w-full max-w-160 flex-col gap-6 rounded-2xl bg-white p-6 shadow-2xl shadow-color1-100/15 lg:w-4/5'
@@ -76,24 +67,25 @@ export default function Questions({ subject, difficulty, content, setContent }) 
                         <Introduction
                             subject={subject}
                             difficulty={difficulty}
+                            time={time}
                             questionsLength={content.length}
                             handleStart={() => setStart(true)}
                         />
                     </article>
-                ) : currentQuestionId < content.length ? (
+                ) : questionId < content.length ? (
                     <>
                         <Display
+                            currentQuestionId={questionId}
                             questions={content}
-                            currentQuestionId={currentQuestionId}
+                            time={time}
+                            onAnimationEnd={onAnimationEnd}
                         />
                         <Options
                             questions={content}
-                            currentQuestionId={currentQuestionId}
-                            answerId={answerId}
-                            showAnswer={showAnswer}
-                            nextQuestion={nextQuestion}
+                            currentQuestionId={questionId}
+                            answeredId={answeredId}
                             toRespond={toRespond}
-                            setShowExplanation={setShowExplanation}
+                            handleClick={handleClick}
                         />
                     </>
                 ) : (
@@ -102,6 +94,7 @@ export default function Questions({ subject, difficulty, content, setContent }) 
                             questions={content}
                             corrects={corrects}
                             subject={subject}
+                            time={time}
                             difficulty={difficulty}
                             handleRestart={handleRestart}
                             setClose={setClose}

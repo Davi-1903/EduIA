@@ -113,6 +113,7 @@ def get_materials():
                         'difficulty': material.difficulty.value if hasattr(material, 'difficulty') else None,  # type: ignore
                         'amount': getattr(material, 'amount', None),
                         'grade': getattr(material, 'grade', None),
+                        'time': getattr(material, 'time_per_question', None),
                         'chalkboard': getattr(material, 'chalkboard', None),
                         'projector': getattr(material, 'projector', None),
                         'printed': getattr(material, 'printed', None),
