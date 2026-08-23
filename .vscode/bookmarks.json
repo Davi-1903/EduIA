@@ -74,17 +74,17 @@
 			"path": "client/src/pages/protected/materials/index.jsx",
 			"bookmarks": [
 				{
-					"line": 101,
+					"line": 106,
 					"column": 0,
 					"label": "Mostrar os filtros mesmo quando não há materiais?"
 				},
 				{
-					"line": 103,
+					"line": 108,
 					"column": 0,
 					"label": "Adicionar aviso que não há materiais para filtros especificados?"
 				},
 				{
-					"line": 112,
+					"line": 117,
 					"column": 0,
 					"label": "Adicionar funcionalidade de lixeira. Selecionar? Talvez"
 				}
@@ -94,7 +94,7 @@
 			"path": "client/src/pages/protected/materials/components/material.jsx",
 			"bookmarks": [
 				{
-					"line": 152,
+					"line": 175,
 					"column": 1,
 					"label": "Talvez trocar ícone por tag, acho que fica mais fácil de identificar o material"
 				}

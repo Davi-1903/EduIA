@@ -76,6 +76,8 @@ export default function MaterialCard({
             'plano de aula': null,
             questoes: (
                 <Questions
+                    subject={title}
+                    difficulty={difficulty}
                     content={content}
                     setContent={setContent}
                 />
