@@ -6,7 +6,7 @@ import End from './components/End';
 import clsx from 'clsx';
 import Introduction from './components/Introduction';
 
-export default function Questions({ subject, difficulty, content, setContent }) {
+export default function Questions({ discipline, subject, difficulty, content, setContent }) {
     const materialRef = useRef(null);
     const [start, setStart] = useState(false);
     const [isClose, setClose] = useState(false);
@@ -72,14 +72,14 @@ export default function Questions({ subject, difficulty, content, setContent }) 
                 className='flex h-170 w-full max-w-160 flex-col gap-6 rounded-2xl bg-white p-6 shadow-2xl shadow-color1-100/15 lg:w-4/5'
             >
                 {!start ? (
-                    <article className='grid h-full place-items-center'>
-                        <Introduction
-                            subject={subject}
-                            difficulty={difficulty}
-                            questionsLength={content.length}
-                            handleStart={() => setStart(true)}
-                        />
-                    </article>
+                    <Introduction
+                        discipline={discipline}
+                        subject={subject}
+                        difficulty={difficulty}
+                        questionsLength={content.length}
+                        handleClose={() => setClose(true)}
+                        handleStart={() => setStart(true)}
+                    />
                 ) : currentQuestionId < content.length ? (
                     <>
                         <Display

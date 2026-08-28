@@ -78,6 +78,7 @@ export default function MaterialCard({
             'plano de aula': null,
             questoes: (
                 <Questions
+                    discipline={discipline}
                     subject={title}
                     difficulty={difficulty}
                     content={content}
@@ -86,6 +87,7 @@ export default function MaterialCard({
             ),
             quiz: (
                 <Quiz
+                    discipline={discipline}
                     subject={title}
                     difficulty={difficulty}
                     time={time}
