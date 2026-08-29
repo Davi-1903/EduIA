@@ -55,12 +55,16 @@ export default function Quiz({ discipline, subject, difficulty, time, content, s
 
     useEffect(() => {
         function handleClick(event) {
-            if (!materialRef.current?.contains(event.target)) setClose(true);
+            if (
+                !materialRef.current?.contains(event.target) &&
+                (!start || questionId >= content.length || confirm('Deseja parar de responder o quiz?'))
+            )
+                setClose(true);
         }
 
         document.addEventListener('mousedown', handleClick);
         return () => document.removeEventListener('mousedown', handleClick);
-    }, []);
+    }, [start, content.length, questionId]);
 
     return (
         <div
@@ -72,7 +76,7 @@ export default function Quiz({ discipline, subject, difficulty, time, content, s
         >
             <main
                 ref={materialRef}
-                className='flex h-170 w-full max-w-160 flex-col gap-6 rounded-2xl bg-white p-6 shadow-2xl shadow-color1-100/15 lg:w-4/5'
+                className='flex min-h-170 w-full max-w-160 flex-col gap-6 rounded-2xl bg-white p-6 shadow-2xl shadow-color1-100/15 lg:w-4/5'
             >
                 {!start ? (
                     <Introduction
@@ -81,6 +85,7 @@ export default function Quiz({ discipline, subject, difficulty, time, content, s
                         difficulty={difficulty}
                         time={time}
                         questionsLength={content.length}
+                        handleClose={() => setClose(true)}
                         handleStart={handleStart}
                     />
                 ) : questionId < content.length ? (

@@ -4,11 +4,20 @@ import {
     IconBook,
     IconBook2,
     IconBrandSpeedtest,
+    IconClock,
     IconListNumbers,
     IconSchool,
 } from '@tabler/icons-react';
 
-export default function Introduction({ discipline, subject, difficulty, questionsLength, handleClose, handleStart }) {
+export default function Introduction({
+    discipline,
+    subject,
+    difficulty,
+    time,
+    questionsLength,
+    handleClose,
+    handleStart,
+}) {
     const informations = [
         {
             id: 1,
@@ -46,6 +55,17 @@ export default function Introduction({ discipline, subject, difficulty, question
         {
             id: 4,
             icon: (
+                <IconClock
+                    size={24}
+                    className='stroke-color1-100'
+                />
+            ),
+            type: 'Tempo por pergunta',
+            content: `${time}s`,
+        },
+        {
+            id: 5,
+            icon: (
                 <IconListNumbers
                     size={24}
                     className='stroke-color1-100'
@@ -73,9 +93,9 @@ export default function Introduction({ discipline, subject, difficulty, question
                 {informations.map(item => (
                     <li
                         key={item.id}
-                        className='flex gap-3 p-3 not-last:border-b-2 not-last:border-color4-100'
+                        className='flex items-stretch gap-3 p-3 not-last:border-b-2 not-last:border-color4-100'
                     >
-                        <div className='grid aspect-square h-full place-items-center rounded-lg bg-color4-100'>
+                        <div className='grid aspect-square place-items-center rounded-lg bg-color4-100'>
                             {item.icon}
                         </div>
                         <div>
