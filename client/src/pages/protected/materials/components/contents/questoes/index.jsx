@@ -15,6 +15,12 @@ export default function Questions({ discipline, subject, difficulty, content, se
     const [showAnswer, setShowAnswer] = useState(false);
     const [answerId, setAnswerId] = useState(null);
     const [corrects, setCorrects] = useState(0);
+    const [time, setTime] = useState(0);
+
+    function handleStart() {
+        setTime(performance.now());
+        setStart(true);
+    }
 
     function handleAnimationEnd(event) {
         if (event.target !== event.currentTarget) return;
@@ -22,13 +28,19 @@ export default function Questions({ discipline, subject, difficulty, content, se
     }
 
     function nextQuestion() {
-        setCurrentQuestionId(prev => prev + 1);
+        if (currentQuestionId >= content.length - 1) {
+            setTime(prev => performance.now() - prev);
+            setCurrentQuestionId(content.length);
+        } else {
+            setCurrentQuestionId(prev => prev + 1);
+        }
         setShowAnswer(false);
         setAnswerId(null);
     }
 
     function handleRestart() {
         setCurrentQuestionId(0);
+        setTime(performance.now());
         setShowAnswer(false);
         setAnswerId(null);
         setCorrects(0);
@@ -78,7 +90,7 @@ export default function Questions({ discipline, subject, difficulty, content, se
                         difficulty={difficulty}
                         questionsLength={content.length}
                         handleClose={() => setClose(true)}
-                        handleStart={() => setStart(true)}
+                        handleStart={handleStart}
                     />
                 ) : currentQuestionId < content.length ? (
                     <>
@@ -97,16 +109,15 @@ export default function Questions({ discipline, subject, difficulty, content, se
                         />
                     </>
                 ) : (
-                    <article className='grid h-full place-items-center'>
-                        <End
-                            questions={content}
-                            corrects={corrects}
-                            subject={subject}
-                            difficulty={difficulty}
-                            handleRestart={handleRestart}
-                            setClose={setClose}
-                        />
-                    </article>
+                    <End
+                        questions={content}
+                        corrects={corrects}
+                        subject={subject}
+                        difficulty={difficulty}
+                        time={time}
+                        handleRestart={handleRestart}
+                        setClose={setClose}
+                    />
                 )}
             </main>
         </div>

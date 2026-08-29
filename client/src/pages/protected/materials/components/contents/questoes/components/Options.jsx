@@ -16,7 +16,7 @@ export default function Options({
         if ((answerId === id || showAnswer) && questions[currentQuestionId].correctAnswerId === id)
             return 'border-green-400 text-green-400';
         if (answerId === id && questions[currentQuestionId].correctAnswerId !== id)
-            return 'border-red-800 text-red-800';
+            return 'border-red-600 text-red-600';
         return 'border-color4-50 text-color1-100';
     }
 

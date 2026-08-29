@@ -149,6 +149,16 @@
 					"label": "Alterar prioridade"
 				}
 			]
+		},
+		{
+			"path": "client/src/pages/protected/materials/components/contents/questoes/components/End.jsx",
+			"bookmarks": [
+				{
+					"line": 77,
+					"column": 0,
+					"label": "Fazer animação do gráfico preenchendo"
+				}
+			]
 		}
 	]
 }

@@ -13,6 +13,12 @@ export default function Quiz({ discipline, subject, difficulty, time, content, s
     const [answeredId, setAnsweredId] = useState(null);
     const [itsWrong, setWrong] = useState(false);
     const [corrects, setCorrests] = useState(0);
+    const [timeSpent, setTimeSpent] = useState(0);
+
+    function handleStart() {
+        setTimeSpent(performance.now());
+        setStart(true);
+    }
 
     function handleAnimationEnd(event) {
         if (event.target !== event.currentTarget) return;
@@ -20,13 +26,19 @@ export default function Quiz({ discipline, subject, difficulty, time, content, s
     }
 
     function toRespond(isCorrect) {
-        setQuestionId(prev => prev + 1);
+        if (questionId >= content.length - 1) {
+            setTimeSpent(prev => performance.now() - prev);
+            setQuestionId(content.length);
+        } else {
+            setQuestionId(prev => prev + 1);
+        }
         if (isCorrect && !itsWrong) setCorrests(prev => prev + 1);
         setAnsweredId(null);
         setWrong(false);
     }
 
     function handleRestart() {
+        setTimeSpent(performance.now())
         setQuestionId(0);
         setCorrests(0);
         setAnsweredId(null);
@@ -69,7 +81,7 @@ export default function Quiz({ discipline, subject, difficulty, time, content, s
                         difficulty={difficulty}
                         time={time}
                         questionsLength={content.length}
-                        handleStart={() => setStart(true)}
+                        handleStart={handleStart}
                     />
                 ) : questionId < content.length ? (
                     <>
@@ -88,17 +100,15 @@ export default function Quiz({ discipline, subject, difficulty, time, content, s
                         />
                     </>
                 ) : (
-                    <article className='grid h-full place-items-center'>
-                        <End
-                            questions={content}
-                            corrects={corrects}
-                            subject={subject}
-                            time={time}
-                            difficulty={difficulty}
-                            handleRestart={handleRestart}
-                            setClose={setClose}
-                        />
-                    </article>
+                    <End
+                        questions={content}
+                        corrects={corrects}
+                        subject={subject}
+                        difficulty={difficulty}
+                        time={timeSpent}
+                        handleRestart={handleRestart}
+                        setClose={setClose}
+                    />
                 )}
             </main>
         </div>
