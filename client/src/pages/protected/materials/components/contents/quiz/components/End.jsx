@@ -1,7 +1,13 @@
 import { IconCheck, IconCircleCheck, IconClock, IconX } from '@tabler/icons-react';
 
 export default function End({ questions, corrects, time, handleRestart, setClose }) {
-    const percentage = (corrects / questions.length) * 100;
+    const safeQuestionsLength = questions.length || 0;
+    const percentage = safeQuestionsLength > 0 ? (corrects / safeQuestionsLength) * 100 : 0;
+    const safePercentage = Number.isFinite(percentage) ? Math.max(0, Math.min(100, percentage)) : 0;
+
+    const radius = 62;
+    const circumference = 2 * Math.PI * radius;
+    const dashOffset = circumference - (safePercentage / 100) * circumference;
 
     function formatTime(time) {
         console.log(time);
@@ -20,41 +26,46 @@ export default function End({ questions, corrects, time, handleRestart, setClose
     }
 
     function getResult() {
-        if (percentage < 0)
+        if (safeQuestionsLength === 0)
             return {
                 message: '0 questões...',
                 description: 'Nenhuma questão foi respondida...',
             };
-        if (percentage < 20)
+        if (safePercentage < 20)
             return {
                 message: 'Resultado insuficiente',
                 description: 'Você precisa estudar mais! Revise o conteúdo e tente novamente.',
             };
-        if (percentage < 60)
+        if (safePercentage < 40)
+            return {
+                message: 'Resultado com potencial de melhora',
+                description:
+                    'Não o melhor resultado! Porém, é possível obter uma melhora considerável. Continue tentando.',
+            };
+        if (safePercentage < 60)
             return {
                 message: 'Resultado mediado',
                 description: 'Bom começo! Com mais dedicação você vai melhorar significativamente.',
             };
-        if (percentage < 80)
+        if (safePercentage < 80)
             return {
                 message: 'Excelente resultado!',
                 description: 'Muito bom! Você demonstra domínio do conteúdo. Parabéns!',
             };
-        if (percentage < 100)
+        if (safePercentage < 100)
             return {
                 message: 'Resultado muito bom!',
                 description: 'Quase perfeito! Revise apenas os detalhes e próxima vez será 100%!',
             };
-        if (percentage == 100)
-            return {
-                message: 'Resultado PERFEITO!',
-                description: 'Ótimo desempenho! Continue assim e nada poderá te parar!',
-            };
+        return {
+            message: 'Resultado PERFEITO!',
+            description: 'Ótimo desempenho! Continue assim e nada poderá te parar!',
+        };
     }
 
     function getColor() {
-        if (percentage < 20) return '#e7000b';
-        if (percentage < 60) return '#f0b100';
+        if (safePercentage < 20) return '#e7000b';
+        if (safePercentage < 60) return '#f0b100';
         return '#00c950';
     }
 
@@ -72,13 +83,39 @@ export default function End({ questions, corrects, time, handleRestart, setClose
                 Parabéns! Você concluiu!
             </h2>
             <div className='flex items-center gap-8 py-2'>
-                <div
-                    className='grid aspect-square h-30 place-items-center rounded-full'
-                    style={{
-                        backgroundImage: `conic-gradient(${getColor()} ${percentage}%, hsl(from var(--base-color3) h s l/0.25) 0)`,
-                    }}
-                >
-                    <div className='flex aspect-square w-8/10 flex-col items-center justify-center gap-0.5 rounded-full bg-color4-400'>
+                <div className='relative grid aspect-square h-36 place-items-center'>
+                    <svg
+                        className='h-36 w-36 -rotate-90'
+                        viewBox='0 0 160 160'
+                        aria-label='Progresso do teste'
+                    >
+                        <circle
+                            cx='80'
+                            cy='80'
+                            r={radius}
+                            fill='none'
+                            stroke='rgba(58, 58, 74, 0.2)'
+                            strokeWidth='12'
+                        />
+                        <circle
+                            cx='80'
+                            cy='80'
+                            r={radius}
+                            fill='none'
+                            stroke={getColor()}
+                            strokeWidth='12'
+                            strokeLinecap='round'
+                            strokeDasharray={circumference}
+                            strokeDashoffset={circumference}
+                            style={{
+                                animation: 'progress-ring 900ms ease-out forwards',
+                                '--progress-total': `${circumference}`,
+                                '--progress-final': `${dashOffset}`,
+                            }}
+                        />
+                    </svg>
+
+                    <div className='absolute inset-0 flex flex-col items-center justify-center gap-0.5 rounded-full'>
                         <span className='block font-secundary text-2xl font-extrabold text-color1-100'>
                             {corrects}/{questions.length}
                         </span>
@@ -88,7 +125,7 @@ export default function End({ questions, corrects, time, handleRestart, setClose
                                 color: getColor(),
                             }}
                         >
-                            {percentage.toFixed(0)}% ACERTO{' '}
+                            {safePercentage.toFixed(0)}% ACERTO{' '}
                         </span>
                     </div>
                 </div>

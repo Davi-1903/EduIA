@@ -38,7 +38,7 @@ export default function Quiz({ discipline, subject, difficulty, time, content, s
     }
 
     function handleRestart() {
-        setTimeSpent(performance.now())
+        setTimeSpent(performance.now());
         setQuestionId(0);
         setCorrests(0);
         setAnsweredId(null);

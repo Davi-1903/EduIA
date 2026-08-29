@@ -61,12 +61,12 @@
 			]
 		},
 		{
-			"path": "server/schemas/planos_de_aula.py",
+			"path": "server/schemas/formularios.py",
 			"bookmarks": [
 				{
-					"line": 4,
+					"line": 7,
 					"column": 0,
-					"label": "Acho que não precisar ser um dicionário, uma string já basta"
+					"label": "Ok, estou com dúvidas o que são esses formulários"
 				}
 			]
 		},
@@ -74,19 +74,14 @@
 			"path": "client/src/pages/protected/materials/index.jsx",
 			"bookmarks": [
 				{
-					"line": 106,
+					"line": 101,
 					"column": 0,
 					"label": "Mostrar os filtros mesmo quando não há materiais?"
 				},
 				{
-					"line": 108,
+					"line": 103,
 					"column": 0,
 					"label": "Adicionar aviso que não há materiais para filtros especificados?"
-				},
-				{
-					"line": 117,
-					"column": 0,
-					"label": "Adicionar funcionalidade de lixeira. Selecionar? Talvez"
 				}
 			]
 		},
@@ -94,7 +89,7 @@
 			"path": "client/src/pages/protected/materials/components/material.jsx",
 			"bookmarks": [
 				{
-					"line": 191,
+					"line": 89,
 					"column": 1,
 					"label": "Talvez trocar ícone por tag, acho que fica mais fácil de identificar o material"
 				}
@@ -147,16 +142,6 @@
 					"line": 21,
 					"column": 0,
 					"label": "Alterar prioridade"
-				}
-			]
-		},
-		{
-			"path": "client/src/pages/protected/materials/components/contents/questoes/components/End.jsx",
-			"bookmarks": [
-				{
-					"line": 77,
-					"column": 0,
-					"label": "Fazer animação do gráfico preenchendo"
 				}
 			]
 		}

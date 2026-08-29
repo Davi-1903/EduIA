@@ -417,3 +417,13 @@
         opacity: 0;
     }
 }
+
+@keyframes progress-ring {
+    from {
+        stroke-dashoffset: var(--progress-total, 0);
+    }
+
+    to {
+        stroke-dashoffset: var(--progress-final, 0);
+    }
+}
