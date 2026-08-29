@@ -1,9 +1,13 @@
 """Popula o banco com usuários e materiais de desenvolvimento."""
 
+from argparse import ArgumentParser
 import random
 
 from pwdlib import PasswordHash
-from sqlalchemy import select
+from rich import print, box
+from rich.table import Table
+from sqlalchemy import desc, func, select
+from sqlalchemy.orm import Session
 
 from database import Base, SessionLocal, engine
 from models.aluno import Aluno
@@ -91,27 +95,50 @@ CATALOGO = {
 }
 
 USUARIOS_PADRAO = (
-    (Aluno, 'Fulano', 'fulano@eduia.local'),
-    (Professor, 'Beltrano', 'beltrano@eduia.local'),
-    (Aluno, 'Sicrano', 'sicrano@eduia.local'),
+    (Aluno, 'Fulano', 'fulano@eduia.com'),
+    (Professor, 'Beltrano', 'beltrano@eduia.com'),
+    (Aluno, 'Sicrano', 'sicrano@eduia.com'),
 )
 
 
-def solicitar_quantidade() -> int:
-    while True:
-        try:
-            quantidade = int(input('Quantidade de materiais por usuário [5]: ') or '5')
-        except ValueError:
-            print('Informe um número inteiro não negativo.')
-            continue
+def exibir_usuarios():
+    table = Table(
+        title='Users',
+        box=box.SIMPLE_HEAD,
+    )
+    table.add_column('Id', style='cyan')
+    table.add_column('Nome', style='green')
+    table.add_column('Email', style='green')
+    table.add_column('Senha', style='yellow', justify='right')
+    table.add_column('Tipo', style='cyan')
 
-        if quantidade >= 0:
-            return quantidade
+    for idx, user in enumerate(USUARIOS_PADRAO, 1):
+        table.add_row(f'{idx:0>2}', user[1], user[2], PASSWORD, user[0].__name__)
 
-        print('Informe um número inteiro não negativo.')
+    print('', table)
 
 
-def obter_ou_criar_usuario(session, model, nome: str, email: str) -> Usuario:
+def exibir_materiais(session: Session):
+    materiais = session.execute(
+        select(Material.type, func.count('*').label('qnt')).group_by(Material.type).order_by(desc('qnt'))
+    ).all()
+
+    table = Table(title='Materiais', box=box.SIMPLE, show_footer=True)
+    table.add_column('Tipo', style='green', footer='Total')
+    table.add_column(
+        'Quantidade',
+        style='cyan bold',
+        footer=str(sum(quantidade for _, quantidade in materiais)),
+        footer_style='cyan bold',
+    )
+
+    for type_, quantidade in materiais:
+        table.add_row(type_.value.upper(), str(quantidade))
+
+    print(table)
+
+
+def obter_ou_criar_usuario(session: Session, model, nome: str, email: str) -> Usuario:
     usuario = session.scalar(select(Usuario).where(Usuario.email == email))
     if usuario is not None:
         if not isinstance(usuario, model):
@@ -163,7 +190,17 @@ def criar_conteudo_estatico(material_type, disciplina: str) -> dict:
                     'id': 1,
                     'question': f'Qual é a ideia central de {disciplina}?',
                     'answer': f'É o conjunto de conceitos e aplicações fundamentais de {disciplina}.',
-                }
+                },
+                {
+                    'id': 2,
+                    'question': f'Como você explicaria {disciplina} com um exemplo prático?',
+                    'answer': 'Relacionando seus conceitos a uma situação real e observando como eles se aplicam.',
+                },
+                {
+                    'id': 3,
+                    'question': f'O que deve ser revisado ao estudar {disciplina}?',
+                    'answer': 'Os conceitos-chave, suas relações e os exemplos em que eles aparecem.',
+                },
             ]
         }
     if material_type is Formulario:
@@ -176,10 +213,32 @@ def criar_conteudo_estatico(material_type, disciplina: str) -> dict:
                         {'id': 1, 'text': f'Aplicar conceitos de {disciplina} em uma situação prática.'},
                         {'id': 2, 'text': 'Ignorar os dados do problema.'},
                         {'id': 3, 'text': 'Repetir uma resposta sem analisá-la.'},
-                        {'id': 4, 'text': 'Solicitar a solução para uma IA'},
+                        {'id': 4, 'text': 'Escolher uma resposta ao acaso.'},
                     ],
                     'correctAnswerId': 1,
-                }
+                },
+                {
+                    'id': 2,
+                    'question': f'Qual é o melhor caminho para compreender melhor {disciplina}?',
+                    'answers': [
+                        {'id': 1, 'text': 'Conectar teoria, exemplos e reflexão sobre o conteúdo.'},
+                        {'id': 2, 'text': 'Memorizar sem relacionar o tema a contextos.'},
+                        {'id': 3, 'text': 'Evitar a revisão de conceitos fundamentais.'},
+                        {'id': 4, 'text': 'Aceitar a primeira ideia que aparecer.'},
+                    ],
+                    'correctAnswerId': 1,
+                },
+                {
+                    'id': 3,
+                    'question': f'O que caracteriza uma boa análise de {disciplina}?',
+                    'answers': [
+                        {'id': 1, 'text': 'Identificar relações entre conceitos e situações reais.'},
+                        {'id': 2, 'text': 'Substituir o raciocínio por respostas prontas.'},
+                        {'id': 3, 'text': 'Ignorar exemplos e exercícios.'},
+                        {'id': 4, 'text': 'Repetir frases sem entender seu significado.'},
+                    ],
+                    'correctAnswerId': 1,
+                },
             ]
         }
     if material_type is PlanoDeAula:
@@ -205,11 +264,35 @@ def criar_conteudo_estatico(material_type, disciplina: str) -> dict:
                         {'id': 1, 'text': 'Para compreender conceitos e resolver situações práticas.'},
                         {'id': 2, 'text': 'Para evitar qualquer forma de análise.'},
                         {'id': 3, 'text': 'Para memorizar respostas sem contexto.'},
-                        {'id': 4, 'text': 'Solicitar para uma IA explicar'},
+                        {'id': 4, 'text': 'Para ignorar exemplos e repertórios de estudo.'},
                     ],
                     'correctAnswerId': 1,
                     'explanation': f'O estudo de {disciplina} combina compreensão conceitual e aplicação prática.',
-                }
+                },
+                {
+                    'id': 2,
+                    'question': f'Qual estratégia ajuda mais no aprendizado de {disciplina}?',
+                    'answers': [
+                        {'id': 1, 'text': 'Relacionar teoria, exemplos e revisão constante.'},
+                        {'id': 2, 'text': 'Repetir textos sem refletir sobre o conteúdo.'},
+                        {'id': 3, 'text': 'Evitar perguntas e exercícios de verificação.'},
+                        {'id': 4, 'text': 'Acreditar que a primeira resposta é sempre correta.'},
+                    ],
+                    'correctAnswerId': 1,
+                    'explanation': f'Uma boa estratégia para {disciplina} envolve reflexão, aplicação e revisão do conteúdo.',
+                },
+                {
+                    'id': 3,
+                    'question': f'O que indica uma compreensão mais sólida de {disciplina}?',
+                    'answers': [
+                        {'id': 1, 'text': 'Ser capaz de explicar o tema e aplicá-lo em exemplos.'},
+                        {'id': 2, 'text': 'Só memorizar fórmulas ou definições sem contexto.'},
+                        {'id': 3, 'text': 'Ignorar as dúvidas durante a aprendizagem.'},
+                        {'id': 4, 'text': 'Resumir tudo sem praticar o conteúdo.'},
+                    ],
+                    'correctAnswerId': 1,
+                    'explanation': f'Compreender {disciplina} significa explicar, relacionar e aplicar os conceitos com clareza.',
+                },
             ]
         }
     if material_type is Quiz:
@@ -222,10 +305,32 @@ def criar_conteudo_estatico(material_type, disciplina: str) -> dict:
                         {'id': 1, 'text': 'Relacionar o conceito a um exemplo.'},
                         {'id': 2, 'text': 'Pular a leitura do enunciado.'},
                         {'id': 3, 'text': 'Escolher uma resposta ao acaso.'},
-                        {'id': 4, 'text': 'Solicitar para uma IA explicar'},
+                        {'id': 4, 'text': 'Ignorar a definição do tema.'},
                     ],
                     'correctAnswerId': 1,
-                }
+                },
+                {
+                    'id': 2,
+                    'question': f'Qual ação melhora a retenção de {disciplina}?',
+                    'answers': [
+                        {'id': 1, 'text': 'Revisar os conceitos com pausas e exercícios.'},
+                        {'id': 2, 'text': 'Estudar apenas uma vez e parar.'},
+                        {'id': 3, 'text': 'Evitar exemplos práticos.'},
+                        {'id': 4, 'text': 'Repetir respostas sem verificar o tema.'},
+                    ],
+                    'correctAnswerId': 1,
+                },
+                {
+                    'id': 3,
+                    'question': f'Como você pode avaliar se aprendeu {disciplina}?',
+                    'answers': [
+                        {'id': 1, 'text': 'Explicando o tema e resolvendo aplicações.'},
+                        {'id': 2, 'text': 'Sem tentar usar o conhecimento em situações reais.'},
+                        {'id': 3, 'text': 'Sem revisar os conceitos principais.'},
+                        {'id': 4, 'text': 'Usando apenas uma resposta memorizada.'},
+                    ],
+                    'correctAnswerId': 1,
+                },
             ]
         }
     if material_type is Resumo:
@@ -315,18 +420,22 @@ def criar_material(usuario: Usuario, indice: int) -> Material:
     return Roteiro(**campos_comuns)
 
 
-def popular_banco(quantidade: int) -> None:
+def popular_banco():
+    parser = ArgumentParser()
+    parser.add_argument('quantidade', type=int, help='Quantidade de materiais por usuário')
+    args = parser.parse_args()
+
     Base.metadata.create_all(engine)
 
     with SessionLocal.begin() as session:
         usuarios = [obter_ou_criar_usuario(session, *dados) for dados in USUARIOS_PADRAO]
         for usuario in usuarios:
-            for indice in range(quantidade):
+            for indice in range(args.quantidade):
                 material = criar_material(usuario, indice)
                 session.add(Historico(material=material))
-
-    print(f'{len(usuarios)} usuários prontos; {quantidade} materiais criados por usuário.')
+        exibir_usuarios()
+        exibir_materiais(session)
 
 
 if __name__ == '__main__':
-    popular_banco(solicitar_quantidade())
+    popular_banco()

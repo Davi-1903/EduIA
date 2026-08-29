@@ -19,6 +19,7 @@ dependencies = [
 
 [dependency-groups]
 dev = [
+    "rich>=15.0.0",
     "ruff>=0.15.20",
 ]
 
