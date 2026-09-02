@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import {
     IconArrowBigUp,
     IconCards,
@@ -11,9 +11,13 @@ import {
     IconListLetters,
     IconReorder,
     IconTimeDuration10,
-    IconTrash,
 } from '@tabler/icons-react';
+import { useNavigate } from 'react-router-dom';
+import { useMessages } from '../../../../context/messagesContext';
+import { DELETE, GET } from '../../../../api/materials';
 import MenuCard from './menu';
+import Questions from './contents/questoes';
+import Quiz from './contents/quiz';
 
 export default function MaterialCard({
     id,
@@ -22,6 +26,7 @@ export default function MaterialCard({
     difficulty,
     amount,
     grade,
+    time,
     chalkboard,
     projector,
     printed,
@@ -30,19 +35,29 @@ export default function MaterialCard({
     type,
     canOpenMenu = true,
 }) {
+    const { setMessages } = useMessages();
+    const [content, setContent] = useState(null);
     const [menu, setMenu] = useState(null);
+    const [isOpening, setIsOpening] = useState(false);
+    const navigate = useNavigate();
 
     function formatarHora(created_at) {
+        const data = new Date(created_at);
+        if (!created_at || Number.isNaN(data.getTime())) return '--:--';
+
         const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
         const formatador = new Intl.DateTimeFormat('pt-BR', {
             hour: '2-digit',
             minute: '2-digit',
             timeZone: userTimeZone,
         });
-        return formatador.format(new Date(created_at));
+        return formatador.format(data);
     }
 
     function formatarData(created_at) {
+        const data = new Date(created_at);
+        if (!created_at || Number.isNaN(data.getTime())) return '--/--/----';
+
         const userTimeZone = Intl.DateTimeFormat().resolvedOptions().timeZone;
         const formatador = new Intl.DateTimeFormat('pt-BR', {
             day: '2-digit',
@@ -50,7 +65,40 @@ export default function MaterialCard({
             year: 'numeric',
             timeZone: userTimeZone,
         });
-        return formatador.format(new Date(created_at));
+        return formatador.format(data);
+    }
+
+    function getContent(type) {
+        const icons = {
+            desafio: null,
+            'exercicio guiado': null,
+            explicacao: null,
+            flashcards: null,
+            formulario: null,
+            'plano de aula': null,
+            questoes: (
+                <Questions
+                    discipline={discipline}
+                    subject={title}
+                    difficulty={difficulty}
+                    content={content}
+                    setContent={setContent}
+                />
+            ),
+            quiz: (
+                <Quiz
+                    discipline={discipline}
+                    subject={title}
+                    difficulty={difficulty}
+                    time={time}
+                    content={content}
+                    setContent={setContent}
+                />
+            ),
+            resumo: null,
+            roteiro: null,
+        };
+        return icons[type];
     }
 
     function getIcon(type) {
@@ -74,17 +122,71 @@ export default function MaterialCard({
         setMenu({ x: e.clientX, y: e.clientY, id });
     }
 
+    function handleOpen() {
+        if (!getContent(type)) {
+            setMessages(prev => [
+                ...prev,
+                {
+                    id: prev.length + 1,
+                    message: 'Visualização deste tipo de material ainda não está disponível',
+                    type: 'danger',
+                },
+            ]);
+            return;
+        }
+
+        if (isOpening) return;
+
+        setMenu(null);
+        setIsOpening(true);
+        GET(`/api/materials/${type}/${id}`)
+            .then(data => {
+                if (data.status !== 200) throw new Error(data.message);
+                setContent(data.material.content.content);
+            })
+            .catch(err => setMessages(prev => [...prev, { id: prev.length + 1, message: err.message, type: 'danger' }]))
+            .finally(() => setIsOpening(false));
+    }
+
+    function handleDelete() {
+        if (!confirm('Você tem certeza? Deseja mesmo mover esse material para a lixeira?')) return;
+
+        setMenu(null);
+        DELETE(`/api/materials/${id}`)
+            .then(data => {
+                if (data.status !== 200) throw new Error(data.message);
+                setMessages(prev => [
+                    ...prev,
+                    { id: prev.length + 1, message: 'Arquivo movido para a lixeira', type: 'ok' },
+                ]);
+                navigate('/trash');
+            })
+            .catch(err =>
+                setMessages(prev => [...prev, { id: prev.length + 1, message: err.message, type: 'danger' }]),
+            );
+    }
+
+    useEffect(() => {
+        document.body.style.overflow = content ? 'hidden' : 'auto';
+    }, [content]);
+
     return (
         <>
             {canOpenMenu && menu && (
                 <MenuCard
                     {...menu}
+                    type={type}
                     setMenu={setMenu}
+                    handleOpen={handleOpen}
+                    handleDelete={handleDelete}
+                    setContent={setContent}
                 />
             )}
+            {content && getContent(type)}
             <article
                 className='flex h-full min-h-48 cursor-pointer flex-col rounded-lg bg-color4-400 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg'
                 onContextMenu={e => handleContextMenu(e, id)}
+                onDoubleClick={handleOpen}
             >
                 <div className='flex items-center justify-end gap-3 border-b-2 border-color4-25 p-2 pl-3'>
                     <span>{getIcon(type)}</span>

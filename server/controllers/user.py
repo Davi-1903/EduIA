@@ -24,16 +24,13 @@ def get_user():
         }
     ), 200
 
+
 @bp_user.route('/progresso', methods=['GET'])
 @login_required
 def get_progresso():
     session = SessionLocal()
     try:
-        materiais = session.scalars(
-            select(Material.type)
-            .where(Material.user_id == current_user.id)
-            .distinct()
-        ).all()
+        materiais = session.scalars(select(Material.type).where(Material.user_id == current_user.id).distinct()).all()
         tipos_utilizados = set()
         for material in materiais:
             tipos_utilizados.add(material.value)

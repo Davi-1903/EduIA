@@ -1,46 +1,18 @@
 import { useEffect, useRef } from 'react';
 import { IconFolderOpen, IconTrash } from '@tabler/icons-react';
-import { useNavigate } from 'react-router-dom';
-import { useMessages } from '../../../../context/messagesContext';
-import { DELETE } from '../../../../api/materials';
 
-export default function MenuCard({ x, y, id, setMenu }) {
-    const { setMessages } = useMessages();
+export default function MenuCard({ x, y, setMenu, handleOpen, handleDelete }) {
     const menuRef = useRef(null);
-    const navigate = useNavigate();
-
-    function handleOpen() {
-        setMenu(null);
-        alert('Funcionalidade ainda não implementada');
-    }
-
-    function handleDelete() {
-        if (!confirm('Você tem certeza? Deseja mesmo mover esse material para a lixeira?')) return;
-
-        setMenu(null);
-        DELETE(`/api/materials/${id}`)
-            .then(data => {
-                if (data.status !== 200) throw new Error(data.message);
-                setMessages(prev => [
-                    ...prev,
-                    { id: prev.length + 1, message: 'Arquivo movido para a lixeira', type: 'ok' },
-                ]);
-                navigate('/trash');
-            })
-            .catch(err =>
-                setMessages(prev => [...prev, { id: prev.length + 1, message: err.message, type: 'danger' }]),
-            );
-    }
 
     useEffect(() => {
-        function handleClick(e) {
-            if (menuRef.current && !menuRef.current.contains(e.target)) {
+        function handleClick(event) {
+            if (menuRef.current && !menuRef.current.contains(event.target)) {
                 setMenu(null);
             }
         }
 
-        function handleKey(e) {
-            if (e.key === 'Escape') setMenu(null);
+        function handleKey(event) {
+            if (event.key === 'Escape') setMenu(null);
         }
 
         document.addEventListener('mousedown', handleClick);
@@ -51,13 +23,15 @@ export default function MenuCard({ x, y, id, setMenu }) {
         };
     }, [setMenu]);
 
+    const estimatedMenuHeight = 110;
+
     return (
         <div
             ref={menuRef}
             className={'fixed z-8 flex flex-col gap-2 rounded-xl border-color4-25 bg-color4-400 p-2 shadow-lg'}
             style={{
                 left: x - Math.max(0, x - window.innerWidth + 200),
-                top: y,
+                top: y - Math.max(0, y - window.innerHeight + estimatedMenuHeight),
             }}
         >
             <button

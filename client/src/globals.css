@@ -198,6 +198,24 @@
             border-radius: 4px;
         }
     }
+
+    .timer-bar {
+        height: 100%;
+        border-radius: 1rem;
+        background-image: linear-gradient(to right, var(--cor-inicio), var(--cor-fim));
+    }
+}
+
+@property --cor-inicio {
+    syntax: '<color>';
+    inherits: false;
+    initial-value: #7add32;
+}
+
+@property --cor-fim {
+    syntax: '<color>';
+    inherits: false;
+    initial-value: #24bc70;
 }
 
 @utility bg-button {
@@ -336,6 +354,19 @@
     }
 }
 
+@keyframes animate-quiz-timer {
+    0% {
+        width: 100%;
+        --cor-inicio: #7add32;
+        --cor-fim: #24bc70;
+    }
+    100% {
+        width: 0%;
+        --cor-inicio: #db0000;
+        --cor-fim: #cc046c;
+    }
+}
+
 @keyframes animate-new-message {
     from {
         transform: translateX(calc(100% + 1rem));
@@ -384,5 +415,15 @@
 
     to {
         opacity: 0;
+    }
+}
+
+@keyframes progress-ring {
+    from {
+        stroke-dashoffset: var(--progress-total, 0);
+    }
+
+    to {
+        stroke-dashoffset: var(--progress-final, 0);
     }
 }
