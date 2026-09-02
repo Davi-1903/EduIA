@@ -16,6 +16,7 @@ from controllers.formulario import bp_materials_formulario
 from controllers.lesson_plan import bp_materials_plano_de_aula
 from controllers.guided_exercises import bp_materials_exercicio_guiado
 from controllers.study_guide import bp_study_guide
+from controllers.flashcards import bp_materials_flashcard
 from database import SessionLocal
 from models.material import Difficulty, Material, MaterialType
 
@@ -30,6 +31,7 @@ bp_materials.register_blueprint(bp_materials_formulario)
 bp_materials.register_blueprint(bp_materials_plano_de_aula)
 bp_materials.register_blueprint(bp_materials_exercicio_guiado)
 bp_materials.register_blueprint(bp_study_guide)
+bp_materials.register_blueprint(bp_materials_flashcard)
 
 
 def to_boolean_prefix_search(term: str) -> str:
