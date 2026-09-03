@@ -13,7 +13,7 @@ bp_materials_flashcard = Blueprint('flashcard', __name__, url_prefix='/flashcard
 
 @bp_materials_flashcard.route('/', methods=['GET'])
 @login_required
-def get_flashcards():   
+def get_flashcards():
     cursor = request.args.get('cursor', 0, type=int)
     limit = request.args.get('limit', 50, type=int)
 

@@ -120,7 +120,6 @@
 //     );
 // }
 
-
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { disciplinasList } from '../../../../../public/assets/data/disciplinas';
@@ -158,7 +157,7 @@ export default function GenerateFlashCards({ setOpen }) {
                 discipline,
                 subject,
                 difficulty: difficulties[difficulty],
-                amount
+                amount,
             });
             if (response.status !== 201) throw new Error(response.message);
             document.body.style.overflowY = 'auto';
@@ -232,9 +231,15 @@ export default function GenerateFlashCards({ setOpen }) {
                         onChange={e => setDiscipline(e.target.value)}
                     >
                         {Object.entries(disciplinasList).map(([key, disciplinas]) => (
-                            <optgroup key={key} label={key}>
+                            <optgroup
+                                key={key}
+                                label={key}
+                            >
                                 {disciplinas.map(disciplina => (
-                                    <option key={disciplina} value={disciplina}>
+                                    <option
+                                        key={disciplina}
+                                        value={disciplina}
+                                    >
                                         {disciplina}
                                     </option>
                                 ))}

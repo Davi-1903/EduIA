@@ -73,9 +73,9 @@ export default function Introduction({ discipline, subject, difficulty, question
                 {informations.map(item => (
                     <li
                         key={item.id}
-                        className='flex gap-3 p-3 not-last:border-b-2 not-last:border-color4-100'
+                        className='flex items-center gap-3 p-3 not-last:border-b-2 not-last:border-color4-100'
                     >
-                        <div className='grid aspect-square h-full place-items-center rounded-lg bg-color4-100'>
+                        <div className='grid aspect-square h-full max-h-11 place-items-center rounded-lg bg-color4-100'>
                             {item.icon}
                         </div>
                         <div>

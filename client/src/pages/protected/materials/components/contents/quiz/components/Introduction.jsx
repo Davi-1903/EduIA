@@ -93,9 +93,9 @@ export default function Introduction({
                 {informations.map(item => (
                     <li
                         key={item.id}
-                        className='flex items-stretch gap-3 p-3 not-last:border-b-2 not-last:border-color4-100'
+                        className='flex items-center gap-3 p-3 not-last:border-b-2 not-last:border-color4-100'
                     >
-                        <div className='grid aspect-square place-items-center rounded-lg bg-color4-100'>
+                        <div className='grid aspect-square w-11 place-items-center rounded-lg bg-color4-100'>
                             {item.icon}
                         </div>
                         <div>
