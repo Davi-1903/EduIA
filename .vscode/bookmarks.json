@@ -129,9 +129,9 @@
 			"path": "server/controllers/questoes.py",
 			"bookmarks": [
 				{
-					"line": 80,
+					"line": 28,
 					"column": 0,
-					"label": "Por enquanto, cria um material sem conteúdo"
+					"label": "Dividir a lógica para a rota não mexer com a geração de questões ou banco de dados"
 				}
 			]
 		},

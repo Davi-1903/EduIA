@@ -3,7 +3,7 @@ from flask_login import current_user, login_required
 from sqlalchemy import func, select
 
 from ai import get_chain
-from ai.questoes import PROMPT, parser
+from ai.prompts.questoes import prompt_template, parser
 from database import SessionLocal
 from models.historico import Historico
 from models.questoes import Questoes
@@ -91,7 +91,7 @@ def create_questions():
         return jsonify({'ok': False, 'message': 'Dados não recebidos'}), 400
 
     try:
-        chain = get_chain(PROMPT, parser)
+        chain = get_chain(prompt_template, parser)
         resposta_json = chain.invoke(
             {
                 'disciplina': data['discipline'],
