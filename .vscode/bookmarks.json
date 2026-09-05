@@ -129,9 +129,9 @@
 			"path": "server/controllers/questoes.py",
 			"bookmarks": [
 				{
-					"line": 28,
+					"line": 48,
 					"column": 0,
-					"label": "Dividir a lógica para a rota não mexer com a geração de questões ou banco de dados"
+					"label": "Adicionar camada de serviçoa para a IA"
 				}
 			]
 		},
@@ -142,6 +142,16 @@
 					"line": 21,
 					"column": 0,
 					"label": "Alterar prioridade"
+				}
+			]
+		},
+		{
+			"path": "server/controllers/user.py",
+			"bookmarks": [
+				{
+					"line": 32,
+					"column": 0,
+					"label": "É preciso verificar que os materiais não estejam no lixeira"
 				}
 			]
 		}

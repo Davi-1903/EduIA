@@ -1,13 +1,14 @@
 from flask import Blueprint, jsonify, request
-from flask_login import current_user, login_required
-from sqlalchemy import func, select
+from flask_login import login_required
 
-from ai import get_chain
-from ai.prompts.questoes import prompt_template, parser
-from database import SessionLocal
-from models.historico import Historico
-from models.questoes import Questoes
-from models.material import Difficulty
+from errors.materials import MaterialNotFoundError, MaterialServiceError, MaterialValidationError
+from ia import get_chain
+from ia.prompts.questoes import prompt_template, parser
+from services.questoes import (
+    create_question_service,
+    get_question_service,
+    get_questions_service,
+)
 
 
 bp_materials_questoes = Blueprint('questoes', __name__, url_prefix='/questoes')
@@ -16,71 +17,26 @@ bp_materials_questoes = Blueprint('questoes', __name__, url_prefix='/questoes')
 @bp_materials_questoes.route('/', methods=['GET'])
 @login_required
 def get_questions():
-    cursor = request.args.get('cursor', 0, type=int)
-    limit = request.args.get('limit', 50, type=int)
+    try:
+        cursor = request.args.get('cursor', 0, type=int)
+        limit = request.args.get('limit', 50, type=int)
 
-    with SessionLocal() as session:
-        count_stmt = (
-            select(func.count())
-            .select_from(Questoes)
-            .where(Questoes.user_id == current_user.id)
-            .where(Questoes.deleted_at.is_(None))
-        )
-        statement = (
-            select(Questoes)
-            .where(Questoes.user_id == current_user.id)
-            .where(Questoes.deleted_at.is_(None))
-            .offset(cursor)
-            .limit(limit)
-            .order_by(Questoes.created_at.desc())
-        )
+        questions = get_questions_service(cursor, limit)
+        return jsonify({'ok': True, **questions}), 200
 
-        total = session.scalar(count_stmt) or 0
-        materials = session.scalars(statement).all()
-
-        return jsonify(
-            {
-                'ok': True,
-                'total': total,
-                'materials': [
-                    {
-                        'id': material.id,
-                        'title': material.subject,
-                        'discipline': material.discipline,
-                        'difficulty': material.difficulty.value,
-                        'amount': material.amount,
-                        'created_at': material.created_at,
-                        'type': material.type.value,
-                    }
-                    for material in materials
-                ],
-            }
-        ), 200
+    except MaterialServiceError as error:
+        return jsonify({'ok': False, 'message': str(error)}), 500
 
 
 @bp_materials_questoes.route('/<int:id>', methods=['GET'])
 @login_required
 def get_question(id: int):
-    with SessionLocal() as session:
-        material = session.get(Questoes, id)
-        if material is None or material.deleted_at is not None:
-            return jsonify({'ok': False, 'message': 'Questões não encontradas'}), 404
+    try:
+        questions = get_question_service(id)
+        return jsonify({'ok': True, 'material': questions}), 200
 
-        return jsonify(
-            {
-                'ok': True,
-                'material': {
-                    'id': material.id,
-                    'title': material.subject,
-                    'discipline': material.discipline,
-                    'difficulty': material.difficulty.value,
-                    'content': material.content,
-                    'amount': material.amount,
-                    'created_at': material.created_at,
-                    'type': material.type.value,
-                },
-            }
-        ), 200
+    except MaterialNotFoundError as erro:
+        return jsonify({'ok': False, 'message': str(erro)}), 404
 
 
 @bp_materials_questoes.route('/', methods=['POST'])
@@ -98,29 +54,17 @@ def create_questions():
                 'quantidade': data['amount'],
                 'dificuldade': data['difficulty'],
                 'assunto': data['subject'],
-                'observacoes': data['note'] if data['note'] != '' else 'Não há observações',
+                'observacoes': data['note'] if data.get('note') not in (None, '') else 'Não há observações',
             }
         )
+    except (KeyError, TypeError, ValueError):
+        return jsonify({'ok': False, 'message': 'Dados inválidos para geração de questões'}), 400
     except Exception:
-        return jsonify({'ok': False, 'message': 'Ocorreu um erro interno'}), 500
+        return jsonify({'ok': False, 'message': 'A geração de questões ainda não foi iniciada'}), 501
 
-    with SessionLocal() as session:
-        try:
-            questions = Questoes(
-                user_id=current_user.id,
-                discipline=data['discipline'],
-                subject=data['subject'],
-                content=resposta_json,  # Resposta da IA
-                difficulty=Difficulty(data['difficulty']),
-                amount=data['amount'],
-                note=data['note'] if data['note'] != '' else None,
-            )
-            historico = Historico(material=questions)
-            session.add(questions)
-            session.add(historico)
-            session.commit()
-            return jsonify({'ok': True, 'redirect': '/materials'}), 201
+    try:
+        create_question_service(data, resposta_json)
+        return jsonify({'ok': True, 'redirect': '/materials'}), 201
 
-        except Exception:
-            session.rollback()
-            return jsonify({'ok': False, 'message': 'Ocorreu um erro interno'}), 500
+    except MaterialValidationError as error:
+        return jsonify({'ok': False, 'message': str(error)}), 400
