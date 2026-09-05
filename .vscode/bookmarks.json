@@ -14,6 +14,11 @@
 			"path": "README.md",
 			"bookmarks": [
 				{
+					"line": 0,
+					"column": 0,
+					"label": "Adicionar mais informações ao README"
+				},
+				{
 					"line": 13,
 					"column": 0,
 					"label": "Lembrar de adicionar uma imagem"
@@ -152,6 +157,26 @@
 					"line": 32,
 					"column": 0,
 					"label": "É preciso verificar que os materiais não estejam no lixeira"
+				}
+			]
+		},
+		{
+			"path": "server/ai/__init__.py",
+			"bookmarks": [
+				{
+					"line": 2,
+					"column": 0,
+					"label": "Futuramente trocar para langhchain-openai"
+				}
+			]
+		},
+		{
+			"path": ".env.example",
+			"bookmarks": [
+				{
+					"line": 2,
+					"column": 0,
+					"label": "Adicionar quantidade de máxima de tokens no .env"
 				}
 			]
 		}

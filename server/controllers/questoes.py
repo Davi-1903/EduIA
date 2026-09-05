@@ -2,8 +2,8 @@ from flask import Blueprint, jsonify, request
 from flask_login import login_required
 
 from errors.materials import MaterialNotFoundError, MaterialServiceError, MaterialValidationError
-from ia import get_chain
-from ia.prompts.questoes import prompt_template, parser
+from ai import get_chain
+from ai.prompts.questoes import prompt_template, parser
 from services.questoes import (
     create_question_service,
     get_question_service,
