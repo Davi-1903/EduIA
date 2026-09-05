@@ -12,3 +12,7 @@ class QuestoesJSON(BaseModel):
     answers: list[Answer]
     correctAnswerId: int
     explanation: str
+
+
+class Questoes(BaseModel):
+    content: list[QuestoesJSON]

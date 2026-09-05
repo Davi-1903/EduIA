@@ -2,6 +2,8 @@ from flask import Blueprint, jsonify, request
 from flask_login import current_user, login_required
 from sqlalchemy import func, select
 
+from ai import get_chain
+from ai.questoes import PROMPT, parser
 from database import SessionLocal
 from models.historico import Historico
 from models.questoes import Questoes
@@ -88,7 +90,19 @@ def create_questions():
     if data is None:
         return jsonify({'ok': False, 'message': 'Dados não recebidos'}), 400
 
-    # Lógica da IA...
+    try:
+        chain = get_chain(PROMPT, parser)
+        resposta_json = chain.invoke(
+            {
+                'disciplina': data['discipline'],
+                'quantidade': data['amount'],
+                'dificuldade': data['difficulty'],
+                'assunto': data['subject'],
+                'observacoes': data['note'] if data['note'] != '' else 'Não há observações',
+            }
+        )
+    except Exception:
+        return jsonify({'ok': False, 'message': 'Ocorreu um erro interno'}), 500
 
     with SessionLocal() as session:
         try:
@@ -96,7 +110,7 @@ def create_questions():
                 user_id=current_user.id,
                 discipline=data['discipline'],
                 subject=data['subject'],
-                content={'content': 1},  # Respota da IA
+                content=resposta_json,  # Resposta da IA
                 difficulty=Difficulty(data['difficulty']),
                 amount=data['amount'],
                 note=data['note'] if data['note'] != '' else None,
