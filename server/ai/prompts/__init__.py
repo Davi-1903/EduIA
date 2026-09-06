@@ -1,4 +1,4 @@
-from . import questoes
+from . import questoes, quiz
 
 
-__all__ = ['questoes']
+__all__ = ['questoes', 'quiz']

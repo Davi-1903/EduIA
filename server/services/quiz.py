@@ -5,24 +5,24 @@ from database import SessionLocal
 from errors.materials import MaterialNotFoundError, MaterialServiceError
 from models.historico import Historico
 from models.material import Difficulty
-from models.questoes import Questoes
+from models.quizzes import Quiz
 
 
-def get_questions_service(cursor: int, limit: int):
+def get_quizzes_service(cursor: int, limit: int):
     with SessionLocal() as session:
         count_stmt = (
             select(func.count())
-            .select_from(Questoes)
-            .where(Questoes.user_id == current_user.id)
-            .where(Questoes.deleted_at.is_(None))
+            .select_from(Quiz)
+            .where(Quiz.user_id == current_user.id)
+            .where(Quiz.deleted_at.is_(None))
         )
         statement = (
-            select(Questoes)
-            .where(Questoes.user_id == current_user.id)
-            .where(Questoes.deleted_at.is_(None))
+            select(Quiz)
+            .where(Quiz.user_id == current_user.id)
+            .where(Quiz.deleted_at.is_(None))
             .offset(cursor)
             .limit(limit)
-            .order_by(Questoes.created_at.desc())
+            .order_by(Quiz.created_at.desc())
         )
 
         total = session.scalar(count_stmt) or 0
@@ -36,6 +36,7 @@ def get_questions_service(cursor: int, limit: int):
                     'title': material.subject,
                     'discipline': material.discipline,
                     'difficulty': material.difficulty.value,
+                    'timer_per_question': material.time_per_question,
                     'amount': material.amount,
                     'created_at': material.created_at,
                     'type': material.type.value,
@@ -45,38 +46,40 @@ def get_questions_service(cursor: int, limit: int):
         }
 
 
-def get_question_service(id: int):
+def get_quiz_service(id: int):
     with SessionLocal() as session:
-        material = session.get(Questoes, id)
+        material = session.get(Quiz, id)
         if material is None or material.deleted_at is not None:
-            raise MaterialNotFoundError('Questões não encontradas')
+            raise MaterialNotFoundError('Quiz não encontrado')
 
         return {
             'id': material.id,
             'title': material.subject,
             'discipline': material.discipline,
             'difficulty': material.difficulty.value,
-            'content': material.content,
+            'timer_per_question': material.time_per_question,
             'amount': material.amount,
+            'content': material.content,
             'created_at': material.created_at,
             'type': material.type.value,
         }
 
 
-def create_question_service(data: dict):
+def create_quiz_service(data: dict):
     with SessionLocal() as session:
         try:
-            questions = Questoes(
+            quiz = Quiz(
                 user_id=current_user.id,
                 discipline=data['discipline'],
                 subject=data['subject'],
                 content=data['content'],
                 difficulty=Difficulty(data['difficulty']),
+                time_per_question=data['time_per_question'],
                 amount=data['amount'],
-                note=data.get('note') if data.get('note') not in (None, '') else None,
+                note=data['note'] if data['note'] != '' else None,
             )
-            historico = Historico(material=questions)
-            session.add(questions)
+            historico = Historico(material=quiz)
+            session.add(quiz)
             session.add(historico)
             session.commit()
 

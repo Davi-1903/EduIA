@@ -97,11 +97,6 @@
 					"line": 89,
 					"column": 1,
 					"label": "Talvez trocar ícone por tag, acho que fica mais fácil de identificar o material"
-				},
-				{
-					"line": 144,
-					"column": 0,
-					"label": "content dentro de content??????????????????????????????????"
 				}
 			]
 		},
@@ -182,6 +177,21 @@
 					"line": 14,
 					"column": 0,
 					"label": "Adicionar esquemas para entrada e saída"
+				}
+			]
+		},
+		{
+			"path": "server/controllers/questoes.py",
+			"bookmarks": [
+				{
+					"line": 28,
+					"column": 0,
+					"label": "Esse erro não está sendo lançado"
+				},
+				{
+					"line": 56,
+					"column": 0,
+					"label": "Tratar erros da IA no frontend também"
 				}
 			]
 		}

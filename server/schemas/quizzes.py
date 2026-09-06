@@ -11,3 +11,7 @@ class QuizJSON(BaseModel):
     question: str
     answers: list[Answer]
     correctAnswerId: int
+
+
+class Quiz(BaseModel):
+    content: list[QuizJSON]

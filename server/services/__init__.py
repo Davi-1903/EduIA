@@ -1,4 +1,4 @@
-from . import materials, questoes
+from . import materials, questoes, quiz
 
 
-__all__ = ['materials', 'questoes']
+__all__ = ['materials', 'questoes', 'quiz']

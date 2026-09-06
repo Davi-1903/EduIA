@@ -10,11 +10,7 @@ from errors.ai import (
 )
 from errors.materials import MaterialNotFoundError, MaterialServiceError, MaterialValidationError
 from ai.services.questoes import generate_questions
-from services.questoes import (
-    create_question_service,
-    get_question_service,
-    get_questions_service,
-)
+from services.questoes import create_question_service, get_question_service, get_questions_service
 
 
 bp_materials_questoes = Blueprint('questoes', __name__, url_prefix='/questoes')

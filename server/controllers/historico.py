@@ -51,7 +51,7 @@ def get_historico():
                             'discipline': item.material.discipline,
                             'difficulty': item.material.difficulty.value if hasattr(item.material, 'difficulty') else None,  # type: ignore
                             'amount': getattr(item.material, 'amount', None),
-                            'time': getattr(item.material, 'time', getattr(item.material, 'duration', None)),
+                            'time': getattr(item.material, 'time_per_question', None),
                             'grade': getattr(item.material, 'grade', None),
                             'chalkboard': getattr(item.material, 'chalkboard', None),
                             'projector': getattr(item.material, 'projector', None),
