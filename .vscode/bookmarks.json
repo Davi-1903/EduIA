@@ -171,16 +171,6 @@
 			]
 		},
 		{
-			"path": "server/schemas/__init__.py",
-			"bookmarks": [
-				{
-					"line": 14,
-					"column": 0,
-					"label": "Adicionar esquemas para entrada e saída"
-				}
-			]
-		},
-		{
 			"path": "server/controllers/questoes.py",
 			"bookmarks": [
 				{
