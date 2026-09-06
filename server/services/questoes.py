@@ -63,14 +63,14 @@ def get_question_service(id: int):
         }
 
 
-def create_question_service(data: dict, content: dict):
+def create_question_service(data: dict):
     with SessionLocal() as session:
         try:
             questions = Questoes(
                 user_id=current_user.id,
                 discipline=data['discipline'],
                 subject=data['subject'],
-                content=content,  # Resposta da IA
+                content=data['content'],  # Resposta da IA
                 difficulty=Difficulty(data['difficulty']),
                 amount=data['amount'],
                 note=data.get('note') if data.get('note') not in (None, '') else None,

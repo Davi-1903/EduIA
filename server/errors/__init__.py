@@ -1,4 +1,4 @@
-from . import materials
+from . import materials, ai
 
 
-__all__ = ['materials']
+__all__ = ['ai', 'materials']

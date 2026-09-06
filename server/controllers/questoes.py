@@ -1,9 +1,15 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
 
+from errors.ai import (
+    AiInvalidData,
+    AiInvalidResponse,
+    AiProviderUnavailable,
+    AiServiceError,
+    AiTimeout,
+)
 from errors.materials import MaterialNotFoundError, MaterialServiceError, MaterialValidationError
-from ai import get_chain
-from ai.prompts.questoes import prompt_template, parser
+from ai.services.questoes import generate_questions
 from services.questoes import (
     create_question_service,
     get_question_service,
@@ -17,10 +23,10 @@ bp_materials_questoes = Blueprint('questoes', __name__, url_prefix='/questoes')
 @bp_materials_questoes.route('/', methods=['GET'])
 @login_required
 def get_questions():
-    try:
-        cursor = request.args.get('cursor', 0, type=int)
-        limit = request.args.get('limit', 50, type=int)
+    cursor = request.args.get('cursor', 0, type=int)
+    limit = request.args.get('limit', 50, type=int)
 
+    try:
         questions = get_questions_service(cursor, limit)
         return jsonify({'ok': True, **questions}), 200
 
@@ -38,6 +44,9 @@ def get_question(id: int):
     except MaterialNotFoundError as erro:
         return jsonify({'ok': False, 'message': str(erro)}), 404
 
+    except MaterialServiceError as error:
+        return jsonify({'ok': False, 'message': str(error)}), 500
+
 
 @bp_materials_questoes.route('/', methods=['POST'])
 @login_required
@@ -47,24 +56,22 @@ def create_questions():
         return jsonify({'ok': False, 'message': 'Dados não recebidos'}), 400
 
     try:
-        chain = get_chain(prompt_template, parser)
-        resposta_json = chain.invoke(
-            {
-                'disciplina': data['discipline'],
-                'quantidade': data['amount'],
-                'dificuldade': data['difficulty'],
-                'assunto': data['subject'],
-                'observacoes': data['note'] if data.get('note') not in (None, '') else 'Não há observações',
-            }
-        )
-    except (KeyError, TypeError, ValueError):
-        return jsonify({'ok': False, 'message': 'Dados inválidos para geração de questões'}), 400
-    except Exception:
-        return jsonify({'ok': False, 'message': 'A geração de questões ainda não foi iniciada'}), 501
+        content = generate_questions(data)
+    except AiInvalidData as error:
+        return jsonify({'ok': False, 'message': str(error)}), 400
+    except AiInvalidResponse as error:
+        return jsonify({'ok': False, 'message': str(error)}), 502
+    except AiTimeout as error:
+        return jsonify({'ok': False, 'message': str(error)}), 503
+    except AiProviderUnavailable as error:
+        return jsonify({'ok': False, 'message': str(error)}), 503
+    except AiServiceError as error:
+        return jsonify({'ok': False, 'message': str(error)}), 500
 
     try:
-        create_question_service(data, resposta_json)
+        create_question_service({**data, 'content': content})
         return jsonify({'ok': True, 'redirect': '/materials'}), 201
-
     except MaterialValidationError as error:
         return jsonify({'ok': False, 'message': str(error)}), 400
+    except MaterialServiceError:
+        return jsonify({'ok': False, 'message': 'Ocorreu um erro interno'}), 500

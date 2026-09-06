@@ -131,16 +131,6 @@
 			]
 		},
 		{
-			"path": "server/controllers/questoes.py",
-			"bookmarks": [
-				{
-					"line": 48,
-					"column": 0,
-					"label": "Adicionar camada de serviçoa para a IA"
-				}
-			]
-		},
-		{
 			"path": "docs/requisitos_nao_funcionais.md",
 			"bookmarks": [
 				{
@@ -177,6 +167,16 @@
 					"line": 2,
 					"column": 0,
 					"label": "Adicionar quantidade de máxima de tokens no .env"
+				}
+			]
+		},
+		{
+			"path": "server/schemas/__init__.py",
+			"bookmarks": [
+				{
+					"line": 14,
+					"column": 0,
+					"label": "Adicionar esquemas para entrada e saída"
 				}
 			]
 		}
