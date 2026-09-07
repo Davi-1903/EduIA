@@ -161,16 +161,6 @@
 			]
 		},
 		{
-			"path": ".env.example",
-			"bookmarks": [
-				{
-					"line": 2,
-					"column": 0,
-					"label": "Adicionar quantidade de máxima de tokens no .env"
-				}
-			]
-		},
-		{
 			"path": "server/controllers/questoes.py",
 			"bookmarks": [
 				{
@@ -182,6 +172,16 @@
 					"line": 56,
 					"column": 0,
 					"label": "Tratar erros da IA no frontend também"
+				}
+			]
+		},
+		{
+			"path": "server/Dockerfile",
+			"bookmarks": [
+				{
+					"line": 20,
+					"column": 0,
+					"label": "O gunicorn \"mata\" as requisições para IA que demoram muito"
 				}
 			]
 		}

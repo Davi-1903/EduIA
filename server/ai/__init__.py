@@ -6,7 +6,11 @@ from utils import get_env
 
 
 llm_base = HuggingFaceEndpoint(
-    model=get_env('HF_MODEL'), max_new_tokens=3000, temperature=0.1, top_p=0.9, provider='auto'
+    model=get_env('HF_MODEL'),
+    max_new_tokens=int(get_env('MAX_TOKENS')),
+    temperature=0.1,
+    top_p=0.9,
+    provider='auto',
 )
 
 chat_model = ChatHuggingFace(llm=llm_base)

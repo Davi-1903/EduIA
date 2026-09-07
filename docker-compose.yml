@@ -11,6 +11,9 @@ services:
         build: ./server
         container_name: server
         environment:
+            - HUGGINGFACEHUB_API_TOKEN=${HUGGINGFACEHUB_API_TOKEN}
+            - HF_MODEL=${HF_MODEL}
+            - MAX_TOKENS=${MAX_TOKENS}
             - SECRET_KEY=${SECRET_KEY}
             - CORS_ORIGINS=${CORS_ORIGINS}
             - DB_USER=${DB_USER}

@@ -1,7 +1,7 @@
 from pydantic import ValidationError
 
 from errors.ai import AiInvalidData, AiInvalidRequest
-from ..gateways.huggingface import generate_questions as generate_questions_with_huggingface
+from ..gateways import generate_questions as generate_questions_gateway
 from schemas.questoes import Questoes
 
 
@@ -18,7 +18,7 @@ def generate_questions(data: dict):
         raise AiInvalidData('Dados inválidos para geração de questões') from error
 
     try:
-        content = generate_questions_with_huggingface(payload)
+        content = generate_questions_gateway(payload)
         Questoes.model_validate(content)
         return content
     except ValidationError as error:
