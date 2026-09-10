@@ -108,7 +108,7 @@ export default function GenerateQuestions({ setOpen }) {
                         id='disciplina'
                         className='h-12 w-full rounded-lg border border-color4-25 px-4 font-medium text-color1-100 outline-none'
                         value={discipline}
-                        onChange={e => setDiscipline(e.target.value)}
+                        onChange={e => isLoading || setDiscipline(e.target.value)}
                     >
                         {Object.entries(disciplinasList).map(([key, disciplinas]) => (
                             <optgroup label={key}>
@@ -133,6 +133,7 @@ export default function GenerateQuestions({ setOpen }) {
                         className='h-12 w-full rounded-lg border border-color4-25 px-4 font-medium outline-none focus:ring-2 focus:ring-color1-400'
                         value={subject}
                         onChange={e => setSubject(e.target.value)}
+                        readOnly={isLoading}
                         required
                     />
                 </div>
@@ -147,6 +148,7 @@ export default function GenerateQuestions({ setOpen }) {
                         value={difficulties[difficulty]}
                         trueValue={difficulty}
                         setValue={setDifficulty}
+                        readOnly={isLoading}
                         steps={1}
                         min={0}
                         max={4}
@@ -164,6 +166,7 @@ export default function GenerateQuestions({ setOpen }) {
                         trueValue={amount}
                         setValue={setAmount}
                         formatValue={formatQuantidade}
+                        readOnly={isLoading}
                         max={50}
                         min={5}
                     />
@@ -181,6 +184,7 @@ export default function GenerateQuestions({ setOpen }) {
                         placeholder='Caso deseje, descreva aqui suas observações'
                         value={note}
                         onChange={e => setNote(e.target.value)}
+                        readOnly={isLoading}
                     ></textarea>
                 </div>
                 <button

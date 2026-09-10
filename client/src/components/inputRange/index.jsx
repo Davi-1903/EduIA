@@ -1,6 +1,6 @@
 import { memo } from 'react';
 
-function InputRange({ value, trueValue, setValue, id, min, max, steps = 1, formatValue = null }) {
+function InputRange({ value, trueValue, setValue, id, min, max, steps = 1, formatValue = null, readOnly = false }) {
     function handleFormat(value) {
         if (!formatValue) return value;
         return formatValue(value);
@@ -21,7 +21,7 @@ function InputRange({ value, trueValue, setValue, id, min, max, steps = 1, forma
                 type='range'
                 id={id}
                 value={trueValue}
-                onChange={e => setValue(e.target.value)}
+                onChange={e => readOnly || setValue(e.target.value)}
                 className='input-range'
                 step={steps}
                 min={min}
