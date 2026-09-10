@@ -8,7 +8,7 @@ from models.flashcards import FlashCards
 from models.material import Difficulty
 
 
-bp_materials_flashcard = Blueprint('flashcard', __name__, url_prefix='/flashcard')
+bp_materials_flashcard = Blueprint('flashcards', __name__, url_prefix='/flashcards')
 
 
 @bp_materials_flashcard.route('/', methods=['GET'])
