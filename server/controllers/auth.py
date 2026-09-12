@@ -1,88 +1,69 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, login_user, logout_user
 from flask_wtf.csrf import generate_csrf
-from pwdlib import PasswordHash
-from sqlalchemy import select
-from sqlalchemy.exc import IntegrityError
-from models.user import UserType, Usuario
-from models.professor import Professor
-from models.aluno import Aluno
-from database import SessionLocal
+from errors.user import UserAlreadyExistsError, UserCredentialsError, UserServiceError, UserTypeError
+from services.user import create_user_service, get_user_service
 
 
 bp_auth = Blueprint('auth', __name__, url_prefix='/api/auth')
-ph = PasswordHash.recommended()
 
 
 @bp_auth.route('/register', methods=['POST'])
 def register():
-    with SessionLocal() as session:
-        try:
-            data = request.get_json()
-            if not data:
-                return jsonify({'ok': False, 'message': 'Dados não recebidos'}), 400
+    data = request.get_json(silent=True)
+    if not data:
+        return jsonify({'ok': False, 'message': 'Dados não recebidos'}), 400
 
-            if data['type'] == UserType.ALUNO.value:
-                new_user = Aluno(name=data['nome'], email=data['email'], password=ph.hash(data['password']))
-            elif data['type'] == UserType.PROFESSOR.value:
-                new_user = Professor(name=data['nome'], email=data['email'], password=ph.hash(data['password']))
-            else:
-                return jsonify({'ok': False, 'message': 'Tipo inválido'}), 400
+    try:
+        user = create_user_service(data)
+    except UserTypeError as error:
+        return jsonify({'ok': False, 'message': str(error)}), 400
+    except UserAlreadyExistsError:
+        return jsonify({'ok': False, 'message': 'Credenciais inválidas'}), 401
+    except UserServiceError as error:
+        return jsonify({'ok': False, 'message': str(error)}), 500
 
-            session.add(new_user)
-            session.commit()
-            login_user(new_user)
-
-            return jsonify(
-                {
-                    'ok': True,
-                    'redirect': '/dash',
-                    'user': {
-                        'id': new_user.id,
-                        'nome': new_user.name,
-                        'email': new_user.email,
-                        'tipo': new_user.type.value,
-                    },
-                }
-            ), 201
-
-        except IntegrityError:
-            session.rollback()
-            return jsonify({'ok': False, 'message': 'Credenciais inválidas'}), 401
-
-        except Exception:
-            session.rollback()
-            return jsonify({'ok': False, 'message': 'Erro interno'}), 500
+    login_user(user)
+    return jsonify(
+        {
+            'ok': True,
+            'redirect': '/dash',
+            'user': {
+                'id': user.id,
+                'nome': user.name,
+                'email': user.email,
+                'tipo': user.type.value,
+            },
+        }
+    )
 
 
 @bp_auth.route('/login', methods=['POST'])
 def login():
-    with SessionLocal() as session:
-        try:
-            data = request.get_json()
-            if not data:
-                return jsonify({'ok': False, 'message': 'Dados não recebidos'}), 400
+    data = request.get_json(silent=True)
+    if not data:
+        return jsonify({'ok': False, 'message': 'Dados não recebidos'}), 400
 
-            user = session.scalar(select(Usuario).where(Usuario.email == data['email']))
-            if not user or not ph.verify(data['senha'], user.password):
-                return jsonify({'ok': False, 'message': 'Credenciais inválidas'}), 401
+    try:
+        user = get_user_service(data['email'], data['senha'])
+    except UserCredentialsError as error:
+        return jsonify({'ok': False, 'message': str(error)}), 401
+    except UserServiceError as error:
+        return jsonify({'ok': False, 'message': str(error)}), 500
 
-            login_user(user)
-            return jsonify(
-                {
-                    'ok': True,
-                    'redirect': '/dash',
-                    'user': {
-                        'id': user.id,
-                        'nome': user.name,
-                        'email': user.email,
-                        'tipo': user.type.value,
-                    },
-                }
-            ), 200
-
-        except Exception:
-            return jsonify({'ok': False, 'message': 'Ocorreu um erro interno'}), 500
+    login_user(user)
+    return jsonify(
+        {
+            'ok': True,
+            'redirect': '/dash',
+            'user': {
+                'id': user.id,
+                'nome': user.name,
+                'email': user.email,
+                'tipo': user.type.value,
+            },
+        }
+    ), 200
 
 
 @bp_auth.route('/csrf')
