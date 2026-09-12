@@ -1,4 +1,4 @@
-from . import materials, ai, user
+from . import ai, materials, user
 
 
 __all__ = ['ai', 'materials', 'user']

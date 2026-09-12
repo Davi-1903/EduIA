@@ -1,8 +1,9 @@
 from pydantic import ValidationError
 
 from errors.ai import AiInvalidData, AiInvalidRequest
-from ..gateways import generate_quizzes as generate_quizzes_gateway
 from schemas.quizzes import Quiz
+
+from ..gateways import generate_quizzes as generate_quizzes_gateway
 
 
 def generate_quiz(data: dict):

@@ -1,5 +1,6 @@
 from os import getenv
 from time import sleep
+
 from dotenv import load_dotenv
 from sqlalchemy import Engine, create_engine
 from sqlalchemy.exc import OperationalError

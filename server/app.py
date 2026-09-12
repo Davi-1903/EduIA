@@ -1,10 +1,11 @@
 from flask import Flask
+
+from config import config_app
 from controllers.auth import bp_auth
-from controllers.user import bp_user
-from controllers.materials import bp_materials
 from controllers.historico import bp_historico
 from controllers.lixeira import bp_lixeira
-from config import config_app
+from controllers.materials import bp_materials
+from controllers.user import bp_user
 
 
 app = Flask(__name__)

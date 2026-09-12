@@ -1,9 +1,9 @@
 from . import (
-    formularios,
     desafios,
     exercicios_guiados,
     explicacoes,
     flashcards,
+    formularios,
     planos_de_aula,
     questoes,
     quizzes,

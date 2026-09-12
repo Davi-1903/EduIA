@@ -3,8 +3,8 @@ from flask_login import current_user, login_required
 from sqlalchemy import func, select
 
 from database import SessionLocal
-from models.historico import Historico
 from models.flashcards import FlashCards
+from models.historico import Historico
 from models.material import Difficulty
 
 

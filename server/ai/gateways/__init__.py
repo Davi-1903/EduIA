@@ -1,7 +1,7 @@
-from ai import get_chain
-from ai.prompts import questoes, quiz
 from langchain_core.exceptions import OutputParserException
 
+from ai import get_chain
+from ai.prompts import questoes, quiz
 from errors.ai import (
     AiInvalidRequest,
     AiInvalidResponse,

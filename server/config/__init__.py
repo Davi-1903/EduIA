@@ -2,6 +2,7 @@ from flask import Flask, jsonify
 from flask_cors import CORS
 from flask_login import LoginManager
 from flask_wtf import CSRFProtect
+
 from database import SessionLocal, init_database
 from models.user import Usuario
 from utils import get_env

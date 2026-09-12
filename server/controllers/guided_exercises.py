@@ -4,8 +4,8 @@ from sqlalchemy import func, select
 
 from database import SessionLocal
 from models.exercicios_guiados import ExercicioGuiado
-from models.material import Difficulty
 from models.historico import Historico
+from models.material import Difficulty
 
 
 bp_materials_exercicio_guiado = Blueprint('exercicio_guiado', __name__, url_prefix='/exercicio_guiado')

@@ -1,15 +1,17 @@
 import enum
-from typing import TYPE_CHECKING, Any
 from datetime import datetime
+from typing import TYPE_CHECKING, Any
+
 from sqlalchemy import JSON, DateTime, Enum, ForeignKey, Index, String, func
-from sqlalchemy.orm import Mapped, mapped_column, relationship
 from sqlalchemy.ext.mutable import MutableDict
+from sqlalchemy.orm import Mapped, mapped_column, relationship
+
 from database import Base
 
 
 if TYPE_CHECKING:
-    from models.user import Usuario
     from models.historico import Historico
+    from models.user import Usuario
 
 
 class MaterialType(enum.Enum):

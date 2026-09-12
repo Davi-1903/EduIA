@@ -1,6 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required, login_user, logout_user
 from flask_wtf.csrf import generate_csrf
+
 from errors.user import UserAlreadyExistsError, UserCredentialsError, UserServiceError, UserTypeError
 from services.user import create_user_service, get_user_service
 

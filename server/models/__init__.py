@@ -1,18 +1,18 @@
 from . import (
-    historico,
-    user,
-    professor,
     aluno,
     desafios,
     exercicios_guiados,
     explicacoes,
     flashcards,
     formularios,
+    historico,
     planos_de_aula,
+    professor,
     questoes,
     quizzes,
     resumos,
     roteiros,
+    user,
 )
 
 

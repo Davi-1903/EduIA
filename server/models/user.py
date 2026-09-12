@@ -1,8 +1,10 @@
 import enum
 from typing import TYPE_CHECKING
+
 from flask_login import UserMixin
+from sqlalchemy import Enum, String
 from sqlalchemy.orm import Mapped, mapped_column, relationship
-from sqlalchemy import String, Enum
+
 from database import Base
 
 

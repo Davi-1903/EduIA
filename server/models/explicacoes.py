@@ -1,5 +1,6 @@
 from sqlalchemy import ForeignKey, Text
 from sqlalchemy.orm import Mapped, mapped_column
+
 from models.material import Material, MaterialType
 
 

@@ -1,9 +1,10 @@
 from flask import Blueprint, jsonify, request
-from flask_login import login_required, current_user
+from flask_login import current_user, login_required
+from sqlalchemy import func, select
+
 from database import SessionLocal
-from sqlalchemy import select, func
-from models.roteiros import Roteiro
 from models.historico import Historico
+from models.roteiros import Roteiro
 
 
 bp_study_guide = Blueprint('roteiro_estudos', __name__, url_prefix='/roteiro_estudos')

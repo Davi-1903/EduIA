@@ -1,22 +1,22 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
 
+from controllers.desafios import bp_materials_desafio
+from controllers.explanation import bp_materials_explicacao
+from controllers.flashcards import bp_materials_flashcard
+from controllers.formulario import bp_materials_formulario
+from controllers.guided_exercises import bp_materials_exercicio_guiado
+from controllers.lesson_plan import bp_materials_plano_de_aula
 from controllers.questoes import bp_materials_questoes
 from controllers.quiz import bp_materials_quiz
-from controllers.explanation import bp_materials_explicacao
 from controllers.resumos import bp_materials_resumo
-from controllers.desafios import bp_materials_desafio
-from controllers.formulario import bp_materials_formulario
-from controllers.lesson_plan import bp_materials_plano_de_aula
-from controllers.guided_exercises import bp_materials_exercicio_guiado
 from controllers.study_guide import bp_study_guide
-from controllers.flashcards import bp_materials_flashcard
 from errors.materials import MaterialNotFoundError, MaterialServiceError, MaterialValidationError
 from services.materials import (
     get_materials_service,
+    hard_delete_material_service,
     restore_material_service,
     soft_delete_material_service,
-    hard_delete_material_service,
 )
 
 

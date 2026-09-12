@@ -1,6 +1,7 @@
-from flask import Blueprint, request, jsonify
+from flask import Blueprint, jsonify, request
 from flask_login import current_user, login_required
-from sqlalchemy import select, func
+from sqlalchemy import func, select
+
 from database import SessionLocal
 from models.explicacoes import Explicacao
 from models.historico import Historico

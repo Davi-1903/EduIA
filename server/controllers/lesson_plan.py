@@ -3,8 +3,8 @@ from flask_login import current_user, login_required
 from sqlalchemy import func, select
 
 from database import SessionLocal
-from models.planos_de_aula import PlanoDeAula
 from models.historico import Historico
+from models.planos_de_aula import PlanoDeAula
 
 
 bp_materials_plano_de_aula = Blueprint('plano_de_aula', __name__, url_prefix='/plano_de_aula')

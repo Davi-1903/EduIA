@@ -1,9 +1,10 @@
 from flask import Blueprint, jsonify, request
-from flask_login import login_required, current_user
+from flask_login import current_user, login_required
+from sqlalchemy import func, select
+
 from database import SessionLocal
-from models.resumos import Resumo
 from models.historico import Historico
-from sqlalchemy import select, func
+from models.resumos import Resumo
 
 
 bp_materials_resumo = Blueprint('resumos', __name__, url_prefix='/resumos')

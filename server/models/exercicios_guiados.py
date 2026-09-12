@@ -1,5 +1,6 @@
 from sqlalchemy import CheckConstraint, Enum, ForeignKey, Text
 from sqlalchemy.orm import Mapped, mapped_column
+
 from models.material import Difficulty, Material, MaterialType
 
 

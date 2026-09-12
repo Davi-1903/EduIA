@@ -1,10 +1,10 @@
 """Popula o banco com usuários e materiais de desenvolvimento."""
 
-from argparse import ArgumentParser
 import random
+from argparse import ArgumentParser
 
 from pwdlib import PasswordHash
-from rich import print, box
+from rich import box, print
 from rich.table import Table
 from sqlalchemy import desc, func, select
 from sqlalchemy.orm import Session

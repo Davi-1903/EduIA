@@ -3,7 +3,7 @@ from sqlalchemy import select
 from sqlalchemy.exc import IntegrityError
 
 from database import SessionLocal
-from errors.user import UserServiceError, UserAlreadyExistsError, UserTypeError, UserCredentialsError
+from errors.user import UserAlreadyExistsError, UserCredentialsError, UserServiceError, UserTypeError
 from models.aluno import Aluno
 from models.professor import Professor
 from models.user import UserType, Usuario
