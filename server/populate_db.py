@@ -26,7 +26,6 @@ from models.resumos import Resumo
 from models.roteiros import Roteiro
 from models.user import Usuario
 
-
 PASSWORD = '1234'
 password_hash = PasswordHash.recommended()
 

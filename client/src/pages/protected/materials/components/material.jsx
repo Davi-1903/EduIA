@@ -74,7 +74,15 @@ export default function MaterialCard({
             desafio: null,
             'exercicio guiado': null,
             explicacao: null,
-            flashcards: <FlashCards />,
+            flashcards: (
+                <FlashCards
+                    discipline={discipline}
+                    title={title}
+                    difficulty={difficulty}
+                    content={content}
+                    setContent={setContent}
+                />
+            ),
             formulario: null,
             'plano de aula': null,
             questoes: (

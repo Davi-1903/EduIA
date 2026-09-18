@@ -222,6 +222,7 @@
     background-image: linear-gradient(to top right, var(--base-color1), var(--color-color1-400));
 }
 
+
 @utility shadow-link {
     box-shadow: 0 0 0.5rem hsl(from var(--base-color1) h s l / 0.75);
 }
