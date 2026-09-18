@@ -77,7 +77,7 @@ export default function MaterialCard({
             flashcards: (
                 <FlashCards
                     discipline={discipline}
-                    title={title}
+                    subject={title}
                     difficulty={difficulty}
                     content={content}
                     setContent={setContent}

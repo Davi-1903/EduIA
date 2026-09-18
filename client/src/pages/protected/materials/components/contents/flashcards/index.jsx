@@ -69,7 +69,7 @@ export default function FlashCards({ discipline, subject, difficulty, content, s
                         discipline={discipline}
                         subject={subject}
                         difficulty={difficulty}
-                        cardsLength={content.lenght}
+                        cardsLength={content.length}
                         handleClose={() => setClose(true)}
                         handleStart={handleStart}
                     />
