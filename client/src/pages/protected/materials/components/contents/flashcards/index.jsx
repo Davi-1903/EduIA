@@ -1,9 +1,9 @@
 import { useEffect, useRef, useState } from 'react';
 import clsx from 'clsx';
 import Display from './componentes/Display';
-import BarProgress from './componentes/BarProgress';
 import { IconArrowRight, IconArrowLeft } from '@tabler/icons-react';
 import Introduction from './componentes/Introducion';
+import ProgressBar from './componentes/ProgressBar';
 
 export default function FlashCards({ discipline, subject, difficulty, content, setContent }) {
     const materialRef = useRef(null);
@@ -65,7 +65,7 @@ export default function FlashCards({ discipline, subject, difficulty, content, s
                 className='flex h-170 w-full max-w-160 flex-col justify-center gap-6 rounded-2xl bg-white p-6 shadow-2xl shadow-color1-100/15 lg:w-4/5'
             >
                 {!start ? (
-                    <Introduction 
+                    <Introduction
                         discipline={discipline}
                         subject={subject}
                         difficulty={difficulty}
@@ -75,7 +75,7 @@ export default function FlashCards({ discipline, subject, difficulty, content, s
                     />
                 ) : (
                     <>
-                        <BarProgress
+                        <ProgressBar
                             cards={content}
                             currentCardID={cardID}
                         />
@@ -86,7 +86,7 @@ export default function FlashCards({ discipline, subject, difficulty, content, s
 
                         <div className='flex justify-between'>
                             <button
-                                className='flex cursor-pointer items-center gap-3 rounded-lg bg-button px-6 py-2 font-primary text-lg text-color4-400 transition-all duration-250 not-disabled:hover:shadow-lg-hard disabled:cursor-no-drop disabled:opacity-50'
+                                className='flex cursor-pointer justify-first gap-3 items-center rounded-lg border-3 border-color1-100 w-35 px-3 py-2 font-primary text-lg text-color1-100 transition-all duration-250 hover:text-color4-100 not-disabled:hover:bg-button disabled:cursor-no-drop disabled:opacity-50'
                                 onClick={previousCard}
                                 disabled={cardID === 0}
                             >
@@ -97,7 +97,7 @@ export default function FlashCards({ discipline, subject, difficulty, content, s
                             {cardID === content.length - 1 ? (
                                 <>
                                     <button
-                                        className='flex cursor-pointer items-center gap-3 rounded-lg border-2 border-solid border-[color-mix(in_srgb,var(--color-color1-100)_50%,white)] bg-[color-mix(in_srgb,var(--color-color1-400)_90%,white)] px-6 py-2 font-primary text-lg text-color4-400 transition-all duration-250 not-disabled:hover:shadow-lg-hard disabled:cursor-no-drop disabled:opacity-50'
+                                        className='flex cursor-pointer justify-center items-center rounded-lg bg-button w-35 px-3 py-2 font-primary text-lg text-color4-400 transition-all duration-250 not-disabled:hover:shadow-lg-hard disabled:cursor-no-drop disabled:opacity-50'
                                         onClick={() => setClose(true)}
                                     >
                                         <span>Finalizar</span>
@@ -106,10 +106,7 @@ export default function FlashCards({ discipline, subject, difficulty, content, s
                             ) : (
                                 <>
                                     <button
-                                        className={clsx(
-                                            'flex cursor-pointer items-center gap-3 rounded-lg bg-button px-6 py-2 font-primary text-lg text-color4-400 transition-all duration-250 not-disabled:hover:shadow-lg-hard disabled:cursor-no-drop disabled:opacity-50',
-                                            cardsEnd && 'bg-button2',
-                                        )}
+                                        className='flex cursor-pointer justify-end px-3 gap-3 items-center rounded-lg border-3 border-color1-100 w-35 py-2 font-primary text-lg text-color1-100 transition-all duration-250 hover:text-color4-100 not-disabled:hover:bg-button disabled:cursor-no-drop disabled:opacity-50'
                                         onClick={nextCard}
                                     >
                                         <span>Avançar</span>
