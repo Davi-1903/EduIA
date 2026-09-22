@@ -3,7 +3,7 @@ from flask_login import login_required
 
 from controllers.desafios import bp_materials_desafio
 from controllers.explanation import bp_materials_explicacao
-from controllers.flashcards import bp_materials_flashcard
+from controllers.flashcards import bp_materials_flashcards
 from controllers.formulario import bp_materials_formulario
 from controllers.guided_exercises import bp_materials_exercicio_guiado
 from controllers.lesson_plan import bp_materials_plano_de_aula
@@ -30,7 +30,7 @@ bp_materials.register_blueprint(bp_materials_formulario)
 bp_materials.register_blueprint(bp_materials_plano_de_aula)
 bp_materials.register_blueprint(bp_materials_exercicio_guiado)
 bp_materials.register_blueprint(bp_study_guide)
-bp_materials.register_blueprint(bp_materials_flashcard)
+bp_materials.register_blueprint(bp_materials_flashcards)
 
 
 @bp_materials.route('/', methods=['GET'])

@@ -10,7 +10,6 @@ export default function FlashCards({ discipline, subject, difficulty, content, s
     const [start, setStart] = useState(false);
     const [isClose, setClose] = useState(false);
     const [cardID, setCardId] = useState(0);
-    const [cardsEnd, setCardsEnd] = useState(false);
 
     function handleStart() {
         setStart(true);
@@ -19,9 +18,7 @@ export default function FlashCards({ discipline, subject, difficulty, content, s
     function nextCard() {
         if (cardID < content.length - 1) {
             setCardId(prev => prev + 1);
-        } else {
-            setCardsEnd(true);
-        }
+        } 
     }
 
     function previousCard() {
