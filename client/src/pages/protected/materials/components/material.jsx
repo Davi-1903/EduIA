@@ -18,6 +18,7 @@ import { DELETE, GET } from '../../../../api/materials';
 import MenuCard from './menu';
 import Questions from './contents/questoes';
 import Quiz from './contents/quiz';
+import FlashCards from './contents/flashcards';
 
 export default function MaterialCard({
     id,
@@ -73,7 +74,15 @@ export default function MaterialCard({
             desafio: null,
             'exercicio guiado': null,
             explicacao: null,
-            flashcards: null,
+            flashcards: (
+                <FlashCards
+                    discipline={discipline}
+                    subject={title}
+                    difficulty={difficulty}
+                    content={content}
+                    setContent={setContent}
+                />
+            ),
             formulario: null,
             'plano de aula': null,
             questoes: (
