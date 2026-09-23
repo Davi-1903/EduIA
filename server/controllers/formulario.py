@@ -8,7 +8,7 @@ from models.historico import Historico
 from models.material import Difficulty
 
 
-bp_materials_formulario = Blueprint('formularios', __name__, url_prefix='/formularios')
+bp_materials_formulario = Blueprint('formularios', __name__, url_prefix='/formulario')
 
 
 @bp_materials_formulario.route('/', methods=['GET'])

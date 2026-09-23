@@ -49,3 +49,5 @@ def init_database():
         atexit.register(lambda: scheduler.shutdown())
 
     Base.metadata.create_all(engine)
+
+

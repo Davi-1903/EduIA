@@ -19,7 +19,8 @@ import MenuCard from './menu';
 import Questions from './contents/questoes';
 import Quiz from './contents/quiz';
 import FlashCards from './contents/flashcards';
-
+import Formulario from './contents/forms'
+import { useAuthenticated } from '../../../../context/authContext';
 export default function MaterialCard({
     id,
     title,
@@ -40,6 +41,7 @@ export default function MaterialCard({
     const [content, setContent] = useState(null);
     const [menu, setMenu] = useState(null);
     const [isOpening, setIsOpening] = useState(false);
+    const {user} = useAuthenticated();
     const navigate = useNavigate();
 
     function formatarHora(created_at) {
@@ -83,7 +85,17 @@ export default function MaterialCard({
                     setContent={setContent}
                 />
             ),
-            formulario: null,
+            formulario: (
+                <Formulario
+                    id={id}
+                    discipline={discipline}
+                    subject={title}
+                    difficulty={difficulty}
+                    content={content}
+                    userEmail={user.email}
+                    setContent={setContent}
+                />
+            ),
             'plano de aula': null,
             questoes: (
                 <Questions

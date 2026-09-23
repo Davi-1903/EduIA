@@ -28,7 +28,7 @@ export default function GenerateForms({ setOpen }) {
         setLoading(true);
 
         try {
-            const response = await POST('/api/materials/formularios/', {
+            const response = await POST('/api/materials/formulario/', {
                 discipline,
                 subject,
                 content: {},
