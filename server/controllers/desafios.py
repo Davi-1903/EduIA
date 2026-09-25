@@ -8,7 +8,7 @@ from models.desafios import Desafio
 from models.material import Difficulty
 
 
-bp_materials_desafio = Blueprint('desafios', __name__, url_prefix='/desafios')
+bp_materials_desafio = Blueprint('desafios', __name__, url_prefix='/desafio')
 
 
 @bp_materials_desafio.route('/', methods=['GET'])
@@ -45,7 +45,7 @@ def get_desafios():
                         'id': material.id,
                         'title': material.subject,
                         'discipline': material.discipline,
-                        'difficulty': material.difficulty,
+                        'difficulty': material.difficulty.value,
                         'note': material.note,
                         'created_at': material.created_at,
                         'type': material.type.value,
@@ -71,7 +71,7 @@ def get_desafio(id: int):
                     'id': material.id,
                     'title': material.subject,
                     'discipline': material.discipline,
-                    'difficulty': material.difficulty,
+                    'difficulty': material.difficulty.value,
                     'content': material.content,
                     'note': material.note,
                     'created_at': material.created_at,

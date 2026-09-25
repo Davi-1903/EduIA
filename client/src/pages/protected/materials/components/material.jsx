@@ -20,6 +20,7 @@ import Questions from './contents/questoes';
 import Quiz from './contents/quiz';
 import FlashCards from './contents/flashcards';
 import Formulario from './contents/forms'
+import Desafio from './contents/desafio';
 import { useAuthenticated } from '../../../../context/authContext';
 export default function MaterialCard({
     id,
@@ -73,7 +74,16 @@ export default function MaterialCard({
 
     function getContent(type) {
         const icons = {
-            desafio: null,
+            desafio: (
+                <Desafio
+                    id={id}
+                    discipline={discipline}
+                    subject={title}
+                    difficulty={difficulty}
+                    content={content}
+                    setContent={setContent}
+                />
+            ),
             'exercicio guiado': null,
             explicacao: null,
             flashcards: (
