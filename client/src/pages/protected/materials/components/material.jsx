@@ -21,6 +21,7 @@ import Quiz from './contents/quiz';
 import FlashCards from './contents/flashcards';
 import Formulario from './contents/forms'
 import Desafio from './contents/desafio';
+import GuidedExercises from './contents/guided_exercises';
 import { useAuthenticated } from '../../../../context/authContext';
 export default function MaterialCard({
     id,
@@ -84,7 +85,15 @@ export default function MaterialCard({
                     setContent={setContent}
                 />
             ),
-            'exercicio guiado': null,
+            exercicio_guiado: (
+                <GuidedExercises
+                    discipline={discipline}
+                    subject={title}
+                    difficulty={difficulty}
+                    content={content}
+                    setContent={setContent}
+                />
+            ),
             explicacao: null,
             flashcards: (
                 <FlashCards

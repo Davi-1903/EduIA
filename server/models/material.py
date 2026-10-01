@@ -14,7 +14,7 @@ if TYPE_CHECKING:
 
 class MaterialType(enum.Enum):
     DESAFIO = 'desafio'
-    EXERCICIO_GUIADO = 'exercicio guiado'
+    EXERCICIO_GUIADO = 'exercicio_guiado'
     EXPLICACAO = 'explicacao'
     FLASHCARD = 'flashcards'
     FORMULARIO = 'formulario'
