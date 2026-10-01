@@ -2,7 +2,6 @@ from flask import Blueprint, jsonify, request
 from flask_login import current_user, login_required
 from sqlalchemy import func, select
 from sqlalchemy.orm import with_polymorphic
-
 from database import SessionLocal
 from models.historico import Historico
 from models.material import Material
