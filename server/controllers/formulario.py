@@ -8,7 +8,11 @@ from models.historico import Historico
 from models.material import Difficulty
 
 
-bp_materials_formulario = Blueprint('formularios', __name__, url_prefix='/formulario')
+bp_materials_formulario = Blueprint(
+    'formularios',
+    __name__,
+    url_prefix='/formulario'
+)
 
 
 @bp_materials_formulario.route('/', methods=['GET'])
@@ -24,6 +28,7 @@ def get_formularios():
             .where(Formulario.user_id == current_user.id)
             .where(Formulario.deleted_at.is_(None))
         )
+
         statement = (
             select(Formulario)
             .where(Formulario.user_id == current_user.id)
@@ -61,9 +66,20 @@ def get_formularios():
 @login_required
 def get_formulario(id: int):
     with SessionLocal() as session:
-        material = session.get(Formulario, id)
-        if material is None or material.deleted_at is not None:
-            return jsonify({'ok': False, 'message': 'Formulario não encontrado'}), 404
+        material = session.scalar(
+            select(Formulario)
+            .where(Formulario.id == id)
+            .where(Formulario.user_id == current_user.id)
+            .where(Formulario.deleted_at.is_(None))
+        )
+
+        if material is None:
+            return jsonify(
+                {
+                    'ok': False,
+                    'message': 'Formulario não encontrado',
+                }
+            ), 404
 
         return jsonify(
             {
@@ -79,7 +95,7 @@ def get_formulario(id: int):
                     'created_at': material.created_at,
                     'type': material.type.value,
                 },
-            },
+            }
         ), 200
 
 
@@ -87,8 +103,14 @@ def get_formulario(id: int):
 @login_required
 def create_formulario():
     data = request.get_json(silent=True)
+
     if data is None:
-        return jsonify({'ok': False, 'message': 'Dados não recebidos'}), 400
+        return jsonify(
+            {
+                'ok': False,
+                'message': 'Dados não recebidos',
+            }
+        ), 400
 
     with SessionLocal() as session:
         try:
@@ -101,12 +123,109 @@ def create_formulario():
                 amount=data['amount'],
                 note=data['note'] if data['note'] != '' else None,
             )
+
             historico = Historico(material=formulario)
+
             session.add(formulario)
             session.add(historico)
-            session.commit()
-            return jsonify({'ok': True, 'redirect': '/materials'}), 201
 
-        except Exception:
+            session.commit()
+
+            return jsonify(
+                {
+                    'ok': True,
+                    'redirect': '/materials',
+                }
+            ), 201
+
+        except Exception as e:
             session.rollback()
-            return jsonify({'ok': False, 'message': 'Ocorreu um erro interno'}), 500
+
+            print(f'ERRO AO CRIAR FORMULÁRIO: {e}')
+
+            return jsonify(
+                {
+                    'ok': False,
+                    'message': 'Ocorreu um erro interno',
+                }
+            ), 500
+
+
+@bp_materials_formulario.route(
+    '/<int:id>/respostas',
+    methods=['POST']
+)
+@login_required
+def responder_formulario(id: int):
+    data = request.get_json(silent=True)
+
+    if data is None:
+        return jsonify(
+            {
+                'ok': False,
+                'message': 'Dados não recebidos',
+            }
+        ), 400
+
+    answers = data.get('answers')
+
+    if not isinstance(answers, dict) or not answers:
+        return jsonify(
+            {
+                'ok': False,
+                'message': 'Nenhuma resposta foi enviada',
+            }
+        ), 400
+
+    with SessionLocal() as session:
+        try:
+            formulario = session.scalar(
+                select(Formulario)
+                .where(Formulario.id == id)
+                .where(Formulario.user_id == current_user.id)
+                .where(Formulario.deleted_at.is_(None))
+            )
+
+            if formulario is None:
+                return jsonify(
+                    {
+                        'ok': False,
+                        'message': 'Formulário não encontrado',
+                    }
+                ), 404
+
+            historico = session.scalar(
+                select(Historico)
+                .where(Historico.material_id == formulario.id)
+            )
+
+            if historico is None:
+                return jsonify(
+                    {
+                        'ok': False,
+                        'message': 'Histórico do formulário não encontrado',
+                    }
+                ), 404
+
+            historico.answer = str(answers)
+
+            session.commit()
+
+            return jsonify(
+                {
+                    'ok': True,
+                    'message': 'Respostas enviadas com sucesso',
+                }
+            ), 200
+
+        except Exception as e:
+            session.rollback()
+
+            print(f'ERRO AO RESPONDER FORMULÁRIO: {e}')
+
+            return jsonify(
+                {
+                    'ok': False,
+                    'message': 'Ocorreu um erro interno',
+                }
+            ), 500

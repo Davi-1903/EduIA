@@ -12,7 +12,11 @@ class Historico(Base):
     __tablename__ = 'historico'
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
-    material_id: Mapped[int] = mapped_column(ForeignKey('materiais.id'), unique=True, nullable=False)
+    material_id: Mapped[int] = mapped_column(
+        ForeignKey('materiais.id'),
+        unique=True,
+        nullable=False
+    )
     answer: Mapped[str | None] = mapped_column(Text, nullable=True)
 
     material: Mapped['Material'] = relationship(back_populates='historico')
