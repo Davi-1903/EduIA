@@ -1,9 +1,41 @@
-<div align='center'>
+<div style='text-align: center'>
     <img
         src='client/public/assets/images/README.png'
         loading='lazy'
         alt='Logo EduIA'
         width='800'
+        style='border-radius: 16px'
+    >
+</div>
+
+<div style='text-align: center; margin-top: 16px'>
+    <img
+        src='https://img.shields.io/badge/Python-3.12%20%7C%203.13%20%7C%203.14-blue'
+        alt='Python - 3.12 | 3.13 | 3.14'
+    >
+    <img
+        src='https://img.shields.io/badge/React-^19.2.0-blue'
+        alt='React - >19.2.0'
+    >
+    <img
+        src='https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json'
+        alt='Ferramenta - UV'
+    >
+    <img
+        src='https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json'
+        alt='Ferramenta - RUFF'
+    >
+    <img
+        src='https://img.shields.io/badge/Formatter-Prettier-darkblue?logo=prettier'
+        alt='Ferramenta - Prettier'
+    >
+    <img
+        src='https://img.shields.io/badge/License-MIT-default'
+        alt='Licença'
+    >
+    <img
+        src='https://img.shields.io/badge/Repo%20size-63.2MB-blue?logo=github'
+        alt='Repo size - 63.2MB'
     >
 </div>
 
@@ -37,13 +69,13 @@ Devido à complexidade do sistema, foi necessária mais de uma tecnologia para a
 > [!NOTE]
 > Para mais detalhes, vá ao documento de [requisitos não funcionais](docs/requisitos_nao_funcionais.md).
 
-| Tecnologia   | Funcionalidade                                                           |
-| ------------ | ------------------------------------------------------------------------ |
-| `Flask`      | microframework `Python` usado na integração com o `frontend` e `backend` |
-| `ReactJS`    | Biblioteca `JavaScript` para a criação de interfaces                     |
-| `MySQL`      | Banco de dados relacional utilizado para armazenar dados e informações   |
-| `LangChain`  | Framework para a orquestração da **LLM**                                 |
-| `GPT-5 nano` | Modelo de linguagem desenvolvido pela **OpenAI**                         |
+| Tecnologia     | Funcionalidade                                                           |
+| -------------- | ------------------------------------------------------------------------ |
+| **Flask**      | microframework `Python` usado na integração com o `frontend` e `backend` |
+| **ReactJS**    | Biblioteca `JavaScript` para a criação de interfaces                     |
+| **MySQL**      | Banco de dados relacional utilizado para armazenar dados e informações   |
+| **LangChain**  | Framework para a orquestração da **LLM**                                 |
+| **GPT-5 nano** | Modelo de linguagem desenvolvido pela **OpenAI**                         |
 
 ### 🧠 IA
 

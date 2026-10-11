@@ -1,16 +1,6 @@
 {
 	"files": [
 		{
-			"path": "client/src/globals.css",
-			"bookmarks": [
-				{
-					"line": 22,
-					"column": 0,
-					"label": "Mudar fontes"
-				}
-			]
-		},
-		{
 			"path": "README.md",
 			"bookmarks": [
 				{
@@ -19,39 +9,9 @@
 					"label": "Adicionar mais informações ao README"
 				},
 				{
-					"line": 13,
+					"line": 45,
 					"column": 0,
 					"label": "Lembrar de adicionar uma imagem"
-				}
-			]
-		},
-		{
-			"path": "client/src/components/loading/index.jsx",
-			"bookmarks": [
-				{
-					"line": 2,
-					"column": 0,
-					"label": "Loading provisório. Vamos fazer com skeletons"
-				}
-			]
-		},
-		{
-			"path": "client/src/pages/unprotected/landingpage/index.jsx",
-			"bookmarks": [
-				{
-					"line": 14,
-					"column": 0,
-					"label": "Adicionar perguntas e respostas com FAQ"
-				}
-			]
-		},
-		{
-			"path": "client/src/layout.jsx",
-			"bookmarks": [
-				{
-					"line": 7,
-					"column": 0,
-					"label": "Padronizar as páginas"
 				}
 			]
 		},
@@ -91,16 +51,6 @@
 			]
 		},
 		{
-			"path": "client/src/pages/protected/materials/components/material.jsx",
-			"bookmarks": [
-				{
-					"line": 98,
-					"column": 1,
-					"label": "Talvez trocar ícone por tag, acho que fica mais fácil de identificar o material"
-				}
-			]
-		},
-		{
 			"path": "server/models/exercicios_guiados.py",
 			"bookmarks": [
 				{
@@ -127,16 +77,6 @@
 					"line": 4,
 					"column": 0,
 					"label": "Quando há poucos materiais a largura fica enorme"
-				}
-			]
-		},
-		{
-			"path": "docs/requisitos_nao_funcionais.md",
-			"bookmarks": [
-				{
-					"line": 21,
-					"column": 0,
-					"label": "Alterar prioridade"
 				}
 			]
 		},
@@ -182,6 +122,16 @@
 					"line": 20,
 					"column": 0,
 					"label": "O gunicorn \"mata\" as requisições para IA que demoram muito"
+				}
+			]
+		},
+		{
+			"path": "server/schemas/questoes.py",
+			"bookmarks": [
+				{
+					"line": 3,
+					"column": 0,
+					"label": "Estudar a possibilidade usar o formato TOON"
 				}
 			]
 		}
