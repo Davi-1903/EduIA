@@ -1,4 +1,4 @@
-<div style='text-align: center'>
+<div align='center'>
     <img
         src='client/public/assets/images/README.png'
         loading='lazy'
@@ -8,7 +8,7 @@
     >
 </div>
 
-<div style='text-align: center; margin-top: 16px'>
+<div align='center'>
     <img
         src='https://img.shields.io/badge/Python-3.12%20%7C%203.13%20%7C%203.14-blue'
         alt='Python - 3.12 | 3.13 | 3.14'
