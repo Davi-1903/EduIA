@@ -4,9 +4,19 @@
 			"path": "README.md",
 			"bookmarks": [
 				{
-					"line": 45,
+					"line": 61,
 					"column": 0,
 					"label": "Lembrar de adicionar uma imagem"
+				},
+				{
+					"line": 70,
+					"column": 0,
+					"label": "Atualizar README ao adicionar RAG"
+				},
+				{
+					"line": 82,
+					"column": 0,
+					"label": "Atualizar quando formos usar GPT-5 nano"
 				}
 			]
 		},
@@ -127,6 +137,16 @@
 					"line": 3,
 					"column": 0,
 					"label": "Estudar a possibilidade usar o formato TOON"
+				}
+			]
+		},
+		{
+			"path": "docs/framework_e_llm.md",
+			"bookmarks": [
+				{
+					"line": 16,
+					"column": 0,
+					"label": "Alterar documentação ao implementar RAG"
 				}
 			]
 		}

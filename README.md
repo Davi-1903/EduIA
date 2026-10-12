@@ -10,44 +10,44 @@
 
 <div align='center'>
     <img
-        src='https://img.shields.io/badge/Python-3.12%20%7C%203.13%20%7C%203.14-blue'
-        alt='Python - 3.12 | 3.13 | 3.14'
+        src='https://img.shields.io/badge/Python-3.12%2B-blue?logo=python'
+        alt='Python 3.12+'
     >
     <img
-        src='https://img.shields.io/badge/React-^19.2.0-blue'
-        alt='React - >19.2.0'
+        src='https://img.shields.io/badge/React-19.2.0-61DAFB?logo=react'
+        alt='React 19.2.0'
     >
     <img
         src='https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/uv/main/assets/badge/v0.json'
-        alt='Ferramenta - UV'
+        alt='uv'
     >
     <img
         src='https://img.shields.io/endpoint?url=https://raw.githubusercontent.com/astral-sh/ruff/main/assets/badge/v2.json'
-        alt='Ferramenta - RUFF'
+        alt='ruff'
     >
     <img
-        src='https://img.shields.io/badge/Formatter-Prettier-darkblue?logo=prettier'
-        alt='Ferramenta - Prettier'
+        src='https://img.shields.io/badge/MySQL-8.0-4479A1?logo=mysql&logoColor=white'
+        alt='MySQL 8.0'
     >
     <img
-        src='https://img.shields.io/badge/License-MIT-default'
-        alt='Licença'
-    >
-    <img
-        src='https://img.shields.io/badge/Repo%20size-63.2MB-blue?logo=github'
-        alt='Repo size - 63.2MB'
+        src='https://img.shields.io/badge/License-MIT-green'
+        alt='MIT License'
     >
 </div>
 
-## 📚 O que é o EduIA
+<p align='center'>
+  <strong>EduIA</strong> - Geração inteligente de materiais de estudo para professores e alunos
+</p>
 
-O **EduIA** é um sistema de geração de materiais de estudo com **IA** (Inteligência Artificial), desenvolvido por estudantes do ensino médio técnico integrado do **IFRN** - campus Caicó. O sistema visa reduzir o tempo gasto por alunos e professores, gerando questões e planos de aula.
+## 📌 Visão geral
 
-<!-- Imagem ou GIF do sistema -->
+O **EduIA** é uma plataforma que usa Inteligência Artificial para auxiliar na criação de materiais didáticos personalizados, reduzindo o tempo de produção de conteúdos e tornando o processo de ensino-aprendizado mais dinâmico.
 
-### 📖 Materiais gerados
+O projeto foi desenvolvido por estudantes do ensino médio técnico integrado do **IFRN – campus Caicó** e tem como objetivo automatizar a geração de atividades pedagógicas com qualidade, rapidez e adaptabilidade.
 
-O sistema gera diversos materiais que são distribuídos entre professores e alunos. Abaixo está uma tabela com todos os materiais que são gerados.
+## ✨ O que o sistema gera
+
+O EduIA pode criar diferentes tipos de materiais acadêmicos, como:
 
 | Material               | Como funciona                                                                                              |
 | ---------------------- | ---------------------------------------------------------------------------------------------------------- |
@@ -62,138 +62,148 @@ O sistema gera diversos materiais que são distribuídos entre professores e alu
 | **Roteiros de estudo** | Contém o que deve ser estudado e em qual sequência                                                         |
 | **Desafios**           | Desafios para cada assunto ou matéria                                                                      |
 
-### ⚒️ Tecnologias
+## 🧠 Como funciona
 
-Devido à complexidade do sistema, foi necessária mais de uma tecnologia para a elaboração. Abaixo está uma tabela com as tecnologias usadas.
+A experiência parte da interface web, onde o usuário define o tipo de material, a disciplina, o nível de dificuldade e outros critérios. O backend reúne essas informações em um prompt específico para o material solicitado e o envia, com o auxílio do **LangChain**, ao modelo de linguagem configurado no Hugging Face. O modelo gera o conteúdo, e um parser valida e organiza a resposta em JSON para que o sistema possa utilizá-la.
+
+O **RAG** (_Retrieval-Augmented Generation_, ou geração aumentada por recuperação) é uma técnica que complementa esse processo: antes de gerar a resposta, o sistema busca informações relevantes em uma base de documentos e inclui os trechos encontrados no contexto enviado ao modelo. Assim, a geração pode se apoiar em fontes específicas e atualizadas, em vez de depender apenas do conhecimento aprendido pelo modelo. A qualidade e a pertinência das fontes recuperadas influenciam o resultado. Veja mais em [Framework e LLM](docs/framework_e_llm.md).
+
+No fluxo atual do EduIA, o conteúdo é gerado a partir dos dados informados pelo usuário e das instruções do prompt; não há uma etapa de busca em uma base de documentos. O RAG é uma possibilidade de evolução para fundamentar os materiais em conteúdos didáticos selecionados.
+
+Essa abordagem permite que o mesmo fluxo seja reutilizado para diferentes materiais e facilite futuras expansões do projeto.
+
+## ⚙️ Stack tecnológica
+
+| Categoria           | Tecnologia              | Finalidade                            |
+| ------------------- | ----------------------- | ------------------------------------- |
+| Backend             | **Flask**               | API e lógica de negócio               |
+| Frontend            | **React + Vite**        | Interface web responsiva              |
+| Banco de dados      | **MySQL**               | Persistência e armazenamento          |
+| IA                  | **LangChain**           | Orquestração da LLM                   |
+| Modelo de linguagem | **Hugging Face / Qwen** | Geração de conteúdo educacional       |
+| Qualidade           | **Ruff, Prettier**      | Padronização e lint                   |
+| Ambiente            | **uv, Docker**          | Dependências e execução em containers |
 
 > [!NOTE]
-> Para mais detalhes, vá ao documento de [requisitos não funcionais](docs/requisitos_nao_funcionais.md).
+> A documentações completas de requisitos e decisões técnicas: [**Documentação**](#documentação).
 
-| Tecnologia     | Funcionalidade                                                           |
-| -------------- | ------------------------------------------------------------------------ |
-| **Flask**      | microframework `Python` usado na integração com o `frontend` e `backend` |
-| **ReactJS**    | Biblioteca `JavaScript` para a criação de interfaces                     |
-| **MySQL**      | Banco de dados relacional utilizado para armazenar dados e informações   |
-| **LangChain**  | Framework para a orquestração da **LLM**                                 |
-| **GPT-5 nano** | Modelo de linguagem desenvolvido pela **OpenAI**                         |
+## 🚀 Pré-requisitos
 
-### 🧠 IA
+Antes de executar o projeto, certifique-se de ter instalado:
 
-A **IA** é o coração do projeto. Optamos por usar um modelo de linguagem pela sua capacidade de adaptação e generalização dos dados absorvidos durante o treinamento. Para que ela se adaptasse aos nossos dados, não a retreinamos; utilizamos **RAG** (Retrieval-Augmented Generation), ou geração aumentada de recuperação.
+- Python 3.12 ou superior
+- Node.js 18+
+- npm
+- MySQL (para execução local)
+- Docker e Docker Compose (opcional)
 
----
+## 💻 Como executar o projeto
 
-## ▶️ Como executar o projeto
+Há duas formas principais de rodar o EduIA:
 
-Para executar o projeto, há duas formas:
-
-- **🧑‍💻 Modo desenvolvedor:** O modo desenvolvedor consiste em iniciar ambos os servidores (servidor do `Flask` e o servidor do `React`), possibilitando alterações em tempo real;
-- **🐋 Modo deploy com `Docker`:** O modo deploy é indicado para quando o projeto estiver pronto para produção;
-
-> [!IMPORTANT]
-> O projeto usa `Flask` e `React`. Ou seja, é necessário ter o `Python` e o `Node` instalados
+- **🧑‍💻 modo desenvolvedor**: frontend e backend em execução separada
+- **🐋 modo `Docker`**: execução em ambiente containerizado
 
 ### 🧑‍💻 Modo desenvolvedor
 
-1. **Clone o repositório e acesse-o**
+1. **Clone o repositório**
 
-    ```git
+    ```bash
     git clone https://github.com/Davi-1903/EduIA.git
     cd EduIA
     ```
 
-2. **Instale as dependências**
+2. **Configure as variáveis de ambiente**
+
+    Copie o arquivo de exemplo e ajuste os valores de acordo com o seu ambiente:
 
     ```bash
-    # Backend
-    cd server
-    uv sync
-    # OU
-    pip install -r requirements.txt
-
-    # Frontend
-    cd ../client
-    npm install --legacy-peer-deps
+    cp .env.example .env
     ```
 
-3. **Crie um arquivo `.env` na raiz do projeto para as variáveis de ambiente e adicione**
+    Exemplo de configuração:
 
-    ```.env
+    ```env
+    # =====================< Hugging Face >=====================
+    HUGGINGFACEHUB_API_TOKEN=<SUA-CHAVE-DE-API>
+    HF_MODEL=Qwen/Qwen2.5-72B-Instruct
+    MAX_TOKENS=3000
+
     # =====================< Autenticação >=====================
     SECRET_KEY=<SUA-CHAVE-SECRETA>
     CORS_ORIGINS=http://localhost:3000,http://localhost:4173
 
     # ====================< Banco de dados >====================
     DB_USER=root
-    DB_PASSWORD=<SENHA>
+    DB_PASSWORD=<SENHA-DO-BANCO>
     DB_HOST=localhost
     DB_PORT=3306
     DB_NAME=db_eduia
     TRASH_RETENTION_DAYS=30
     ```
 
-4. **Inicie ambos os servidores**
+3. **Instale as dependências**
+
+    ```bash
+    # Backend
+    cd server
+    uv sync
+    # ou
+    pip install -r requirements.txt
+
+    # Frontend
+    cd ../client
+    npm install
+    ```
+
+    > Se houver conflitos de dependência no frontend, use: `npm install --legacy-peer-deps`
+
+4. **Inicie os serviços**
 
     ```bash
     # Backend
     cd ../server
     flask run --debug
 
-    # Frontend
+    # Frontend em outro terminal
     cd ../client
     npm run dev
     ```
 
-> [!TIP]
-> Use ambiente virtual 😉
+    A aplicação estará disponível em:
 
-Após finalizar esse passo a passo, a aplicação iniciará em seu navegador padrão em [`http://localhost:3000`](http://localhost:3000)
+    - frontend: http://localhost:3000
+    - backend: http://localhost:5000
 
-### 🐋 Modo deploy com `Docker`
+### 🐋 Modo Docker
 
-> [!IMPORTANT]
-> É necessário ter o Docker e o Docker Compose instalados
+1. **Configure o arquivo `.env`**
 
-1. **Clone o repositório e acesse-o**
+    O mesmo arquivo `.env` pode ser usado no modo Docker, com a diferença de que o host do banco dentro da rede do Compose é `database`.
 
-    ```git
-    git clone https://github.com/Davi-1903/EduIA.git
-    cd EduIA
+2. **Suba os containers**
+
+    ```bash
+    docker compose up --build
     ```
 
-2. **Crie um arquivo `.env` na raiz do projeto para as variáveis de ambiente e adicione**
+    Isso inicia automaticamente:
 
-    ```.env
-    # =====================< Autenticação >=====================
-    SECRET_KEY=<SUA-CHAVE-SECRETA>
-    CORS_ORIGINS=http://localhost:3000,http://localhost:4173
+    - frontend da aplicação
+    - backend Flask
+    - banco MySQL
 
-    # ====================< Banco de dados >====================
-    DB_USER=root
-    DB_PASSWORD=<SENHA>
-    DB_HOST=database
-    DB_PORT=3306
-    DB_NAME=db_eduia
-    TRASH_RETENTION_DAYS=30
-    ```
+    Após a inicialização, a interface fica disponível em:
 
-3. **Crie e inicie os `contêineres Docker`**
+    - http://localhost:3000
 
-    ```powershell
-    docker compose up -d
-    ```
-
-Após finalizar esse passo a passo, a aplicação estará executando em [`http://localhost:3000`](http://localhost:3000)
-
----
-
-## 📄 Documentos
+## 📚 Documentação
 
 - [Requisitos Funcionais](docs/requisitos_funcionais.md)
 - [Requisitos Não Funcionais](docs/requisitos_nao_funcionais.md)
 - [Framework e LLM](docs/framework_e_llm.md)
 
-## 😁 Equipe
+## 👥 Equipe
 
 | Nome                                              | Papel no projeto |
 | ------------------------------------------------- | ---------------- |
@@ -206,6 +216,6 @@ Após finalizar esse passo a passo, a aplicação estará executando em [`http:/
 
 ## ⚖️ Licença
 
-O sistema foi construído como **Projeto de Pesquisa e Extensão** pelos alunos do **IFRN** - campus Caicó.
+O sistema foi construído como projeto de pesquisa e extensão pelos alunos do **IFRN – campus Caicó**.
 
 - [Licença MIT](LICENSE)
