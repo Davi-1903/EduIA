@@ -74,18 +74,62 @@ Essa abordagem permite que o mesmo fluxo seja reutilizado para diferentes materi
 
 ## ⚙️ Stack tecnológica
 
-| Categoria           | Tecnologia              | Finalidade                            |
-| ------------------- | ----------------------- | ------------------------------------- |
-| Backend             | **Flask**               | API e lógica de negócio               |
-| Frontend            | **React + Vite**        | Interface web responsiva              |
-| Banco de dados      | **MySQL**               | Persistência e armazenamento          |
-| IA                  | **LangChain**           | Orquestração da LLM                   |
-| Modelo de linguagem | **Hugging Face / Qwen** | Geração de conteúdo educacional       |
-| Qualidade           | **Ruff, Prettier**      | Padronização e lint                   |
-| Ambiente            | **uv, Docker**          | Dependências e execução em containers |
+<table>
+    <thead>
+        <tr>
+            <th>Categoria</th>
+            <th>Tecnologia</th>
+            <th>Finalidade</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td rowspan='2'>Backend</td>
+            <td><strong>Python</strong></td>
+            <td>Linguagem de programação usada no backend</td>
+        </tr>
+        <tr>
+            <td><strong>Flask</strong></td>
+            <td>API e lógica de negócio</td>
+        </tr>
+        <tr>
+            <td rowspan='2'>Frontend</td>
+            <td><strong>React</strong></td>
+            <td>Biblioteca <strong>JavaScript</strong> usada no frontend</td>
+        </tr>
+        <tr>
+            <td><strong>Vite</strong></td>
+            <td>Ferramenta de desenvolvimento e construção</td>
+        </tr>
+        <tr>
+            <td>Banco de dados</td>
+            <td><strong>MySQL</strong></td>
+            <td>Persistência e armazenamento</td>
+        </tr>
+        <tr>
+            <td rowspan='2'>IA</td>
+            <td><strong>LangChain</strong></td>
+            <td>Orquestração da LLM</td>
+        </tr>
+        <tr>
+            <td><strong>GPT-5 none</strong></td>
+            <td>Geração do conteúdo educacional</td>
+        </tr>
+        <tr>
+            <td>Qualidade</td>
+            <td><strong>Ruff, Prettier</strong></td>
+            <td>Padronização e lint</td>
+        </tr>
+        <tr>
+            <td>Ambiente</td>
+            <td><strong>UV, Docker</strong></td>
+            <td>Dependências e execução em containers</td>
+        </tr>
+    </tbody>
+</table>
 
 > [!NOTE]
-> A documentações completas de requisitos e decisões técnicas: [**Documentação**](#documentação).
+> A documentações completas de requisitos e decisões técnicas: [**Documentação**](#-documentação).
 
 ## 🚀 Pré-requisitos
 
@@ -199,6 +243,7 @@ Há duas formas principais de rodar o EduIA:
 
 ## 📚 Documentação
 
+- [Projeto Integrador - EduIA](docs/Projeto%20Integrador%20-%20EduIA.pdf)
 - [Requisitos Funcionais](docs/requisitos_funcionais.md)
 - [Requisitos Não Funcionais](docs/requisitos_nao_funcionais.md)
 - [Framework e LLM](docs/framework_e_llm.md)

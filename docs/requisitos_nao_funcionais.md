@@ -12,7 +12,7 @@
 | **NF06** | Usar `MySQL`          | Tipo de banco de dados relacional utilizado para armazenar informações                                                           | Essencial  | ✅ Implementado |
 | **NF07** | Usar `Git` e `GitHub` | Ferramentas utilizadas para versionamento e compartilhamento do projeto para melhorar e otimizar o desenvolvimento da plataforma | Importante | ✅ Implementado |
 | **NF08** | Usar `Figma`          | Plataforma utilizada na criação do design das páginas antes na estilização com CSS                                               | Importante | ✅ Implementado |
-| **NF09** | Usar `LangChain`      | Framework para integrar a API da LLM                                                                                             | Essencial  | ⏳ Planejando   |
+| **NF09** | Usar `LangChain`      | Framework para integrar a API da LLM                                                                                             | Essencial  | ✅ Implementado |
 | **NF10** | Usar `GPT-5 nano`     | API para integração com o modelo de linguagem `OpenAI`                                                                           | Essencial  | ⏳ Planejando   |
 
 ## 2. Performance
@@ -69,21 +69,22 @@
 
 ## 9. Custo operacional
 
-|  Código  | Requisito                                                            | Prioridade | Status                |
-| :------: | -------------------------------------------------------------------- | ---------- | --------------------- |
-| **NF28** | Utilizar serviços em nuvem com custo-benefício (ex: AWS, GCP, Azure) | Desejável  | 🔧 Em desenvolvimento |
-| **NF29** | Monitorar e otimizar o uso de recursos para minimizar custos         | Importante | ✅ Implementado       |
+|  Código  | Requisito                                                                   | Prioridade | Status                |
+| :------: | --------------------------------------------------------------------------- | ---------- | --------------------- |
+| **NF28** | Utilizar serviços em nuvem com custo-benefício (ex: AWS, GCP, Azure)        | Desejável  | 🔧 Em desenvolvimento |
+| **NF29** | Monitorar e otimizar o uso de recursos para minimizar custos                | Importante | ✅ Implementado       |
+| **NF30** | Usar formato **TOON** visando reduzir a quantidade de tokens de saída da IA | Desejável  | ⏳ Planejando         |
 
 ## 10. Páginas
 
 |  Código  | Página        | Funcionalidade                                                                                       | Prioridade | Status                |
 | :------: | ------------- | ---------------------------------------------------------------------------------------------------- | ---------- | --------------------- |
-| **NF30** | Home          | Página inicial do site (Landing Page), para mostrar as funcionalidades                               | Essencial  | ✅ Implementado       |
-| **NF31** | Login         | Autenticação do usuário                                                                              | Essencial  | ✅ Implementado       |
-| **NF32** | Cadastro      | Registro de novos usuários                                                                           | Essencial  | ✅ Implementado       |
-| **NF33** | Dashboard     | Área principal: criação e visualização de materiais, grupos, entre outras funcionalidades            | Essencial  | 🔧 Em desenvolvimento |
-| **NF34** | Perfil        | Visualização e edição do perfil do usuário                                                           | Essencial  | ✅ Implementado       |
-| **NF35** | Históricos    | Visualização dos históricos do usuário                                                               | Essencial  | ✅ Implementado       |
-| **NF36** | Sobre         | Informações sobre a sistema                                                                          | Essencial  | ✅ Implementado       |
-| **NF37** | Lixeira       | Materiais movidos para a lixeira (os materiais movidos para a lixeira são apagados após **30 dias**) | Essencial  | ✅ Implementado       |
-| **NF38** | Configurações | Configurações do usuário e preferências da IA                                                        | Essencial  | 🔧 Em desenvolvimento |
+| **NF31** | Home          | Página inicial do site (Landing Page), para mostrar as funcionalidades                               | Essencial  | ✅ Implementado       |
+| **NF32** | Login         | Autenticação do usuário                                                                              | Essencial  | ✅ Implementado       |
+| **NF33** | Cadastro      | Registro de novos usuários                                                                           | Essencial  | ✅ Implementado       |
+| **NF34** | Dashboard     | Área principal: criação e visualização de materiais, grupos, entre outras funcionalidades            | Essencial  | 🔧 Em desenvolvimento |
+| **NF35** | Perfil        | Visualização e edição do perfil do usuário                                                           | Essencial  | ✅ Implementado       |
+| **NF36** | Históricos    | Visualização dos históricos do usuário                                                               | Essencial  | ✅ Implementado       |
+| **NF37** | Sobre         | Informações sobre a sistema                                                                          | Essencial  | ✅ Implementado       |
+| **NF38** | Lixeira       | Materiais movidos para a lixeira (os materiais movidos para a lixeira são apagados após **30 dias**) | Essencial  | ✅ Implementado       |
+| **NF39** | Configurações | Configurações do usuário e preferências da IA                                                        | Essencial  | 🔧 Em desenvolvimento |

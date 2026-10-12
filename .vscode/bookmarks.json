@@ -149,6 +149,16 @@
 					"label": "Alterar documentação ao implementar RAG"
 				}
 			]
+		},
+		{
+			"path": "docs/requisitos_nao_funcionais.md",
+			"bookmarks": [
+				{
+					"line": 89,
+					"column": 0,
+					"label": "Alterar prioridade"
+				}
+			]
 		}
 	]
 }

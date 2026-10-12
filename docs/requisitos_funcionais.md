@@ -28,7 +28,7 @@
 | **RF10** | Gerar Questões           | Listas de exercícios com quantidade e nível especificados pelo usuário                                     | Ambos     | Essencial  | ✅ Implementado       |
 | **RF11** | Gerar Formulários        | Formulários com quantidade e nível especificados pelo usuário                                              | Professor | Essencial  | 🔧 Em desenvolvimento |
 | **RF12** | Gerar Quiz               | Quizzes com pontuação e tempo estabelecidos pelo usuário                                                   | Ambos     | Importante | ✅ Implementado       |
-| **RF13** | Gerar Flashcards         | Cartões com perguntas simples e suas respostas                                                             | Aluno     | Essencial  | 🔧 Em desenvolvimento |
+| **RF13** | Gerar Flashcards         | Cartões com perguntas simples e suas respostas                                                             | Aluno     | Essencial  | ✅ Implementado       |
 | **RF14** | Gerar Resumos            | Resumo de um determinado assunto ou matéria                                                                | Ambos     | Importante | 🔧 Em desenvolvimento |
 | **RF15** | Gerar Explicações        | Explicação de um assunto ou matéria para diferentes níveis, podendo usar analogias e demonstrar aplicações | Ambos     | Essencial  | 🔧 Em desenvolvimento |
 | **RF16** | Gerar Exercícios guiados | Questões já respondidas, com passo a passo e explicações detalhadas                                        | Ambos     | Essencial  | 🔧 Em desenvolvimento |
