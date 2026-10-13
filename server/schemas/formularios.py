@@ -11,3 +11,7 @@ class FormularioJSON(BaseModel):
     question: str
     answers: list[Answer]
     correctAnswerId: int
+
+
+class Formularios(BaseModel):
+    content: list[FormularioJSON]
