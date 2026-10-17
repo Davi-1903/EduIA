@@ -23,6 +23,9 @@ function InputRange({ value, trueValue, setValue, id, min, max, steps = 1, forma
                 value={trueValue}
                 onChange={e => readOnly || setValue(e.target.value)}
                 className='input-range'
+                style={{
+                    backgroundImage: `linear-gradient(to right, var(--base-color1) 0%, var(--color-color1-400) ${((trueValue - min) / (max - min)) * 100}%, var(--color-color4-25) ${((trueValue - min) / (max - min)) * 100}%, var(--color-color4-50) 100%)`,
+                }}
                 step={steps}
                 min={min}
                 max={max}

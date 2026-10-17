@@ -104,16 +104,6 @@
 					"label": "Alterar documentação ao implementar RAG"
 				}
 			]
-		},
-		{
-			"path": "client/src/globals.css",
-			"bookmarks": [
-				{
-					"line": 152,
-					"column": 0,
-					"label": "Fazer a linha \"encher\""
-				}
-			]
 		}
 	]
 }
