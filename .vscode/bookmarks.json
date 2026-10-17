@@ -31,21 +31,6 @@
 			]
 		},
 		{
-			"path": "client/src/pages/protected/materials/index.jsx",
-			"bookmarks": [
-				{
-					"line": 101,
-					"column": 0,
-					"label": "Mostrar os filtros mesmo quando não há materiais?"
-				},
-				{
-					"line": 103,
-					"column": 0,
-					"label": "Adicionar aviso que não há materiais para filtros especificados?"
-				}
-			]
-		},
-		{
 			"path": "client/src/pages/protected/tools/questions/index.jsx",
 			"bookmarks": [
 				{

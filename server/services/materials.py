@@ -73,6 +73,7 @@ def get_materials_service(cursor: int, limit: int, type_: str, difficulty: str, 
 
         return {
             'total': total,
+            'withFilter': type_ != 'all' or difficulty != 'all' or discipline != 'all' or search != '',
             'materials': [
                 {
                     'id': material.id,

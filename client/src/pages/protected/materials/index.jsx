@@ -21,6 +21,7 @@ export default function Materials() {
     const [total, setTotal] = useState(0);
     const [cursor, setCursor] = useState(0);
     const [isLoading, setIsLoading] = useState(true);
+    const [withFilter, setWithFilter] = useState(false);
     const setMessagesRef = useRef(setMessages);
     const limit = 50;
 
@@ -54,7 +55,10 @@ export default function Materials() {
                 if (data.status !== 200) throw new Error('Não foi possível carregar os materiais');
 
                 setMaterials(data.materials);
+                setWithFilter(data.withFilter);
                 setTotal(data.total);
+
+                if (data.total === 0 && data.withFilter) throw new Error('Não há materiais para os filtros escolhidos');
             } catch (err) {
                 if (err.name === 'AbortError') return;
                 setMaterials(null);
@@ -104,18 +108,20 @@ export default function Materials() {
                     <h1 className='bg-linear-to-tr from-color1-100 to-color4-100 bg-clip-text text-4xl leading-tight font-bold text-transparent md:text-5xl'>
                         Meus materiais
                     </h1>
-                    <Filters
-                        user={user?.tipo}
-                        type={type}
-                        discipline={discipline}
-                        search={search}
-                        difficulty={difficulty}
-                        setType={setType}
-                        setDiscipline={setDiscipline}
-                        setSearch={setSearch}
-                        setDifficulty={setDifficulty}
-                        clearFilters={clearFilters}
-                    />
+                    {(total > 0 || withFilter) && (
+                        <Filters
+                            user={user?.tipo}
+                            type={type}
+                            discipline={discipline}
+                            search={search}
+                            difficulty={difficulty}
+                            setType={setType}
+                            setDiscipline={setDiscipline}
+                            setSearch={setSearch}
+                            setDifficulty={setDifficulty}
+                            clearFilters={clearFilters}
+                        />
+                    )}
                     {isLoading && !materials ? (
                         <p className='pt-12 text-center text-xl font-bold text-color3-400'>Carregando materiais...</p>
                     ) : total > 0 && materials ? (
