@@ -43,5 +43,5 @@
 | **RF20** | Permitir salvar materiais criados                                | Essencial  | ✅ Implementado       |
 | **RF21** | Proporcionar a organização dos materiais por disciplinas         | Desejável  | 🔧 Em desenvolvimento |
 | **RF22** | Permitir a visualização dos materiais diretamente pelo navegador | Essencial  | 🔧 Em desenvolvimento |
-| **RF23** | Permitir o download dos materiais gerados                        | Importante | 🔧 Em desenvolvimento |
+| **RF23** | Permitir o download dos materiais gerados                        | Desejável  | 🔧 Em desenvolvimento |
 | **RF24** | Permitir buscar materiais por palavra-chave                      | Desejável  | ✅ Implementado       |

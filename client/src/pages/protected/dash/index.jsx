@@ -17,6 +17,7 @@ import GenerateForms from '../tools/forms';
 import GenerateChallenge from '../tools/challenge';
 import MaterialCard from '../materials/components/material';
 import Card from './cards';
+import clsx from 'clsx';
 
 export default function Dashboard() {
     const { user } = useAuthenticated();
@@ -150,7 +151,14 @@ export default function Dashboard() {
                             <h2 className='mb-6 font-primary text-2xl font-semibold text-color1-100'>
                                 Materiais recentes
                             </h2>
-                            <div className='grid grid-cols-[repeat(auto-fit,minmax(18rem,1fr))] gap-6'>
+                            <div
+                                className={clsx(
+                                    'grid gap-6',
+                                    materials.length > 0 && materials.length <= 4
+                                        ? 'grid-cols-1 lg:grid-cols-2 xl:grid-cols-4'
+                                        : 'grid-cols-[repeat(auto-fit,minmax(18rem,1fr))]',
+                                )}
+                            >
                                 {materials.map((material, idx) => (
                                     <Link
                                         to='/materials'

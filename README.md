@@ -26,6 +26,10 @@
         alt='ruff'
     >
     <img
+        src='https://img.shields.io/badge/Prettier-3.0-F7B93E?logo=prettier&logoColor=white'
+        alt='Prettier'
+    >
+    <img
         src='https://img.shields.io/badge/MySQL-8.0-4479A1?logo=mysql&logoColor=white'
         alt='MySQL 8.0'
     >

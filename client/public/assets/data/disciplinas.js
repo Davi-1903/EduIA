@@ -19,7 +19,7 @@ export const disciplinasList = {
         'Filosofia, Ciência e Tecnologia',
         'Sociologia do Trabalho',
         'Qualidade de Vida e Trabalho',
-        'Gestão Organizaciona',
+        'Gestão Organizacional',
         'Fundamentos de Lógica e Algoritmo',
         'Análise e Projeto Orientados a Objeto',
         'Projeto de Desenvolvimento de Sistemas para Internet',

@@ -87,4 +87,4 @@
 | **NF36** | Históricos    | Visualização dos históricos do usuário                                                               | Essencial  | ✅ Implementado       |
 | **NF37** | Sobre         | Informações sobre a sistema                                                                          | Essencial  | ✅ Implementado       |
 | **NF38** | Lixeira       | Materiais movidos para a lixeira (os materiais movidos para a lixeira são apagados após **30 dias**) | Essencial  | ✅ Implementado       |
-| **NF39** | Configurações | Configurações do usuário e preferências da IA                                                        | Essencial  | 🔧 Em desenvolvimento |
+| **NF39** | Configurações | Configurações do usuário e preferências da IA                                                        | Desejável  | 🔧 Em desenvolvimento |

@@ -4,29 +4,19 @@
 			"path": "README.md",
 			"bookmarks": [
 				{
-					"line": 61,
+					"line": 65,
 					"column": 0,
 					"label": "Lembrar de adicionar uma imagem"
 				},
 				{
-					"line": 70,
+					"line": 74,
 					"column": 0,
 					"label": "Atualizar README ao adicionar RAG"
 				},
 				{
-					"line": 82,
+					"line": 86,
 					"column": 0,
 					"label": "Atualizar quando formos usar GPT-5 nano"
-				}
-			]
-		},
-		{
-			"path": "server/models/roteiros.py",
-			"bookmarks": [
-				{
-					"line": 5,
-					"column": 0,
-					"label": "Talvez adicionar o tempo (quantidade de dias, tempo de estudo por dia...)"
 				}
 			]
 		},
@@ -56,32 +46,12 @@
 			]
 		},
 		{
-			"path": "server/models/exercicios_guiados.py",
-			"bookmarks": [
-				{
-					"line": 10,
-					"column": 0,
-					"label": "Não estou entendendo o porquê da quantidade"
-				}
-			]
-		},
-		{
 			"path": "client/src/pages/protected/tools/questions/index.jsx",
 			"bookmarks": [
 				{
 					"line": 17,
 					"column": 0,
 					"label": "Adicionar animação quando o material estiver sendo gerado pela IA"
-				}
-			]
-		},
-		{
-			"path": "client/src/pages/protected/materials/components/cardsView.jsx",
-			"bookmarks": [
-				{
-					"line": 4,
-					"column": 0,
-					"label": "Quando há poucos materiais a largura fica enorme"
 				}
 			]
 		},
@@ -99,24 +69,9 @@
 			"path": "server/ai/__init__.py",
 			"bookmarks": [
 				{
-					"line": 2,
+					"line": 3,
 					"column": 0,
 					"label": "Futuramente trocar para langhchain-openai"
-				}
-			]
-		},
-		{
-			"path": "server/controllers/questoes.py",
-			"bookmarks": [
-				{
-					"line": 28,
-					"column": 0,
-					"label": "Esse erro não está sendo lançado"
-				},
-				{
-					"line": 56,
-					"column": 0,
-					"label": "Tratar erros da IA no frontend também"
 				}
 			]
 		},
@@ -151,12 +106,12 @@
 			]
 		},
 		{
-			"path": "docs/requisitos_nao_funcionais.md",
+			"path": "client/src/globals.css",
 			"bookmarks": [
 				{
-					"line": 89,
+					"line": 152,
 					"column": 0,
-					"label": "Alterar prioridade"
+					"label": "Fazer a linha \"encher\""
 				}
 			]
 		}
