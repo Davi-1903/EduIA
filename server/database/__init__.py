@@ -1,17 +1,12 @@
 import atexit
 import os
 from datetime import datetime, timedelta, timezone
-from typing import TYPE_CHECKING
 
 from apscheduler.schedulers.background import BackgroundScheduler
 from sqlalchemy import select
 from sqlalchemy.orm import DeclarativeBase, sessionmaker
 
 from utils.database import create_url, get_connection, get_env
-
-
-if TYPE_CHECKING:
-    from models.material import Material
 
 
 engine = get_connection(url=create_url(), echo=False, connect_args={'init_command': "SET time_zone='+00:00'"})
@@ -23,6 +18,8 @@ class Base(DeclarativeBase):
 
 
 def purge_expired_trash():
+    from models.material import Material
+
     with SessionLocal() as session:
         try:
             cutoff = datetime.now(timezone.utc) - timedelta(days=int(get_env('TRASH_RETENTION_DAYS')))

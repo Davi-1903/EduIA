@@ -44,7 +44,7 @@ def get_embedding_model() -> HuggingFaceEmbeddings:
     )
 
 
-def get_vector_store():
+def get_vector_store() -> PineconeVectorStore:
     embeddings = get_embedding_model()
 
     try:
@@ -53,7 +53,7 @@ def get_vector_store():
     except Exception as err:
         raise RuntimeError(f'Não foi possível se conectar ao pinecone: {err}') from err
 
-    return index, PineconeVectorStore(embedding=embeddings, index=index)
+    return PineconeVectorStore(embedding=embeddings, index=index)
 
 
 def search_documentation(vector_store: PineconeVectorStore, query: str, discipline: str) -> str:

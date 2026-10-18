@@ -3,6 +3,7 @@ from flask_cors import CORS
 from flask_login import LoginManager
 from flask_wtf import CSRFProtect
 
+from ai import init_ai
 from database import SessionLocal, init_database
 from models.user import Usuario
 from utils.database import get_env
@@ -25,6 +26,7 @@ def config_app(app: Flask):
 
     login_config(app)
     init_database()
+    init_ai(app)
 
 
 def login_config(app: Flask):

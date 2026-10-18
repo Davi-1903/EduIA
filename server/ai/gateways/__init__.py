@@ -9,11 +9,13 @@ from errors.ai import (
     AiTimeout,
 )
 from utils.ai import search_documentation
-
-from .. import llm, vector_store
+from utils.extensions import get_llm_ext, get_vector_store_ext
 
 
 def generate_questions(payload: dict):
+    llm = get_llm_ext()
+    vector_store = get_vector_store_ext()
+
     documentation = search_documentation(vector_store, payload['assunto'], payload['disciplina'])
 
     try:
@@ -34,6 +36,9 @@ def generate_questions(payload: dict):
 
 
 def generate_quizzes(payload: dict):
+    llm = get_llm_ext()
+    vector_store = get_vector_store_ext()
+
     documentation = search_documentation(vector_store, payload['assunto'], payload['disciplina'])
 
     try:
@@ -54,6 +59,9 @@ def generate_quizzes(payload: dict):
 
 
 def generate_flashcards(payload: dict):
+    llm = get_llm_ext()
+    vector_store = get_vector_store_ext()
+
     documentation = search_documentation(vector_store, payload['assunto'], payload['disciplina'])
 
     try:
