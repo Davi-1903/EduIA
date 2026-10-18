@@ -1,6 +1,5 @@
 from langchain_core.exceptions import OutputParserException
 
-from ai import get_chain
 from ai.prompts import flashcards, questoes, quiz
 from errors.ai import (
     AiInvalidRequest,
@@ -9,12 +8,16 @@ from errors.ai import (
     AiServiceError,
     AiTimeout,
 )
+from utils.ai import search_documentation
+
+from .. import llm, vector_store
 
 
 def generate_questions(payload: dict):
+    documentation = search_documentation(vector_store, payload['assunto'], payload['disciplina'])
+
     try:
-        chain = get_chain(questoes.prompt_template, questoes.parser)
-        return chain.invoke(payload)
+        return llm.invoke(questoes.prompt_template.format(**{**payload, 'documentacao': documentation})).content
 
     except AiServiceError:
         raise
@@ -31,9 +34,10 @@ def generate_questions(payload: dict):
 
 
 def generate_quizzes(payload: dict):
+    documentation = search_documentation(vector_store, payload['assunto'], payload['disciplina'])
+
     try:
-        chain = get_chain(quiz.prompt_template, quiz.parser)
-        return chain.invoke(payload)
+        return llm.invoke(quiz.prompt_template.format(**{**payload, 'documentacao': documentation})).content
 
     except AiServiceError:
         raise
@@ -48,10 +52,12 @@ def generate_quizzes(payload: dict):
     except Exception as error:
         raise AiProviderUnavailable('Não foi possível acessar o serviço de IA') from error
 
+
 def generate_flashcards(payload: dict):
+    documentation = search_documentation(vector_store, payload['assunto'], payload['disciplina'])
+
     try:
-        chain = get_chain(flashcards.prompt_template, flashcards.parser)
-        return chain.invoke(payload)
+        return llm.invoke(flashcards.prompt_template.format(**{**payload, 'documentacao': documentation})).content
 
     except AiServiceError:
         raise

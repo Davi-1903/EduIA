@@ -18,7 +18,7 @@ export default function FlashCards({ discipline, subject, difficulty, content, s
     function nextCard() {
         if (cardID < content.length - 1) {
             setCardId(prev => prev + 1);
-        } 
+        }
     }
 
     function previousCard() {
@@ -83,7 +83,7 @@ export default function FlashCards({ discipline, subject, difficulty, content, s
 
                         <div className='flex justify-between'>
                             <button
-                                className='flex cursor-pointer justify-first gap-3 items-center rounded-lg border-3 border-color1-100 w-35 px-3 py-2 font-primary text-lg text-color1-100 transition-all duration-250 hover:text-color4-100 not-disabled:hover:bg-button disabled:cursor-no-drop disabled:opacity-50'
+                                className='justify-first flex w-35 cursor-pointer items-center gap-3 rounded-lg border-3 border-color1-100 px-3 py-2 font-primary text-lg text-color1-100 transition-all duration-250 hover:text-color4-100 not-disabled:hover:bg-button disabled:cursor-no-drop disabled:opacity-50'
                                 onClick={previousCard}
                                 disabled={cardID === 0}
                             >
@@ -94,7 +94,7 @@ export default function FlashCards({ discipline, subject, difficulty, content, s
                             {cardID === content.length - 1 ? (
                                 <>
                                     <button
-                                        className='flex cursor-pointer justify-center items-center rounded-lg bg-button w-35 px-3 py-2 font-primary text-lg text-color4-400 transition-all duration-250 not-disabled:hover:shadow-lg-hard disabled:cursor-no-drop disabled:opacity-50'
+                                        className='flex w-35 cursor-pointer items-center justify-center rounded-lg bg-button px-3 py-2 font-primary text-lg text-color4-400 transition-all duration-250 not-disabled:hover:shadow-lg-hard disabled:cursor-no-drop disabled:opacity-50'
                                         onClick={() => setClose(true)}
                                     >
                                         <span>Finalizar</span>
@@ -103,7 +103,7 @@ export default function FlashCards({ discipline, subject, difficulty, content, s
                             ) : (
                                 <>
                                     <button
-                                        className='flex cursor-pointer justify-end px-3 gap-3 items-center rounded-lg border-3 border-color1-100 w-35 py-2 font-primary text-lg text-color1-100 transition-all duration-250 hover:text-color4-100 not-disabled:hover:bg-button disabled:cursor-no-drop disabled:opacity-50'
+                                        className='flex w-35 cursor-pointer items-center justify-end gap-3 rounded-lg border-3 border-color1-100 px-3 py-2 font-primary text-lg text-color1-100 transition-all duration-250 hover:text-color4-100 not-disabled:hover:bg-button disabled:cursor-no-drop disabled:opacity-50'
                                         onClick={nextCard}
                                     >
                                         <span>Avançar</span>

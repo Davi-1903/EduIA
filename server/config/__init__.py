@@ -5,7 +5,7 @@ from flask_wtf import CSRFProtect
 
 from database import SessionLocal, init_database
 from models.user import Usuario
-from utils import get_env
+from utils.database import get_env
 
 
 __all__ = ['config_app']

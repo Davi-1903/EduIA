@@ -51,16 +51,6 @@
 			]
 		},
 		{
-			"path": "server/ai/__init__.py",
-			"bookmarks": [
-				{
-					"line": 3,
-					"column": 0,
-					"label": "Futuramente trocar para langhchain-openai"
-				}
-			]
-		},
-		{
 			"path": "server/Dockerfile",
 			"bookmarks": [
 				{

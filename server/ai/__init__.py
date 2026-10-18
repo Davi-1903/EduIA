@@ -1,22 +1,10 @@
-from langchain_core.output_parsers import JsonOutputParser
-from langchain_core.prompts import PromptTemplate
-from langchain_huggingface import ChatHuggingFace, HuggingFaceEndpoint
+from utils.ai import get_llm, get_vector_store
 
-from utils import get_env
+from . import gateways, prompts, services
 
 
-llm_base = HuggingFaceEndpoint(
-    model=get_env('HF_MODEL'),
-    max_new_tokens=int(get_env('MAX_TOKENS')),
-    temperature=0.1,
-    top_p=0.9,
-    provider='auto',
-)
-
-chat_model = ChatHuggingFace(llm=llm_base)
-
-llm_resiliente = chat_model.with_retry(stop_after_attempt=5, wait_exponential_jitter=True)
+__all__ = ['gateways', 'prompts', 'services']
 
 
-def get_chain(prompt: PromptTemplate, parser: JsonOutputParser):
-    return prompt | llm_resiliente | parser
+llm = get_llm()
+_, vector_store = get_vector_store()

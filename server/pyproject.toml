@@ -13,6 +13,7 @@ dependencies = [
     "langchain>=1.4.0",
     "langchain-core>=1.6.2",
     "langchain-huggingface>=1.2.2",
+    "langchain-pinecone>=0.2.13",
     "pwdlib[argon2]>=0.3.1",
     "pydantic>=2.13.4",
     "pymysql>=1.2.0",

@@ -7,7 +7,7 @@ from apscheduler.schedulers.background import BackgroundScheduler
 from sqlalchemy import select
 from sqlalchemy.orm import DeclarativeBase, sessionmaker
 
-from utils import create_url, get_connection, get_env
+from utils.database import create_url, get_connection, get_env
 
 
 if TYPE_CHECKING:

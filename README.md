@@ -172,18 +172,24 @@ Há duas formas principais de rodar o EduIA:
     Exemplo de configuração:
 
     ```env
+    # ========================< API KEYS >========================
+    PINECONE_API_KEY=<SUA-CHAVE-DE-API-DO-PINECONE>
+    HUGGINGFACEHUB_API_TOKEN=<SUA-CHAVE-DE-API-DO-HUGGING-FACE>
+
     # =====================< Hugging Face >=====================
-    HUGGINGFACEHUB_API_TOKEN=<SUA-CHAVE-DE-API>
-    HF_MODEL=Qwen/Qwen2.5-72B-Instruct
+    HF_EMBEDDING_MODEL=<MODELO-DE-EMBEDDING>
+    HF_VISION_MODEL=<MODELO-PARA-OCR>
+    HF_MODEL=<MODELO-DE-IA>
     MAX_TOKENS=3000
+    INDEX_NAME=eduia-rag
 
     # =====================< Autenticação >=====================
-    SECRET_KEY=<SUA-CHAVE-SECRETA>
+    SECRET_KEY=<SUA-CHAVE-SECRETA-AQUI>
     CORS_ORIGINS=http://localhost:3000,http://localhost:4173
 
     # ====================< Banco de dados >====================
     DB_USER=root
-    DB_PASSWORD=<SENHA-DO-BANCO>
+    DB_PASSWORD=<SENHA-DO-BANCO-DE-DADOS-AQUI>
     DB_HOST=localhost
     DB_PORT=3306
     DB_NAME=db_eduia
