@@ -141,6 +141,14 @@ export default function MaterialCard({
         return icons[type];
     }
 
+    function normalizarTipo(t = '') {
+        return t
+            .toLowerCase()
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .replace(/[\s-]+/g, '_');
+    }
+
     function getIcon(type) {
         const icons = {
             desafio: <IconLaurelWreath1 className='stroke-color1-100' />,
@@ -163,12 +171,14 @@ export default function MaterialCard({
     }
 
     function handleOpen() {
-        if (!getContent(type)) {
+        const tipo = normalizarTipo(type);
+
+        if (!getContent(tipo)) {
             setMessages(prev => [
                 ...prev,
                 {
                     id: prev.length + 1,
-                    message: 'Visualização deste tipo de material ainda não está disponível',
+                    message: `Visualização deste tipo de material ainda não está disponível (${type})`,
                     type: 'danger',
                 },
             ]);
@@ -179,10 +189,11 @@ export default function MaterialCard({
 
         setMenu(null);
         setIsOpening(true);
-        GET(`/api/materials/${type}/${id}`)
+        GET(`/api/materials/${tipo}/${id}`)
             .then(data => {
                 if (data.status !== 200) throw new Error(data.message);
-                setContent(data.material.content.content);
+                const { content: conteudo } = data.material;
+                setContent(tipo === 'exercicio_guiado' ? conteudo : conteudo.content);
             })
             .catch(err => setMessages(prev => [...prev, { id: prev.length + 1, message: err.message, type: 'danger' }]))
             .finally(() => setIsOpening(false));

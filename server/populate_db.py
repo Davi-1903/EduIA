@@ -162,15 +162,85 @@ def criar_conteudo_estatico(material_type, disciplina: str) -> dict:
             )
         }
     if material_type is ExercicioGuiado:
-        return {
-            'content': (
-                f'## Exercício guiado: {disciplina}\n\n'
-                f'1. Defina o conceito principal de {disciplina}.\n'
-                '2. Liste duas características importantes.\n'
-                '3. Resolva um exemplo relacionado ao curso técnico.\n'
-                '4. Confira a resolução e explique o resultado com suas próprias palavras.'
-            )
-        }
+        return random.choice(
+            [
+                {
+                    'type': 'multiple_choice',
+                    'content': [
+                        {
+                            'id': 1,
+                            'question': f'Qual alternativa representa corretamente uma aplicação de {disciplina}?',
+                            'answers': [
+                                {'id': 1, 'text': f'Aplicar os conceitos de {disciplina} em uma situação prática.'},
+                                {'id': 2, 'text': 'Ignorar os dados apresentados no problema.'},
+                                {'id': 3, 'text': 'Repetir uma resposta sem analisá-la.'},
+                                {'id': 4, 'text': 'Escolher uma alternativa ao acaso.'},
+                            ],
+                            'correctAnswerId': 1,
+                            'hint': 'Pense em qual opção relaciona o conceito a uma situação real.',
+                            'explanation': 'A alternativa A é a única que conecta o conceito a uma aplicação real.',
+                        },
+                        {
+                            'id': 2,
+                            'question': f'O que ajuda mais a compreender {disciplina}?',
+                            'answers': [
+                                {'id': 1, 'text': 'Relacionar teoria, exemplos e revisão constante.'},
+                                {'id': 2, 'text': 'Decorar definições sem contexto.'},
+                                {'id': 3, 'text': 'Evitar exercícios de verificação.'},
+                                {'id': 4, 'text': 'Aceitar a primeira ideia que aparecer.'},
+                            ],
+                            'correctAnswerId': 1,
+                            'hint': 'Aprender é mais do que memorizar.',
+                            'explanation': 'Conectar teoria, prática e revisão consolida o aprendizado.',
+                        },
+                    ],
+                },
+                {
+                    'type': 'true_or_false',
+                    'content': [
+                        {
+                            'id': 1,
+                            'question': (
+                                f'Para compreender {disciplina}, basta memorizar definições, '
+                                'sem relacioná-las a exemplos.'
+                            ),
+                            'correctAnswer': False,
+                            'hint': 'Compreender é diferente de decorar.',
+                            'explanation': 'Memorizar sem relacionar a exemplos não garante compreensão.',
+                        },
+                        {
+                            'id': 2,
+                            'question': f'Aplicar {disciplina} em situações práticas ajuda a fixar o conteúdo.',
+                            'correctAnswer': True,
+                            'hint': 'Pense no papel da prática no aprendizado.',
+                            'explanation': 'A prática conecta o conceito a situações reais e reforça a retenção.',
+                        },
+                    ],
+                },
+                {
+                    'type': 'discursive',
+                    'content': [
+                        {
+                            'id': 1,
+                            'question': (
+                                f'Explique com suas palavras o conceito principal de {disciplina} '
+                                'e apresente um exemplo prático relacionado ao curso técnico.'
+                            ),
+                            'hint': 'Comece definindo o conceito e depois mostre uma situação real.',
+                            'expectedAnswer': 'Definição clara, exemplo coerente com o curso e explicação da aplicação.',
+                            'explanation': 'Uma boa resposta define o conceito, exemplifica e justifica a aplicação.',
+                        },
+                        {
+                            'id': 2,
+                            'question': f'Descreva como você avaliaria se aprendeu {disciplina}.',
+                            'hint': 'Pense em como explicar e aplicar o tema.',
+                            'expectedAnswer': 'Explicar o tema com clareza e resolver aplicações práticas.',
+                            'explanation': 'Aprender significa saber explicar e aplicar, não só repetir.',
+                        },
+                    ],
+                },
+            ]
+        )
     if material_type is Explicacao:
         return {
             'content': (

@@ -1,15 +1,15 @@
 import { useEffect, useRef, useState } from 'react';
 import clsx from 'clsx';
 import Introduction from './components/introduction';
+import Questions from './components/Questions';
 
 export default function Guided_exercises({ discipline, subject, difficulty, content, setContent }) {
     const materialRef = useRef(null);
     const [start, setStart] = useState(false);
     const [isClose, setClose] = useState(false);
 
-    function handleStart() {
-        setStart(true);
-    }
+    const tipo = content?.type; // 'multiple_choice' | 'true_or_false' | 'discursive'
+    const questoes = Array.isArray(content?.content) ? content.content : [];
 
     function handleAnimationEnd(event) {
         if (event.target !== event.currentTarget) return;
@@ -35,20 +35,20 @@ export default function Guided_exercises({ discipline, subject, difficulty, cont
         >
             <main
                 ref={materialRef}
-                className='flex h-170 w-full max-w-160 flex-col gap-6 rounded-2xl bg-white p-6 shadow-2xl shadow-color1-100/15 lg:w-4/5'
+                className='flex h-170 w-full max-w-160 flex-col gap-6 overflow-y-auto rounded-2xl bg-white p-6 shadow-2xl shadow-color1-100/15 lg:w-4/5'
             >
                 {!start ? (
                     <Introduction
                         discipline={discipline}
                         subject={subject}
                         difficulty={difficulty}
-                        questionsLength={content?.length}
+                        questionsLength={questoes.length}
                         handleClose={() => setClose(true)}
-                        handleStart={handleStart}
+                        handleStart={() => setStart(true)}
                     />
-                ) : (
+                ) : questoes.length === 0 ? (
                     <div className='flex flex-1 flex-col items-center justify-center gap-6'>
-                        <p className='font-primary text-4xl font-extrabold text-color1-100'>aaaaa</p>
+                        <p className='font-secundary text-lg text-color1-100'>Nenhuma questão encontrada.</p>
                         <button
                             className='cursor-pointer rounded-xl border-3 border-color1-100 px-8 py-2 font-secundary text-lg font-bold text-color1-100'
                             onClick={() => setClose(true)}
@@ -56,6 +56,14 @@ export default function Guided_exercises({ discipline, subject, difficulty, cont
                             Fechar
                         </button>
                     </div>
+                ) : (
+                    <Questions
+                        discipline={discipline}
+                        difficulty={difficulty}
+                        tipo={tipo}
+                        questoes={questoes}
+                        onFinish={() => setClose(true)}
+                    />
                 )}
             </main>
         </div>

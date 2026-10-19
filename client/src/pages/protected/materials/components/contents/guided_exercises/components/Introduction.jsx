@@ -79,7 +79,7 @@ export default function Introduction({ discipline, subject, difficulty, question
                             {item.icon}
                         </div>
                         <div>
-                            <span className='block font-secundary text-sm font-medium text-color1-100/40'>
+                            <span className='block font-secundary text- font-medium text-color1-100/40'>
                                 {item.type}
                             </span>
                             <span className='block font-primary text-base font-bold text-color1-100'>
