@@ -1,10 +1,5 @@
 from os import getenv
 
-from . import ai, database, extensions
-
-
-__all__ = ['ai', 'database', 'extensions']
-
 
 def get_env(key: str, default: str | None = None) -> str:
     value = getenv(key)

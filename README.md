@@ -178,7 +178,6 @@ Há duas formas principais de rodar o EduIA:
 
     # =====================< Hugging Face >=====================
     HF_EMBEDDING_MODEL=<MODELO-DE-EMBEDDING>
-    HF_VISION_MODEL=<MODELO-PARA-OCR>
     HF_MODEL=<MODELO-DE-IA>
     MAX_TOKENS=3000
     INDEX_NAME=eduia-rag
