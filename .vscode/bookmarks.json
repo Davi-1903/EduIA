@@ -79,6 +79,16 @@
 					"label": "Alterar documentação ao implementar RAG"
 				}
 			]
+		},
+		{
+			"path": "server/controllers/desafios.py",
+			"bookmarks": [
+				{
+					"line": 113,
+					"column": 0,
+					"label": "Passar logs para os services quando forem alterados"
+				}
+			]
 		}
 	]
 }

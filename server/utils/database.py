@@ -1,13 +1,17 @@
+from pathlib import Path
 from time import sleep
 
 from dotenv import load_dotenv
+from loguru import logger
 from sqlalchemy import Engine, create_engine
 from sqlalchemy.exc import OperationalError
 
-from . import get_env
+from . import get_env, setup_logger
 
 
 load_dotenv()
+
+setup_logger(__name__, Path(__file__).resolve().parents[1] / 'logs' / 'database.log')
 
 
 def create_url() -> str:
@@ -23,12 +27,14 @@ def create_url() -> str:
 
 
 def get_connection(**kargs) -> Engine:
-    for _ in range(10):
+    for attempt in range(10):
         try:
             engine = create_engine(**kargs)
             engine.connect()
-            print('A conexão com o banco de dados foi estabelecida')
+            logger.info('Conexão com o banco de dados estabelecida')
             return engine
-        except OperationalError:
+        except OperationalError as error:
+            logger.warning('Tentativa {}/10 de conexão com o banco falhou: {}', attempt + 1, error)
             sleep(3)
+    logger.error('Não foi possível estabelecer uma conexão com o banco de dados após 10 tentativas')
     raise RuntimeError('Não foi possível estabeler uma conexão com o banco de dados')

@@ -1,10 +1,15 @@
 from enum import Enum
+from pathlib import Path
 
 from langchain_huggingface import ChatHuggingFace, HuggingFaceEmbeddings, HuggingFaceEndpoint
 from langchain_pinecone import PineconeVectorStore
+from loguru import logger
 from pinecone import Pinecone
 
-from . import get_env
+from . import get_env, setup_logger
+
+
+setup_logger(__name__, Path(__file__).resolve().parents[1] / 'logs' / 'ai.log')
 
 
 # Usar para validar a disciplina
@@ -51,6 +56,7 @@ def get_vector_store() -> PineconeVectorStore:
         pc = Pinecone(api_key=get_env('PINECONE_API_KEY'))
         index = pc.Index(get_env('INDEX_NAME'))
     except Exception as err:
+        logger.exception('Não foi possível se conectar ao Pinecone')
         raise RuntimeError(f'Não foi possível se conectar ao pinecone: {err}') from err
 
     return PineconeVectorStore(embedding=embeddings, index=index)

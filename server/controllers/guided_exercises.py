@@ -1,11 +1,18 @@
+from pathlib import Path
+
 from flask import Blueprint, jsonify, request
 from flask_login import current_user, login_required
+from loguru import logger
 from sqlalchemy import func, select
 
 from database import SessionLocal
 from models.exercicios_guiados import ExercicioGuiado
 from models.historico import Historico
 from models.material import Difficulty
+from utils import setup_logger
+
+
+setup_logger(__name__, Path(__file__).resolve().parents[1] / 'logs' / 'guided-exercises.log')
 
 
 bp_materials_exercicio_guiado = Blueprint('exercicio_guiado', __name__, url_prefix='/exercicio_guiado')
@@ -120,8 +127,10 @@ def create_guided_exercise():
             session.add(guided_exercise)
             session.add(historico)
             session.commit()
+            logger.info('Exercício guiado salvo no banco de dados')
             return jsonify({'ok': True, 'redirect': '/materials'}), 201
 
         except Exception:
             session.rollback()
+            logger.error('Falha ao salvar exercício guiado no banco de dados')
             return jsonify({'ok': False, 'message': 'Ocorreu um erro interno'}), 500

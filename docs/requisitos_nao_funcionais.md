@@ -35,9 +35,9 @@
 
 ## 4. Confiabilidade
 
-|  Código  | Requisito    | Prioridade | Status                |
-| :------: | ------------ | ---------- | --------------------- |
-| **NF19** | Logs de erro | Desejável  | 🔧 Em desenvolvimento |
+|  Código  | Requisito    | Prioridade | Status          |
+| :------: | ------------ | ---------- | --------------- |
+| **NF19** | Logs de erro | Desejável  | ✅ Implementado |
 
 ## 5. Segurança
 

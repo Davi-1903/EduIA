@@ -1,10 +1,17 @@
+from pathlib import Path
+
 from flask import Blueprint, jsonify, request
 from flask_login import current_user, login_required
+from loguru import logger
 from sqlalchemy import func, select
 
 from database import SessionLocal
 from models.explicacoes import Explicacao
 from models.historico import Historico
+from utils import setup_logger
+
+
+setup_logger(__name__, Path(__file__).resolve().parents[1] / 'logs' / 'explanations.log')
 
 
 bp_materials_explicacao = Blueprint('explicacoes', __name__, url_prefix='/explicacoes')
@@ -100,8 +107,10 @@ def create_explanation():
             session.add(explanation)
             session.add(historico)
             session.commit()
+            logger.info('Material de explicação salvo no banco de dados')
             return jsonify({'ok': True, 'redirect': '/materials'}), 201
 
         except Exception:
             session.rollback()
+            logger.error('Falha ao salvar material de explicação no banco de dados')
             return jsonify({'ok': False, 'message': 'Ocorreu um erro interno'}), 500
