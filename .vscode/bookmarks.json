@@ -4,29 +4,9 @@
 			"path": "README.md",
 			"bookmarks": [
 				{
-					"line": 65,
+					"line": 99,
 					"column": 0,
-					"label": "Lembrar de adicionar uma imagem"
-				},
-				{
-					"line": 74,
-					"column": 0,
-					"label": "Atualizar README ao adicionar RAG"
-				},
-				{
-					"line": 86,
-					"column": 0,
-					"label": "Atualizar quando formos usar GPT-5 nano"
-				}
-			]
-		},
-		{
-			"path": "server/schemas/formularios.py",
-			"bookmarks": [
-				{
-					"line": 7,
-					"column": 0,
-					"label": "Ok, estou com dúvidas o que são esses formulários"
+					"label": "Atualizar ao utilizarmos o modelo da OpenAI"
 				}
 			]
 		},
@@ -51,42 +31,12 @@
 			]
 		},
 		{
-			"path": "server/Dockerfile",
-			"bookmarks": [
-				{
-					"line": 20,
-					"column": 0,
-					"label": "O gunicorn \"mata\" as requisições para IA que demoram muito"
-				}
-			]
-		},
-		{
 			"path": "server/schemas/questoes.py",
 			"bookmarks": [
 				{
 					"line": 3,
 					"column": 0,
 					"label": "Estudar a possibilidade usar o formato TOON"
-				}
-			]
-		},
-		{
-			"path": "docs/framework_e_llm.md",
-			"bookmarks": [
-				{
-					"line": 16,
-					"column": 0,
-					"label": "Alterar documentação ao implementar RAG"
-				}
-			]
-		},
-		{
-			"path": "server/controllers/desafios.py",
-			"bookmarks": [
-				{
-					"line": 113,
-					"column": 0,
-					"label": "Passar logs para os services quando forem alterados"
 				}
 			]
 		}

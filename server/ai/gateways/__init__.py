@@ -30,7 +30,7 @@ def generate_questions(payload: dict):
         raise
 
     try:
-        content = llm.invoke(questoes.prompt_template.format(**{**payload, 'documentacao': documentation})).content
+        content = llm.invoke(questoes.prompt_template.format(**payload, documentacao=documentation)).content
         logger.info('Geração de material de questões concluída')
         return content
 
@@ -65,7 +65,7 @@ def generate_quizzes(payload: dict):
         raise
 
     try:
-        content = llm.invoke(quiz.prompt_template.format(**{**payload, 'documentacao': documentation})).content
+        content = llm.invoke(quiz.prompt_template.format(**payload, documentacao=documentation)).content
         logger.info('Geração de quiz concluída')
         return content
 
@@ -100,7 +100,7 @@ def generate_flashcards(payload: dict):
         raise
 
     try:
-        content = llm.invoke(flashcards.prompt_template.format(**{**payload, 'documentacao': documentation})).content
+        content = llm.invoke(flashcards.prompt_template.format(**payload, documentacao=documentation)).content
         logger.info('Geração de flashcards concluída')
         return content
 

@@ -4,7 +4,6 @@
         loading='lazy'
         alt='Logo EduIA'
         width='800'
-        style='border-radius: 16px'
     >
 </div>
 
@@ -49,6 +48,36 @@ O **EduIA** é uma plataforma que usa Inteligência Artificial para auxiliar na 
 
 O projeto foi desenvolvido por estudantes do ensino médio técnico integrado do **IFRN – campus Caicó** e tem como objetivo automatizar a geração de atividades pedagógicas com qualidade, rapidez e adaptabilidade.
 
+<figure align='center'>
+    <img
+        src='client/public/assets/images/landing-page.png'
+        loading='lazy'
+        alt='Landing page do sistema'
+        width='800'
+    >
+    <figcaption>Landing page do sistema</figcaption>
+</figure>
+
+<figure align='center'>
+    <img
+        src='client/public/assets/images/cadastro.png'
+        loading='lazy'
+        alt='Página de cadastro do sistema'
+        width='800'
+    >
+    <figcaption>Página de cadastro</figcaption>
+</figure>
+
+<figure align='center'>
+    <img
+        src='client/public/assets/images/questão.png'
+        loading='lazy'
+        alt='Exemplo de questão gerada pelo sistema'
+        width='800'
+    >
+    <figcaption>Exemplo de questão gerada pelo sistema</figcaption>
+</figure>
+
 ## ✨ O que o sistema gera
 
 O EduIA pode criar diferentes tipos de materiais acadêmicos, como:
@@ -71,8 +100,6 @@ O EduIA pode criar diferentes tipos de materiais acadêmicos, como:
 A experiência parte da interface web, onde o usuário define o tipo de material, a disciplina, o nível de dificuldade e outros critérios. O backend reúne essas informações em um prompt específico para o material solicitado e o envia, com o auxílio do **LangChain**, ao modelo de linguagem configurado no Hugging Face. O modelo gera o conteúdo, e um parser valida e organiza a resposta em JSON para que o sistema possa utilizá-la.
 
 O **RAG** (_Retrieval-Augmented Generation_, ou geração aumentada por recuperação) é uma técnica que complementa esse processo: antes de gerar a resposta, o sistema busca informações relevantes em uma base de documentos e inclui os trechos encontrados no contexto enviado ao modelo. Assim, a geração pode se apoiar em fontes específicas e atualizadas, em vez de depender apenas do conhecimento aprendido pelo modelo. A qualidade e a pertinência das fontes recuperadas influenciam o resultado. Veja mais em [Framework e LLM](docs/framework_e_llm.md).
-
-No fluxo atual do EduIA, o conteúdo é gerado a partir dos dados informados pelo usuário e das instruções do prompt; não há uma etapa de busca em uma base de documentos. O RAG é uma possibilidade de evolução para fundamentar os materiais em conteúdos didáticos selecionados.
 
 Essa abordagem permite que o mesmo fluxo seja reutilizado para diferentes materiais e facilite futuras expansões do projeto.
 
@@ -116,12 +143,12 @@ Essa abordagem permite que o mesmo fluxo seja reutilizado para diferentes materi
             <td>Orquestração da LLM</td>
         </tr>
         <tr>
-            <td><strong>GPT-5 none</strong></td>
+            <td><strong>GPT-5 nano</strong></td>
             <td>Geração do conteúdo educacional</td>
         </tr>
         <tr>
             <td>Qualidade</td>
-            <td><strong>Ruff, Prettier</strong></td>
+            <td><strong>Ruff, Prettier, Eslint</strong></td>
             <td>Padronização e lint</td>
         </tr>
         <tr>
@@ -224,7 +251,6 @@ Há duas formas principais de rodar o EduIA:
     ```
 
     A aplicação estará disponível em:
-
     - frontend: http://localhost:3000
     - backend: http://localhost:5000
 
@@ -241,13 +267,11 @@ Há duas formas principais de rodar o EduIA:
     ```
 
     Isso inicia automaticamente:
-
     - frontend da aplicação
     - backend Flask
     - banco MySQL
 
     Após a inicialização, a interface fica disponível em:
-
     - http://localhost:3000
 
 ## 📚 Documentação
