@@ -4,19 +4,9 @@
 			"path": "README.md",
 			"bookmarks": [
 				{
-					"line": 99,
+					"line": 111,
 					"column": 0,
 					"label": "Atualizar ao utilizarmos o modelo da OpenAI"
-				}
-			]
-		},
-		{
-			"path": "client/src/pages/protected/tools/questions/index.jsx",
-			"bookmarks": [
-				{
-					"line": 17,
-					"column": 0,
-					"label": "Adicionar animação quando o material estiver sendo gerado pela IA"
 				}
 			]
 		},
@@ -26,17 +16,27 @@
 				{
 					"line": 32,
 					"column": 0,
-					"label": "É preciso verificar que os materiais não estejam no lixeira"
+					"label": "É preciso verificar que os materiais não estejam na lixeira"
 				}
 			]
 		},
 		{
-			"path": "server/schemas/questoes.py",
+			"path": "server/controllers/desafios.py",
 			"bookmarks": [
 				{
-					"line": 3,
+					"line": 118,
 					"column": 0,
-					"label": "Estudar a possibilidade usar o formato TOON"
+					"label": "Adicionar logs aos serviços quando forem criados"
+				}
+			]
+		},
+		{
+			"path": ".env.example",
+			"bookmarks": [
+				{
+					"line": 7,
+					"column": 0,
+					"label": "Acho que vai precisar subir"
 				}
 			]
 		}

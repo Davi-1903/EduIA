@@ -39,7 +39,19 @@
 </div>
 
 <p align='center'>
-  <strong>EduIA</strong> - Geração inteligente de materiais de estudo para professores e alunos
+    <strong>EduIA</strong> • Geração inteligente de materiais de estudo para professores e alunos
+</p>
+
+<p align='center'>
+    <a href='#-visão-geral'>Visão geral</a> •
+    <a href='#-o-que-o-sistema-gera'>O que o sistema gera</a> •
+    <a href='#-como-funciona'>Como funciona</a> •
+    <a href='#️-stack-tecnológica'>Stack tecnológica</a> •
+    <a href='#-pré-requisitos'>Pré requisitos</a> •
+    <a href='#-como-executar-o-projeto'>Como executar o projeto</a> •
+    <a href='#-documentação'>Documentação</a> •
+    <a href='#-equipe'>Equipe</a> •
+    <a href='#️-licença'>Licença</a>
 </p>
 
 ## 📌 Visão geral
@@ -48,35 +60,35 @@ O **EduIA** é uma plataforma que usa Inteligência Artificial para auxiliar na 
 
 O projeto foi desenvolvido por estudantes do ensino médio técnico integrado do **IFRN – campus Caicó** e tem como objetivo automatizar a geração de atividades pedagógicas com qualidade, rapidez e adaptabilidade.
 
-<figure align='center'>
+<div align='center'>
     <img
         src='client/public/assets/images/landing-page.png'
         loading='lazy'
         alt='Landing page do sistema'
         width='800'
     >
-    <figcaption>Landing page do sistema</figcaption>
-</figure>
+    <p>Landing page do sistema</p>
+</div>
 
-<figure align='center'>
+<div align='center'>
     <img
         src='client/public/assets/images/cadastro.png'
         loading='lazy'
         alt='Página de cadastro do sistema'
         width='800'
     >
-    <figcaption>Página de cadastro</figcaption>
-</figure>
+    <p>Página de cadastro</p>
+</div>
 
-<figure align='center'>
+<div align='center'>
     <img
         src='client/public/assets/images/questão.png'
         loading='lazy'
         alt='Exemplo de questão gerada pelo sistema'
         width='800'
     >
-    <figcaption>Exemplo de questão gerada pelo sistema</figcaption>
-</figure>
+    <p>Exemplo de questão gerada pelo sistema</p>
+</div>
 
 ## ✨ O que o sistema gera
 
