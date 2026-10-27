@@ -19,9 +19,9 @@ import MenuCard from './menu';
 import Questions from './contents/questoes';
 import Quiz from './contents/quiz';
 import FlashCards from './contents/flashcards';
-import Formulario from './contents/forms'
+import Formulario from './contents/forms';
 import Desafio from './contents/desafio';
-import GuidedExercises from './contents/guided_exercises';
+import Explicacoes from './contents/explicacoes';
 import { useAuthenticated } from '../../../../context/authContext';
 export default function MaterialCard({
     id,
@@ -43,7 +43,7 @@ export default function MaterialCard({
     const [content, setContent] = useState(null);
     const [menu, setMenu] = useState(null);
     const [isOpening, setIsOpening] = useState(false);
-    const {user} = useAuthenticated();
+    const { user } = useAuthenticated();
     const navigate = useNavigate();
 
     function formatarHora(created_at) {
@@ -85,16 +85,16 @@ export default function MaterialCard({
                     setContent={setContent}
                 />
             ),
-            exercicio_guiado: (
-                <GuidedExercises
+            'exercicio guiado': null,
+            explicacao: (
+                <Explicacoes
+                    materialId={id}
                     discipline={discipline}
                     subject={title}
-                    difficulty={difficulty}
                     content={content}
                     setContent={setContent}
                 />
             ),
-            explicacao: null,
             flashcards: (
                 <FlashCards
                     discipline={discipline}
@@ -141,14 +141,6 @@ export default function MaterialCard({
         return icons[type];
     }
 
-    function normalizarTipo(t = '') {
-        return t
-            .toLowerCase()
-            .normalize('NFD')
-            .replace(/[\u0300-\u036f]/g, '')
-            .replace(/[\s-]+/g, '_');
-    }
-
     function getIcon(type) {
         const icons = {
             desafio: <IconLaurelWreath1 className='stroke-color1-100' />,
@@ -171,14 +163,12 @@ export default function MaterialCard({
     }
 
     function handleOpen() {
-        const tipo = normalizarTipo(type);
-
-        if (!getContent(tipo)) {
+        if (!getContent(type)) {
             setMessages(prev => [
                 ...prev,
                 {
                     id: prev.length + 1,
-                    message: `Visualização deste tipo de material ainda não está disponível (${type})`,
+                    message: 'Visualização deste tipo de material ainda não está disponível',
                     type: 'danger',
                 },
             ]);
@@ -189,11 +179,17 @@ export default function MaterialCard({
 
         setMenu(null);
         setIsOpening(true);
-        GET(`/api/materials/${tipo}/${id}`)
+        const endpoint = type === 'explicacao' ? 'explicacoes' : type;
+
+        GET(`/api/materials/${endpoint}/${id}`)
             .then(data => {
-                if (data.status !== 200) throw new Error(data.message);
-                const { content: conteudo } = data.material;
-                setContent(tipo === 'exercicio_guiado' ? conteudo : conteudo.content);
+                if (data.status !== 200) {
+                    throw new Error(data.message || 'Erro ao buscar material');
+                }
+
+                const material = data.material[0];
+
+                setContent(material.content);
             })
             .catch(err => setMessages(prev => [...prev, { id: prev.length + 1, message: err.message, type: 'danger' }]))
             .finally(() => setIsOpening(false));
