@@ -1,4 +1,4 @@
-from . import flashcards, questoes, quiz
+from . import desafio, flashcards, questoes, quiz
 
 
-__all__ = ['flashcards', 'questoes', 'quiz']
+__all__ = ['flashcards', 'questoes', 'quiz', 'desafio']

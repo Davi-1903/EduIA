@@ -1,7 +1,7 @@
 from langchain_core.exceptions import OutputParserException
 
 from ai import get_chain
-from ai.prompts import flashcards, questoes, quiz
+from ai.prompts import desafio, flashcards, questoes, quiz
 from errors.ai import (
     AiInvalidRequest,
     AiInvalidResponse,
@@ -48,9 +48,29 @@ def generate_quizzes(payload: dict):
     except Exception as error:
         raise AiProviderUnavailable('Não foi possível acessar o serviço de IA') from error
 
+
 def generate_flashcards(payload: dict):
     try:
         chain = get_chain(flashcards.prompt_template, flashcards.parser)
+        return chain.invoke(payload)
+
+    except AiServiceError:
+        raise
+    except OutputParserException as error:
+        raise AiInvalidResponse('A IA retornou uma resposta inválida') from error
+    except (KeyError, TypeError, ValueError) as error:
+        raise AiInvalidRequest('Dados inválidos para geração de flashcards') from error
+    except TimeoutError as error:
+        raise AiTimeout('O serviço de IA demorou para responder') from error
+    except (ConnectionError, OSError) as error:
+        raise AiProviderUnavailable('O serviço de IA está indisponível') from error
+    except Exception as error:
+        raise AiProviderUnavailable('Não foi possível acessar o serviço de IA') from error
+
+
+def generate_desafio(payload: dict):
+    try:
+        chain = get_chain(desafio.prompt_template, desafio.parser)
         return chain.invoke(payload)
 
     except AiServiceError:

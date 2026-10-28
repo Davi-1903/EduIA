@@ -1,11 +1,16 @@
 from flask import Blueprint, jsonify, request
-from flask_login import current_user, login_required
-from sqlalchemy import func, select
+from flask_login import login_required
 
-from database import SessionLocal
-from models.desafios import Desafio
-from models.historico import Historico
-from models.material import Difficulty
+from ai.services.desafio import generate_desafios
+from errors.ai import (
+    AiInvalidData,
+    AiInvalidResponse,
+    AiProviderUnavailable,
+    AiServiceError,
+    AiTimeout,
+)
+from errors.materials import MaterialNotFoundError, MaterialServiceError, MaterialValidationError
+from services.desafio import create_desafio_service, get_desafio_service, get_desafios_service
 
 
 bp_materials_desafio = Blueprint('desafios', __name__, url_prefix='/desafios')
@@ -13,72 +18,29 @@ bp_materials_desafio = Blueprint('desafios', __name__, url_prefix='/desafios')
 
 @bp_materials_desafio.route('/', methods=['GET'])
 @login_required
-def get_desafios():
+def get_desafio():
     cursor = request.args.get('cursor', 0, type=int)
     limit = request.args.get('limit', 50, type=int)
 
-    with SessionLocal() as session:
-        count_stmt = (
-            select(func.count())
-            .select_from(Desafio)
-            .where(Desafio.user_id == current_user.id)
-            .where(Desafio.deleted_at.is_(None))
-        )
-        statement = (
-            select(Desafio)
-            .where(Desafio.user_id == current_user.id)
-            .where(Desafio.deleted_at.is_(None))
-            .offset(cursor)
-            .limit(limit)
-            .order_by(Desafio.created_at.desc())
-        )
-
-        total = session.scalar(count_stmt) or 0
-        materials = session.scalars(statement).all()
-
-        return jsonify(
-            {
-                'ok': True,
-                'total': total,
-                'materials': [
-                    {
-                        'id': material.id,
-                        'title': material.subject,
-                        'discipline': material.discipline,
-                        'difficulty': material.difficulty,
-                        'note': material.note,
-                        'created_at': material.created_at,
-                        'type': material.type.value,
-                    }
-                    for material in materials
-                ],
-            }
-        ), 200
+    try:
+        desafio = get_desafio_service(cursor, limit)
+        return jsonify({'ok': True, **desafio}), 200
+    except MaterialServiceError as error:
+        return jsonify({'ok': False, 'message': str(error)}), 500
 
 
 @bp_materials_desafio.route('/<int:id>', methods=['GET'])
 @login_required
-def get_desafio(id: int):
-    with SessionLocal() as session:
-        material = session.get(Desafio, id)
-        if material is None or material.deleted_at is not None:
-            return jsonify({'ok': False, 'message': 'Desafio não encontrado'}), 404
+def get_flashcard(id: int):
+    try:
+        desafio = get_desafios_service(id)
+        return jsonify({'ok': True, 'material': desafio}), 200
 
-        return jsonify(
-            {
-                'ok': True,
-                'material': {
-                    'id': material.id,
-                    'title': material.subject,
-                    'discipline': material.discipline,
-                    'difficulty': material.difficulty,
-                    'content': material.content,
-                    'note': material.note,
-                    'created_at': material.created_at,
-                    'type': material.type.value,
-                },
-            },
-        ), 200
+    except MaterialNotFoundError as erro:
+        return jsonify({'ok': False, 'message': str(erro)}), 404
+
+    except MaterialServiceError as erro:
+        return jsonify({'ok': False, 'message': str(erro)}), 500
 
 
 @bp_materials_desafio.route('/', methods=['POST'])
@@ -88,24 +50,23 @@ def create_desafio():
     if data is None:
         return jsonify({'ok': False, 'message': 'Dados não recebidos'}), 400
 
-    # Lógica da IA...
+    try:
+        content = generate_desafios(data)
+    except AiInvalidData as error:
+        return jsonify({'ok': False, 'message': str(error)}), 400
+    except AiInvalidResponse as error:
+        return jsonify({'ok': False, 'message': str(error)}), 502
+    except AiTimeout as error:
+        return jsonify({'ok': False, 'message': str(error)}), 503
+    except AiProviderUnavailable as error:
+        return jsonify({'ok': False, 'message': str(error)}), 503
+    except AiServiceError as error:
+        return jsonify({'ok': False, 'message': str(error)}), 500
 
-    with SessionLocal() as session:
-        try:
-            desafio = Desafio(
-                user_id=current_user.id,
-                discipline=data['discipline'],
-                subject=data['subject'],
-                content={'content': 1},
-                difficulty=Difficulty.MUITO_DIFICIL,
-                note=data['note'] if data['note'] != '' else None,
-            )
-            historico = Historico(material=desafio)
-            session.add(desafio)
-            session.add(historico)
-            session.commit()
-            return jsonify({'ok': True, 'redirect': '/materials'}), 201
-
-        except Exception:
-            session.rollback()
-            return jsonify({'ok': False, 'message': 'Ocorreu um erro interno'}), 500
+    try:
+        create_desafio_service({**data, 'content': content})
+        return jsonify({'ok': True, 'redirect': '/materials'}), 201
+    except MaterialValidationError as error:
+        return jsonify({'ok': False, 'message': str(error)}), 400
+    except MaterialServiceError:
+        return jsonify({'ok': False, 'message': 'Ocorreu um erro interno'}), 500
