@@ -1,13 +1,13 @@
 import { useState } from 'react';
-
-import clsx from 'clsx';
+import { IconFileDescription, IconCopy, IconArrowUp } from '@tabler/icons-react';
 import ReactMarkdown from 'react-markdown';
 import removeMarkdown from 'remove-markdown';
-import { IconFileDescription, IconCopy, IconArrowUp } from '@tabler/icons-react';
+import clsx from 'clsx';
+import { useMessages } from '../../../../../../context/messagesContext';
 
 export default function Explicacoes({ content, subject, setContent }) {
     const [isClose, setClose] = useState(false);
-    console.log('Dados recebidos em Explicacoes:', content);
+    const { setMessages } = useMessages();
 
     function handleAnimationEnd(event) {
         if (event.target !== event.currentTarget) return;
@@ -19,12 +19,24 @@ export default function Explicacoes({ content, subject, setContent }) {
             const text = removeMarkdown(content?.content ?? '');
 
             await navigator.clipboard.writeText(text);
-            // o ideal é mudar isso
-            alert('Explicação copiada.');
+            setMessages(prev => [
+                ...prev,
+                {
+                    id: prev.length + 1,
+                    message: 'Explicação copiada',
+                    type: 'ok',
+                },
+            ]);
         } catch (err) {
             console.error('Erro ao copiar explicação:', err);
-            // isso tmb
-            alert('Não foi possível copiar a explicação.');
+            setMessages(prev => [
+                ...prev,
+                {
+                    id: prev.length + 1,
+                    message: 'Não foi possível copiar a explicação',
+                    type: 'danger',
+                },
+            ]);
         }
     }
 
