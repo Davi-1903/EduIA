@@ -19,11 +19,11 @@ export default function Explicacoes({ content, subject, setContent }) {
             const text = removeMarkdown(content?.content ?? '');
 
             await navigator.clipboard.writeText(text);
-            // precisa mudar isso
+            // o ideal é mudar isso
             alert('Explicação copiada.');
         } catch (err) {
             console.error('Erro ao copiar explicação:', err);
-            // isso tmb precisa mudar
+            // isso tmb
             alert('Não foi possível copiar a explicação.');
         }
     }
@@ -114,14 +114,14 @@ export default function Explicacoes({ content, subject, setContent }) {
                     <p className='justify-self-end text-lg font-bold text-[#011F5B] sm:text-xl md:text-2xl'>
                         Qual é a sua dúvida?
                     </p>
-                    <div className='flex min-w-0 items-center gap-2 rounded-lg border border-[#0D4183] p-2'>
+                    <div className='flex h-20 flex-row items-center justify-between gap-2 rounded-lg border border-[#0D4183] p-2'>
                         <input
-                            className='h-fit w-fit text-[22px]'
+                            className='h-fit w-fit text-xl'
                             type='text'
                             name='text'
                             placeholder='Escreva aqui...'
                         />
-                        <button className='cursor-pointer rounded-[50px] border border-[#0D4183] bg-[#E0E9F5] p-2.5 transition-colors duration-300 ease-in-out hover:bg-white'>
+                        <button className='cursor-pointer rounded-[50px] border border-[#0D4183] bg-white p-2.5 transition-colors duration-300 ease-in-out hover:bg-[#E0E9F5]'>
                             <IconArrowUp className='h-9.75 w-9.75 text-[#011F5B]' />
                         </button>
                     </div>
