@@ -48,10 +48,11 @@ export default function Explicacoes({ content, subject, setContent }) {
                     </div>
                     <button
                         onClick={copyExplanation}
-                        className='flex w-full shrink-0 items-center justify-center gap-2 rounded-lg bg-button px-4 py-3 text-white sm:w-fit'
+                        className='group flex w-full shrink-0 items-center justify-center gap-2 rounded-lg border-2 border-transparent bg-button px-4 py-3 text-white transition-all duration-300 hover:bg-white hover:button-gradient-border sm:w-fit'
                     >
-                        <IconCopy className='h-6 w-6 shrink-0' />
-                        <p className='text-base font-bold sm:text-lg'>Copiar Explicação</p>
+                        <IconCopy className='h-6 w-6 shrink-0 text-white transition-colors duration-300 group-hover:text-color1-100' />
+
+                        <p className='text-base font-bold hover:button-gradient-text sm:text-lg'>Copiar Explicação</p>
                     </button>
                 </div>
                 <div className='min-h-0 w-full flex-1 overflow-y-auto'>
