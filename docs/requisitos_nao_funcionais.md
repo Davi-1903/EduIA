@@ -19,7 +19,7 @@
 
 |  Código  | Requisito                                             | Prioridade | Status                |
 | :------: | ----------------------------------------------------- | ---------- | --------------------- |
-| **NF11** | Usar geração aumentada de recuperação (**RAG**)       | Essencial  | 🔧 Em desenvolvimento |
+| **NF11** | Usar geração aumentada de recuperação (**RAG**)       | Essencial  | ✅ Implementado       |
 | **NF12** | Resposta em até 2 segundos para 95% das requisições   | Importante | 🔧 Em desenvolvimento |
 | **NF13** | Resposta em até 5 segundos para 99% das requisições   | Importante | 🔧 Em desenvolvimento |
 | **NF14** | Resposta em até 10 segundos para 100% das requisições | Importante | 🔧 Em desenvolvimento |
@@ -57,7 +57,7 @@
 
 |  Código  | Requisito                                       | Prioridade | Status                |
 | :------: | ----------------------------------------------- | ---------- | --------------------- |
-| **NF24** | Interface intuitiva e fácil de navegar          | Importante | 🔧 Em desenvolvimento |
+| **NF24** | Interface intuitiva e fácil de navegar          | Importante | ✅ Implementado       |
 | **NF25** | Compatível com dispositivos móveis (responsivo) | Importante | 🔧 Em desenvolvimento |
 
 ## 8. Manutenibilidade
@@ -65,26 +65,24 @@
 |  Código  | Requisito                        | Prioridade | Status                |
 | :------: | -------------------------------- | ---------- | --------------------- |
 | **NF26** | Código documentado e comentado   | Importante | 🔧 Em desenvolvimento |
-| **NF27** | Estrutura modular e reutilizável | Importante | 🔧 Em desenvolvimento |
+| **NF27** | Estrutura modular e reutilizável | Importante | ✅ Implementado       |
 
 ## 9. Custo operacional
 
-|  Código  | Requisito                                                                   | Prioridade | Status                |
-| :------: | --------------------------------------------------------------------------- | ---------- | --------------------- |
-| **NF28** | Utilizar serviços em nuvem com custo-benefício (ex: AWS, GCP, Azure)        | Desejável  | 🔧 Em desenvolvimento |
-| **NF29** | Monitorar e otimizar o uso de recursos para minimizar custos                | Importante | ✅ Implementado       |
-| **NF30** | Usar formato **TOON** visando reduzir a quantidade de tokens de saída da IA | Desejável  | ⏳ Planejando         |
+|  Código  | Requisito                                                            | Prioridade | Status                |
+| :------: | -------------------------------------------------------------------- | ---------- | --------------------- |
+| **NF28** | Utilizar serviços em nuvem com custo-benefício (ex: AWS, GCP, Azure) | Desejável  | 🔧 Em desenvolvimento |
+| **NF29** | Monitorar e otimizar o uso de recursos para minimizar custos         | Importante | ✅ Implementado       |
 
 ## 10. Páginas
 
-|  Código  | Página        | Funcionalidade                                                                                       | Prioridade | Status                |
-| :------: | ------------- | ---------------------------------------------------------------------------------------------------- | ---------- | --------------------- |
-| **NF31** | Home          | Página inicial do site (Landing Page), para mostrar as funcionalidades                               | Essencial  | ✅ Implementado       |
-| **NF32** | Login         | Autenticação do usuário                                                                              | Essencial  | ✅ Implementado       |
-| **NF33** | Cadastro      | Registro de novos usuários                                                                           | Essencial  | ✅ Implementado       |
-| **NF34** | Dashboard     | Área principal: criação e visualização de materiais, grupos, entre outras funcionalidades            | Essencial  | 🔧 Em desenvolvimento |
-| **NF35** | Perfil        | Visualização e edição do perfil do usuário                                                           | Essencial  | ✅ Implementado       |
-| **NF36** | Históricos    | Visualização dos históricos do usuário                                                               | Essencial  | ✅ Implementado       |
-| **NF37** | Sobre         | Informações sobre a sistema                                                                          | Essencial  | ✅ Implementado       |
-| **NF38** | Lixeira       | Materiais movidos para a lixeira (os materiais movidos para a lixeira são apagados após **30 dias**) | Essencial  | ✅ Implementado       |
-| **NF39** | Configurações | Configurações do usuário e preferências da IA                                                        | Desejável  | 🔧 Em desenvolvimento |
+|  Código  | Página     | Funcionalidade                                                                                       | Prioridade | Status          |
+| :------: | ---------- | ---------------------------------------------------------------------------------------------------- | ---------- | --------------- |
+| **NF31** | Home       | Página inicial do site (Landing Page), para mostrar as funcionalidades                               | Essencial  | ✅ Implementado |
+| **NF32** | Login      | Autenticação do usuário                                                                              | Essencial  | ✅ Implementado |
+| **NF33** | Cadastro   | Registro de novos usuários                                                                           | Essencial  | ✅ Implementado |
+| **NF34** | Dashboard  | Área principal: criação e visualização de materiais, grupos, entre outras funcionalidades            | Essencial  | ✅ Implementado |
+| **NF35** | Perfil     | Visualização e edição do perfil do usuário                                                           | Essencial  | ✅ Implementado |
+| **NF36** | Históricos | Visualização dos históricos do usuário                                                               | Essencial  | ✅ Implementado |
+| **NF37** | Sobre      | Informações sobre a sistema                                                                          | Essencial  | ✅ Implementado |
+| **NF38** | Lixeira    | Materiais movidos para a lixeira (os materiais movidos para a lixeira são apagados após **30 dias**) | Essencial  | ✅ Implementado |
