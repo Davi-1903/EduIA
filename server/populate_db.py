@@ -3,6 +3,7 @@
 import random
 from argparse import ArgumentParser
 
+from dotenv import load_dotenv
 from pwdlib import PasswordHash
 from rich import box, print
 from rich.table import Table
@@ -25,6 +26,9 @@ from models.quizzes import Quiz
 from models.resumos import Resumo
 from models.roteiros import Roteiro
 from models.user import Usuario
+
+
+load_dotenv()
 
 
 PASSWORD = '1234'

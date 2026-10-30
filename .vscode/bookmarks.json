@@ -4,39 +4,9 @@
 			"path": "README.md",
 			"bookmarks": [
 				{
-					"line": 65,
+					"line": 111,
 					"column": 0,
-					"label": "Lembrar de adicionar uma imagem"
-				},
-				{
-					"line": 74,
-					"column": 0,
-					"label": "Atualizar README ao adicionar RAG"
-				},
-				{
-					"line": 86,
-					"column": 0,
-					"label": "Atualizar quando formos usar GPT-5 nano"
-				}
-			]
-		},
-		{
-			"path": "server/schemas/formularios.py",
-			"bookmarks": [
-				{
-					"line": 7,
-					"column": 0,
-					"label": "Ok, estou com dúvidas o que são esses formulários"
-				}
-			]
-		},
-		{
-			"path": "client/src/pages/protected/tools/questions/index.jsx",
-			"bookmarks": [
-				{
-					"line": 17,
-					"column": 0,
-					"label": "Adicionar animação quando o material estiver sendo gerado pela IA"
+					"label": "Atualizar ao utilizarmos o modelo da OpenAI"
 				}
 			]
 		},
@@ -46,47 +16,72 @@
 				{
 					"line": 32,
 					"column": 0,
-					"label": "É preciso verificar que os materiais não estejam no lixeira"
+					"label": "É preciso verificar que os materiais não estejam na lixeira"
 				}
 			]
 		},
 		{
-			"path": "server/ai/__init__.py",
+			"path": ".env.example",
 			"bookmarks": [
 				{
-					"line": 3,
+					"line": 7,
 					"column": 0,
-					"label": "Futuramente trocar para langhchain-openai"
+					"label": "Acho que vai precisar subir"
 				}
 			]
 		},
 		{
-			"path": "server/Dockerfile",
+			"path": "server/ai/gateways/__init__.py",
 			"bookmarks": [
 				{
 					"line": 20,
 					"column": 0,
-					"label": "O gunicorn \"mata\" as requisições para IA que demoram muito"
+					"label": "Usar o chain"
 				}
 			]
 		},
 		{
-			"path": "server/schemas/questoes.py",
+			"path": "client/src/pages/protected/materials/components/contents/explicacoes/index.jsx",
 			"bookmarks": [
 				{
-					"line": 3,
+					"line": 43,
 					"column": 0,
-					"label": "Estudar a possibilidade usar o formato TOON"
+					"label": "Ajetar as proporções"
+				},
+				{
+					"line": 129,
+					"column": 0,
+					"label": "Melhorar input"
 				}
 			]
 		},
 		{
-			"path": "docs/framework_e_llm.md",
+			"path": "client/src/pages/protected/materials/components/contents/desafio/index.jsx",
 			"bookmarks": [
 				{
-					"line": 16,
+					"line": 18,
 					"column": 0,
-					"label": "Alterar documentação ao implementar RAG"
+					"label": "Adicionar useEffect para clicar fora e sair"
+				}
+			]
+		},
+		{
+			"path": "server/controllers/auth.py",
+			"bookmarks": [
+				{
+					"line": 41,
+					"column": 0,
+					"label": "Erro 500 ao entrar em uma conta não existente"
+				}
+			]
+		},
+		{
+			"path": "server/controllers/explanation.py",
+			"bookmarks": [
+				{
+					"line": 14,
+					"column": 0,
+					"label": "Separa em serviço"
 				}
 			]
 		}

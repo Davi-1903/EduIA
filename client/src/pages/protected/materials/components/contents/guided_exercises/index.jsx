@@ -3,13 +3,13 @@ import clsx from 'clsx';
 import Introduction from './components/introduction';
 import Questions from './components/Questions';
 
-export default function Guided_exercises({ discipline, subject, difficulty, content, setContent }) {
+export default function GuidedExercises({ discipline, subject, difficulty, content, setContent }) {
     const materialRef = useRef(null);
     const [start, setStart] = useState(false);
     const [isClose, setClose] = useState(false);
 
     const tipo = content?.type; // 'multiple_choice' | 'true_or_false' | 'discursive'
-    const questoes = Array.isArray(content?.content) ? content.content : [];
+    const questoes = Array.isArray(content) ? content : [];
 
     function handleAnimationEnd(event) {
         if (event.target !== event.currentTarget) return;

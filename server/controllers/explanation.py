@@ -65,16 +65,14 @@ def get_explanation(id: int):
         return jsonify(
             {
                 'ok': True,
-                'material': [
-                    {
-                        'id': material.id,
-                        'title': material.subject,
-                        'discipline': material.discipline,
-                        'content': material.content,
-                        'created_at': material.created_at,
-                        'type': material.type.value,
-                    }
-                ],
+                'material': {
+                    'id': material.id,
+                    'title': material.subject,
+                    'discipline': material.discipline,
+                    'content': material.content,
+                    'created_at': material.created_at,
+                    'type': material.type.value,
+                },
             }
         ), 200
 

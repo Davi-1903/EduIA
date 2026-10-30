@@ -20,6 +20,7 @@ import Questions from './contents/questoes';
 import Quiz from './contents/quiz';
 import FlashCards from './contents/flashcards';
 import Formulario from './contents/forms';
+import GuidedExercises from './contents/guided_exercises';
 import Desafio from './contents/desafio';
 import Explicacoes from './contents/explicacoes';
 import { useAuthenticated } from '../../../../context/authContext';
@@ -85,8 +86,16 @@ export default function MaterialCard({
                     setContent={setContent}
                 />
             ),
-            'exercicio guiado': null,
-            explicacao: (
+            exercicio_guiado: (
+                <GuidedExercises
+                    discipline={discipline}
+                    subject={title}
+                    difficulty={difficulty}
+                    content={content}
+                    setContent={setContent}
+                />
+            ),
+            explicacoes: (
                 <Explicacoes
                     materialId={id}
                     discipline={discipline}
@@ -141,11 +150,19 @@ export default function MaterialCard({
         return icons[type];
     }
 
+    function normalizarTipo(t = '') {
+        return t
+            .toLowerCase()
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .replace(/[\s-]+/g, '_');
+    }
+
     function getIcon(type) {
         const icons = {
             desafio: <IconLaurelWreath1 className='stroke-color1-100' />,
             'exercicio guiado': <IconArrowBigUp className='stroke-color1-100' />,
-            explicacao: <IconChalkboardTeacher className='stroke-color1-100' />,
+            explicacoes: <IconChalkboardTeacher className='stroke-color1-100' />,
             flashcards: <IconCards className='stroke-color1-100' />,
             formulario: <IconListDetails className='stroke-color1-100' />,
             'plano de aula': <IconChalkboard className='stroke-color1-100' />,
@@ -163,6 +180,8 @@ export default function MaterialCard({
     }
 
     function handleOpen() {
+        const tipo = normalizarTipo(type);
+
         if (!getContent(type)) {
             setMessages(prev => [
                 ...prev,
@@ -179,17 +198,13 @@ export default function MaterialCard({
 
         setMenu(null);
         setIsOpening(true);
-        const endpoint = type === 'explicacao' ? 'explicacoes' : type;
 
-        GET(`/api/materials/${endpoint}/${id}`)
+        GET(`/api/materials/${tipo}/${id}`)
             .then(data => {
                 if (data.status !== 200) {
                     throw new Error(data.message || 'Erro ao buscar material');
                 }
-
-                const material = data.material[0];
-
-                setContent(material.content);
+                setContent(data.material.content.content);
             })
             .catch(err => setMessages(prev => [...prev, { id: prev.length + 1, message: err.message, type: 'danger' }]))
             .finally(() => setIsOpening(false));

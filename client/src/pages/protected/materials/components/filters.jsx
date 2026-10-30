@@ -15,7 +15,7 @@ export default function Filters({
     const materialsType = [
         { type: 'desafio', label: 'Desafio' },
         { type: 'exercicio_guiado', label: 'Exercício guiado' },
-        { type: 'explicacao', label: 'Explicação' },
+        { type: 'explicacoes', label: 'Explicação' },
         { type: 'flashcards', label: 'Flashcards' },
         { type: 'formulario', label: 'Formulário' },
         { type: 'plano de aula', label: 'Plano de aula' },

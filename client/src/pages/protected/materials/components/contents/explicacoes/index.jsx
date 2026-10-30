@@ -45,7 +45,7 @@ export default function Explicacoes({ content, subject, setContent }) {
             onClick={() => setClose(true)}
             onAnimationEnd={handleAnimationEnd}
             className={clsx(
-                'fixed inset-0 z-50 grid min-h-dvh w-full place-items-center overflow-y-auto bg-gray-800/20 p-4 backdrop-blur-sm sm:p-4',
+                'fixed inset-0 z-7 grid min-h-dvh w-full place-items-center overflow-y-auto bg-gray-800/20 p-4 backdrop-blur-sm sm:p-4',
                 isClose ? 'animate-fade-out' : 'animate-fade-in',
             )}
         >
@@ -118,7 +118,7 @@ export default function Explicacoes({ content, subject, setContent }) {
                                 em: ({ children }) => <em className='italic'>{children}</em>,
                             }}
                         >
-                            {content?.content ?? 'Erro na exibição da explicação'}
+                            {content ?? 'Erro na exibição da explicação'}
                         </ReactMarkdown>
                     </div>
                 </div>
