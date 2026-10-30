@@ -52,16 +52,15 @@ def get_formulario_service(id: int):
             return MaterialNotFoundError('Formulário não encontrados')
 
         return {
-                'id': material.id,
-                'title': material.subject,
-                'discipline': material.discipline,
-                'difficulty': material.difficulty.value,
-                'content': material.content,
-                'amount': material.amount,
-                'created_at': material.created_at,
-                'type': material.type.value,
+            'id': material.id,
+            'title': material.subject,
+            'discipline': material.discipline,
+            'difficulty': material.difficulty.value,
+            'content': material.content,
+            'amount': material.amount,
+            'created_at': material.created_at,
+            'type': material.type.value,
         }
-        
 
 
 def create_formulario_service(data: dict):
@@ -71,7 +70,7 @@ def create_formulario_service(data: dict):
                 user_id=current_user.id,
                 discipline=data['discipline'],
                 subject=data['subject'],
-                content=data['content'], 
+                content=data['content'],
                 difficulty=Difficulty(data['difficulty']),
                 amount=data['amount'],
             )

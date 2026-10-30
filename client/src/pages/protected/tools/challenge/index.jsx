@@ -24,7 +24,7 @@ export default function GenerateChallenge({ setOpen }) {
         setLoading(true);
 
         try {
-            const response = await POST('/api/materials/desafios/', {
+            const response = await POST('/api/materials/desafio/', {
                 discipline,
                 subject,
                 note,

@@ -13,7 +13,7 @@ from errors.materials import MaterialNotFoundError, MaterialServiceError, Materi
 from services.formularios import create_formulario_service, get_formulario_service, get_formularios_service
 
 
-bp_materials_formulario = Blueprint('formularios', __name__, url_prefix='/formularios')
+bp_materials_formulario = Blueprint('formularios', __name__, url_prefix='/formulario')
 
 
 @bp_materials_formulario.route('/', methods=['GET'])
@@ -47,8 +47,14 @@ def get_formulario(id: int):
 @login_required
 def create_formularios():
     data = request.get_json(silent=True)
+
     if data is None:
-        return jsonify({'ok': False, 'message': 'Dados não recebidos'}), 400
+        return jsonify(
+            {
+                'ok': False,
+                'message': 'Dados não recebidos',
+            }
+        ), 400
 
     try:
         content = generate_formularios(data)

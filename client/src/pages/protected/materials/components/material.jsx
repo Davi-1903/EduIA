@@ -19,7 +19,10 @@ import MenuCard from './menu';
 import Questions from './contents/questoes';
 import Quiz from './contents/quiz';
 import FlashCards from './contents/flashcards';
-
+import Formulario from './contents/forms';
+import Desafio from './contents/desafio';
+import Explicacoes from './contents/explicacoes';
+import { useAuthenticated } from '../../../../context/authContext';
 export default function MaterialCard({
     id,
     title,
@@ -40,6 +43,7 @@ export default function MaterialCard({
     const [content, setContent] = useState(null);
     const [menu, setMenu] = useState(null);
     const [isOpening, setIsOpening] = useState(false);
+    const { user } = useAuthenticated();
     const navigate = useNavigate();
 
     function formatarHora(created_at) {
@@ -71,9 +75,26 @@ export default function MaterialCard({
 
     function getContent(type) {
         const icons = {
-            desafio: null,
+            desafio: (
+                <Desafio
+                    id={id}
+                    discipline={discipline}
+                    subject={title}
+                    difficulty={difficulty}
+                    content={content}
+                    setContent={setContent}
+                />
+            ),
             'exercicio guiado': null,
-            explicacao: null,
+            explicacao: (
+                <Explicacoes
+                    materialId={id}
+                    discipline={discipline}
+                    subject={title}
+                    content={content}
+                    setContent={setContent}
+                />
+            ),
             flashcards: (
                 <FlashCards
                     discipline={discipline}
@@ -83,7 +104,17 @@ export default function MaterialCard({
                     setContent={setContent}
                 />
             ),
-            formulario: null,
+            formulario: (
+                <Formulario
+                    id={id}
+                    discipline={discipline}
+                    subject={title}
+                    difficulty={difficulty}
+                    content={content}
+                    userEmail={user.email}
+                    setContent={setContent}
+                />
+            ),
             'plano de aula': null,
             questoes: (
                 <Questions
@@ -148,10 +179,17 @@ export default function MaterialCard({
 
         setMenu(null);
         setIsOpening(true);
-        GET(`/api/materials/${type}/${id}`)
+        const endpoint = type === 'explicacao' ? 'explicacoes' : type;
+
+        GET(`/api/materials/${endpoint}/${id}`)
             .then(data => {
-                if (data.status !== 200) throw new Error(data.message);
-                setContent(data.material.content.content);
+                if (data.status !== 200) {
+                    throw new Error(data.message || 'Erro ao buscar material');
+                }
+
+                const material = data.material[0];
+
+                setContent(material.content);
             })
             .catch(err => setMessages(prev => [...prev, { id: prev.length + 1, message: err.message, type: 'danger' }]))
             .finally(() => setIsOpening(false));
