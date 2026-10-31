@@ -1,10 +1,17 @@
+from pathlib import Path
+
 from flask_login import current_user
+from loguru import logger
 from sqlalchemy import func, select
 
 from database import SessionLocal
 from errors.materials import MaterialNotFoundError, MaterialServiceError
 from models.explicacoes import Explicacao
 from models.historico import Historico
+from utils import setup_logger
+
+
+setup_logger(__name__, Path(__file__).resolve().parents[1] / 'logs' / 'explanations.log')
 
 
 def get_explanations_service(cursor: int, limit: int):
@@ -73,7 +80,9 @@ def create_explanation_service(data: dict):
             session.add(explanation)
             session.add(historico)
             session.commit()
+            logger.info('Explicação salva no banco de dados')
 
         except Exception as exc:
             session.rollback()
+            logger.error('Falha ao salvar explicação no banco de dados')
             raise MaterialServiceError('Ocorreu um erro interno') from exc
