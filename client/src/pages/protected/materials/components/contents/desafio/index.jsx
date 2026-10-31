@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import clsx from 'clsx';
 import Display from './components/Display';
 import Introduction from './components/Introducion';
@@ -6,6 +6,7 @@ import Introduction from './components/Introducion';
 export default function Desafio({ id, discipline, subject, difficulty, content, setContent }) {
     const [start, setStart] = useState(false);
     const [isClose, setClose] = useState(false);
+    const materialRef = useRef(null);
 
     function handleStart() {
         setStart(true);
@@ -16,6 +17,23 @@ export default function Desafio({ id, discipline, subject, difficulty, content, 
         if (isClose) setContent(null);
     }
 
+    useEffect(() => {
+        function handleClick(event) {
+            if (!materialRef.current?.contains(event.target)) setClose(true);
+        }
+
+        function handleKey(event) {
+            if (event.key === 'Escape') setClose(true);
+        }
+
+        document.addEventListener('mousedown', handleClick);
+        document.addEventListener('keydown', handleKey);
+        return () => {
+            document.removeEventListener('mousedown', handleClick);
+            document.removeEventListener('keydown', handleKey);
+        };
+    }, []);
+
     return (
         <div
             onAnimationEnd={handleAnimationEnd}
@@ -24,7 +42,10 @@ export default function Desafio({ id, discipline, subject, difficulty, content, 
                 isClose ? 'animate-fade-out' : 'animate-fade-in',
             )}
         >
-            <main className='flex max-h-[90vh] w-full max-w-2xl flex-col gap-6 overflow-y-auto rounded-2xl bg-white p-8 shadow-2xl shadow-color1-100/15 lg:w-4/5'>
+            <main
+                ref={materialRef}
+                className='flex max-h-[90vh] w-full max-w-2xl flex-col gap-6 overflow-y-auto rounded-2xl bg-white p-8 shadow-2xl shadow-color1-100/15 lg:w-4/5'
+            >
                 {!start ? (
                     <Introduction
                         discipline={discipline}

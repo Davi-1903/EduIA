@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useEffect, useRef, useState } from 'react';
 import { IconFileDescription, IconCopy, IconArrowUp } from '@tabler/icons-react';
 import ReactMarkdown from 'react-markdown';
 import removeMarkdown from 'remove-markdown';
@@ -6,8 +6,9 @@ import clsx from 'clsx';
 import { useMessages } from '../../../../../../context/messagesContext';
 
 export default function Explicacoes({ content, subject, setContent }) {
-    const [isClose, setClose] = useState(false);
     const { setMessages } = useMessages();
+    const [isClose, setClose] = useState(false);
+    const materialRef = useRef(null);
 
     function handleAnimationEnd(event) {
         if (event.target !== event.currentTarget) return;
@@ -40,9 +41,25 @@ export default function Explicacoes({ content, subject, setContent }) {
         }
     }
 
+    useEffect(() => {
+        function handleClick(event) {
+            if (!materialRef.current?.contains(event.target)) setClose(true);
+        }
+
+        function handleKey(event) {
+            if (event.key === 'Escape') setClose(true);
+        }
+
+        document.addEventListener('mousedown', handleClick);
+        document.addEventListener('keydown', handleKey);
+        return () => {
+            document.removeEventListener('mousedown', handleClick);
+            document.removeEventListener('keydown', handleKey);
+        };
+    }, []);
+
     return (
         <div
-            onClick={() => setClose(true)}
             onAnimationEnd={handleAnimationEnd}
             className={clsx(
                 'fixed inset-0 z-7 grid min-h-dvh w-full place-items-center overflow-y-auto bg-gray-800/20 p-4 backdrop-blur-sm sm:p-4',
@@ -50,7 +67,7 @@ export default function Explicacoes({ content, subject, setContent }) {
             )}
         >
             <div
-                onClick={event => event.stopPropagation()}
+                ref={materialRef}
                 className='flex max-h-[90dvh] w-full max-w-4xl flex-col gap-4 overflow-hidden rounded-3xl bg-white p-4 shadow-[5px_5px_7px_rgba(0,0,0,.2)] sm:gap-6 sm:p-6 md:p-10'
             >
                 <div className='flex w-full flex-col gap-4 p-2 sm:p-3 lg:flex-row lg:items-center lg:justify-between'>

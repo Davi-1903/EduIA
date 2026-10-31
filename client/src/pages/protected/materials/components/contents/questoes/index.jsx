@@ -60,13 +60,26 @@ export default function Questions({ discipline, subject, difficulty, content, se
             if (showExplanation) return;
             if (
                 !materialRef.current?.contains(event.target) &&
-                (!start || currentQuestionId >= content.length || confirm('Deseja parar de responder as questões'))
+                (!start || currentQuestionId >= content.length || confirm('Deseja parar de responder as questões?'))
+            )
+                setClose(true);
+        }
+
+        function handleKey(event) {
+            if (showExplanation) return;
+            if (
+                event.key === 'Escape' &&
+                (!start || currentQuestionId >= content.length || confirm('Deseja parar de responder as questões?'))
             )
                 setClose(true);
         }
 
         document.addEventListener('mousedown', handleClick);
-        return () => document.removeEventListener('mousedown', handleClick);
+        document.addEventListener('keydown', handleKey);
+        return () => {
+            document.removeEventListener('mousedown', handleClick);
+            document.removeEventListener('keydown', handleKey);
+        };
     }, [showExplanation, content.length, currentQuestionId, start]);
 
     return (

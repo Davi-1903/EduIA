@@ -57,13 +57,25 @@ export default function Quiz({ discipline, subject, difficulty, time, content, s
         function handleClick(event) {
             if (
                 !materialRef.current?.contains(event.target) &&
-                (!start || questionId >= content.length || confirm('Deseja parar de responder o quiz?'))
+                (!start || questionId >= content.length || confirm('Deseja parar de responder as questões?'))
+            )
+                setClose(true);
+        }
+
+        function handleKey(event) {
+            if (
+                event.key === 'Escape' &&
+                (!start || questionId >= content.length || confirm('Deseja parar de responder as questões?'))
             )
                 setClose(true);
         }
 
         document.addEventListener('mousedown', handleClick);
-        return () => document.removeEventListener('mousedown', handleClick);
+        document.addEventListener('keydown', handleKey);
+        return () => {
+            document.removeEventListener('mousedown', handleClick);
+            document.removeEventListener('keydown', handleKey);
+        };
     }, [start, content.length, questionId]);
 
     return (

@@ -18,12 +18,21 @@ export default function GuidedExercises({ discipline, subject, difficulty, conte
 
     useEffect(() => {
         function handleClick(event) {
-            if (!materialRef.current?.contains(event.target)) setClose(true);
+            if (!materialRef.current?.contains(event.target) && (!start || confirm('Deseja sair do exercício guiado?')))
+                setClose(true);
+        }
+
+        function handleKey(event) {
+            if (event.key === 'Escape' && (!start || confirm('Deseja sair do execício guiado?'))) setClose(true);
         }
 
         document.addEventListener('mousedown', handleClick);
-        return () => document.removeEventListener('mousedown', handleClick);
-    }, []);
+        document.addEventListener('keydown', handleKey);
+        return () => {
+            document.removeEventListener('mousedown', handleClick);
+            document.removeEventListener('keydown', handleKey);
+        }
+    }, [start]);
 
     return (
         <div

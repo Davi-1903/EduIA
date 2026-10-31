@@ -161,7 +161,7 @@ export default function MaterialCard({
     function getIcon(type) {
         const icons = {
             desafio: <IconLaurelWreath1 className='stroke-color1-100' />,
-            'exercicio guiado': <IconArrowBigUp className='stroke-color1-100' />,
+            exercicio_guiado: <IconArrowBigUp className='stroke-color1-100' />,
             explicacoes: <IconChalkboardTeacher className='stroke-color1-100' />,
             flashcards: <IconCards className='stroke-color1-100' />,
             formulario: <IconListDetails className='stroke-color1-100' />,
