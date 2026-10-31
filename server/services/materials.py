@@ -97,7 +97,7 @@ def get_materials_service(cursor: int, limit: int, type_: str, difficulty: str, 
 
 def soft_delete_material_service(id: int):
     with SessionLocal() as session:
-        material = session.get(Material, id)
+        material = session.scalar(select(Material).where(Material.id == id).where(Material.user_id == current_user.id))
         if material is None or material.deleted_at is not None:
             raise MaterialNotFoundError('Material não encontrado')
 
@@ -112,7 +112,7 @@ def soft_delete_material_service(id: int):
 
 def restore_material_service(id: int):
     with SessionLocal() as session:
-        material = session.get(Material, id)
+        material = session.scalar(select(Material).where(Material.id == id).where(Material.user_id == current_user.id))
         if material is None or material.deleted_at is None:
             raise MaterialNotFoundError('Material não encontrado')
 
@@ -127,7 +127,7 @@ def restore_material_service(id: int):
 
 def hard_delete_material_service(id: int):
     with SessionLocal() as session:
-        material = session.get(Material, id)
+        material = session.scalar(select(Material).where(Material.id == id).where(Material.user_id == current_user.id))
         if material is None or material.deleted_at is None:
             raise MaterialNotFoundError('Material não encontrado')
 

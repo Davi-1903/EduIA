@@ -2,13 +2,7 @@ from flask import Blueprint, jsonify, request
 from flask_login import login_required
 
 from ai.services.questoes import generate_questions
-from errors.ai import (
-    AiInvalidData,
-    AiInvalidResponse,
-    AiProviderUnavailable,
-    AiServiceError,
-    AiTimeout,
-)
+from errors.ai import AiInvalidData, AiInvalidResponse, AiProviderUnavailable, AiServiceError, AiTimeout
 from errors.materials import MaterialNotFoundError, MaterialServiceError, MaterialValidationError
 from services.questoes import create_question_service, get_question_service, get_questions_service
 

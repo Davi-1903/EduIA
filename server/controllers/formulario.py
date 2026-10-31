@@ -2,13 +2,7 @@ from flask import Blueprint, jsonify, request
 from flask_login import login_required
 
 from ai.services.formularios import generate_formularios
-from errors.ai import (
-    AiInvalidData,
-    AiInvalidResponse,
-    AiProviderUnavailable,
-    AiServiceError,
-    AiTimeout,
-)
+from errors.ai import AiInvalidData, AiInvalidResponse, AiProviderUnavailable, AiServiceError, AiTimeout
 from errors.materials import MaterialNotFoundError, MaterialServiceError, MaterialValidationError
 from services.formularios import create_formulario_service, get_formulario_service, get_formularios_service
 

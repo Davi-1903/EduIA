@@ -39,12 +39,7 @@ def create_user_service(data: dict):
 
 def get_user_service(email: str, password: str):
     with SessionLocal() as session:
-        try:
-            user = session.scalar(select(Usuario).where(Usuario.email == email))
-            if user is None or not ph.verify(password, user.password):
-                raise UserCredentialsError('Credenciais inválidas')
-
-            return user
-
-        except Exception as exc:
-            raise UserServiceError('Ocorreu um erro interno') from exc
+        user = session.scalar(select(Usuario).where(Usuario.email == email))
+        if user is None or not ph.verify(password, user.password):
+            raise UserCredentialsError('Credenciais inválidas')
+        return user

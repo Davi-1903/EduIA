@@ -2,13 +2,7 @@ from flask import Blueprint, jsonify, request
 from flask_login import login_required
 
 from ai.services.flashcards import generate_flashcards
-from errors.ai import (
-    AiInvalidData,
-    AiInvalidResponse,
-    AiProviderUnavailable,
-    AiServiceError,
-    AiTimeout,
-)
+from errors.ai import AiInvalidData, AiInvalidResponse, AiProviderUnavailable, AiServiceError, AiTimeout
 from errors.materials import MaterialNotFoundError, MaterialServiceError, MaterialValidationError
 from services.flashcards import create_flashcard_service, get_flashcard_service, get_flashcards_service
 

@@ -49,7 +49,7 @@ def login():
         user = get_user_service(data['email'], data['senha'])
     except UserCredentialsError as error:
         return jsonify({'ok': False, 'message': str(error)}), 401
-    except UserServiceError as error:
+    except Exception as error:
         return jsonify({'ok': False, 'message': str(error)}), 500
 
     login_user(user)
