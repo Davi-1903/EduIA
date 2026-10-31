@@ -18,22 +18,21 @@ from models.explicacoes import Explicacao
 from models.flashcards import FlashCards
 from models.formularios import Formulario
 from models.historico import Historico
-from models.material import Difficulty, Material
+from models.material import Difficulty, Material, MaterialType
 from models.planos_de_aula import PlanoDeAula
 from models.professor import Professor
 from models.questoes import Questoes
 from models.quizzes import Quiz
 from models.resumos import Resumo
 from models.roteiros import Roteiro
-from models.user import Usuario
+from models.user import UserType, Usuario
 
 
 load_dotenv()
 
 
-PASSWORD = '1234'
 password_hash = PasswordHash.recommended()
-
+PASSWORD = '1234'
 CATALOGO = {
     'Disciplinas Comuns': [
         'Língua Portuguesa e Literatura',
@@ -97,7 +96,40 @@ CATALOGO = {
         'Normas Técnicas e Controle de Qualidade na Confecção do Vestuário',
     ],
 }
-
+MATERIAL_TYPE_BY_USER_TYPE = {
+    UserType.ALUNO: [
+        MaterialType.DESAFIO,
+        MaterialType.EXERCICIO_GUIADO,
+        MaterialType.EXPLICACAO,
+        MaterialType.FLASHCARD,
+        MaterialType.QUESTOES,
+        MaterialType.QUIZ,
+        MaterialType.RESUMO,
+        MaterialType.ROTEIRO,
+    ],
+    UserType.PROFESSOR: [
+        MaterialType.DESAFIO,
+        MaterialType.EXERCICIO_GUIADO,
+        MaterialType.EXPLICACAO,
+        MaterialType.FORMULARIO,
+        MaterialType.PLANO_DE_AULA,
+        MaterialType.QUESTOES,
+        MaterialType.QUIZ,
+        MaterialType.RESUMO,
+    ],
+}
+MATERIAL_MODEL_BY_TYPE = {
+    MaterialType.DESAFIO,
+    MaterialType.EXERCICIO_GUIADO,
+    MaterialType.EXPLICACAO,
+    MaterialType.FORMULARIO,
+    MaterialType.PLANO_DE_AULA,
+    MaterialType.FLASHCARD,
+    MaterialType.QUESTOES,
+    MaterialType.QUIZ,
+    MaterialType.ROTEIRO,
+    MaterialType.RESUMO,
+}
 USUARIOS_PADRAO = (
     (Aluno, 'Fulano', 'fulano@eduia.com'),
     (Professor, 'Beltrano', 'beltrano@eduia.com'),
@@ -142,23 +174,20 @@ def exibir_materiais(session: Session):
     print(table)
 
 
-def obter_ou_criar_usuario(session: Session, model, nome: str, email: str) -> Usuario:
-    usuario = session.scalar(select(Usuario).where(Usuario.email == email))
-    if usuario is not None:
-        if not isinstance(usuario, model):
-            raise ValueError(f'O e-mail {email} já pertence a um usuário de outro tipo.')
-        usuario.name = nome
-        usuario.password = password_hash.hash(PASSWORD)
-        return usuario
+def obter_ou_criar_usuario(session: Session, model, name: str, email: str) -> Usuario:
+    user = session.scalar(select(Usuario).where(Usuario.email == email))
+    if user is None:
+        new_user = model(name=name, email=email, password=password_hash.hash(PASSWORD))
+        session.add(new_user)
+        return new_user
+    if not isinstance(user, model):
+        raise TypeError(f'O email {email} pertence a um usuário de outro tipo')
 
-    usuario = model(name=nome, email=email, password=password_hash.hash(PASSWORD))
-    session.add(usuario)
-    session.flush()
-    return usuario
+    return user
 
 
 def criar_conteudo_estatico(material_type, disciplina: str) -> dict:
-    if material_type is Desafio:
+    if material_type is MaterialType.DESAFIO:
         return {
             'content': (
                 f'## Desafio: {disciplina}\n\n'
@@ -166,7 +195,7 @@ def criar_conteudo_estatico(material_type, disciplina: str) -> dict:
                 'Apresente um exemplo, descreva as etapas da solução e justifique suas escolhas.'
             )
         }
-    if material_type is ExercicioGuiado:
+    if material_type is MaterialType.EXERCICIO_GUIADO:
         return random.choice(
             [
                 {
@@ -246,7 +275,7 @@ def criar_conteudo_estatico(material_type, disciplina: str) -> dict:
                 },
             ]
         )
-    if material_type is Explicacao:
+    if material_type is MaterialType.EXPLICACAO:
         return {
             'content': (
                 f'# {disciplina}\n\n'
@@ -257,7 +286,7 @@ def criar_conteudo_estatico(material_type, disciplina: str) -> dict:
                 '- Compare os resultados e registre dúvidas para revisão.'
             )
         }
-    if material_type is FlashCards:
+    if material_type is MaterialType.FLASHCARD:
         return {
             'content': [
                 {
@@ -277,7 +306,7 @@ def criar_conteudo_estatico(material_type, disciplina: str) -> dict:
                 },
             ]
         }
-    if material_type is Formulario:
+    if material_type is MaterialType.FORMULARIO:
         return {
             'content': [
                 {
@@ -315,7 +344,7 @@ def criar_conteudo_estatico(material_type, disciplina: str) -> dict:
                 },
             ]
         }
-    if material_type is PlanoDeAula:
+    if material_type is MaterialType.PLANO_DE_AULA:
         return {
             'content': (
                 f'# Plano de aula: {disciplina}\n\n'
@@ -328,7 +357,7 @@ def criar_conteudo_estatico(material_type, disciplina: str) -> dict:
                 '4. Síntese e avaliação formativa.'
             )
         }
-    if material_type is Questoes:
+    if material_type is MaterialType.QUESTOES:
         return {
             'content': [
                 {
@@ -369,7 +398,7 @@ def criar_conteudo_estatico(material_type, disciplina: str) -> dict:
                 },
             ]
         }
-    if material_type is Quiz:
+    if material_type is MaterialType.QUIZ:
         return {
             'content': [
                 {
@@ -407,7 +436,7 @@ def criar_conteudo_estatico(material_type, disciplina: str) -> dict:
                 },
             ]
         }
-    if material_type is Resumo:
+    if material_type is MaterialType.RESUMO:
         return {
             'content': (
                 f'# Resumo: {disciplina}\n\n'
@@ -427,35 +456,22 @@ def criar_conteudo_estatico(material_type, disciplina: str) -> dict:
     }
 
 
-def criar_material(usuario: Usuario, indice: int) -> Material:
+def criar_material(usuario: Usuario) -> Material:
     grupo = random.choice(list(CATALOGO))
     disciplina = random.choice(CATALOGO[grupo])
     assunto = f'{disciplina}: conceitos e aplicações'
-    material_type = random.choice(
-        [
-            Desafio,
-            ExercicioGuiado,
-            Explicacao,
-            FlashCards,
-            Formulario,
-            PlanoDeAula,
-            Questoes,
-            Quiz,
-            Resumo,
-            Roteiro,
-        ]
-    )
+    material_type = random.choice(MATERIAL_TYPE_BY_USER_TYPE[usuario.type])
     conteudo = criar_conteudo_estatico(material_type, disciplina)
     campos_comuns = {
-        'user_id': usuario.id,
+        'user': usuario,
         'discipline': disciplina,
         'subject': assunto,
         'content': conteudo,
     }
 
-    if material_type is Desafio:
+    if material_type is MaterialType.DESAFIO:
         return Desafio(**campos_comuns, difficulty=random.choice(list(Difficulty)))
-    if material_type is ExercicioGuiado:
+    if material_type is MaterialType.EXERCICIO_GUIADO:
         return ExercicioGuiado(
             **campos_comuns,
             difficulty=random.choice(list(Difficulty)),
@@ -468,13 +484,13 @@ def criar_material(usuario: Usuario, indice: int) -> Material:
             interpretation=True,
             code=disciplina == 'Programação de Sistemas para Internet',
         )
-    if material_type is Explicacao:
+    if material_type is MaterialType.EXPLICACAO:
         return Explicacao(**campos_comuns, questions='Quais são os principais conceitos deste assunto?')
-    if material_type is FlashCards:
+    if material_type is MaterialType.FLASHCARD:
         return FlashCards(**campos_comuns, difficulty=random.choice(list(Difficulty)), amount=5)
-    if material_type is Formulario:
+    if material_type is MaterialType.FORMULARIO:
         return Formulario(**campos_comuns, difficulty=random.choice(list(Difficulty)), amount=5)
-    if material_type is PlanoDeAula:
+    if material_type is MaterialType.PLANO_DE_AULA:
         return PlanoDeAula(
             **campos_comuns,
             grade='Ensino Médio Técnico',
@@ -485,11 +501,11 @@ def criar_material(usuario: Usuario, indice: int) -> Material:
             printed=False,
             digital=True,
         )
-    if material_type is Questoes:
+    if material_type is MaterialType.QUESTOES:
         return Questoes(**campos_comuns, difficulty=random.choice(list(Difficulty)), amount=5)
-    if material_type is Quiz:
+    if material_type is MaterialType.QUIZ:
         return Quiz(**campos_comuns, difficulty=random.choice(list(Difficulty)), time_per_question=30, amount=5)
-    if material_type is Resumo:
+    if material_type is MaterialType.RESUMO:
         return Resumo(**campos_comuns)
     return Roteiro(**campos_comuns)
 
@@ -504,8 +520,8 @@ def popular_banco():
     with SessionLocal.begin() as session:
         usuarios = [obter_ou_criar_usuario(session, *dados) for dados in USUARIOS_PADRAO]
         for usuario in usuarios:
-            for indice in range(args.quantidade):
-                material = criar_material(usuario, indice)
+            for _ in range(args.quantidade):
+                material = criar_material(usuario)
                 session.add(Historico(material=material))
         exibir_usuarios()
         exibir_materiais(session)
