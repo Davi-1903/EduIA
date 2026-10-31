@@ -56,11 +56,11 @@ export default function GenerateResumes({ setOpen }) {
 
     useEffect(() => {
         function handleClick(event) {
-            if (!articleRef.current.contains(event.target)) setClose(true);
+            if (!isLoading && !articleRef.current.contains(event.target)) setClose(true);
         }
 
         function handleKey(event) {
-            if (event.key === 'Escape') setClose(true);
+            if (!isLoading && event.key === 'Escape') setClose(true);
         }
 
         document.addEventListener('mousedown', handleClick);
@@ -70,7 +70,7 @@ export default function GenerateResumes({ setOpen }) {
             document.removeEventListener('mousedown', handleClick);
             document.removeEventListener('keydown', handleKey);
         };
-    });
+    }, [isLoading]);
 
     return (
         <div

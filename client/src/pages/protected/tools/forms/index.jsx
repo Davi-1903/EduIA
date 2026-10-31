@@ -65,11 +65,11 @@ export default function GenerateForms({ setOpen }) {
 
     useEffect(() => {
         function handleClick(event) {
-            if (!articleRef.current.contains(event.target)) setClose(true);
+            if (!loading && !articleRef.current.contains(event.target)) setClose(true);
         }
 
         function handleKey(event) {
-            if (event.key === 'Escape') setClose(true);
+            if (!loading && event.key === 'Escape') setClose(true);
         }
 
         document.addEventListener('mousedown', handleClick);
@@ -79,7 +79,7 @@ export default function GenerateForms({ setOpen }) {
             document.removeEventListener('mousedown', handleClick);
             document.removeEventListener('keydown', handleKey);
         };
-    }, []);
+    }, [loading]);
 
     return (
         <div
