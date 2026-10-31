@@ -1,24 +1,12 @@
 import clsx from 'clsx';
 import { useState } from 'react';
 
-import {
-    IconCheck,
-    IconLoader2,
-    IconSend,
-} from '@tabler/icons-react';
+import { IconCheck, IconLoader2, IconSend } from '@tabler/icons-react';
 
 import { POST } from '../../../../../../../../api/materials';
 import { useMessages } from '../../../../../../../../context/messagesContext';
 
-export default function Display({
-    id,
-    content,
-    userEmail,
-    emailConfirmed,
-    setEmailConfirmed,
-    setClose,
-    onSuccess,
-}) {
+export default function Display({ id, content, userEmail, emailConfirmed, setEmailConfirmed, setClose, onSuccess }) {
     const [answers, setAnswers] = useState({});
     const [isSending, setIsSending] = useState(false);
 
@@ -48,41 +36,27 @@ export default function Display({
         if (isSending) return;
 
         if (!emailConfirmed) {
-            return pushError(
-                'Confirme seu e-mail antes de enviar.',
-            );
+            return pushError('Confirme seu e-mail antes de enviar.');
         }
 
         if (answeredCount !== content.length) {
-            return pushError(
-                'Responda todas as perguntas antes de enviar.',
-            );
+            return pushError('Responda todas as perguntas antes de enviar.');
         }
 
         setIsSending(true);
 
         try {
-            const data = await POST(
-                `/api/materials/formulario/${id}/respostas`,
-                {
-                    answers,
-                },
-            );
+            const data = await POST(`/api/materials/formulario/${id}/respostas`, {
+                answers,
+            });
 
             if (data.status !== 200 && data.status !== 201) {
-                throw new Error(
-                    data.message ||
-                        'Não foi possível enviar as respostas',
-                );
+                throw new Error(data.message || 'Não foi possível enviar as respostas');
             }
 
             onSuccess();
         } catch (err) {
-            pushError(
-                err.name === 'SyntaxError'
-                    ? 'Ocorreu um problema com a resposta do servidor'
-                    : err.message,
-            );
+            pushError(err.name === 'SyntaxError' ? 'Ocorreu um problema com a resposta do servidor' : err.message);
         } finally {
             setIsSending(false);
         }
@@ -90,9 +64,7 @@ export default function Display({
 
     return (
         <>
-            <h1 className='text-center font-primary text-2xl font-bold text-color1-100'>
-                Formulário
-            </h1>
+            <h1 className='text-center font-primary text-2xl font-bold text-color1-100'>Formulário</h1>
 
             <div className='flex flex-col gap-2'>
                 <span className='font-secundary text-sm text-color1-100/60'>
@@ -101,18 +73,14 @@ export default function Display({
 
                 <button
                     type='button'
-                    onClick={() =>
-                        setEmailConfirmed(prev => !prev)
-                    }
+                    onClick={() => setEmailConfirmed(prev => !prev)}
                     disabled={isSending}
                     className='flex cursor-pointer items-center gap-2 disabled:cursor-no-drop'
                 >
                     <span
                         className={clsx(
                             'grid h-5 w-5 shrink-0 place-items-center rounded-md border-2',
-                            emailConfirmed
-                                ? 'border-color1-400 bg-color1-400'
-                                : 'border-color4-50',
+                            emailConfirmed ? 'border-color1-400 bg-color1-400' : 'border-color4-50',
                         )}
                     >
                         {emailConfirmed && (
@@ -123,16 +91,12 @@ export default function Display({
                         )}
                     </span>
 
-                    <span className='font-secundary text-sm text-color1-100'>
-                        {userEmail}
-                    </span>
+                    <span className='font-secundary text-sm text-color1-100'>{userEmail}</span>
                 </button>
             </div>
 
             <div className='flex items-center justify-between'>
-                <h2 className='font-primary text-lg font-bold text-color1-100'>
-                    Perguntas
-                </h2>
+                <h2 className='font-primary text-lg font-bold text-color1-100'>Perguntas</h2>
 
                 <span className='font-secundary text-sm text-color1-100/60'>
                     {answeredCount} de {content.length} respondidas
@@ -155,9 +119,7 @@ export default function Display({
                             className='flex flex-col gap-2 pl-1'
                         >
                             {question.answers.map(answer => {
-                                const checked =
-                                    answers[question.id] ===
-                                    answer.id;
+                                const checked = answers[question.id] === answer.id;
 
                                 return (
                                     <li key={answer.id}>
@@ -166,20 +128,13 @@ export default function Display({
                                             role='radio'
                                             aria-checked={checked}
                                             disabled={isSending}
-                                            onClick={() =>
-                                                setAnswer(
-                                                    question.id,
-                                                    answer.id,
-                                                )
-                                            }
+                                            onClick={() => setAnswer(question.id, answer.id)}
                                             className='flex cursor-pointer items-center gap-2 text-left disabled:cursor-no-drop'
                                         >
                                             <span
                                                 className={clsx(
                                                     'grid h-5 w-5 shrink-0 place-items-center rounded-md border-2',
-                                                    checked
-                                                        ? 'border-color1-400 bg-color1-400'
-                                                        : 'border-color4-50',
+                                                    checked ? 'border-color1-400 bg-color1-400' : 'border-color4-50',
                                                 )}
                                             >
                                                 {checked && (

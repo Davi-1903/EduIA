@@ -23,12 +23,15 @@ export default function Questions({ discipline, difficulty, tipo, questoes, onFi
         <article className='flex flex-1 flex-col gap-5'>
             {/* Cabeçalho */}
             <header className='flex items-center gap-3'>
-                <div className='bg-black/3 p-4 rounded-full'>
-                    <IconBook size={30} className='stroke-color1-100' />
+                <div className='rounded-full bg-black/3 p-4'>
+                    <IconBook
+                        size={30}
+                        className='stroke-color1-100'
+                    />
                 </div>
                 <div>
                     <h2 className='font-primary text-xl font-bold text-color1-100'>Exercícios guiados</h2>
-                    <span className='block font-secundary text-md text-color1-100/70'>
+                    <span className='text-md block font-secundary text-color1-100/70'>
                         {discipline} · {difficulty} · {questoes.length} questões
                     </span>
                 </div>
@@ -36,7 +39,7 @@ export default function Questions({ discipline, difficulty, tipo, questoes, onFi
 
             {/* Progresso */}
             <div className='flex flex-col gap-2'>
-                <div className='flex items-center justify-between font-secundary text-md font-bold text-black'>
+                <div className='text-md flex items-center justify-between font-secundary font-bold text-black'>
                     <span>
                         Questão {indice + 1} de {questoes.length}
                     </span>
@@ -51,16 +54,29 @@ export default function Questions({ discipline, difficulty, tipo, questoes, onFi
             </div>
 
             {/* Enunciado */}
-            <p className='font-primary text-xl font-medium text-color1-black'>{indice + 1}. {questao.question}</p>
+            <p className='text-color1-black font-primary text-xl font-medium'>
+                {indice + 1}. {questao.question}
+            </p>
 
-            <Alternativas tipo={tipo} questao={questao} revelada={revelada} />
+            <Alternativas
+                tipo={tipo}
+                questao={questao}
+                revelada={revelada}
+            />
 
             {mostrarDica && questao.hint && (
-                <Dica texto={questao.hint} onClose={() => setMostrarDica(false)} />
+                <Dica
+                    texto={questao.hint}
+                    onClose={() => setMostrarDica(false)}
+                />
             )}
 
             {revelada ? (
-                <Resposta tipo={tipo} questao={questao} onClose={() => setRevelada(false)} />
+                <Resposta
+                    tipo={tipo}
+                    questao={questao}
+                    onClose={() => setRevelada(false)}
+                />
             ) : (
                 <MostrarResposta
                     onClick={() => {
@@ -79,9 +95,9 @@ export default function Questions({ discipline, difficulty, tipo, questoes, onFi
                             setMostrarDica(v => !v);
                             setRevelada(false);
                         }}
-                        className='flex cursor-pointer items-center gap-2 rounded-xl border-3 border-color1-100 px-6 py-2 font-secundary text-base font-bold text-color1-100 transition-all duration-250 hover:bg-button hover:text-color4-400'
+                        className='flex cursor-pointer items-center gap-2 rounded-xl border-3 border-color1-100 px-6 py-2 font-secundary text-base font-bold text-nowrap text-color1-100 transition-all duration-250 hover:bg-button hover:text-color4-400'
                     >
-                        <IconBulb size={32} />
+                        <IconBulb size={26} />
                         Ver dica
                     </button>
                 )}
@@ -91,7 +107,10 @@ export default function Questions({ discipline, difficulty, tipo, questoes, onFi
                     className='group flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-button px-8 py-2 font-secundary text-base font-bold text-color4-400 transition-all duration-250 hover:shadow-lg-hard'
                 >
                     <span>{ultima ? 'Finalizar' : 'Próxima questão'}</span>
-                    <IconArrowRight size={22} className='transition-all duration-250 group-hover:ml-2' />
+                    <IconArrowRight
+                        size={22}
+                        className='transition-all duration-250 group-hover:ml-2'
+                    />
                 </button>
             </div>
         </article>

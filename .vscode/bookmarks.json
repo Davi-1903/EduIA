@@ -41,47 +41,12 @@
 			]
 		},
 		{
-			"path": "client/src/pages/protected/materials/components/contents/explicacoes/index.jsx",
-			"bookmarks": [
-				{
-					"line": 43,
-					"column": 0,
-					"label": "Ajetar as proporções"
-				},
-				{
-					"line": 129,
-					"column": 0,
-					"label": "Melhorar input"
-				}
-			]
-		},
-		{
-			"path": "client/src/pages/protected/materials/components/contents/desafio/index.jsx",
-			"bookmarks": [
-				{
-					"line": 18,
-					"column": 0,
-					"label": "Adicionar useEffect para clicar fora e sair"
-				}
-			]
-		},
-		{
-			"path": "server/controllers/auth.py",
-			"bookmarks": [
-				{
-					"line": 41,
-					"column": 0,
-					"label": "Erro 500 ao entrar em uma conta não existente"
-				}
-			]
-		},
-		{
 			"path": "server/controllers/explanation.py",
 			"bookmarks": [
 				{
-					"line": 14,
+					"line": 44,
 					"column": 0,
-					"label": "Separa em serviço"
+					"label": "Fazer integração com IA nas explicações"
 				}
 			]
 		}

@@ -62,28 +62,33 @@ export default function Explicacoes({ content, subject, setContent }) {
         <div
             onAnimationEnd={handleAnimationEnd}
             className={clsx(
-                'fixed inset-0 z-7 grid min-h-dvh w-full place-items-center overflow-y-auto bg-gray-800/20 p-4 backdrop-blur-sm sm:p-4',
+                'fixed inset-0 z-7 grid min-h-dvh w-full place-items-center overflow-y-auto bg-gray-800/20 backdrop-blur-sm',
                 isClose ? 'animate-fade-out' : 'animate-fade-in',
             )}
         >
             <div
                 ref={materialRef}
-                className='flex max-h-[90dvh] w-full max-w-4xl flex-col gap-4 overflow-hidden rounded-3xl bg-white p-4 shadow-[5px_5px_7px_rgba(0,0,0,.2)] sm:gap-6 sm:p-6 md:p-10'
+                className='flex max-h-[90dvh] w-full max-w-2xl flex-col gap-6 overflow-hidden rounded-3xl bg-white p-6 shadow-[5px_5px_7px_rgba(0,0,0,.2)] sm:gap-6 sm:p-8'
             >
-                <div className='flex w-full flex-col gap-4 p-2 sm:p-3 lg:flex-row lg:items-center lg:justify-between'>
-                    <div className='flex min-w-0 items-center gap-2'>
-                        <IconFileDescription className='h-7 w-7 shrink-0 text-[#011F5B] sm:h-9 sm:w-9' />
-                        <p className='min-w-0 text-xl font-bold wrap-break-word text-[#011F5B] sm:text-2xl lg:text-3xl'>
-                            {subject}
-                        </p>
+                <div className='flex w-full flex-col gap-4 lg:flex-row lg:items-center lg:justify-between'>
+                    <div className='flex min-w-0 items-center gap-4'>
+                        <div className='rounded-full bg-black/3 p-4'>
+                            <IconFileDescription
+                                size={30}
+                                className='stroke-color1-100'
+                            />
+                        </div>
+                        <p className='min-w-0 text-xl font-bold wrap-break-word text-color1-100'>{subject}</p>
                     </div>
                     <button
                         onClick={copyExplanation}
-                        className='group flex w-full shrink-0 items-center justify-center gap-2 rounded-lg border-2 border-transparent bg-button px-3 py-2.5 text-white transition-all duration-300 hover:bg-white hover:button-gradient-border sm:w-fit sm:px-4 sm:py-3'
+                        className='group flex w-full shrink-0 items-center justify-center gap-3 rounded-lg border-2 border-transparent bg-button px-2 py-1 text-white transition-all duration-300 hover:bg-white hover:button-gradient-border sm:w-fit sm:px-3 sm:py-2'
                     >
-                        <IconCopy className='h-5 w-5 shrink-0 text-white transition-colors duration-300 group-hover:text-color1-100 sm:h-6 sm:w-6' />
-
-                        <p className='text-sm font-bold transition-colors duration-300 group-hover:button-gradient-text sm:text-base lg:text-lg'>
+                        <IconCopy
+                            size={20}
+                            className='text-white transition-colors duration-300 group-hover:text-color1-100'
+                        />
+                        <p className='text-base font-semibold transition-colors duration-300 group-hover:button-gradient-text'>
                             Copiar Explicação
                         </p>
                     </button>
@@ -93,45 +98,35 @@ export default function Explicacoes({ content, subject, setContent }) {
                         <ReactMarkdown
                             components={{
                                 h1: ({ children }) => (
-                                    <h1 className='mb-3 text-2xl font-bold wrap-break-word text-[#011F5B] sm:text-3xl lg:text-4xl'>
+                                    <h1 className='mb-3 text-2xl font-bold wrap-break-word text-color1-100'>
                                         {children}
                                     </h1>
                                 ),
-
                                 h2: ({ children }) => (
-                                    <h2 className='mt-5 mb-3 text-xl font-bold wrap-break-word text-[#011F5B] sm:text-2xl lg:text-3xl'>
+                                    <h2 className='mt-5 mb-3 text-xl font-bold wrap-break-word text-color1-100'>
                                         {children}
                                     </h2>
                                 ),
-
                                 h3: ({ children }) => (
-                                    <h3 className='mt-4 mb-2 text-lg font-semibold wrap-break-word text-[#011F5B] sm:text-xl lg:text-2xl'>
+                                    <h3 className='mt-4 mb-2 text-lg font-semibold wrap-break-word text-color1-100'>
                                         {children}
                                     </h3>
                                 ),
-
                                 p: ({ children }) => (
-                                    <p className='mb-4 text-base leading-relaxed wrap-break-word whitespace-pre-wrap sm:text-lg lg:text-xl'>
+                                    <p className='mb-4 text-lg leading-relaxed wrap-break-word whitespace-pre-wrap'>
                                         {children}
                                     </p>
                                 ),
-
                                 ul: ({ children }) => (
                                     <ul className='mb-4 list-disc space-y-2 pl-5 sm:pl-8'>{children}</ul>
                                 ),
-
                                 ol: ({ children }) => (
                                     <ol className='mb-4 list-decimal space-y-2 pl-5 sm:pl-8'>{children}</ol>
                                 ),
-
                                 li: ({ children }) => (
-                                    <li className='text-base leading-relaxed wrap-break-word sm:text-lg lg:text-xl'>
-                                        {children}
-                                    </li>
+                                    <li className='text-lg leading-relaxed wrap-break-word'>{children}</li>
                                 ),
-
                                 strong: ({ children }) => <strong className='font-bold'>{children}</strong>,
-
                                 em: ({ children }) => <em className='italic'>{children}</em>,
                             }}
                         >
@@ -139,19 +134,20 @@ export default function Explicacoes({ content, subject, setContent }) {
                         </ReactMarkdown>
                     </div>
                 </div>
-                <div className='grid shrink-0 grid-cols-1 gap-3 rounded-[20px] bg-[#F4F4F4] p-4 sm:p-6 md:gap-4 md:p-8'>
-                    <p className='justify-self-end text-lg font-bold text-[#011F5B] sm:text-xl md:text-2xl'>
-                        Qual é a sua dúvida?
-                    </p>
-                    <div className='flex h-20 flex-row items-center justify-between gap-2 rounded-lg border border-[#0D4183] p-2'>
+                <div className='grid shrink-0 grid-cols-1 gap-2 rounded-2xl bg-color4-200 p-4'>
+                    <p className='justify-self-end text-lg font-bold text-color1-100'>Qual é a sua dúvida?</p>
+                    <div className='relative'>
                         <input
-                            className='h-fit w-fit text-xl'
+                            className='min-h-12 w-full rounded-xl border-2 border-color1-100 pr-12 pl-4 text-base font-semibold outline-none'
                             type='text'
                             name='text'
                             placeholder='Escreva aqui...'
                         />
-                        <button className='cursor-pointer rounded-[50px] border border-[#0D4183] bg-white p-2.5 transition-colors duration-300 ease-in-out hover:bg-[#E0E9F5]'>
-                            <IconArrowUp className='h-9.75 w-9.75 text-[#011F5B]' />
+                        <button className='absolute top-1/2 right-[4.8px] grid aspect-square h-4/5 -translate-y-1/2 cursor-pointer place-items-center rounded-full transition-colors duration-300 ease-in-out hover:bg-color4-50'>
+                            <IconArrowUp
+                                size={26}
+                                className='stroke-color1-100'
+                            />
                         </button>
                     </div>
                 </div>

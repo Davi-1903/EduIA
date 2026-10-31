@@ -44,7 +44,7 @@ export default function Desafio({ id, discipline, subject, difficulty, content, 
         >
             <main
                 ref={materialRef}
-                className='flex max-h-[90vh] w-full max-w-2xl flex-col gap-6 overflow-y-auto rounded-2xl bg-white p-8 shadow-2xl shadow-color1-100/15 lg:w-4/5'
+                className='flex max-h-[90vh] w-full max-w-2xl flex-col gap-6 overflow-y-auto rounded-2xl bg-white p-4 sm:p-8 shadow-2xl shadow-color1-100/15 lg:w-4/5'
             >
                 {!start ? (
                     <Introduction
