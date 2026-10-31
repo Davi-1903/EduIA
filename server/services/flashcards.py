@@ -1,4 +1,7 @@
+from pathlib import Path
+
 from flask_login import current_user
+from loguru import logger
 from sqlalchemy import func, select
 
 from database import SessionLocal
@@ -6,6 +9,10 @@ from errors.materials import MaterialNotFoundError, MaterialServiceError
 from models.flashcards import FlashCards
 from models.historico import Historico
 from models.material import Difficulty
+from utils import setup_logger
+
+
+setup_logger(__name__, Path(__file__).resolve().parents[1] / 'logs' / 'flashcards.log')
 
 
 def get_flashcards_service(cursor: int, limit: int):
@@ -78,7 +85,9 @@ def create_flashcard_service(data: dict):
             session.add(flashcards)
             session.add(historico)
             session.commit()
+            logger.info('Flashcards salvos no banco de dados')
 
         except Exception as exc:
             session.rollback()
+            logger.error('Falha ao salvar flashcards no banco de dados')
             raise MaterialServiceError('Ocorreu um erro interno') from exc

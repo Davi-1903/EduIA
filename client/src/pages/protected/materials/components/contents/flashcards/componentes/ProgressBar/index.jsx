@@ -1,5 +1,3 @@
-
-
 export default function ProgressBar({ currentCardID, cards }) {
     return (
         <>

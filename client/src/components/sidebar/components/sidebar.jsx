@@ -51,17 +51,6 @@ const links = [
         ),
     },
     {
-        id: 4,
-        path: '/settings',
-        name: 'Configurações',
-        icon: (
-            <IconSettings
-                size={28}
-                className='stroke-color1-100'
-            />
-        ),
-    },
-    {
         id: 5,
         path: '/trash',
         name: 'Lixeira',

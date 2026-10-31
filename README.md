@@ -4,7 +4,6 @@
         loading='lazy'
         alt='Logo EduIA'
         width='800'
-        style='border-radius: 16px'
     >
 </div>
 
@@ -40,7 +39,19 @@
 </div>
 
 <p align='center'>
-  <strong>EduIA</strong> - Geração inteligente de materiais de estudo para professores e alunos
+    <strong>EduIA</strong> • Geração inteligente de materiais de estudo para professores e alunos
+</p>
+
+<p align='center'>
+    <a href='#-visão-geral'>Visão geral</a> •
+    <a href='#-o-que-o-sistema-gera'>O que o sistema gera</a> •
+    <a href='#-como-funciona'>Como funciona</a> •
+    <a href='#️-stack-tecnológica'>Stack tecnológica</a> •
+    <a href='#-pré-requisitos'>Pré requisitos</a> •
+    <a href='#-como-executar-o-projeto'>Como executar o projeto</a> •
+    <a href='#-documentação'>Documentação</a> •
+    <a href='#-equipe'>Equipe</a> •
+    <a href='#️-licença'>Licença</a>
 </p>
 
 ## 📌 Visão geral
@@ -48,6 +59,36 @@
 O **EduIA** é uma plataforma que usa Inteligência Artificial para auxiliar na criação de materiais didáticos personalizados, reduzindo o tempo de produção de conteúdos e tornando o processo de ensino-aprendizado mais dinâmico.
 
 O projeto foi desenvolvido por estudantes do ensino médio técnico integrado do **IFRN – campus Caicó** e tem como objetivo automatizar a geração de atividades pedagógicas com qualidade, rapidez e adaptabilidade.
+
+<div align='center'>
+    <img
+        src='client/public/assets/images/landing-page.png'
+        loading='lazy'
+        alt='Landing page do sistema'
+        width='800'
+    >
+    <p>Landing page do sistema</p>
+</div>
+
+<div align='center'>
+    <img
+        src='client/public/assets/images/cadastro.png'
+        loading='lazy'
+        alt='Página de cadastro do sistema'
+        width='800'
+    >
+    <p>Página de cadastro</p>
+</div>
+
+<div align='center'>
+    <img
+        src='client/public/assets/images/questão.png'
+        loading='lazy'
+        alt='Exemplo de questão gerada pelo sistema'
+        width='800'
+    >
+    <p>Exemplo de questão gerada pelo sistema</p>
+</div>
 
 ## ✨ O que o sistema gera
 
@@ -71,8 +112,6 @@ O EduIA pode criar diferentes tipos de materiais acadêmicos, como:
 A experiência parte da interface web, onde o usuário define o tipo de material, a disciplina, o nível de dificuldade e outros critérios. O backend reúne essas informações em um prompt específico para o material solicitado e o envia, com o auxílio do **LangChain**, ao modelo de linguagem configurado no Hugging Face. O modelo gera o conteúdo, e um parser valida e organiza a resposta em JSON para que o sistema possa utilizá-la.
 
 O **RAG** (_Retrieval-Augmented Generation_, ou geração aumentada por recuperação) é uma técnica que complementa esse processo: antes de gerar a resposta, o sistema busca informações relevantes em uma base de documentos e inclui os trechos encontrados no contexto enviado ao modelo. Assim, a geração pode se apoiar em fontes específicas e atualizadas, em vez de depender apenas do conhecimento aprendido pelo modelo. A qualidade e a pertinência das fontes recuperadas influenciam o resultado. Veja mais em [Framework e LLM](docs/framework_e_llm.md).
-
-No fluxo atual do EduIA, o conteúdo é gerado a partir dos dados informados pelo usuário e das instruções do prompt; não há uma etapa de busca em uma base de documentos. O RAG é uma possibilidade de evolução para fundamentar os materiais em conteúdos didáticos selecionados.
 
 Essa abordagem permite que o mesmo fluxo seja reutilizado para diferentes materiais e facilite futuras expansões do projeto.
 
@@ -116,12 +155,12 @@ Essa abordagem permite que o mesmo fluxo seja reutilizado para diferentes materi
             <td>Orquestração da LLM</td>
         </tr>
         <tr>
-            <td><strong>GPT-5 none</strong></td>
+            <td><strong>GPT-5 nano</strong></td>
             <td>Geração do conteúdo educacional</td>
         </tr>
         <tr>
             <td>Qualidade</td>
-            <td><strong>Ruff, Prettier</strong></td>
+            <td><strong>Ruff, Prettier, Eslint</strong></td>
             <td>Padronização e lint</td>
         </tr>
         <tr>
@@ -172,18 +211,23 @@ Há duas formas principais de rodar o EduIA:
     Exemplo de configuração:
 
     ```env
+    # ========================< API KEYS >========================
+    PINECONE_API_KEY=<SUA-CHAVE-DE-API-DO-PINECONE>
+    HUGGINGFACEHUB_API_TOKEN=<SUA-CHAVE-DE-API-DO-HUGGING-FACE>
+
     # =====================< Hugging Face >=====================
-    HUGGINGFACEHUB_API_TOKEN=<SUA-CHAVE-DE-API>
-    HF_MODEL=Qwen/Qwen2.5-72B-Instruct
+    HF_EMBEDDING_MODEL=<MODELO-DE-EMBEDDING>
+    HF_MODEL=<MODELO-DE-IA>
     MAX_TOKENS=3000
+    INDEX_NAME=eduia-rag
 
     # =====================< Autenticação >=====================
-    SECRET_KEY=<SUA-CHAVE-SECRETA>
+    SECRET_KEY=<SUA-CHAVE-SECRETA-AQUI>
     CORS_ORIGINS=http://localhost:3000,http://localhost:4173
 
     # ====================< Banco de dados >====================
     DB_USER=root
-    DB_PASSWORD=<SENHA-DO-BANCO>
+    DB_PASSWORD=<SENHA-DO-BANCO-DE-DADOS-AQUI>
     DB_HOST=localhost
     DB_PORT=3306
     DB_NAME=db_eduia
@@ -219,7 +263,6 @@ Há duas formas principais de rodar o EduIA:
     ```
 
     A aplicação estará disponível em:
-
     - frontend: http://localhost:3000
     - backend: http://localhost:5000
 
@@ -236,13 +279,11 @@ Há duas formas principais de rodar o EduIA:
     ```
 
     Isso inicia automaticamente:
-
     - frontend da aplicação
     - backend Flask
     - banco MySQL
 
     Após a inicialização, a interface fica disponível em:
-
     - http://localhost:3000
 
 ## 📚 Documentação

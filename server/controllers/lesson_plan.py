@@ -1,10 +1,17 @@
+from pathlib import Path
+
 from flask import Blueprint, jsonify, request
 from flask_login import current_user, login_required
+from loguru import logger
 from sqlalchemy import func, select
 
 from database import SessionLocal
 from models.historico import Historico
 from models.planos_de_aula import PlanoDeAula
+from utils import setup_logger
+
+
+setup_logger(__name__, Path(__file__).resolve().parents[1] / 'logs' / 'lesson-plans.log')
 
 
 bp_materials_plano_de_aula = Blueprint('plano_de_aula', __name__, url_prefix='/plano_de_aula')
@@ -115,8 +122,10 @@ def create_lesson_plan():
             session.add(lesson_plan)
             session.add(historico)
             session.commit()
+            logger.info('Plano de aula salvo no banco de dados')
             return jsonify({'ok': True, 'redirect': '/materials'}), 201
 
         except Exception:
             session.rollback()
+            logger.error('Falha ao salvar plano de aula no banco de dados')
             return jsonify({'ok': False, 'message': 'Ocorreu um erro interno'}), 500

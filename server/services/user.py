@@ -1,3 +1,6 @@
+from pathlib import Path
+
+from loguru import logger
 from pwdlib import PasswordHash
 from sqlalchemy import select
 from sqlalchemy.exc import IntegrityError
@@ -7,6 +10,10 @@ from errors.user import UserAlreadyExistsError, UserCredentialsError, UserServic
 from models.aluno import Aluno
 from models.professor import Professor
 from models.user import UserType, Usuario
+from utils import setup_logger
+
+
+setup_logger(__name__, Path(__file__).resolve().parents[1] / 'logs' / 'users.log')
 
 
 ph = PasswordHash.recommended()
@@ -25,15 +32,18 @@ def create_user_service(data: dict):
             session.add(new_user)
             session.commit()
             session.refresh(new_user)
+            logger.info('Cadastro de usuário concluído')
 
             return new_user
 
         except IntegrityError:
             session.rollback()
+            logger.warning('Cadastro de usuário recusado por conflito de integridade')
             raise UserAlreadyExistsError('Credenciais inválidas')
 
         except Exception as exc:
             session.rollback()
+            logger.error('Falha ao cadastrar usuário')
             raise UserServiceError('Ocorreu um erro ao criar um novo usuário') from exc
 
 

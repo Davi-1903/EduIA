@@ -1,18 +1,18 @@
 import atexit
 import os
 from datetime import datetime, timedelta, timezone
-from typing import TYPE_CHECKING
+from pathlib import Path
 
 from apscheduler.schedulers.background import BackgroundScheduler
+from loguru import logger
 from sqlalchemy import select
 from sqlalchemy.orm import DeclarativeBase, sessionmaker
 
-from utils import create_url, get_connection, get_env
+from utils import setup_logger
+from utils.database import create_url, get_connection, get_env
 
 
-if TYPE_CHECKING:
-    from models.material import Material
-
+setup_logger(__name__, Path(__file__).resolve().parents[1] / 'logs' / 'database.log')
 
 engine = get_connection(url=create_url(), echo=False, connect_args={'init_command': "SET time_zone='+00:00'"})
 SessionLocal = sessionmaker(bind=engine)
@@ -23,6 +23,8 @@ class Base(DeclarativeBase):
 
 
 def purge_expired_trash():
+    from models.material import Material
+
     with SessionLocal() as session:
         try:
             cutoff = datetime.now(timezone.utc) - timedelta(days=int(get_env('TRASH_RETENTION_DAYS')))
@@ -36,11 +38,11 @@ def purge_expired_trash():
                 session.delete(item)
 
             session.commit()
-            print(f'Apagados {len(expired_materials)} materiais da lixeira.')
+            logger.info('Apagados {} materiais da lixeira', len(expired_materials))
 
         except Exception as e:
             session.rollback()
-            print(f'Erro ao apagar materiais da lixeira: {e}')
+            logger.exception('Erro ao apagar materiais expirados da lixeira: {}', e)
 
 
 def init_database():

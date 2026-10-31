@@ -44,9 +44,69 @@
 			"path": "server/controllers/explanation.py",
 			"bookmarks": [
 				{
-					"line": 44,
+					"line": 40,
 					"column": 0,
-					"label": "Fazer integração com IA nas explicações"
+					"label": "Criar integração com IA"
+				}
+			]
+		},
+		{
+			"path": "server/controllers/guided_exercises.py",
+			"bookmarks": [
+				{
+					"line": 19,
+					"column": 0,
+					"label": "Separar a interação com o banco de dados em um serviço separado"
+				},
+				{
+					"line": 98,
+					"column": 0,
+					"label": "Criar integração com IA"
+				}
+			]
+		},
+		{
+			"path": "server/controllers/lesson_plan.py",
+			"bookmarks": [
+				{
+					"line": 18,
+					"column": 0,
+					"label": "Separar a interação com o banco de dados em um serviço separado"
+				},
+				{
+					"line": 95,
+					"column": 0,
+					"label": "Criar integração com IA"
+				}
+			]
+		},
+		{
+			"path": "server/controllers/resumos.py",
+			"bookmarks": [
+				{
+					"line": 18,
+					"column": 0,
+					"label": "Separar a interação com o banco de dados em um serviço separado"
+				},
+				{
+					"line": 90,
+					"column": 0,
+					"label": "Criar integração com IA"
+				}
+			]
+		},
+		{
+			"path": "server/controllers/study_guide.py",
+			"bookmarks": [
+				{
+					"line": 18,
+					"column": 0,
+					"label": "Separar a interação com o banco de dados em um serviço separado"
+				},
+				{
+					"line": 89,
+					"column": 0,
+					"label": "Criar integração com IA"
 				}
 			]
 		}

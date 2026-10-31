@@ -1,11 +1,18 @@
+from pathlib import Path
+
 from flask import Blueprint, jsonify, request
 from flask_login import current_user, login_required
+from loguru import logger
 from sqlalchemy import func, select
 
 from database import SessionLocal
 from models.desafios import Desafio
 from models.historico import Historico
 from models.material import Difficulty
+from utils import setup_logger
+
+
+setup_logger(__name__, Path(__file__).resolve().parents[1] / 'logs' / 'challenges.log')
 
 
 bp_materials_desafio = Blueprint('desafios', __name__, url_prefix='/desafio')
