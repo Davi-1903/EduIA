@@ -146,6 +146,16 @@ export default function Dashboard() {
                             aprendizado.
                         </p>
                     </div>
+                    {user && (
+                        <section>
+                            <h2 className='mb-6 font-primary text-2xl font-semibold text-color1-100'>
+                                O que você quer criar hoje?
+                            </h2>
+                            <div className='grid grid-cols-[repeat(auto-fit,minmax(18rem,1fr))] gap-6'>
+                                {cards.map(card => getCard(user.tipo, card))}
+                            </div>
+                        </section>
+                    )}
                     {materials?.length > 0 && (
                         <div>
                             <h2 className='mb-6 font-primary text-2xl font-semibold text-color1-100'>
@@ -172,16 +182,6 @@ export default function Dashboard() {
                                 ))}
                             </div>
                         </div>
-                    )}
-                    {user && (
-                        <section>
-                            <h2 className='mb-6 font-primary text-2xl font-semibold text-color1-100'>
-                                O que você quer criar hoje?
-                            </h2>
-                            <div className='grid grid-cols-[repeat(auto-fit,minmax(18rem,1fr))] gap-6'>
-                                {cards.map(card => getCard(user.tipo, card))}
-                            </div>
-                        </section>
                     )}
                 </section>
             </main>

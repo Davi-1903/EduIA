@@ -1,9 +1,8 @@
 from flask import Blueprint, jsonify
 from flask_login import current_user, login_required
-from sqlalchemy import select
 
-from database import SessionLocal
-from models.material import Material, MaterialType
+from errors.user import UserServiceError
+from services.user import get_progress_service
 
 
 bp_user = Blueprint('user', __name__, url_prefix='/api/user')
@@ -28,18 +27,9 @@ def get_user():
 @bp_user.route('/progresso', methods=['GET'])
 @login_required
 def get_progresso():
-    session = SessionLocal()
     try:
-        materiais = session.scalars(select(Material.type).where(Material.user_id == current_user.id).distinct()).all()
-        tipos_utilizados = set()
-        for material in materiais:
-            tipos_utilizados.add(material.value)
-        progresso = {}
-        for material_type in MaterialType:
-            nome = material_type.name.lower()
-            utilizado = material_type.value in tipos_utilizados
-            progresso[nome] = utilizado
-        return jsonify(progresso), 200
+        progress = get_progress_service(current_user.id, current_user.type)
+        return jsonify(progress), 200
 
-    finally:
-        session.close()
+    except UserServiceError as error:
+        return jsonify({'ok': False, 'message': str(error)}), 500

@@ -8,6 +8,7 @@ from sqlalchemy.exc import IntegrityError
 from database import SessionLocal
 from errors.user import UserAlreadyExistsError, UserCredentialsError, UserServiceError, UserTypeError
 from models.aluno import Aluno
+from models.material import Material, MaterialType
 from models.professor import Professor
 from models.user import UserType, Usuario
 from utils import setup_logger
@@ -53,3 +54,20 @@ def get_user_service(email: str, password: str):
         if user is None or not ph.verify(password, user.password):
             raise UserCredentialsError('Credenciais inválidas')
         return user
+
+
+def get_progress_service(id_: int, type_: UserType):
+    MATERIALS_STUDENT = {MaterialType.FLASHCARD, MaterialType.ROTEIRO}
+    MATERIALS_TEACHER = {MaterialType.FORMULARIO, MaterialType.PLANO_DE_AULA}
+
+    materials_user = set(MaterialType) - (MATERIALS_STUDENT if type_ == UserType.PROFESSOR else MATERIALS_TEACHER)
+
+    with SessionLocal() as session:
+        try:
+            materials_db = session.scalars(
+                select(Material.type).where(Material.user_id == id_).where(Material.deleted_at.is_(None)).distinct()
+            ).all()
+            return {material.value.lower(): material in materials_db for material in materials_user}
+
+        except Exception as exc:
+            raise UserServiceError('Ocorreu um erro ao buscar o progresso do usuário') from exc

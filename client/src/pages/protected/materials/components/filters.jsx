@@ -18,7 +18,7 @@ export default function Filters({
         { type: 'explicacoes', label: 'Explicação' },
         { type: 'flashcards', label: 'Flashcards' },
         { type: 'formulario', label: 'Formulário' },
-        { type: 'plano de aula', label: 'Plano de aula' },
+        { type: 'plano_de_aula', label: 'Plano de aula' },
         { type: 'questoes', label: 'Questões' },
         { type: 'quiz', label: 'Quiz' },
         { type: 'resumo', label: 'Resumo' },

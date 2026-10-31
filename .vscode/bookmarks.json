@@ -11,16 +11,6 @@
 			]
 		},
 		{
-			"path": "server/controllers/user.py",
-			"bookmarks": [
-				{
-					"line": 32,
-					"column": 0,
-					"label": "É preciso verificar que os materiais não estejam na lixeira"
-				}
-			]
-		},
-		{
 			"path": ".env.example",
 			"bookmarks": [
 				{
@@ -107,6 +97,16 @@
 					"line": 89,
 					"column": 0,
 					"label": "Criar integração com IA"
+				}
+			]
+		},
+		{
+			"path": "client/src/pages/protected/history/components/tools/lesson_plan.jsx",
+			"bookmarks": [
+				{
+					"line": 9,
+					"column": 0,
+					"label": "Plano de aula não tem tempo"
 				}
 			]
 		}

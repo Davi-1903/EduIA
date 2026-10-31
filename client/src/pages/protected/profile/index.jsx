@@ -61,7 +61,7 @@ export default function Profile() {
         {
             id: 3,
             nome: 'Explicações',
-            tipo: 'explicacao',
+            tipo: 'explicacoes',
             icone: (
                 <IconChalkboardTeacher
                     size={60}
@@ -73,7 +73,7 @@ export default function Profile() {
         {
             id: 4,
             nome: 'Flashcards',
-            tipo: 'flashcard',
+            tipo: 'flashcards',
             icone: (
                 <IconCards
                     size={60}
@@ -162,6 +162,16 @@ export default function Profile() {
     ];
     const [progresso, setProgresso] = useState({});
 
+    function getAchievementsByUserType(type) {
+        const achievements = conquistas.filter(
+            achievement =>
+                !(type === 'professor' ? ['flashcards', 'roteiro'] : ['formulario', 'plano_de_aula']).includes(
+                    achievement.tipo,
+                ),
+        );
+        return achievements;
+    }
+
     useEffect(() => {
         async function carregarProgresso() {
             const response = await GET('/api/user/progresso');
@@ -194,7 +204,7 @@ export default function Profile() {
                 </div>
                 <div className='flex flex-col gap-6 md:flex-row'>
                     <div>
-                        <div className='flex min-w-[300px] flex-col items-center justify-center rounded-xl bg-white p-6 shadow'>
+                        <div className='flex min-w-75 flex-col items-center justify-center rounded-xl bg-white p-6 shadow'>
                             <article className='relative -top-15 left-5 h-22 w-22 rounded-full bg-gray-300 md:static md:top-0 md:left-0 md:h-25 md:w-25'></article>
                             <h2 className='text-md bg-linear-to-tr from-color1-100 from-45% to-color4-100 bg-clip-text leading-tight font-bold text-transparent md:text-2xl'>
                                 {user?.nome?.toUpperCase()}
@@ -297,9 +307,8 @@ export default function Profile() {
                         <div className='rounded-xl bg-white p-6 shadow'>
                             <h3 className='mb-4 text-2xl font-bold text-color1-100'>Conquistas</h3>
                             <div className='flex flex-wrap justify-center gap-10'>
-                                {conquistas.map(conquista => {
+                                {getAchievementsByUserType(user.tipo).map(conquista => {
                                     const desbloqueada = progresso[conquista.tipo];
-
                                     return (
                                         <article
                                             key={conquista.id}

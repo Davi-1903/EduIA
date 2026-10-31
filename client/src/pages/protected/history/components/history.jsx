@@ -65,11 +65,11 @@ export default function HistoryCard({
     function getIcon(type) {
         const icons = {
             desafio: <IconLaurelWreath1 className='stroke-color1-100' />,
-            'exercicio guiado': <IconArrowBigUp className='stroke-color1-100' />,
-            explicacao: <IconChalkboardTeacher className='stroke-color1-100' />,
+            exercicio_guiado: <IconArrowBigUp className='stroke-color1-100' />,
+            explicacoes: <IconChalkboardTeacher className='stroke-color1-100' />,
             flashcards: <IconCards className='stroke-color1-100' />,
             formulario: <IconListDetails className='stroke-color1-100' />,
-            'plano de aula': <IconChalkboard className='stroke-color1-100' />,
+            plano_de_aula: <IconChalkboard className='stroke-color1-100' />,
             questoes: <IconListLetters className='stroke-color1-100' />,
             quiz: <IconTimeDuration10 className='stroke-color1-100' />,
             resumo: <IconFileDescription className='stroke-color1-100' />,
@@ -88,7 +88,7 @@ export default function HistoryCard({
                     setOpen={setOpen}
                 />
             ),
-            'exercicio guiado': (
+            exercicio_guiado: (
                 <GuidedExercisesForm
                     discipline={discipline}
                     subject={title}
@@ -101,7 +101,7 @@ export default function HistoryCard({
                     setOpen={setOpen}
                 />
             ),
-            explicacao: (
+            explicacoes: (
                 <ExplanationForm
                     discipline={discipline}
                     subject={title}
@@ -128,7 +128,7 @@ export default function HistoryCard({
                     setOpen={setOpen}
                 />
             ),
-            'plano de aula': (
+            plano_de_aula: (
                 <LessonPlanForm
                     discipline={discipline}
                     subject={title}

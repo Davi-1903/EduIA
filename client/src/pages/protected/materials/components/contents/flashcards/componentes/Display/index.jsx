@@ -11,8 +11,6 @@ export default function Display({ cards, currentCardID }) {
     return (
         <div className='flex h-full w-full flex-col items-center justify-center px-7 py-13'>
             <div className='relative flex h-full w-full items-center justify-center font-secundary text-base font-semibold perspective-[1000px]'>
-        <div className='flex h-full w-full flex-col items-center justify-center px-7 py-13'>
-            <div className='relative flex h-full w-full items-center justify-center font-secundary text-base font-semibold perspective-[1000px]'>
                 <div
                     className={clsx(
                         'absolute h-full w-full translate-x-2 translate-y-2 rotate-2 rounded-2xl bg-color1-200 shadow-md transition-opacity duration-500',

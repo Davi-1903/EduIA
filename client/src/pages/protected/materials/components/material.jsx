@@ -165,7 +165,7 @@ export default function MaterialCard({
             explicacoes: <IconChalkboardTeacher className='stroke-color1-100' />,
             flashcards: <IconCards className='stroke-color1-100' />,
             formulario: <IconListDetails className='stroke-color1-100' />,
-            'plano de aula': <IconChalkboard className='stroke-color1-100' />,
+            plano_de_aula: <IconChalkboard className='stroke-color1-100' />,
             questoes: <IconListLetters className='stroke-color1-100' />,
             quiz: <IconTimeDuration10 className='stroke-color1-100' />,
             resumo: <IconFileDescription className='stroke-color1-100' />,
