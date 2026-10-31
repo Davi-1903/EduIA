@@ -1,10 +1,8 @@
 from flask import Blueprint, jsonify, request
-from flask_login import current_user, login_required
-from sqlalchemy import func, select
+from flask_login import login_required
 
-from database import SessionLocal
-from models.explicacoes import Explicacao
-from models.historico import Historico
+from errors.materials import MaterialNotFoundError, MaterialServiceError, MaterialValidationError
+from services.explanation import create_explanation_service, get_explanation_service, get_explanations_service
 
 
 bp_materials_explicacao = Blueprint('explicacoes', __name__, url_prefix='/explicacoes')
@@ -16,90 +14,40 @@ def get_explanations():
     cursor = request.args.get('cursor', 0, type=int)
     limit = request.args.get('limit', 50, type=int)
 
-    with SessionLocal() as session:
-        count_stmt = (
-            select(func.count())
-            .select_from(Explicacao)
-            .where(Explicacao.user_id == current_user.id)
-            .where(Explicacao.deleted_at.is_(None))
-        )
-        statement = (
-            select(Explicacao)
-            .where(Explicacao.user_id == current_user.id)
-            .where(Explicacao.deleted_at.is_(None))
-            .offset(cursor)
-            .limit(limit)
-            .order_by(Explicacao.created_at.desc())
-        )
-
-        total = session.scalar(count_stmt) or 0
-        materials = session.scalars(statement).all()
-
-        return jsonify(
-            {
-                'ok': True,
-                'total': total,
-                'materials': [
-                    {
-                        'id': material.id,
-                        'title': material.subject,
-                        'discipline': material.discipline,
-                        'created_at': material.created_at,
-                        'content': material.content,
-                        'type': material.type.value,
-                    }
-                    for material in materials
-                ],
-            }
-        ), 200
+    try:
+        explanations = get_explanations_service(cursor, limit)
+        return jsonify({'ok': True, **explanations}), 200
+    except MaterialServiceError as error:
+        return jsonify({'ok': False, 'message': str(error)}), 500
 
 
 @bp_materials_explicacao.route('/<int:id>', methods=['GET'])
 @login_required
 def get_explanation(id: int):
-    with SessionLocal() as session:
-        material = session.get(Explicacao, id)
-        if material is None or material.deleted_at is not None:
-            return jsonify({'ok': False, 'message': 'Explicação não encontrada'}), 404
+    try:
+        explanation = get_explanation_service(id)
+        return jsonify({'ok': True, 'material': explanation}), 200
 
-        return jsonify(
-            {
-                'ok': True,
-                'material': {
-                    'id': material.id,
-                    'title': material.subject,
-                    'discipline': material.discipline,
-                    'content': material.content,
-                    'created_at': material.created_at,
-                    'type': material.type.value,
-                },
-            }
-        ), 200
+    except MaterialNotFoundError as error:
+        return jsonify({'ok': False, 'message': str(error)}), 404
+
+    except MaterialServiceError as error:
+        return jsonify({'ok': False, 'message': str(error)}), 500
 
 
 @bp_materials_explicacao.route('/', methods=['POST'])
 @login_required
 def create_explanation():
     data = request.get_json(silent=True)
-
     if data is None:
         return jsonify({'ok': False, 'message': 'Dados não recebidos'}), 400
 
-    with SessionLocal() as session:
-        try:
-            explanation = Explicacao(
-                user_id=current_user.id,
-                discipline=data['discipline'],
-                questions=data['questions'],
-                subject=data['subject'],
-                content={'content': 1},
-            )
-            historico = Historico(material=explanation)
-            session.add(explanation)
-            session.add(historico)
-            session.commit()
-            return jsonify({'ok': True, 'redirect': '/materials'}), 201
+    content = '# Opa!\n\nConteúdo de teste'
 
-        except Exception:
-            session.rollback()
-            return jsonify({'ok': False, 'message': 'Ocorreu um erro interno'}), 500
+    try:
+        create_explanation_service({**data, 'content': content})
+        return jsonify({'ok': True, 'redirect': '/materials'}), 201
+    except MaterialValidationError as error:
+        return jsonify({'ok': False, 'message': str(error)}), 400
+    except MaterialServiceError:
+        return jsonify({'ok': False, 'message': 'Ocorreu um erro interno'}), 500
