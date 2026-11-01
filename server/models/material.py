@@ -16,11 +16,11 @@ if TYPE_CHECKING:
 
 class MaterialType(enum.Enum):
     DESAFIO = 'desafio'
-    EXERCICIO_GUIADO = 'exercicio guiado'
-    EXPLICACAO = 'explicacao'
+    EXERCICIO_GUIADO = 'exercicio_guiado'
+    EXPLICACAO = 'explicacoes'
     FLASHCARD = 'flashcards'
     FORMULARIO = 'formulario'
-    PLANO_DE_AULA = 'plano de aula'
+    PLANO_DE_AULA = 'plano_de_aula'
     QUESTOES = 'questoes'
     QUIZ = 'quiz'
     RESUMO = 'resumo'

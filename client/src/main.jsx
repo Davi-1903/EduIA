@@ -13,7 +13,6 @@ const LandingPage = lazy(() => import('./pages/unprotected/landingpage'));
 const Error404 = lazy(() => import('./pages/errors/error404'));
 const Dashboard = lazy(() => import('./pages/protected/dash'));
 const Materials = lazy(() => import('./pages/protected/materials'));
-const Settings = lazy(() => import('./pages/protected/config'));
 const Profile = lazy(() => import('./pages/protected/profile/index'));
 const History = lazy(() => import('./pages/protected/history'));
 const Trash = lazy(() => import('./pages/protected/trash'));
@@ -62,14 +61,6 @@ const router = createBrowserRouter([
                 element: (
                     <Suspense fallback={<Loading />}>
                         <About />
-                    </Suspense>
-                ),
-            },
-            {
-                path: 'settings',
-                element: (
-                    <Suspense fallback={<Loading />}>
-                        <Settings />
                     </Suspense>
                 ),
             },

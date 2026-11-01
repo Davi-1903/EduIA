@@ -1,6 +1,6 @@
 from typing import TYPE_CHECKING
 
-from sqlalchemy import ForeignKey
+from sqlalchemy import ForeignKey, Text
 from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from database import Base
@@ -15,5 +15,6 @@ class Historico(Base):
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
     material_id: Mapped[int] = mapped_column(ForeignKey('materiais.id'), unique=True, nullable=False)
+    answer: Mapped[str | None] = mapped_column(Text, nullable=True)
 
     material: Mapped['Material'] = relationship(back_populates='historico')

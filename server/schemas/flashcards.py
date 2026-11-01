@@ -6,5 +6,6 @@ class FlashCardsJSON(BaseModel):
     question: str
     answer: str
 
+
 class Flashcards(BaseModel):
     content: list[FlashCardsJSON]

@@ -48,11 +48,11 @@ export default function MaterialCard({
     function getIcon(type) {
         const icons = {
             desafio: <IconLaurelWreath1 className='stroke-color1-100' />,
-            'exercicio guiado': <IconArrowBigUp className='stroke-color1-100' />,
-            explicacao: <IconChalkboardTeacher className='stroke-color1-100' />,
+            exercicio_guiado: <IconArrowBigUp className='stroke-color1-100' />,
+            explicacoes: <IconChalkboardTeacher className='stroke-color1-100' />,
             flashcards: <IconCards className='stroke-color1-100' />,
             formulario: <IconListDetails className='stroke-color1-100' />,
-            'plano de aula': <IconChalkboard className='stroke-color1-100' />,
+            plano_de_aula: <IconChalkboard className='stroke-color1-100' />,
             questoes: <IconListLetters className='stroke-color1-100' />,
             quiz: <IconTimeDuration10 className='stroke-color1-100' />,
             resumo: <IconFileDescription className='stroke-color1-100' />,

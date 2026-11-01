@@ -14,11 +14,11 @@ export default function Filters({
 }) {
     const materialsType = [
         { type: 'desafio', label: 'Desafio' },
-        { type: 'exercicio guiado', label: 'Exercício guiado' },
-        { type: 'explicacao', label: 'Explicação' },
+        { type: 'exercicio_guiado', label: 'Exercício guiado' },
+        { type: 'explicacoes', label: 'Explicação' },
         { type: 'flashcards', label: 'Flashcards' },
         { type: 'formulario', label: 'Formulário' },
-        { type: 'plano de aula', label: 'Plano de aula' },
+        { type: 'plano_de_aula', label: 'Plano de aula' },
         { type: 'questoes', label: 'Questões' },
         { type: 'quiz', label: 'Quiz' },
         { type: 'resumo', label: 'Resumo' },

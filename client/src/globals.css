@@ -213,6 +213,22 @@
     background-image: linear-gradient(to top right, var(--base-color1), var(--color-color1-400));
 }
 
+@utility button-gradient-border {
+    border: 2px solid transparent;
+
+    background:
+        linear-gradient(white, white) padding-box,
+        linear-gradient(to top right, var(--base-color1), var(--color-color1-400)) border-box;
+}
+
+@utility button-gradient-text {
+    background-image: linear-gradient(to top right, var(--base-color1), var(--color-color1-400));
+
+    background-clip: text;
+    -webkit-background-clip: text;
+    color: transparent;
+}
+
 @utility shadow-link {
     box-shadow: 0 0 0.5rem hsl(from var(--base-color1) h s l / 0.75);
 }

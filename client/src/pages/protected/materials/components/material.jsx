@@ -19,7 +19,11 @@ import MenuCard from './menu';
 import Questions from './contents/questoes';
 import Quiz from './contents/quiz';
 import FlashCards from './contents/flashcards';
-
+import Formulario from './contents/forms';
+import GuidedExercises from './contents/guided_exercises';
+import Desafio from './contents/desafio';
+import Explicacoes from './contents/explicacoes';
+import { useAuthenticated } from '../../../../context/authContext';
 export default function MaterialCard({
     id,
     title,
@@ -40,6 +44,7 @@ export default function MaterialCard({
     const [content, setContent] = useState(null);
     const [menu, setMenu] = useState(null);
     const [isOpening, setIsOpening] = useState(false);
+    const { user } = useAuthenticated();
     const navigate = useNavigate();
 
     function formatarHora(created_at) {
@@ -71,9 +76,34 @@ export default function MaterialCard({
 
     function getContent(type) {
         const icons = {
-            desafio: null,
-            'exercicio guiado': null,
-            explicacao: null,
+            desafio: (
+                <Desafio
+                    id={id}
+                    discipline={discipline}
+                    subject={title}
+                    difficulty={difficulty}
+                    content={content}
+                    setContent={setContent}
+                />
+            ),
+            exercicio_guiado: (
+                <GuidedExercises
+                    discipline={discipline}
+                    subject={title}
+                    difficulty={difficulty}
+                    content={content}
+                    setContent={setContent}
+                />
+            ),
+            explicacoes: (
+                <Explicacoes
+                    materialId={id}
+                    discipline={discipline}
+                    subject={title}
+                    content={content}
+                    setContent={setContent}
+                />
+            ),
             flashcards: (
                 <FlashCards
                     discipline={discipline}
@@ -83,7 +113,17 @@ export default function MaterialCard({
                     setContent={setContent}
                 />
             ),
-            formulario: null,
+            formulario: (
+                <Formulario
+                    id={id}
+                    discipline={discipline}
+                    subject={title}
+                    difficulty={difficulty}
+                    content={content}
+                    userEmail={user.email}
+                    setContent={setContent}
+                />
+            ),
             'plano de aula': null,
             questoes: (
                 <Questions
@@ -110,14 +150,22 @@ export default function MaterialCard({
         return icons[type];
     }
 
+    function normalizarTipo(t = '') {
+        return t
+            .toLowerCase()
+            .normalize('NFD')
+            .replace(/[\u0300-\u036f]/g, '')
+            .replace(/[\s-]+/g, '_');
+    }
+
     function getIcon(type) {
         const icons = {
             desafio: <IconLaurelWreath1 className='stroke-color1-100' />,
-            'exercicio guiado': <IconArrowBigUp className='stroke-color1-100' />,
-            explicacao: <IconChalkboardTeacher className='stroke-color1-100' />,
+            exercicio_guiado: <IconArrowBigUp className='stroke-color1-100' />,
+            explicacoes: <IconChalkboardTeacher className='stroke-color1-100' />,
             flashcards: <IconCards className='stroke-color1-100' />,
             formulario: <IconListDetails className='stroke-color1-100' />,
-            'plano de aula': <IconChalkboard className='stroke-color1-100' />,
+            plano_de_aula: <IconChalkboard className='stroke-color1-100' />,
             questoes: <IconListLetters className='stroke-color1-100' />,
             quiz: <IconTimeDuration10 className='stroke-color1-100' />,
             resumo: <IconFileDescription className='stroke-color1-100' />,
@@ -132,6 +180,8 @@ export default function MaterialCard({
     }
 
     function handleOpen() {
+        const tipo = normalizarTipo(type);
+
         if (!getContent(type)) {
             setMessages(prev => [
                 ...prev,
@@ -148,9 +198,12 @@ export default function MaterialCard({
 
         setMenu(null);
         setIsOpening(true);
-        GET(`/api/materials/${type}/${id}`)
+
+        GET(`/api/materials/${tipo}/${id}`)
             .then(data => {
-                if (data.status !== 200) throw new Error(data.message);
+                if (data.status !== 200) {
+                    throw new Error(data.message || 'Erro ao buscar material');
+                }
                 setContent(data.material.content.content);
             })
             .catch(err => setMessages(prev => [...prev, { id: prev.length + 1, message: err.message, type: 'danger' }]))

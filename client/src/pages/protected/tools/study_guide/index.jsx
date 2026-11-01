@@ -56,11 +56,11 @@ export default function GenerateStudyGuide({ setOpen }) {
 
     useEffect(() => {
         function handleClick(event) {
-            if (!articleRef.current.contains(event.target)) setClose(true);
+            if (!isLoading && !articleRef.current.contains(event.target)) setClose(true);
         }
 
         function handleKey(event) {
-            if (event.key === 'Escape') setClose(true);
+            if (!isLoading && event.key === 'Escape') setClose(true);
         }
         document.addEventListener('mousedown', handleClick);
         document.addEventListener('keydown', handleKey);
@@ -69,7 +69,8 @@ export default function GenerateStudyGuide({ setOpen }) {
             document.removeEventListener('mousedown', handleClick);
             document.removeEventListener('keydown', handleKey);
         };
-    }, []);
+    }, [isLoading]);
+
     return (
         <div
             onAnimationEnd={handleAnimationEnd}

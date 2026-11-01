@@ -1,10 +1,17 @@
+from pathlib import Path
+
 from flask import Blueprint, jsonify, request
 from flask_login import current_user, login_required
+from loguru import logger
 from sqlalchemy import func, select
 
 from database import SessionLocal
 from models.historico import Historico
 from models.resumos import Resumo
+from utils import setup_logger
+
+
+setup_logger(__name__, Path(__file__).resolve().parents[1] / 'logs' / 'summaries.log')
 
 
 bp_materials_resumo = Blueprint('resumos', __name__, url_prefix='/resumos')
@@ -102,7 +109,9 @@ def create_resume():
             session.add(resume)
             session.add(historico)
             session.commit()
+            logger.info('Resumo salvo no banco de dados')
             return jsonify({'ok': True, 'redirect': '/materials'}), 201
         except Exception:
             session.rollback()
+            logger.error('Falha ao salvar resumo no banco de dados')
             return jsonify({'ok': False, 'message': 'Ocorreu um erro interno'}), 500

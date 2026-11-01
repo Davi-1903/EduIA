@@ -1,4 +1,7 @@
+from pathlib import Path
+
 from flask_login import current_user
+from loguru import logger
 from sqlalchemy import func, select
 
 from database import SessionLocal
@@ -6,6 +9,10 @@ from errors.materials import MaterialNotFoundError, MaterialServiceError
 from models.flashcards import FlashCards
 from models.historico import Historico
 from models.material import Difficulty
+from utils import setup_logger
+
+
+setup_logger(__name__, Path(__file__).resolve().parents[1] / 'logs' / 'flashcards.log')
 
 
 def get_flashcards_service(cursor: int, limit: int):
@@ -52,16 +59,15 @@ def get_flashcard_service(id: int):
             return MaterialNotFoundError('Flashcards não encontrados')
 
         return {
-                'id': material.id,
-                'title': material.subject,
-                'discipline': material.discipline,
-                'difficulty': material.difficulty.value,
-                'content': material.content,
-                'amount': material.amount,
-                'created_at': material.created_at,
-                'type': material.type.value,
+            'id': material.id,
+            'title': material.subject,
+            'discipline': material.discipline,
+            'difficulty': material.difficulty.value,
+            'content': material.content,
+            'amount': material.amount,
+            'created_at': material.created_at,
+            'type': material.type.value,
         }
-        
 
 
 def create_flashcard_service(data: dict):
@@ -71,7 +77,7 @@ def create_flashcard_service(data: dict):
                 user_id=current_user.id,
                 discipline=data['discipline'],
                 subject=data['subject'],
-                content=data['content'], 
+                content=data['content'],
                 difficulty=Difficulty(data['difficulty']),
                 amount=data['amount'],
             )
@@ -79,7 +85,9 @@ def create_flashcard_service(data: dict):
             session.add(flashcards)
             session.add(historico)
             session.commit()
+            logger.info('Flashcards salvos no banco de dados')
 
         except Exception as exc:
             session.rollback()
+            logger.error('Falha ao salvar flashcards no banco de dados')
             raise MaterialServiceError('Ocorreu um erro interno') from exc

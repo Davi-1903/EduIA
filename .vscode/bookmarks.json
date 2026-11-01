@@ -4,89 +4,99 @@
 			"path": "README.md",
 			"bookmarks": [
 				{
-					"line": 65,
+					"line": 111,
 					"column": 0,
-					"label": "Lembrar de adicionar uma imagem"
-				},
-				{
-					"line": 74,
-					"column": 0,
-					"label": "Atualizar README ao adicionar RAG"
-				},
-				{
-					"line": 86,
-					"column": 0,
-					"label": "Atualizar quando formos usar GPT-5 nano"
+					"label": "Atualizar ao utilizarmos o modelo da OpenAI"
 				}
 			]
 		},
 		{
-			"path": "server/schemas/formularios.py",
+			"path": ".env.example",
 			"bookmarks": [
 				{
 					"line": 7,
 					"column": 0,
-					"label": "Ok, estou com dúvidas o que são esses formulários"
+					"label": "Acho que vai precisar aumentar"
 				}
 			]
 		},
 		{
-			"path": "client/src/pages/protected/tools/questions/index.jsx",
+			"path": "server/controllers/explanation.py",
 			"bookmarks": [
 				{
-					"line": 17,
+					"line": 40,
 					"column": 0,
-					"label": "Adicionar animação quando o material estiver sendo gerado pela IA"
+					"label": "Criar integração com IA"
 				}
 			]
 		},
 		{
-			"path": "server/controllers/user.py",
+			"path": "server/controllers/guided_exercises.py",
 			"bookmarks": [
 				{
-					"line": 32,
+					"line": 19,
 					"column": 0,
-					"label": "É preciso verificar que os materiais não estejam no lixeira"
+					"label": "Separar a interação com o banco de dados em um serviço separado"
+				},
+				{
+					"line": 98,
+					"column": 0,
+					"label": "Criar integração com IA"
 				}
 			]
 		},
 		{
-			"path": "server/ai/__init__.py",
+			"path": "server/controllers/lesson_plan.py",
 			"bookmarks": [
 				{
-					"line": 3,
+					"line": 18,
 					"column": 0,
-					"label": "Futuramente trocar para langhchain-openai"
+					"label": "Separar a interação com o banco de dados em um serviço separado"
+				},
+				{
+					"line": 95,
+					"column": 0,
+					"label": "Criar integração com IA"
 				}
 			]
 		},
 		{
-			"path": "server/Dockerfile",
+			"path": "server/controllers/resumos.py",
 			"bookmarks": [
 				{
-					"line": 20,
+					"line": 18,
 					"column": 0,
-					"label": "O gunicorn \"mata\" as requisições para IA que demoram muito"
+					"label": "Separar a interação com o banco de dados em um serviço separado"
+				},
+				{
+					"line": 90,
+					"column": 0,
+					"label": "Criar integração com IA"
 				}
 			]
 		},
 		{
-			"path": "server/schemas/questoes.py",
+			"path": "server/controllers/study_guide.py",
 			"bookmarks": [
 				{
-					"line": 3,
+					"line": 18,
 					"column": 0,
-					"label": "Estudar a possibilidade usar o formato TOON"
+					"label": "Separar a interação com o banco de dados em um serviço separado"
+				},
+				{
+					"line": 89,
+					"column": 0,
+					"label": "Criar integração com IA"
 				}
 			]
 		},
 		{
-			"path": "docs/framework_e_llm.md",
+			"path": "client/src/pages/protected/history/components/tools/lesson_plan.jsx",
 			"bookmarks": [
 				{
-					"line": 16,
+					"line": 9,
 					"column": 0,
-					"label": "Alterar documentação ao implementar RAG"
+					"label": "Plano de aula não tem tempo"
 				}
 			]
 		}

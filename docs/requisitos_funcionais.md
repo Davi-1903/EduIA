@@ -12,8 +12,6 @@
 | **RF06** | O sistema permitirá a recuperação de senhas                                       | Desejável  | 🔧 Em desenvolvimento |
 | **RF07** | O usuário poderá fazer logout                                                     | Essencial  | ✅ Implementado       |
 
-<!-- O RF01 e RF02 nós vamos deixar de lado por enquanto. No finalzinho do projeto nós os implementamos -->
-
 ## 2. Configuração dos perfis
 
 |  Código  | Requisito                                         | Prioridade | Status                |

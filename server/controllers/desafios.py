@@ -1,4 +1,18 @@
+from pathlib import Path
+
 from flask import Blueprint, jsonify, request
+from flask_login import current_user, login_required
+from loguru import logger
+from sqlalchemy import func, select
+
+from database import SessionLocal
+from models.desafios import Desafio
+from models.historico import Historico
+from models.material import Difficulty
+from utils import setup_logger
+
+
+setup_logger(__name__, Path(__file__).resolve().parents[1] / 'logs' / 'challenges.log')
 from flask_login import login_required
 
 from ai.services.desafio import generate_desafios
@@ -13,7 +27,7 @@ from errors.materials import MaterialNotFoundError, MaterialServiceError, Materi
 from services.desafio import create_desafio_service, get_desafio_service, get_desafios_service
 
 
-bp_materials_desafio = Blueprint('desafios', __name__, url_prefix='/desafios')
+bp_materials_desafio = Blueprint('desafios', __name__, url_prefix='/desafio')
 
 
 @bp_materials_desafio.route('/', methods=['GET'])
@@ -22,6 +36,44 @@ def get_desafio():
     cursor = request.args.get('cursor', 0, type=int)
     limit = request.args.get('limit', 50, type=int)
 
+    with SessionLocal() as session:
+        count_stmt = (
+            select(func.count())
+            .select_from(Desafio)
+            .where(Desafio.user_id == current_user.id)
+            .where(Desafio.deleted_at.is_(None))
+        )
+
+        statement = (
+            select(Desafio)
+            .where(Desafio.user_id == current_user.id)
+            .where(Desafio.deleted_at.is_(None))
+            .offset(cursor)
+            .limit(limit)
+            .order_by(Desafio.created_at.desc())
+        )
+
+        total = session.scalar(count_stmt) or 0
+        materials = session.scalars(statement).all()
+
+        return jsonify(
+            {
+                'ok': True,
+                'total': total,
+                'materials': [
+                    {
+                        'id': material.id,
+                        'title': material.subject,
+                        'discipline': material.discipline,
+                        'difficulty': material.difficulty.value,
+                        'note': material.note,
+                        'created_at': material.created_at,
+                        'type': material.type.value,
+                    }
+                    for material in materials
+                ],
+            }
+        ), 200
     try:
         desafio = get_desafio_service(cursor, limit)
         return jsonify({'ok': True, **desafio}), 200
@@ -31,6 +83,33 @@ def get_desafio():
 
 @bp_materials_desafio.route('/<int:id>', methods=['GET'])
 @login_required
+def get_desafio(id: int):
+    with SessionLocal() as session:
+        material = session.scalar(
+            select(Desafio)
+            .where(Desafio.id == id)
+            .where(Desafio.user_id == current_user.id)
+            .where(Desafio.deleted_at.is_(None))
+        )
+
+        if material is None:
+            return jsonify({'ok': False, 'message': 'Desafio não encontrado'}), 404
+
+        return jsonify(
+            {
+                'ok': True,
+                'material': {
+                    'id': material.id,
+                    'title': material.subject,
+                    'discipline': material.discipline,
+                    'difficulty': material.difficulty.value,
+                    'content': material.content,
+                    'note': material.note,
+                    'created_at': material.created_at,
+                    'type': material.type.value,
+                },
+            }
+        ), 200
 def get_flashcard(id: int):
     try:
         desafio = get_desafios_service(id)
@@ -47,8 +126,77 @@ def get_flashcard(id: int):
 @login_required
 def create_desafio():
     data = request.get_json(silent=True)
+
     if data is None:
         return jsonify({'ok': False, 'message': 'Dados não recebidos'}), 400
+
+    # Lógica da IA...
+
+    with SessionLocal() as session:
+        try:
+            desafio = Desafio(
+                user_id=current_user.id,
+                discipline=data['discipline'],
+                subject=data['subject'],
+                content={'content': 1},
+                difficulty=Difficulty.MUITO_DIFICIL,
+                note=data['note'] if data['note'] != '' else None,
+            )
+
+            historico = Historico(material=desafio)
+
+            session.add(desafio)
+            session.add(historico)
+            session.commit()
+
+            return jsonify({'ok': True, 'redirect': '/materials'}), 201
+
+        except Exception:
+            session.rollback()
+
+            return jsonify({'ok': False, 'message': 'Ocorreu um erro interno'}), 500
+
+
+@bp_materials_desafio.route('/<int:id>/respostas', methods=['POST'])
+@login_required
+def responder_desafio(id: int):
+    data = request.get_json(silent=True)
+
+    if data is None:
+        return jsonify({'ok': False, 'message': 'Dados não recebidos'}), 400
+
+    answer = data.get('answer')
+
+    if not answer or not answer.strip():
+        return jsonify({'ok': False, 'message': 'A resolução não pode estar vazia'}), 400
+
+    with SessionLocal() as session:
+        try:
+            desafio = session.scalar(
+                select(Desafio)
+                .where(Desafio.id == id)
+                .where(Desafio.user_id == current_user.id)
+                .where(Desafio.deleted_at.is_(None))
+            )
+
+            if desafio is None:
+                return jsonify({'ok': False, 'message': 'Desafio não encontrado'}), 404
+
+            historico = session.scalar(select(Historico).where(Historico.material_id == desafio.id))
+
+            if historico is None:
+                return jsonify({'ok': False, 'message': 'Histórico do desafio não encontrado'}), 404
+
+            historico.answer = answer.strip()
+
+            session.commit()
+
+            return jsonify({'ok': True, 'message': 'Resolução enviada com sucesso'}), 200
+
+        except Exception:
+            session.rollback()
+
+            return jsonify({'ok': False, 'message': 'Ocorreu um erro interno'}), 500
 
     try:
         content = generate_desafios(data)
