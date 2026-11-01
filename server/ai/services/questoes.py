@@ -1,3 +1,4 @@
+from langchain_core.exceptions import OutputParserException
 from pydantic import ValidationError
 
 from errors.ai import AiInvalidData, AiInvalidRequest
@@ -22,7 +23,7 @@ def generate_questions(data: dict):
         content = generate_questions_gateway(payload)
         Questoes.model_validate(content)
         return content
-    except ValidationError as error:
+    except (ValidationError, OutputParserException) as error:
         raise AiInvalidData('A IA retornou dados inválidos') from error
     except AiInvalidRequest as error:
         raise AiInvalidData(str(error)) from error

@@ -24,7 +24,8 @@ def generate_questions(payload: dict):
         raise
 
     try:
-        content = llm.invoke(questoes.prompt_template.format(**payload, documentacao=documentation)).content
+        chain = questoes.prompt_template | llm | questoes.parser
+        content = chain.invoke({**payload, 'documentacao': documentation})
         logger.info('Geração de material de questões concluída')
         return content
 
@@ -59,7 +60,8 @@ def generate_quizzes(payload: dict):
         raise
 
     try:
-        content = llm.invoke(quiz.prompt_template.format(**payload, documentacao=documentation)).content
+        chain = quiz.prompt_template | llm | quiz.parser
+        content = chain.invoke({**payload, 'documentacao': documentation})
         logger.info('Geração de quiz concluída')
         return content
 
@@ -94,7 +96,8 @@ def generate_flashcards(payload: dict):
         raise
 
     try:
-        content = llm.invoke(flashcards.prompt_template.format(**payload, documentacao=documentation)).content
+        chain = flashcards.prompt_template | llm | flashcards.parser
+        content = chain.invoke({**payload, 'documentacao': documentation})
         logger.info('Geração de flashcards concluída')
         return content
 
@@ -129,7 +132,8 @@ def generate_formularios(payload: dict):
         raise
 
     try:
-        content = llm.invoke(formularios.prompt_template.format(**payload, documentacao=documentation)).content
+        chain = formularios.prompt_template | llm | formularios.parser
+        content = chain.invoke({**payload, 'documentacao': documentation})
         logger.info('Geração de formulários concluída')
         return content
 

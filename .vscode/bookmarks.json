@@ -16,17 +16,7 @@
 				{
 					"line": 7,
 					"column": 0,
-					"label": "Acho que vai precisar subir"
-				}
-			]
-		},
-		{
-			"path": "server/ai/gateways/__init__.py",
-			"bookmarks": [
-				{
-					"line": 20,
-					"column": 0,
-					"label": "Usar o chain"
+					"label": "Acho que vai precisar aumentar"
 				}
 			]
 		},

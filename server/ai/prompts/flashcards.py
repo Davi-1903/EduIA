@@ -4,7 +4,6 @@ from langchain_core.prompts import PromptTemplate
 from schemas.flashcards import Flashcards
 
 
-
 PROMPT = """
 Você é um professor especialista em {disciplina}. Gere {quantidade} flashcards, com breves explicações sobre.
 
@@ -22,4 +21,3 @@ prompt_template = PromptTemplate(
     input_variables=['disciplina', 'quantidade', 'dificuldade', 'assunto', 'documentacao'],
     partial_variables={'format_instructions': parser.get_format_instructions()},
 )
-
