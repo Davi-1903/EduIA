@@ -16,7 +16,8 @@ blockquote { border-left: solid 2px black; background-color: #dfdfdf; }
 """
 
 
-def json_to_html(content: list | dict, type_: str, title: str) -> str:
+def json_to_html(content: dict, type_: str, title: str) -> str:
+    print(content)
     format_types = {
         'exercicio_guiado': 'Exercício guiado',
         'flashcards': 'Flashcards',
@@ -35,7 +36,7 @@ def json_to_html(content: list | dict, type_: str, title: str) -> str:
                 for letter, item in zip(letters, question['answers']):
                     html += f'<p><strong>{letter}</strong> {item["text"]}</p>'
                 html += '</ul>'
-                html += f'<p><strong>Resposta:</strong> {question["answers"][question["correctAnswerId"]]}</p>'
+                html += f'<p><strong>Resposta:</strong> {question["answers"][question["correctAnswerId"]]["text"]}</p>'
                 html += f'<p><strong>Explicação:</strong> {question["explanation"]}</p>'
         elif content['type'] == 'true_or_false':
             for question in content['content']:
@@ -48,13 +49,13 @@ def json_to_html(content: list | dict, type_: str, title: str) -> str:
                 html += f'<p><strong>Resposta esperada:</strong> {question["expectedAnswer"]}</p>'
                 html += f'<p><strong>Explicação:</strong> {question["explanation"]}</p>'
     elif type_ == 'flashcards':
-        for item in content:
+        for item in content['content']:
             html += '<ul>'
             html += f'<li><strong>Pergunta:</strong> <span>{item["question"]}</span><li>'
             html += f'<li><strong>Resposta:</strong> <span>{item["answer"]}</span></li>'
             html += '</ul>'
     elif type_ in ('questoes', 'quiz', 'formulario'):
-        for question in content:
+        for question in content['content']:
             html += f'<h2>{question["id"]}. {question["question"]}</h2>'
             html += '<ul>'
             for letter, item in zip(letters, question['answers']):
@@ -64,12 +65,12 @@ def json_to_html(content: list | dict, type_: str, title: str) -> str:
     return html
 
 
-def make_pdf(content: str | list, type_: str, title: str) -> bytes:
-    if isinstance(content, list):
+def make_pdf(content: dict, type_: str, title: str) -> bytes:
+    if isinstance(content['content'], (list, dict)):
         html_body = json_to_html(content, type_, title)
     else:
-        html_body = nh3.clean(markdown(content, extensions=['extra', 'sane_lists', 'tables', 'fenced_code']))
-    html = f"<html><head><meta charset='utf-8'><style>{PDF_CSS}</style></head><body>{html_body}<blockquote>Teste</blockquote></body></html>"
+        html_body = nh3.clean(markdown(content['content'], extensions=['extra', 'sane_lists', 'tables', 'fenced_code']))
+    html = f"<html><head><meta charset='utf-8'><style>{PDF_CSS}</style></head><body>{html_body}</body></html>"
 
     out = BytesIO()
     result = pisa.CreatePDF(html, dest=out, encoding='utf-8')

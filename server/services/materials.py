@@ -115,7 +115,7 @@ def get_content_service(id_: int):
         return {
             'id': material.id,
             'subject': material.subject,
-            'content': material.content['content'],
+            'content': material.content,
         }
 
 

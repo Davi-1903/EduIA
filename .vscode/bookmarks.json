@@ -107,16 +107,6 @@
 					"line": 4,
 					"column": 0,
 					"label": "Testar o weasyprint"
-				},
-				{
-					"line": 18,
-					"column": 1,
-					"label": ""
-				},
-				{
-					"line": 20,
-					"column": 1,
-					"label": ""
 				}
 			]
 		},
@@ -126,7 +116,7 @@
 				{
 					"line": 3,
 					"column": 0,
-					"label": "Mudar o schema"
+					"label": "Mudar o schema, pois os exercícios guiados não são mais em markdown, mas em JSON"
 				}
 			]
 		},
