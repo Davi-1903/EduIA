@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
-import { IconFolderOpen, IconTrash } from '@tabler/icons-react';
+import { IconDownload, IconFolderOpen, IconTrash } from '@tabler/icons-react';
 
-export default function MenuCard({ x, y, setMenu, handleOpen, handleDelete }) {
+export default function MenuCard({ x, y, setMenu, handleOpen, handleDownload, handleDelete }) {
     const menuRef = useRef(null);
 
     useEffect(() => {
@@ -40,6 +40,13 @@ export default function MenuCard({ x, y, setMenu, handleOpen, handleDelete }) {
             >
                 <IconFolderOpen className='stroke-color1-100' />
                 <span className='font-secundary font-medium text-color1-100'>Abrir</span>
+            </button>
+            <button
+                className='flex items-center gap-2 rounded-sm px-2 py-1 hover:bg-color4-100'
+                onClick={handleDownload}
+            >
+                <IconDownload className='stroke-color1-100' />
+                <span className='font-secundary font-medium text-color1-100'>Baixar</span>
             </button>
             <hr className='border border-color4-25' />
             <button

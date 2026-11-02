@@ -31,7 +31,7 @@ export default function GuidedExercises({ discipline, subject, difficulty, conte
         return () => {
             document.removeEventListener('mousedown', handleClick);
             document.removeEventListener('keydown', handleKey);
-        }
+        };
     }, [start]);
 
     return (

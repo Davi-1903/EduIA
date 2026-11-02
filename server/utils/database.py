@@ -9,8 +9,7 @@ from sqlalchemy.exc import OperationalError
 from . import get_env, setup_logger
 
 
-load_dotenv()
-
+load_dotenv(override=True)
 setup_logger(__name__, Path(__file__).resolve().parents[1] / 'logs' / 'database.log')
 
 

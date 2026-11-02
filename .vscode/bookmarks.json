@@ -99,6 +99,36 @@
 					"label": "Plano de aula não tem tempo"
 				}
 			]
+		},
+		{
+			"path": "server/utils/download.py",
+			"bookmarks": [
+				{
+					"line": 4,
+					"column": 0,
+					"label": "Testar o weasyprint"
+				},
+				{
+					"line": 18,
+					"column": 1,
+					"label": ""
+				},
+				{
+					"line": 20,
+					"column": 1,
+					"label": ""
+				}
+			]
+		},
+		{
+			"path": "server/schemas/exercicios_guiados.py",
+			"bookmarks": [
+				{
+					"line": 3,
+					"column": 0,
+					"label": "Mudar o schema"
+				}
+			]
 		}
 	]
 }

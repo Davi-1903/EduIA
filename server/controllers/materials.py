@@ -1,4 +1,6 @@
-from flask import Blueprint, jsonify, request
+import io
+
+from flask import Blueprint, jsonify, request, send_file
 from flask_login import login_required
 
 from controllers.desafios import bp_materials_desafio
@@ -13,11 +15,13 @@ from controllers.resumos import bp_materials_resumo
 from controllers.study_guide import bp_study_guide
 from errors.materials import MaterialNotFoundError, MaterialServiceError, MaterialValidationError
 from services.materials import (
+    get_content_service,
     get_materials_service,
     hard_delete_material_service,
     restore_material_service,
     soft_delete_material_service,
 )
+from utils.download import make_pdf
 
 
 bp_materials = Blueprint('materials', __name__, url_prefix='/api/materials')
@@ -94,3 +98,37 @@ def hard_delete_material(id: int):
 
     except MaterialServiceError:
         return jsonify({'ok': False, 'message': 'Ocorreu um erro interno'}), 500
+
+
+@bp_materials.route('/<type>/<int:id>/pdf', methods=['GET'])
+@login_required
+def download_pdf(type: str, id: int):
+    format_types = {
+        'desafio': 'Desafios',
+        'exercicio_guiado': 'Exercício guiado',
+        'explicacoes': 'Explicações',
+        'flashcards': 'Flashcards',
+        'formulario': 'Formulário',
+        'plano_de_aula': 'Plano de aula',
+        'questoes': 'Questões',
+        'quiz': 'Quiz',
+        'resumo': 'Resumo',
+        'roteiro': 'Roteiro de estudo',
+    }
+
+    try:
+        material = get_content_service(id)
+    except MaterialNotFoundError as err:
+        return jsonify({'ok': False, 'message': str(err)}), 404
+
+    try:
+        pdf_bytes = make_pdf(material['content'], type, material['subject'])
+    except RuntimeError:
+        return jsonify({'ok': False, 'message': 'Não foi possível gerar o PDF'}), 400
+
+    return send_file(
+        io.BytesIO(pdf_bytes),
+        mimetype='application/pdf',
+        as_attachment=True,
+        download_name=f'{format_types[type]} - {material["subject"]}.pdf',
+    )

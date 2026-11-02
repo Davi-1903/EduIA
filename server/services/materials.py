@@ -101,6 +101,24 @@ def get_materials_service(cursor: int, limit: int, type_: str, difficulty: str, 
         }
 
 
+def get_content_service(id_: int):
+    with SessionLocal() as session:
+        material = session.scalar(
+            select(Material)
+            .where(Material.id == id_)
+            .where(Material.user_id == current_user.id)
+            .where(Material.deleted_at.is_(None))
+        )
+        if material is None:
+            raise MaterialNotFoundError('Material não encontrado')
+
+        return {
+            'id': material.id,
+            'subject': material.subject,
+            'content': material.content['content'],
+        }
+
+
 def soft_delete_material_service(id: int):
     with SessionLocal() as session:
         material = session.scalar(select(Material).where(Material.id == id).where(Material.user_id == current_user.id))

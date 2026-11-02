@@ -1,6 +1,7 @@
 from enum import Enum
 from pathlib import Path
 
+from dotenv import load_dotenv
 from langchain_huggingface import ChatHuggingFace, HuggingFaceEmbeddings, HuggingFaceEndpoint
 from langchain_pinecone import PineconeVectorStore
 from loguru import logger
@@ -9,6 +10,7 @@ from pinecone import Pinecone
 from . import get_env, setup_logger
 
 
+load_dotenv(override=True)
 setup_logger(__name__, Path(__file__).resolve().parents[1] / 'logs' / 'ai.log')
 
 

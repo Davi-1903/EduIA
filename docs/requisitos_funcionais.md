@@ -24,7 +24,7 @@
 |  Código  | Requisito                | Como funcionará                                                                                            | Módulo    | Prioridade | Status                |
 | :------: | ------------------------ | ---------------------------------------------------------------------------------------------------------- | --------- | ---------- | --------------------- |
 | **RF10** | Gerar Questões           | Listas de exercícios com quantidade e nível especificados pelo usuário                                     | Ambos     | Essencial  | ✅ Implementado       |
-| **RF11** | Gerar Formulários        | Formulários com quantidade e nível especificados pelo usuário                                              | Professor | Essencial  | 🔧 Em desenvolvimento |
+| **RF11** | Gerar Formulários        | Formulários com quantidade e nível especificados pelo usuário                                              | Professor | Essencial  | ✅ Implementado       |
 | **RF12** | Gerar Quiz               | Quizzes com pontuação e tempo estabelecidos pelo usuário                                                   | Ambos     | Importante | ✅ Implementado       |
 | **RF13** | Gerar Flashcards         | Cartões com perguntas simples e suas respostas                                                             | Aluno     | Essencial  | ✅ Implementado       |
 | **RF14** | Gerar Resumos            | Resumo de um determinado assunto ou matéria                                                                | Ambos     | Importante | 🔧 Em desenvolvimento |

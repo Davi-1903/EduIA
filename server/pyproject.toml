@@ -15,12 +15,15 @@ dependencies = [
     "langchain-huggingface>=1.2.2",
     "langchain-pinecone>=0.2.13",
     "loguru>=0.7.3",
+    "markdown>=3.11.2",
+    "nh3>=0.3.7",
     "pwdlib[argon2]>=0.3.1",
     "pydantic>=2.13.4",
     "pymysql>=1.2.0",
     "python-dotenv>=1.2.3",
     "sentence-transformers>=6.1.0",
     "sqlalchemy>=2.0.52",
+    "xhtml2pdf>=0.2.28",
 ]
 
 [dependency-groups]
