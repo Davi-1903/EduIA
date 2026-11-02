@@ -9,7 +9,7 @@ export default function GuidedExercises({ discipline, subject, difficulty, conte
     const [isClose, setClose] = useState(false);
 
     const tipo = content?.type; // 'multiple_choice' | 'true_or_false' | 'discursive'
-    const questoes = Array.isArray(content) ? content : [];
+    const questoes = Array.isArray(content.content) ? content.content : [];
 
     function handleAnimationEnd(event) {
         if (event.target !== event.currentTarget) return;

@@ -26,7 +26,7 @@ export default function Filters({
     ];
 
     function filterMaterials(tipo, material, idx) {
-        const exclusivoProfessores = ['formulario', 'plano de aula'];
+        const exclusivoProfessores = ['formulario', 'plano_de_aula'];
         const exclusivoAlunos = ['flashcards', 'roteiro de estudo'];
 
         if (

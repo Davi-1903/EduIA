@@ -129,6 +129,16 @@
 					"label": "Mudar o schema"
 				}
 			]
+		},
+		{
+			"path": "client/src/pages/protected/materials/components/contents/explicacoes/index.jsx",
+			"bookmarks": [
+				{
+					"line": 60,
+					"column": 0,
+					"label": "Adicionar introdução, para ficar igual aos outros"
+				}
+			]
 		}
 	]
 }
