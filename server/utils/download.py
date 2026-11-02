@@ -12,12 +12,12 @@ h1 { -pdf-keep-with-next: true; font-size: 16pt; }
 h2 { -pdf-keep-with-next: true; font-size: 14pt; }
 h3 { -pdf-keep-with-next: true; font-size: 12pt; }
 h4 { -pdf-keep-with-next: true; font-size: 10pt; }
-blockquote { border-left: solid 2px black; background-color: #dfdfdf; }
+table { width: 100%; border: solid 2px black; }
+th, td { border: solid 1px black; padding: 8px; }
 """
 
 
 def json_to_html(content: dict, type_: str, title: str) -> str:
-    print(content)
     format_types = {
         'exercicio_guiado': 'Exercício guiado',
         'flashcards': 'Flashcards',
@@ -49,11 +49,13 @@ def json_to_html(content: dict, type_: str, title: str) -> str:
                 html += f'<p><strong>Resposta esperada:</strong> {question["expectedAnswer"]}</p>'
                 html += f'<p><strong>Explicação:</strong> {question["explanation"]}</p>'
     elif type_ == 'flashcards':
+        html += '<table><thead><tr><th>Pergunta</th><th>Resposta</th></tr></thead><tbody>'
         for item in content['content']:
-            html += '<ul>'
-            html += f'<li><strong>Pergunta:</strong> <span>{item["question"]}</span><li>'
-            html += f'<li><strong>Resposta:</strong> <span>{item["answer"]}</span></li>'
-            html += '</ul>'
+            html += '<tr>'
+            html += f'<td><span>{item["question"]}</span></td>'
+            html += f'<td><span>{item["answer"]}</span></td>'
+            html += '</tr>'
+        html += '</tbody></table>'
     elif type_ in ('questoes', 'quiz', 'formulario'):
         for question in content['content']:
             html += f'<h2>{question["id"]}. {question["question"]}</h2>'
