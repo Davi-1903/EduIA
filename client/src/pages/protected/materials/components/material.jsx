@@ -204,7 +204,7 @@ export default function MaterialCard({
                 if (data.status !== 200) {
                     throw new Error(data.message || 'Erro ao buscar material');
                 }
-                setContent(data.material.content.content);
+                setContent(tipo === 'exercicio_guiado' ? data.material.content : data.material.content.content);
             })
             .catch(err => setMessages(prev => [...prev, { id: prev.length + 1, message: err.message, type: 'danger' }]))
             .finally(() => setIsOpening(false));
