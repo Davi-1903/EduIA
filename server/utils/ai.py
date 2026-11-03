@@ -2,7 +2,8 @@ from enum import Enum
 from pathlib import Path
 
 from dotenv import load_dotenv
-from langchain_huggingface import ChatHuggingFace, HuggingFaceEmbeddings, HuggingFaceEndpoint
+from langchain_groq import ChatGroq
+from langchain_huggingface import HuggingFaceEmbeddings
 from langchain_pinecone import PineconeVectorStore
 from loguru import logger
 from pinecone import Pinecone
@@ -33,15 +34,12 @@ class Discipline(str, Enum):
     programacao_orientada_a_servicos = 'Programação Orientada a Serviços'
 
 
-def get_llm() -> ChatHuggingFace:
-    llm_base = HuggingFaceEndpoint(
-        model=get_env('HF_MODEL'),
-        max_new_tokens=int(get_env('MAX_TOKENS')),
+def get_llm() -> ChatGroq:
+    return ChatGroq(
+        model=get_env('GROQ_MODEL'),
+        max_tokens=int(get_env('MAX_TOKENS')),
         temperature=0.1,
-        top_p=0.9,
-        provider='auto',
     )
-    return ChatHuggingFace(llm=llm_base)
 
 
 def get_embedding_model() -> HuggingFaceEmbeddings:

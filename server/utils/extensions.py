@@ -1,9 +1,9 @@
 from flask import current_app
-from langchain_huggingface import ChatHuggingFace
+from langchain_groq import ChatGroq
 from langchain_pinecone import PineconeVectorStore
 
 
-def get_llm_ext() -> ChatHuggingFace:
+def get_llm_ext() -> ChatGroq:
     return current_app.extensions['llm']
 
 
