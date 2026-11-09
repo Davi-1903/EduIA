@@ -215,8 +215,8 @@ Há duas formas principais de rodar o EduIA:
     PINECONE_API_KEY=<SUA-CHAVE-DE-API-DO-PINECONE>
     GROQ_API_KEY=<SUA-CHAVE-DE-API-DO-GROQ>
 
-    # =====================< Hugging Face >=====================
-    HF_EMBEDDING_MODEL=<MODELO-DE-EMBEDDING>
+    # =====================< IA >=====================
+    HF_EMBEDDING_MODEL=Qwen/Qwen3-Embedding-0.6B
     GROQ_MODEL=<MODELO-DE-IA>
     MAX_TOKENS=3000
     INDEX_NAME=eduia-rag
@@ -224,6 +224,16 @@ Há duas formas principais de rodar o EduIA:
     # =====================< Autenticação >=====================
     SECRET_KEY=<SUA-CHAVE-SECRETA-AQUI>
     CORS_ORIGINS=http://localhost:3000,http://localhost:4173
+    SESSION_COOKIE_SECURE=0
+
+    # ========================< SUAP OAuth >=======================
+    SUAP_CLIENT_ID=<CLIENT-ID-DO-SUAP>
+    SUAP_CLIENT_SECRET=<CLIENT-SECRET-DO-SUAP>
+    SUAP_REDIRECT_URI=http://localhost:3000/api/auth/suap/callback
+    SUAP_AUTHORIZATION_URL=https://suap.ifrn.edu.br/o/authorize/
+    SUAP_TOKEN_URL=https://suap.ifrn.edu.br/o/token/
+    SUAP_PROFILE_URL=https://suap.ifrn.edu.br/api/rh/eu/
+    SUAP_PROFILE_FALLBACK_URL=https://suap.ifrn.edu.br/api/rh/meus-dados/
 
     # ====================< Banco de dados >====================
     DB_USER=root
@@ -233,6 +243,10 @@ Há duas formas principais de rodar o EduIA:
     DB_NAME=db_eduia
     TRASH_RETENTION_DAYS=30
     ```
+
+    Para cadastrar a aplicação OAuth no SUAP, aplicar a migração de matrícula
+    e testar o fluxo de autenticação, consulte
+    [docs/autenticacao_suap.md](./docs/autenticacao_suap.md).
 
 3. **Instale as dependências**
 

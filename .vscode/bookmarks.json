@@ -129,6 +129,66 @@
 					"label": "Adicionar introdução, para ficar igual aos outros"
 				}
 			]
+		},
+		{
+			"path": "client/src/pages/unprotected/about/index.jsx",
+			"bookmarks": [
+				{
+					"line": 3,
+					"column": 0,
+					"label": "Melhorar imagens"
+				}
+			]
+		},
+		{
+			"path": "server/services/suap.py",
+			"bookmarks": [
+				{
+					"line": 150,
+					"column": 0,
+					"label": "{}@escolar.ifrn.edu.br"
+				},
+				{
+					"line": 173,
+					"column": 0,
+					"label": "Acho que não precisará de senha"
+				}
+			]
+		},
+		{
+			"path": "server/models/user.py",
+			"bookmarks": [
+				{
+					"line": 24,
+					"column": 0,
+					"label": "Aumentar quantidade de caracteres"
+				},
+				{
+					"line": 26,
+					"column": 0,
+					"label": "Acho que não vamos mais precisar de senha"
+				}
+			]
+		},
+		{
+			"path": "client/src/main.jsx",
+			"bookmarks": [
+				{
+					"line": 92,
+					"column": 0,
+					"label": "Vai ficar só um, pois vamos depender apenas do SUAP"
+				}
+			]
+		},
+		{
+			"path": "docs/autenticacao_suap.md",
+			"bookmarks": [
+				{
+					"line": 48,
+					"column": 0,
+					"label": "Remover migração do banco de dados"
+				}
+			]
 		}
 	]
 }

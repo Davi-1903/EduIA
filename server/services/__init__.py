@@ -1,4 +1,4 @@
-from . import historico, lixeira, materials, questoes, quiz, user
+from . import historico, lixeira, materials, questoes, quiz, suap, user
 
 
-__all__ = ['materials', 'questoes', 'quiz', 'historico', 'lixeira', 'user']
+__all__ = ['historico', 'lixeira', 'materials', 'questoes', 'quiz', 'suap', 'user']

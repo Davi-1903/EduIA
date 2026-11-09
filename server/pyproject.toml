@@ -22,6 +22,7 @@ dependencies = [
     "pydantic>=2.13.4",
     "pymysql>=1.2.0",
     "python-dotenv>=1.2.3",
+    "requests>=2.34.2",
     "sentence-transformers>=6.1.0",
     "sqlalchemy>=2.0.52",
     "xhtml2pdf>=0.2.28",

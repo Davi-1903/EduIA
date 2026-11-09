@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Link, useNavigate } from 'react-router-dom';
-import { IconArrowLeft, IconEye, IconEyeOff, IconMail } from '@tabler/icons-react';
+import { IconArrowLeft, IconEye, IconEyeOff, IconLogin2, IconMail } from '@tabler/icons-react';
 import { Helmet } from 'react-helmet-async';
 import Footer from '../../../components/footer';
 import ProtectedRoute from '../../../components/protectedRoute';
@@ -17,6 +17,29 @@ export default function SignIn() {
     const { setAuthenticated, setUser } = useAuthenticated();
     const { setMessages } = useMessages();
     const navigate = useNavigate();
+
+    useEffect(() => {
+        const error = new URLSearchParams(window.location.search).get('suap_error');
+        if (!error) return;
+
+        const messages = {
+            invalid_state: 'A validação de segurança do login SUAP falhou. Tente novamente.',
+            denied: 'A autenticação no SUAP foi cancelada.',
+            invalid_response: 'O SUAP não retornou um código de autenticação.',
+            account_conflict: 'Esta conta SUAP precisa ser vinculada pelo administrador.',
+            unsupported_user: 'Este tipo de vínculo SUAP não pode acessar o EduIA.',
+            unavailable: 'O login SUAP está temporariamente indisponível.',
+        };
+        setMessages(prev => [
+            ...prev,
+            {
+                id: Date.now(),
+                message: messages[error] || 'Não foi possível autenticar com o SUAP.',
+                type: 'danger',
+            },
+        ]);
+        window.history.replaceState({}, '', window.location.pathname);
+    }, [setMessages]);
 
     function toggleShowPassword() {
         setShowPassword(!showPassword);
@@ -154,6 +177,21 @@ export default function SignIn() {
                                 disabled={isLoading}
                             >
                                 Entrar
+                            </button>
+                            <div className='relative my-2'>
+                                <hr className='absolute top-1/2 h-0.5 w-full -translate-y-1/2 rounded-full bg-color3-25/20' />
+                                <span className='absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 bg-color4-200 px-2 font-semibold text-color3-25/40'>
+                                    Ou
+                                </span>
+                            </div>
+                            <button
+                                type='button'
+                                className='flex min-h-12 cursor-pointer items-center justify-center gap-2 rounded-lg border-2 border-color1-100 stroke-color1-100 px-4 py-2 text-lg text-color1-100 transition-all duration-100 hover:bg-button hover:stroke-color3-100 hover:text-color4-100'
+                                onClick={() => window.location.assign('/api/auth/suap/login')}
+                                disabled={isLoading}
+                            >
+                                <IconLogin2 size={32} />
+                                <span>Entrar com SUAP</span>
                             </button>
                             <p className='mt-1 text-center text-color3-25'>
                                 Não tem uma conta?{' '}
