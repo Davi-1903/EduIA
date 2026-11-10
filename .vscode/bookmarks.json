@@ -144,7 +144,7 @@
 			"path": "server/services/suap.py",
 			"bookmarks": [
 				{
-					"line": 150,
+					"line": 146,
 					"column": 0,
 					"label": "{}@escolar.ifrn.edu.br"
 				},
@@ -174,7 +174,7 @@
 			"path": "client/src/main.jsx",
 			"bookmarks": [
 				{
-					"line": 92,
+					"line": 91,
 					"column": 0,
 					"label": "Vai ficar só um, pois vamos depender apenas do SUAP"
 				}

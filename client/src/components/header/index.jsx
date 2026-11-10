@@ -87,21 +87,11 @@ function Header() {
                         <li>
                             <Link
                                 to='/login'
-                                className='cursor-pointer rounded-lg border-2 border-color1-100 px-4 py-2 font-primary text-sm font-medium text-color1-100 transition-all duration-150 hover:bg-button hover:text-color4-100'
-                                onClick={closeMenu}
-                                prefetch='intent'
-                            >
-                                Login
-                            </Link>
-                        </li>
-                        <li>
-                            <Link
-                                to='/cadastro'
                                 className='cursor-pointer rounded-lg border-2 border-color1-100 bg-button px-4 py-2 font-primary text-sm font-medium text-color4-100 transition-all duration-150 hover:shadow-link'
                                 onClick={closeMenu}
                                 prefetch='intent'
                             >
-                                Cadastro
+                                Entrar
                             </Link>
                         </li>
                     </ul>
