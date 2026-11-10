@@ -1,12 +1,11 @@
 import { useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import { IconArrowLeft, IconEye, IconEyeOff, IconLogin2, IconMail } from '@tabler/icons-react';
+import { IconArrowLeft, IconLogin2 } from '@tabler/icons-react';
 import { Helmet } from 'react-helmet-async';
 import Footer from '../../../components/footer';
 import ProtectedRoute from '../../../components/protectedRoute';
 import { useMessages } from '../../../context/messagesContext';
 import RenderMessages from '../../../components/renderMessages';
-import { POST } from '../../../api/auth';
 
 export default function SignIn() {
     const { setMessages } = useMessages();

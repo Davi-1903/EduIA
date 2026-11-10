@@ -19,13 +19,12 @@ class UserType(enum.Enum):
 
 class Usuario(Base, UserMixin):
     __tablename__ = 'usuarios'
-    __table_args__ = (UniqueConstraint('suap_matricula', name='uq_usuarios_suap_matricula'),)
+    __table_args__ = (UniqueConstraint('matricula', name='uq_usuarios_matricula'),)
 
     id: Mapped[int] = mapped_column(primary_key=True, autoincrement=True)
-    name: Mapped[str] = mapped_column(String(30), nullable=False)
+    name: Mapped[str] = mapped_column(String(50), nullable=False)
     email: Mapped[str] = mapped_column(String(150), unique=True, nullable=False)
-    password: Mapped[str] = mapped_column(String(255), nullable=False)
-    suap_matricula: Mapped[str | None] = mapped_column(String(30), nullable=True)
+    matricula: Mapped[str] = mapped_column(String(30), unique=True, nullable=False)
     type: Mapped[UserType] = mapped_column(Enum(UserType), nullable=False)
 
     materials: Mapped[list['Material']] = relationship(back_populates='user')

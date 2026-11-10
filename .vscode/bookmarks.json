@@ -141,36 +141,6 @@
 			]
 		},
 		{
-			"path": "server/services/suap.py",
-			"bookmarks": [
-				{
-					"line": 146,
-					"column": 0,
-					"label": "{}@escolar.ifrn.edu.br"
-				},
-				{
-					"line": 173,
-					"column": 0,
-					"label": "Acho que não precisará de senha"
-				}
-			]
-		},
-		{
-			"path": "server/models/user.py",
-			"bookmarks": [
-				{
-					"line": 24,
-					"column": 0,
-					"label": "Aumentar quantidade de caracteres"
-				},
-				{
-					"line": 26,
-					"column": 0,
-					"label": "Acho que não vamos mais precisar de senha"
-				}
-			]
-		},
-		{
 			"path": "client/src/main.jsx",
 			"bookmarks": [
 				{

@@ -4,7 +4,6 @@ import random
 from argparse import ArgumentParser
 
 from dotenv import load_dotenv
-from pwdlib import PasswordHash
 from rich import box, print
 from rich.table import Table
 from sqlalchemy import desc, func, select
@@ -31,8 +30,6 @@ from models.user import UserType, Usuario
 load_dotenv()
 
 
-password_hash = PasswordHash.recommended()
-PASSWORD = '1234'
 CATALOGO = {
     'Disciplinas Comuns': [
         'Língua Portuguesa e Literatura',
@@ -131,9 +128,9 @@ MATERIAL_MODEL_BY_TYPE = {
     MaterialType.RESUMO,
 }
 USUARIOS_PADRAO = (
-    (Aluno, 'Fulano', 'fulano@eduia.com'),
-    (Professor, 'Beltrano', 'beltrano@eduia.com'),
-    (Aluno, 'Sicrano', 'sicrano@eduia.com'),
+    (Aluno, 'Fulano', 'fulano@eduia.com', '20231101110001'),
+    (Professor, 'Beltrano', 'beltrano@eduia.com', '20231101110002'),
+    (Aluno, 'Sicrano', 'sicrano@eduia.com', '20231101110003'),
 )
 
 
@@ -145,11 +142,11 @@ def exibir_usuarios():
     table.add_column('Id', style='cyan')
     table.add_column('Nome', style='green')
     table.add_column('Email', style='green')
-    table.add_column('Senha', style='yellow', justify='right')
+    table.add_column('Matrícula', style='yellow', justify='right')
     table.add_column('Tipo', style='cyan')
 
     for idx, user in enumerate(USUARIOS_PADRAO, 1):
-        table.add_row(f'{idx:0>2}', user[1], user[2], PASSWORD, user[0].__name__)
+        table.add_row(f'{idx:0>2}', user[1], user[2], user[3], user[0].__name__)
 
     print('', table)
 
@@ -174,10 +171,10 @@ def exibir_materiais(session: Session):
     print(table)
 
 
-def obter_ou_criar_usuario(session: Session, model, name: str, email: str) -> Usuario:
+def obter_ou_criar_usuario(session: Session, model, name: str, email: str, matricula: str) -> Usuario:
     user = session.scalar(select(Usuario).where(Usuario.email == email))
     if user is None:
-        new_user = model(name=name, email=email, password=password_hash.hash(PASSWORD))
+        new_user = model(name=name, email=email, matricula=matricula)
         session.add(new_user)
         return new_user
     if not isinstance(user, model):

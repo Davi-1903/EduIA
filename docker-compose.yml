@@ -11,9 +11,12 @@ services:
         build: ./server
         container_name: server
         environment:
-            - HUGGINGFACEHUB_API_TOKEN=${HUGGINGFACEHUB_API_TOKEN}
-            - HF_MODEL=${HF_MODEL}
+            - PINECONE_API_KEY=${PINECONE_API_KEY}
+            - GROQ_API_KEY=${GROQ_API_KEY}
+            - HF_EMBEDDING_MODEL=${HF_EMBEDDING_MODEL}
+            - GROQ_MODEL=${GROQ_MODEL}
             - MAX_TOKENS=${MAX_TOKENS}
+            - INDEX_NAME=${INDEX_NAME}
             - SECRET_KEY=${SECRET_KEY}
             - CORS_ORIGINS=${CORS_ORIGINS}
             - SESSION_COOKIE_SECURE=${SESSION_COOKIE_SECURE:-0}

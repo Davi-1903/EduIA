@@ -3,18 +3,11 @@ from urllib.parse import parse_qsl, urlencode, urlsplit, urlunsplit
 import requests
 from flask import current_app
 from loguru import logger
-from pwdlib import PasswordHash
-from sqlalchemy import select
-from sqlalchemy.exc import IntegrityError
 
-from database import SessionLocal
 from errors.auth import SuapAuthenticationError
-from models.aluno import Aluno
-from models.professor import Professor
+from errors.user import UserAlreadyExistsError, UserCredentialsError
 from models.user import UserType, Usuario
-
-
-password_hasher = PasswordHash.recommended()
+from services.user import create_user_service, get_user_by_email_service, get_user_by_matricula_service
 
 
 def build_suap_authorization_url(state: str) -> str:
@@ -74,13 +67,10 @@ def authenticate_suap_code(code: str) -> Usuario:
 
 
 def fetch_suap_profile(access_token: str) -> dict:
-    profile_urls = dict.fromkeys(
-        (current_app.config['SUAP_PROFILE_URL'], current_app.config['SUAP_PROFILE_FALLBACK_URL'])
-    )
     last_status = None
     connection_error = None
 
-    for profile_url in profile_urls:
+    for profile_url in (current_app.config['SUAP_PROFILE_URL'], current_app.config['SUAP_PROFILE_FALLBACK_URL']):
         for scheme in ('Bearer', 'JWT'):
             try:
                 response = requests.get(
@@ -88,15 +78,15 @@ def fetch_suap_profile(access_token: str) -> dict:
                     headers={'Authorization': f'{scheme} {access_token}'},
                     timeout=10,
                 )
-            except requests.RequestException as error:
-                connection_error = error
+            except requests.RequestException as err:
+                connection_error = err
                 continue
 
             if response.ok:
                 try:
                     profile = response.json()
-                except ValueError as error:
-                    raise SuapAuthenticationError('Resposta de perfil inválida do SUAP') from error
+                except requests.exceptions.JSONDecodeError as err:
+                    raise SuapAuthenticationError('Resposta de perfil inválida do SUAP') from err
                 if isinstance(profile, dict):
                     return profile
                 raise SuapAuthenticationError('Formato de perfil inválido do SUAP')
@@ -113,73 +103,61 @@ def fetch_suap_profile(access_token: str) -> dict:
 
 
 def find_or_create_user(profile: dict) -> Usuario:
-    relationship = profile.get('vinculo')
-    relationship = relationship if isinstance(relationship, dict) else {}
-    registration = profile.get('matricula') or relationship.get('matricula') or profile.get('identificacao')
+    registration = profile.get('identificacao')
     if registration is None or not str(registration).strip():
         raise SuapAuthenticationError('Matrícula não encontrada no perfil do SUAP')
-    registration = str(registration).strip()
-    if len(registration) > 30:
-        raise SuapAuthenticationError('Matrícula SUAP inválida')
 
-    relationship_type = str(profile.get('tipo_vinculo') or profile.get('tipo_usuario') or '').strip().lower()
+    relationship_type = (profile.get('tipo_usuario') or '').strip().lower()
     if 'aluno' in relationship_type:
         user_type = UserType.ALUNO
-        user_class = Aluno
     elif any(term in relationship_type for term in ('professor', 'servidor', 'docente')):
         user_type = UserType.PROFESSOR
-        user_class = Professor
     else:
         raise SuapAuthenticationError('Tipo de vínculo SUAP não suportado', 'unsupported_user')
 
-    name = relationship.get('nome') or profile.get('nome_registro') or profile.get('nome_usual') or profile.get('nome')
+    name = profile.get('nome_registro')
     if not isinstance(name, str) or not name.strip():
         raise SuapAuthenticationError('Nome não encontrado no perfil do SUAP')
-    name = name.strip()[:30]
+    name = name.strip()[:50]
 
     email = next(
-        (
-            value.strip().lower()
-            for value in (
-                profile.get('email_academico'),
-                profile.get('email_institucional'),
-                profile.get('email_preferencial'),
-                profile.get('email'),
-            )
-            if isinstance(value, str) and '@' in value.strip()
-        ),
-        f'{registration}@escolar.ifrn.edu.br',
+        value.strip().lower()
+        for value in (
+            profile.get('email_google_classroom'),
+            profile.get('email_academico'),
+            profile.get('email_preferencial'),
+        )
+        if isinstance(value, str) and '@' in value.strip()
     )
-    if len(email) > 150:
-        raise SuapAuthenticationError('E-mail do perfil SUAP inválido')
 
-    with SessionLocal() as session:
-        user = session.scalar(select(Usuario).where(Usuario.suap_matricula == registration))
-        if user:
-            if user.type != user_type:
-                raise SuapAuthenticationError('Tipo de vínculo SUAP incompatível com a conta', 'account_conflict')
-            return user
-
-        email_owner = session.scalar(select(Usuario).where(Usuario.email == email))
-        if email_owner:
-            raise SuapAuthenticationError(
-                'Este e-mail já pertence a uma conta. Entre com ela ou solicite a vinculação ao administrador.',
-                'account_conflict',
-            )
-
-        try:
-            user = user_class(
-                name=name,
-                email=email,
-                password=password_hasher.hash('1234'),
-                suap_matricula=registration,
-            )
-            session.add(user)
-            session.commit()
-
-        except IntegrityError as error:
-            session.rollback()
-            raise SuapAuthenticationError('Não foi possível criar a conta SUAP', 'account_conflict') from error
-
-        session.refresh(user)
+    try:
+        user = get_user_by_matricula_service(registration)
+        if user.type != user_type:
+            raise SuapAuthenticationError('Tipo de vínculo SUAP incompatível com a conta', 'account_conflict')
         return user
+    except UserCredentialsError:
+        pass
+
+    # Testando se já há um usuário cadastrado com esse email
+    try:
+        _ = get_user_by_email_service(email)
+        raise SuapAuthenticationError(
+            'Este e-mail já pertence a uma conta. Entre com ela ou solicite a vinculação ao administrador.',
+            'account_conflict',
+        )
+    except UserCredentialsError:
+        pass
+
+    # Criando novo usuário
+    try:
+        new_user = create_user_service(
+            {
+                'nome': profile['nome_registro'],
+                'email': email,
+                'matricula': registration,
+                'type': user_type.value,
+            }
+        )
+        return new_user
+    except UserAlreadyExistsError as err:
+        raise SuapAuthenticationError('Não foi possível criar a conta SUAP', 'account_conflict') from err

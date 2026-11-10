@@ -6,72 +6,12 @@ from flask_login import login_required, login_user, logout_user
 from flask_wtf.csrf import generate_csrf
 from loguru import logger
 
-from errors.user import UserAlreadyExistsError, UserCredentialsError, UserServiceError, UserTypeError
 from services.suap import SuapAuthenticationError, authenticate_suap_code, build_suap_authorization_url
-from services.user import create_user_service, get_user_service
 from utils import setup_logger
 
 
 bp_auth = Blueprint('auth', __name__, url_prefix='/api/auth')
 setup_logger(__name__, Path(__file__).resolve().parents[1] / 'logs' / 'auth.log')
-
-
-@bp_auth.route('/register', methods=['POST'])
-def register():
-    data = request.get_json(silent=True)
-    if not data:
-        return jsonify({'ok': False, 'message': 'Dados não recebidos'}), 400
-
-    try:
-        user = create_user_service(data)
-    except UserTypeError as error:
-        return jsonify({'ok': False, 'message': str(error)}), 400
-    except UserAlreadyExistsError:
-        return jsonify({'ok': False, 'message': 'Credenciais inválidas'}), 401
-    except UserServiceError as error:
-        return jsonify({'ok': False, 'message': str(error)}), 500
-
-    login_user(user)
-    return jsonify(
-        {
-            'ok': True,
-            'redirect': '/dash',
-            'user': {
-                'id': user.id,
-                'nome': user.name,
-                'email': user.email,
-                'tipo': user.type.value,
-            },
-        }
-    )
-
-
-@bp_auth.route('/login', methods=['POST'])
-def login():
-    data = request.get_json(silent=True)
-    if not data:
-        return jsonify({'ok': False, 'message': 'Dados não recebidos'}), 400
-
-    try:
-        user = get_user_service(data['email'], data['senha'])
-    except UserCredentialsError as error:
-        return jsonify({'ok': False, 'message': str(error)}), 401
-    except Exception as error:
-        return jsonify({'ok': False, 'message': str(error)}), 500
-
-    login_user(user)
-    return jsonify(
-        {
-            'ok': True,
-            'redirect': '/dash',
-            'user': {
-                'id': user.id,
-                'nome': user.name,
-                'email': user.email,
-                'tipo': user.type.value,
-            },
-        }
-    ), 200
 
 
 @bp_auth.route('/csrf')

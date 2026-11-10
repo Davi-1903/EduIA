@@ -1,7 +1,6 @@
 from pathlib import Path
 
 from loguru import logger
-from pwdlib import PasswordHash
 from sqlalchemy import select
 from sqlalchemy.exc import IntegrityError
 
@@ -17,16 +16,13 @@ from utils import setup_logger
 setup_logger(__name__, Path(__file__).resolve().parents[1] / 'logs' / 'users.log')
 
 
-ph = PasswordHash.recommended()
-
-
 def create_user_service(data: dict):
     with SessionLocal() as session:
         try:
             if data['type'] == UserType.ALUNO.value:
-                new_user = Aluno(name=data['nome'], email=data['email'], password=ph.hash(data['password']))
+                new_user = Aluno(name=data['nome'], email=data['email'], matricula=data['matricula'])
             elif data['type'] == UserType.PROFESSOR.value:
-                new_user = Professor(name=data['nome'], email=data['email'], password=ph.hash(data['password']))
+                new_user = Professor(name=data['nome'], email=data['email'], matricula=data['matricula'])
             else:
                 raise UserTypeError('Tipo inválido')
 
@@ -48,10 +44,18 @@ def create_user_service(data: dict):
             raise UserServiceError('Ocorreu um erro ao criar um novo usuário') from exc
 
 
-def get_user_service(email: str, password: str):
+def get_user_by_matricula_service(matricula: str):
+    with SessionLocal() as session:
+        user = session.scalar(select(Usuario).where(Usuario.matricula == matricula))
+        if user is None:
+            raise UserCredentialsError('Credenciais inválidas')
+        return user
+
+
+def get_user_by_email_service(email: str):
     with SessionLocal() as session:
         user = session.scalar(select(Usuario).where(Usuario.email == email))
-        if user is None or not ph.verify(password, user.password):
+        if user is None:
             raise UserCredentialsError('Credenciais inválidas')
         return user
 
