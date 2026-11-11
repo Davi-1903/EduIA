@@ -30,7 +30,10 @@ export default function Alternativas({ tipo, questao, revelada }) {
         return (
             <ul className='flex flex-col gap-3'>
                 {questao.answers.map((a, i) => (
-                    <Opcao key={a.id} destaque={revelada && a.id === questao.correctAnswerId}>
+                    <Opcao
+                        key={a.id}
+                        destaque={revelada && a.id === questao.correctAnswerId}
+                    >
                         <strong>{LETRAS[i]})</strong>
                         <span>{a.text}</span>
                     </Opcao>
@@ -49,7 +52,7 @@ export default function Alternativas({ tipo, questao, revelada }) {
                     <li
                         key={op.texto}
                         destaque={revelada && op.valor === questao.correctAnswer}
-                        className='transition-all duration-250 hover:bg-button hover:text-color4-400 p-3 w-28 text-center text-color1-100 font-medium rounded-xl border-2 b-color1-100'
+                        className='b-color1-100 w-28 rounded-xl border-2 p-3 text-center font-medium text-color1-100 transition-all duration-250 hover:bg-button hover:text-color4-400'
                     >
                         <span>{op.texto}</span>
                     </li>

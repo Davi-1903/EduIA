@@ -8,14 +8,7 @@ import {
     IconSchool,
 } from '@tabler/icons-react';
 
-export default function Introduction({
-    discipline,
-    subject,
-    difficulty,
-    questionsLength,
-    handleClose,
-    handleStart,
-}) {
+export default function Introduction({ discipline, subject, difficulty, questionsLength, handleClose, handleStart }) {
     const informations = [
         {
             id: 1,
@@ -72,9 +65,7 @@ export default function Introduction({
                     className='stroke-color1-400'
                 />
 
-                <span className='font-secundary text-sm font-bold text-color1-400'>
-                    PREPARAÇÃO PARA FORMULÁRIO
-                </span>
+                <span className='font-secundary text-sm font-bold text-color1-400'>PREPARAÇÃO PARA FORMULÁRIO</span>
             </div>
 
             <h2 className='bg-linear-to-tr from-color1-400 to-color4-25 bg-clip-text font-primary text-4xl font-extrabold text-transparent'>
@@ -111,8 +102,7 @@ export default function Introduction({
                 />
 
                 <p className='font-secundary text-base text-color1-100'>
-                    Responda cada pergunta com atenção. Você pode
-                    voltar e revisar antes de enviar.
+                    Responda cada pergunta com atenção. Você pode voltar e revisar antes de enviar.
                 </p>
             </blockquote>
 

@@ -32,7 +32,7 @@ function formatContent(content) {
             return (
                 <h3
                     key={index}
-                    className='mb-3 mt-4 font-primary text-lg font-bold text-color1-100 first:mt-0'
+                    className='mt-4 mb-3 font-primary text-lg font-bold text-color1-100 first:mt-0'
                 >
                     {formatInlineText(heading[1])}
                 </h3>
@@ -40,11 +40,19 @@ function formatContent(content) {
         }
 
         if (!line.trim()) {
-            return <div key={index} className='h-2' />;
+            return (
+                <div
+                    key={index}
+                    className='h-2'
+                />
+            );
         }
 
         return (
-            <p key={index} className='mb-3 last:mb-0'>
+            <p
+                key={index}
+                className='mb-3 last:mb-0'
+            >
                 {formatInlineText(line)}
             </p>
         );
@@ -85,10 +93,7 @@ export default function Display({ id, content, discipline, subject, setClose }) 
             setElapsedSeconds((Date.now() - startTimeRef.current) / 1000);
             setFinished(true);
         } catch (err) {
-            setMessages(prev => [
-                ...prev,
-                { id: prev.length + 1, message: err.message, type: 'danger' },
-            ]);
+            setMessages(prev => [...prev, { id: prev.length + 1, message: err.message, type: 'danger' }]);
         } finally {
             setIsSending(false);
         }
@@ -115,9 +120,7 @@ export default function Display({ id, content, discipline, subject, setClose }) 
             </div>
 
             <div className='flex flex-col gap-2'>
-                <label className='font-secundary text-sm font-bold text-color1-100'>
-                    Sua resolução
-                </label>
+                <label className='font-secundary text-sm font-bold text-color1-100'>Sua resolução</label>
 
                 <textarea
                     value={resolution}
@@ -142,7 +145,6 @@ export default function Display({ id, content, discipline, subject, setClose }) 
                     ) : (
                         <IconSend size={18} />
                     )}
-
                     Enviar
                 </button>
 
