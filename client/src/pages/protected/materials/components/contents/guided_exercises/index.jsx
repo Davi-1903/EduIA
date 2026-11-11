@@ -1,6 +1,6 @@
 import { useEffect, useRef, useState } from 'react';
 import clsx from 'clsx';
-import Introduction from './components/introduction';
+import Introduction from './components/Introduction';
 import Questions from './components/Questions';
 
 export default function GuidedExercises({ discipline, subject, difficulty, content, setContent }) {

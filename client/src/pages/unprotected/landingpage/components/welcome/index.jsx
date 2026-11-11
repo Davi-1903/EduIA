@@ -34,9 +34,9 @@ export default function LandingPageWelcome() {
                     O <strong>EduIA</strong> utiliza inteligência artificial para criar planos de aula, desafios e
                     conteúdos adaptados ao seu ritmo de aprendizado
                 </p>
-                <Link to='/cadastro'>
+                <Link to='/login'>
                     <button className='mt-8 cursor-pointer rounded-xl bg-button px-8 py-4 font-primary text-xl text-color4-200 transition-all duration-200 hover:shadow-lg-hard'>
-                        Crie uma conta
+                        Entrar com <strong>SUAP</strong>
                     </button>
                 </Link>
             </article>
