@@ -1,5 +1,6 @@
 from os import getenv
 from pathlib import Path
+from sys import stdout
 
 from loguru import logger
 
@@ -23,6 +24,12 @@ def setup_logger(name: str, filepath: str | Path, rotation: str = '1 MB') -> int
     log_path = Path(filepath)
     log_path.parent.mkdir(parents=True, exist_ok=True)
 
+    logger.add(
+        stdout,
+        format='{level:<8} | {time:DD/MM/YYYY HH:mm} | {name} - {message}',
+        level='DEBUG',
+        filter=lambda record, _name=name: record['name'] == _name,
+    )
     return logger.add(
         log_path,
         format='{level:<8} | {time:DD/MM/YYYY HH:mm} | {name} - {message}',
