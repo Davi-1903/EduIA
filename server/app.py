@@ -3,6 +3,11 @@ from pathlib import Path
 from flask import Flask
 from loguru import logger
 
+from dotenv import load_dotenv
+from pathlib import Path
+
+load_dotenv(Path(__file__).resolve().parent.parent / '.env')
+
 from config import config_app
 from controllers.auth import bp_auth
 from controllers.historico import bp_historico
@@ -10,7 +15,6 @@ from controllers.lixeira import bp_lixeira
 from controllers.materials import bp_materials
 from controllers.user import bp_user
 from utils import setup_logger
-
 
 setup_logger(__name__, Path(__file__).resolve().parent / 'logs' / 'app.log')
 

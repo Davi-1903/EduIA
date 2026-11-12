@@ -25,15 +25,15 @@ def create_url() -> str:
     return f'mysql+pymysql://{user}:{password}@{host}:{port}/{name}'
 
 
-def get_connection(**kargs) -> Engine:
-    for attempt in range(10):
-        try:
-            engine = create_engine(**kargs)
-            engine.connect()
-            logger.info('Conexão com o banco de dados estabelecida')
-            return engine
-        except OperationalError as error:
-            logger.warning('Tentativa {}/10 de conexão com o banco falhou: {}', attempt + 1, error)
-            sleep(3)
-    logger.error('Não foi possível estabelecer uma conexão com o banco de dados após 10 tentativas')
-    raise RuntimeError('Não foi possível estabeler uma conexão com o banco de dados')
+def get_connection(**kwargs) -> Engine:
+    try:
+        engine = create_engine(**kwargs)
+
+        with engine.connect() as connection:
+            logger.info('Conexão com o banco estabelecida')
+
+        return engine
+
+    except Exception as error:
+        print(f'\nERRO ORIGINAL: {type(error).__name__}: {error}\n')
+        raise
