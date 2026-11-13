@@ -89,6 +89,7 @@ def create_question_service(data: dict):
             logger.info('Material de questões salvo no banco de dados')
 
         except Exception as exc:
+            print(exc)
             session.rollback()
             logger.error('Falha ao salvar material de questões no banco de dados')
             raise MaterialServiceError('Ocorreu um erro interno') from exc
