@@ -218,7 +218,7 @@ Há duas formas principais de rodar o EduIA:
     # =====================< IA >=====================
     HF_EMBEDDING_MODEL=Qwen/Qwen3-Embedding-0.6B
     GROQ_MODEL=<MODELO-DE-IA>
-    MAX_TOKENS=3000
+    MAX_TOKENS=5000
     INDEX_NAME=eduia-rag
 
     # =====================< Autenticação >=====================
@@ -305,6 +305,7 @@ Há duas formas principais de rodar o EduIA:
 - [Projeto Integrador - EduIA](docs/Projeto%20Integrador%20-%20EduIA.pdf)
 - [Requisitos Funcionais](docs/requisitos_funcionais.md)
 - [Requisitos Não Funcionais](docs/requisitos_nao_funcionais.md)
+- [Autenticação via SUAP](docs/autenticacao_suap.md)
 - [Framework e LLM](docs/framework_e_llm.md)
 
 ## 👥 Equipe

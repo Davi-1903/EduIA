@@ -11,16 +11,6 @@
 			]
 		},
 		{
-			"path": ".env.example",
-			"bookmarks": [
-				{
-					"line": 7,
-					"column": 0,
-					"label": "Acho que vai precisar aumentar"
-				}
-			]
-		},
-		{
 			"path": "server/controllers/explanation.py",
 			"bookmarks": [
 				{
@@ -137,36 +127,6 @@
 					"line": 3,
 					"column": 0,
 					"label": "Melhorar imagens"
-				}
-			]
-		},
-		{
-			"path": "client/src/main.jsx",
-			"bookmarks": [
-				{
-					"line": 91,
-					"column": 0,
-					"label": "Vai ficar só um, pois vamos depender apenas do SUAP"
-				}
-			]
-		},
-		{
-			"path": "docs/autenticacao_suap.md",
-			"bookmarks": [
-				{
-					"line": 48,
-					"column": 0,
-					"label": "Remover migração do banco de dados"
-				}
-			]
-		},
-		{
-			"path": "server/Dockerfile",
-			"bookmarks": [
-				{
-					"line": 8,
-					"column": 0,
-					"label": "Especificar versão do torch sem cuda e pull do modelo durante a criação do container"
 				}
 			]
 		}

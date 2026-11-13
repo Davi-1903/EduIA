@@ -6,7 +6,7 @@ Depois do OAuth, o EduIA autentica o usuário com a sessão de cookie do
 Flask-Login; o token SUAP é usado somente pelo backend para consultar a
 identidade.
 
-## 1. Registrar a aplicação OAuth no SUAP
+## Registrar a aplicação OAuth no SUAP
 
 Cadastre uma aplicação OAuth no SUAP e configure a URL de callback exatamente
 igual ao valor de `SUAP_REDIRECT_URI`. Para a execução padrão com Docker Compose
@@ -22,7 +22,7 @@ EduIA. O servidor Vite também usa a porta `3000` por padrão; ao usar o preview
 Vite em `4173`, ajuste o callback para
 `http://localhost:4173/api/auth/suap/callback`.
 
-## 2. Configurar as variáveis de ambiente
+## Configurar as variáveis de ambiente
 
 Copie `.env.example` para `.env` e preencha as credenciais emitidas pelo SUAP:
 
@@ -46,36 +46,7 @@ O callback é servido pelo mesmo host público da SPA através do proxy `/api/`.
 Por isso, ele redireciona para `/dash` no sucesso e para `/login` em caso de
 erro.
 
-## 3. Aplicar a migração do banco
-
-O modelo agora guarda a matrícula SUAP em `usuarios.suap_matricula`, com
-restrição de unicidade. Como `Base.metadata.create_all()` não altera tabelas
-existentes, faça backup e aplique uma única vez a migração antes de iniciar a
-versão nova:
-
-```bash
-mysql -u <usuario> -p <banco> < server/migrations/20261104_add_suap_matricula.sql
-```
-
-No modo Docker, suba primeiro somente o banco (`docker compose up -d database`)
-e execute a migração a partir de um cliente MySQL que alcance esse banco.
-
-Para contas locais que devam ser usadas também com SUAP, um administrador pode
-vincular a matrícula após verificar a identidade do titular:
-
-```sql
-UPDATE usuarios
-SET suap_matricula = '<matricula-confirmada>'
-WHERE id = <id-da-conta>;
-```
-
-Não associe contas automaticamente pelo e-mail: isso permitiria que a posse de
-um e-mail informado no perfil conectasse uma identidade SUAP a uma conta local
-sem confirmação adicional. Se o e-mail SUAP já estiver em uso e a matrícula
-ainda não estiver vinculada, o login é recusado até que o administrador
-confirme e faça a associação.
-
-## 4. Iniciar e testar
+## Iniciar e testar
 
 Com as variáveis e a migração configuradas:
 
@@ -94,7 +65,7 @@ Os caminhos locais do backend são:
   perfil, cria ou recupera a conta e inicia a sessão Flask-Login.
 - `GET /api/auth/csrf`: continua emitindo o token CSRF para operações da SPA.
 
-## 5. Como o usuário é identificado
+## Como o usuário é identificado
 
 O backend usa a matrícula retornada no perfil SUAP como identificador estável.
 Contas novas recebem um hash de senha aleatória, sem senha SUAP local. O tipo
@@ -104,7 +75,7 @@ modelos do EduIA. Outros tipos de vínculo são recusados.
 
 O e-mail institucional do perfil é armazenado como e-mail da conta. Se o perfil
 não fornecer um e-mail válido, é usado o endereço não roteável
-`<matricula>@suap.local`; ele não deve ser tratado como endereço de contato.
+`<matricula>@escolar.ifrn.edu.br`; ele não deve ser tratado como endereço de contato.
 Para uma matrícula já vinculada, o backend mantém os dados da conta existente.
 
 O token SUAP não é enviado à SPA nem persistido pelo fluxo de login. Se futuras
@@ -113,7 +84,7 @@ armazenamento de tokens no backend com expiração e política explícita de
 renovação; não use a sessão Flask do usuário como repositório de tokens
 terceiros.
 
-## 6. Sessão, CSRF e produção
+## Sessão, CSRF e produção
 
 - Flask-Login mantém a sessão EduIA em cookie `HttpOnly`.
 - `SameSite=Lax` permite que o cookie acompanhe o retorno OAuth de navegação
@@ -127,7 +98,7 @@ terceiros.
   mantenha o segredo OAuth fora do repositório. Configure `CORS_ORIGINS` com
   origens explícitas caso frontend e API sejam servidos por origens diferentes.
 
-## 7. Diagnóstico
+## Diagnóstico
 
 | Sintoma                              | Verificação                                                                                                       |
 | ------------------------------------ | ----------------------------------------------------------------------------------------------------------------- |
@@ -136,4 +107,3 @@ terceiros.
 | Erro de redirect no SUAP             | Compare o `SUAP_REDIRECT_URI` com a URL cadastrada, sem diferenças de barra, porta ou protocolo                   |
 | `account_conflict`                   | Confirme a matrícula e, se apropriado, vincule-a manualmente a uma conta existente                                |
 | `unsupported_user`                   | O tipo de vínculo retornado não corresponde a aluno ou servidor/docente suportado                                 |
-| Erro SQL citando `suap_matricula`    | Aplique a migração do banco descrita acima                                                                        |
