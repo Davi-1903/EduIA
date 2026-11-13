@@ -19,6 +19,7 @@ def get_user():
                 'nome': current_user.name,
                 'email': current_user.email,
                 'tipo': current_user.type.value,
+                'foto': current_user.foto,
             },
         }
     ), 200

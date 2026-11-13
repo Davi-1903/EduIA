@@ -155,6 +155,7 @@ def find_or_create_user(profile: dict) -> Usuario:
                 'nome': profile['nome_registro'],
                 'email': email,
                 'matricula': registration,
+                'foto': profile['foto'],
                 'type': user_type.value,
             }
         )

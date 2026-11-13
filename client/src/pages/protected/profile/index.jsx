@@ -205,7 +205,11 @@ export default function Profile() {
                 <div className='flex flex-col gap-6 md:flex-row'>
                     <div>
                         <div className='flex min-w-75 flex-col items-center justify-center rounded-xl bg-white p-6 shadow'>
-                            <article className='relative -top-15 left-5 h-22 w-22 rounded-full bg-gray-300 md:static md:top-0 md:left-0 md:h-25 md:w-25'></article>
+                            <img
+                                src={user?.foto}
+                                className='relative -top-15 left-5 h-22 w-22 rounded-full md:static md:top-0 md:left-0 md:h-25 md:w-25'
+                                alt='Foto do usuário'
+                            />
                             <h2 className='text-md bg-linear-to-tr from-color1-100 from-45% to-color4-100 bg-clip-text leading-tight font-bold text-transparent md:text-2xl'>
                                 {user?.nome?.toUpperCase()}
                             </h2>

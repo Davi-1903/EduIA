@@ -26,6 +26,7 @@ class Usuario(Base, UserMixin):
     email: Mapped[str] = mapped_column(String(150), unique=True, nullable=False)
     matricula: Mapped[str] = mapped_column(String(30), unique=True, nullable=False)
     type: Mapped[UserType] = mapped_column(Enum(UserType), nullable=False)
+    foto: Mapped[str] = mapped_column(String(150), nullable=False)
 
     materials: Mapped[list['Material']] = relationship(back_populates='user')
 
