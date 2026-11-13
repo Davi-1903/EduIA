@@ -17,7 +17,7 @@ export default function Explicacoes({ content, subject, setContent }) {
 
     async function copyExplanation() {
         try {
-            const text = removeMarkdown(content?.content ?? '');
+            const text = removeMarkdown(content ?? '');
 
             await navigator.clipboard.writeText(text);
             setMessages(prev => [

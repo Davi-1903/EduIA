@@ -163,8 +163,7 @@ def generate_formularios(payload: dict):
         vector_store = get_vector_store_ext()
         documentation = search_documentation(vector_store, payload['assunto'], payload['disciplina'])
     except Exception as error:
-        logger.error('Falha ao preparar geração de formulários ({})', type(error).__name__)
-        raise
+        raise AiProviderUnavailable('Não foi possível preparar a geração da explicação') from error
 
     try:
         chain = formularios.prompt_template | llm | formularios.parser

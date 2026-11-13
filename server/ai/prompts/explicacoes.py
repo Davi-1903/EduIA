@@ -37,6 +37,6 @@ parser = JsonOutputParser(pydantic_object=ExplicacoesJSON)
 
 prompt_template = PromptTemplate(
     template=PROMPT,
-    input_variables=['disciplina', 'quantidade', 'dificuldade', 'assunto', 'documentacao'],
+    input_variables=['disciplina', 'assunto', 'duvidas', 'documentacao'],
     partial_variables={'format_instructions': parser.get_format_instructions()},
 )
