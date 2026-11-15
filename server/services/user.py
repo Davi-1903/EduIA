@@ -22,7 +22,9 @@ def create_user_service(data: dict):
             if data['type'] == UserType.ALUNO.value:
                 new_user = Aluno(name=data['nome'], email=data['email'], matricula=data['matricula'], foto=data['foto'])
             elif data['type'] == UserType.PROFESSOR.value:
-                new_user = Professor(name=data['nome'], email=data['email'], matricula=data['matricula'], foto=data['foto'])
+                new_user = Professor(
+                    name=data['nome'], email=data['email'], matricula=data['matricula'], foto=data['foto']
+                )
             else:
                 raise UserTypeError('Tipo inválido')
 

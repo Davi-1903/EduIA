@@ -8,8 +8,12 @@ services:
             - server
 
     server:
-        build: ./server
+        build:
+            context: ./server
+            args:
+                HF_EMBEDDING_MODEL: ${HF_EMBEDDING_MODEL:?Defina HF_EMBEDDING_MODEL no .env}
         container_name: server
+        env_file: .env
         environment:
             - PINECONE_API_KEY=${PINECONE_API_KEY}
             - GROQ_API_KEY=${GROQ_API_KEY}
@@ -34,7 +38,10 @@ services:
             - DB_NAME=${DB_NAME}
             - TRASH_RETENTION_DAYS=${TRASH_RETENTION_DAYS}
         depends_on:
-            - database
+            database:
+                condition: service_healthy
+        volumes:
+            - models:/models
 
     database:
         image: mysql:8
@@ -53,3 +60,4 @@ services:
 
 volumes:
     db_data:
+    models:
