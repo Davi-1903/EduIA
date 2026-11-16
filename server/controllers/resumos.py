@@ -1,17 +1,10 @@
-from pathlib import Path
-
 from flask import Blueprint, jsonify, request
-from flask_login import current_user, login_required
-from loguru import logger
-from sqlalchemy import func, select
+from flask_login import login_required
 
-from database import SessionLocal
-from models.historico import Historico
-from models.resumos import Resumo
-from utils import setup_logger
-
-
-setup_logger(__name__, Path(__file__).resolve().parents[1] / 'logs' / 'summaries.log')
+from ai.services.resumos import generate_resumos
+from errors.ai import AiInvalidData, AiInvalidResponse, AiProviderUnavailable, AiServiceError, AiTimeout
+from errors.materials import MaterialNotFoundError, MaterialServiceError, MaterialValidationError
+from services.resumos import create_resume_service, get_resume_service, get_resumes_service
 
 
 bp_materials_resumo = Blueprint('resumos', __name__, url_prefix='/resumos')
@@ -23,95 +16,52 @@ def get_resumes():
     cursor = request.args.get('cursor', 0, type=int)
     limit = request.args.get('limit', 50, type=int)
 
-    with SessionLocal() as session:
-        count_stmt = (
-            select(func.count())
-            .select_from(Resumo)
-            .where(Resumo.user_id == current_user.id)
-            .where(Resumo.deleted_at.is_(None))
-        )
-        statement = (
-            select(Resumo)
-            .where(Resumo.user_id == current_user.id)
-            .where(Resumo.deleted_at.is_(None))
-            .offset(cursor)
-            .limit(limit)
-            .order_by(Resumo.created_at.desc())
-        )
+    try:
+        resumos = get_resumes_service(cursor, limit)
+        return jsonify({'ok': True, **resumos}), 200
 
-        total = session.scalar(count_stmt) or 0
-        materials = session.scalars(statement).all()
-
-        return jsonify(
-            {
-                'ok': True,
-                'total': total,
-                'materials': [
-                    {
-                        'id': material.id,
-                        'title': material.subject,
-                        'discipline': material.discipline,
-                        'note': material.note,
-                        'created_at': material.created_at,
-                        'content': material.content,
-                        'type': material.type.value,
-                    }
-                    for material in materials
-                ],
-            }
-        ), 200
+    except MaterialServiceError as error:
+        return jsonify({'ok': False, 'message': str(error)}), 500
 
 
 @bp_materials_resumo.route('/<int:id>', methods=['GET'])
 @login_required
 def get_resume(id: int):
-    with SessionLocal() as session:
-        material = session.get(Resumo, id)
-        if material is None or material.deleted_at is not None:
-            return jsonify({'ok': False, 'message': 'Resume não encontrado'}), 404
+    try:
+        resume = get_resume_service(id)
+        return jsonify({'ok': True, 'material': resume}), 200
 
-        return jsonify(
-            {
-                'ok': True,
-                'materials': [
-                    {
-                        'id': material.id,
-                        'title': material.subject,
-                        'discipline': material.discipline,
-                        'note': material.note,
-                        'created_at': material.created_at,
-                        'content': material.content,
-                        'type': material.type.value,
-                    }
-                ],
-            }
-        ), 200
+    except MaterialNotFoundError as err:
+        return jsonify({'ok': False, 'message': str(err)}), 404
+
+    except MaterialServiceError as err:
+        return jsonify({'ok': False, 'message': str(err)}), 500
 
 
 @bp_materials_resumo.route('/', methods=['POST'])
 @login_required
 def create_resume():
     data = request.get_json(silent=True)
-
     if data is None:
         return jsonify({'ok': False, 'message': 'Dados não recebidos'}), 400
 
-    with SessionLocal() as session:
-        try:
-            resume = Resumo(
-                user_id=current_user.id,
-                discipline=data['discipline'],
-                subject=data['subject'],
-                content={'content': 1},
-                note=data['note'],
-            )
-            historico = Historico(material=resume)
-            session.add(resume)
-            session.add(historico)
-            session.commit()
-            logger.info('Resumo salvo no banco de dados')
-            return jsonify({'ok': True, 'redirect': '/materials'}), 201
-        except Exception:
-            session.rollback()
-            logger.error('Falha ao salvar resumo no banco de dados')
-            return jsonify({'ok': False, 'message': 'Ocorreu um erro interno'}), 500
+    try:
+        content = generate_resumos(data)
+    except AiInvalidData as error:
+        return jsonify({'ok': False, 'message': str(error)}), 400
+    except AiInvalidResponse as error:
+        return jsonify({'ok': False, 'message': str(error)}), 502
+    except AiTimeout as error:
+        return jsonify({'ok': False, 'message': str(error)}), 503
+    except AiProviderUnavailable as error:
+        return jsonify({'ok': False, 'message': str(error)}), 503
+    except AiServiceError as error:
+        return jsonify({'ok': False, 'message': str(error)}), 500
+
+    try:
+        create_resume_service({**data, 'content': content})
+        return jsonify({'ok': True, 'redirect': '/materials'}), 201
+    except MaterialValidationError as error:
+        return jsonify({'ok': False, 'message': str(error)}), 400
+    except MaterialServiceError:
+        return jsonify({'ok': False, 'message': 'Ocorreu um erro interno'}), 500

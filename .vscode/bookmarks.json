@@ -61,21 +61,6 @@
 			]
 		},
 		{
-			"path": "server/controllers/resumos.py",
-			"bookmarks": [
-				{
-					"line": 18,
-					"column": 0,
-					"label": "Separar a interação com o banco de dados em um serviço separado"
-				},
-				{
-					"line": 90,
-					"column": 0,
-					"label": "Criar integração com IA"
-				}
-			]
-		},
-		{
 			"path": "server/controllers/study_guide.py",
 			"bookmarks": [
 				{
