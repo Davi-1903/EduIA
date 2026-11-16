@@ -12,7 +12,7 @@ export default function Options({ questions, currentQuestionId, answeredId, toRe
 
     return (
         <>
-            <ul className='grid grid-cols-2 gap-4'>
+            <ul className='grid grid-cols-1 gap-4 md:grid-cols-2'>
                 {questions[currentQuestionId].answers.map(options => (
                     <li key={options.id}>
                         <button
@@ -29,7 +29,7 @@ export default function Options({ questions, currentQuestionId, answeredId, toRe
             </ul>
             <div className='flex justify-end'>
                 <button
-                    className='flex cursor-pointer items-center gap-3 rounded-lg bg-button px-6 py-2 font-primary text-lg text-color4-400 transition-all duration-250 not-disabled:hover:shadow-lg-hard disabled:cursor-no-drop disabled:opacity-50'
+                    className='flex cursor-pointer items-center justify-center gap-3 rounded-lg bg-button px-6 py-2 font-primary text-lg text-color4-400 transition-all duration-250 not-sm:flex-1 not-disabled:hover:shadow-lg-hard disabled:cursor-no-drop disabled:opacity-50'
                     disabled={answeredId === null}
                     onClick={() => toRespond(answeredId === questions[currentQuestionId].correctAnswerId)}
                 >

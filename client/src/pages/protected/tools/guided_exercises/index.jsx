@@ -104,7 +104,7 @@ export default function GenerateQuidedExercises({ setOpen }) {
             )}
         >
             <form
-                className='flex w-full max-w-xl flex-col gap-6 rounded-2xl bg-color4-200 px-4 py-8 lg:px-6'
+                className='flex w-full max-w-xl flex-col gap-4 rounded-2xl bg-color4-200 px-4 py-6 lg:gap-6 lg:px-6 lg:py-8'
                 ref={articleRef}
                 onSubmit={handleSubmit}
             >

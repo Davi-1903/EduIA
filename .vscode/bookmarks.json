@@ -81,32 +81,12 @@
 			]
 		},
 		{
-			"path": "client/src/pages/protected/history/components/tools/lesson_plan.jsx",
-			"bookmarks": [
-				{
-					"line": 9,
-					"column": 0,
-					"label": "Plano de aula não tem tempo"
-				}
-			]
-		},
-		{
 			"path": "server/utils/download.py",
 			"bookmarks": [
 				{
 					"line": 4,
 					"column": 0,
 					"label": "Testar o weasyprint"
-				}
-			]
-		},
-		{
-			"path": "server/schemas/exercicios_guiados.py",
-			"bookmarks": [
-				{
-					"line": 3,
-					"column": 0,
-					"label": "Mudar o schema, pois os exercícios guiados não são mais em markdown, mas em JSON"
 				}
 			]
 		},
@@ -121,12 +101,12 @@
 			]
 		},
 		{
-			"path": "client/src/pages/unprotected/about/index.jsx",
+			"path": "client/src/pages/protected/tools/lesson_plan/index.jsx",
 			"bookmarks": [
 				{
-					"line": 3,
+					"line": 96,
 					"column": 0,
-					"label": "Melhorar imagens"
+					"label": "Muito grande dependendo da tela, adicionar responsividade para largura e altura"
 				}
 			]
 		}

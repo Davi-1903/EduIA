@@ -88,7 +88,7 @@ export default function Quiz({ discipline, subject, difficulty, time, content, s
         >
             <main
                 ref={materialRef}
-                className='flex min-h-170 w-full max-w-160 flex-col gap-6 rounded-2xl bg-white p-6 shadow-2xl shadow-color1-100/15 lg:w-4/5'
+                className='flex min-h-170 w-full max-w-160 flex-col gap-3 rounded-2xl bg-white p-4 shadow-2xl shadow-color1-100/15 md:gap-6 md:p-6 lg:w-4/5'
             >
                 {!start ? (
                     <Introduction

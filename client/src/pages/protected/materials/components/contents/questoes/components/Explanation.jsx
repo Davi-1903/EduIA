@@ -49,7 +49,7 @@ export default function Explanation({ explanation, setShowExplanation }) {
         >
             <article
                 ref={articleRef}
-                className='relative w-sm rounded-2xl bg-white p-8 pt-12 text-center text-[1.2rem] font-semibold text-color1-100 shadow-2xl'
+                className='relative w-full max-w-sm rounded-2xl bg-white p-8 pt-12 text-center text-[1.2rem] font-semibold text-color1-100 shadow-2xl'
             >
                 <button
                     className='absolute top-2 right-2 cursor-pointer rounded-lg p-2 transition-all duration-100 hover:bg-gray-300'

@@ -21,7 +21,7 @@ export default function Message({ id, message, type }) {
     return (
         <article
             className={clsx(
-                'pointer-events-auto relative flex w-sm items-center gap-4 overflow-hidden rounded-lg p-4 backdrop-blur-lg',
+                'pointer-events-auto relative flex w-full items-center gap-4 overflow-hidden rounded-lg p-4 backdrop-blur-lg sm:w-sm',
                 type === 'ok' ? 'bg-green-600/75' : 'bg-red-600/75',
                 close ? 'animate-delete-message' : 'animate-new-message',
             )}

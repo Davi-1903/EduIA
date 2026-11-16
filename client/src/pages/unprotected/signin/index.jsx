@@ -56,10 +56,10 @@ export default function SignIn() {
                             </button>
                         </Link>
                         <article className='w-full max-w-md'>
-                            <h2 className='bg-linear-to-tr from-color1-100 via-color1-400 to-color4-25 bg-clip-text font-primary text-6xl font-semibold text-transparent'>
+                            <h2 className='bg-linear-to-tr from-color1-100 via-color1-400 to-color4-25 bg-clip-text font-primary text-4xl font-semibold text-transparent md:text-6xl'>
                                 Olá!
                             </h2>
-                            <p className='text-secundary mb-6 text-xl text-balance text-color3-25'>
+                            <p className='mb-6 font-secundary text-xl text-balance text-color3-25'>
                                 Inicie a sessão com o <strong className='text-color1-100'>SUAP</strong>
                             </p>
                             <button

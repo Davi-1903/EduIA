@@ -175,9 +175,6 @@ export default function Profile() {
     useEffect(() => {
         async function carregarProgresso() {
             const response = await GET('/api/user/progresso');
-
-            console.log('Resposta do progresso:', response);
-
             setProgresso(response);
         }
 
