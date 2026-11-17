@@ -23,6 +23,7 @@ import Formulario from './contents/forms';
 import GuidedExercises from './contents/guided_exercises';
 import Desafio from './contents/desafio';
 import Explicacoes from './contents/explicacoes';
+import LessonPlan from './contents/lesson_plan'
 import { useAuthenticated } from '../../../../context/authContext';
 
 export default function MaterialCard({
@@ -125,7 +126,21 @@ export default function MaterialCard({
                     setContent={setContent}
                 />
             ),
-            plano_de_aula: null,
+            plano_de_aula: (
+                            <LessonPlan
+                                discipline={discipline}
+                                subject={title}
+                                grade={grade}
+                                resources={{
+                                    chalkboard,
+                                    projector,
+                                    printed,
+                                    digital,
+                                }}
+                                content={content}
+                                setContent={setContent}
+                            />
+            ),
             questoes: (
                 <Questions
                     discipline={discipline}
@@ -182,6 +197,7 @@ export default function MaterialCard({
 
     function handleOpen() {
         const tipo = normalizarTipo(type);
+        console.log('abrindo', { id, tipo, type, title });
 
         if (!getContent(type)) {
             setMessages(prev => [
