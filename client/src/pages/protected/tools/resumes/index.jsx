@@ -31,7 +31,7 @@ export default function GenerateResumes({ setOpen }) {
             setMessages(prev => [
                 ...prev,
                 {
-                    id: prev.lenght + 1,
+                    id: prev.length + 1,
                     message: 'Resumo criado com sucesso!',
                     type: 'ok',
                 },
@@ -40,7 +40,7 @@ export default function GenerateResumes({ setOpen }) {
             setMessages(prev => [
                 ...prev,
                 {
-                    id: prev.lenght + 1,
+                    id: prev.length + 1,
                     message: err.message,
                     type: 'danger',
                 },
