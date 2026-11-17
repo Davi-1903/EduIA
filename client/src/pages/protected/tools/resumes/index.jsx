@@ -20,7 +20,7 @@ export default function GenerateResumes({ setOpen }) {
         setLoading(true);
 
         try {
-            const response = await POST('api/materials/resumos', {
+            const response = await POST('api/materials/resumo', {
                 discipline,
                 subject,
                 note,

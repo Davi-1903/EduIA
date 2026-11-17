@@ -2,7 +2,6 @@ from pydantic import BaseModel
 
 
 class ResumosJSON(BaseModel):
-    content: str  # Armazenado em markdown
+    id: int
+    content: str
 
-class Resumos(BaseModel):
-    content: list[ResumosJSON]

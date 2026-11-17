@@ -2,7 +2,7 @@ from langchain_core.exceptions import OutputParserException
 from pydantic import ValidationError
 
 from errors.ai import AiInvalidData, AiInvalidRequest
-from schemas.resumos import Resumos
+from schemas.resumos import ResumosJSON
 
 from ..gateways import generate_resumos as generate_resumos_gateway
 
@@ -19,7 +19,7 @@ def generate_resumos(data: dict):
 
     try:
         content = generate_resumos_gateway(payload)
-        Resumos.model_validate(content)
+        ResumosJSON.model_validate(content)
         return content
     except (ValidationError, OutputParserException) as error:
         raise AiInvalidData('A IA retornou dados inválidos') from error

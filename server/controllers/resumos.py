@@ -7,7 +7,7 @@ from errors.materials import MaterialNotFoundError, MaterialServiceError, Materi
 from services.resumos import create_resume_service, get_resume_service, get_resumes_service
 
 
-bp_materials_resumo = Blueprint('resumos', __name__, url_prefix='/resumos')
+bp_materials_resumo = Blueprint('resumo', __name__, url_prefix='/resumo')
 
 
 @bp_materials_resumo.route('/', methods=['GET'])

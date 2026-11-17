@@ -72,8 +72,8 @@ def create_resume_service(data: dict):
                 user_id=current_user.id,
                 discipline=data['discipline'],
                 subject=data['subject'],
-                content={'content': 1},
-                note=data['note'] if data['note'] != '' else None,
+                content=data['content'],
+                note=data.get('none') if data.get('note') not in (None, '') else None,
             )
             historico = Historico(material=resume)
             session.add(resume)

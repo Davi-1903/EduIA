@@ -24,7 +24,8 @@ import GuidedExercises from './contents/guided_exercises';
 import Desafio from './contents/desafio';
 import Explicacoes from './contents/explicacoes';
 import LessonPlan from './contents/lesson_plan';
-import StudyGuide from './contents/study_guide'
+import StudyGuide from './contents/study_guide';
+import Resume from './contents/resumes';
 import { useAuthenticated } from '../../../../context/authContext';
 
 export default function MaterialCard({
@@ -128,19 +129,19 @@ export default function MaterialCard({
                 />
             ),
             plano_de_aula: (
-                            <LessonPlan
-                                discipline={discipline}
-                                subject={title}
-                                grade={grade}
-                                resources={{
-                                    chalkboard,
-                                    projector,
-                                    printed,
-                                    digital,
-                                }}
-                                content={content}
-                                setContent={setContent}
-                            />
+                <LessonPlan
+                    discipline={discipline}
+                    subject={title}
+                    grade={grade}
+                    resources={{
+                        chalkboard,
+                        projector,
+                        printed,
+                        digital,
+                    }}
+                    content={content}
+                    setContent={setContent}
+                />
             ),
             questoes: (
                 <Questions
@@ -161,16 +162,23 @@ export default function MaterialCard({
                     setContent={setContent}
                 />
             ),
-            resumo: null,
+            resumo: (
+                <Resume
+                    discipline={discipline}
+                    subject={title}
+                    content={content}
+                    setContent={setContent}
+                />
+            ),
             roteiro: (
-                        <StudyGuide
-                            discipline={discipline}
-                            subject={title}
-                            grade={grade}
-                            duration={time}
-                            content={content}
-                            setContent={setContent}
-                        />
+                <StudyGuide
+                    discipline={discipline}
+                    subject={title}
+                    grade={grade}
+                    duration={time}
+                    content={content}
+                    setContent={setContent}
+                />
             ),
         };
         return icons[type];
