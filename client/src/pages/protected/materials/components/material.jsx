@@ -4,6 +4,7 @@ import {
     IconCards,
     IconChalkboard,
     IconChalkboardTeacher,
+    IconDotsVertical,
     IconFile,
     IconFileDescription,
     IconLaurelWreath1,
@@ -24,7 +25,7 @@ import GuidedExercises from './contents/guided_exercises';
 import Desafio from './contents/desafio';
 import Explicacoes from './contents/explicacoes';
 import LessonPlan from './contents/lesson_plan';
-import StudyGuide from './contents/study_guide'
+import StudyGuide from './contents/study_guide';
 import { useAuthenticated } from '../../../../context/authContext';
 
 export default function MaterialCard({
@@ -128,19 +129,19 @@ export default function MaterialCard({
                 />
             ),
             plano_de_aula: (
-                            <LessonPlan
-                                discipline={discipline}
-                                subject={title}
-                                grade={grade}
-                                resources={{
-                                    chalkboard,
-                                    projector,
-                                    printed,
-                                    digital,
-                                }}
-                                content={content}
-                                setContent={setContent}
-                            />
+                <LessonPlan
+                    discipline={discipline}
+                    subject={title}
+                    grade={grade}
+                    resources={{
+                        chalkboard,
+                        projector,
+                        printed,
+                        digital,
+                    }}
+                    content={content}
+                    setContent={setContent}
+                />
             ),
             questoes: (
                 <Questions
@@ -163,14 +164,14 @@ export default function MaterialCard({
             ),
             resumo: null,
             roteiro: (
-                        <StudyGuide
-                            discipline={discipline}
-                            subject={title}
-                            grade={grade}
-                            duration={time}
-                            content={content}
-                            setContent={setContent}
-                        />
+                <StudyGuide
+                    discipline={discipline}
+                    subject={title}
+                    grade={grade}
+                    duration={time}
+                    content={content}
+                    setContent={setContent}
+                />
             ),
         };
         return icons[type];
@@ -311,13 +312,20 @@ export default function MaterialCard({
             )}
             {content && getContent(type)}
             <article
-                className='flex h-full min-h-48 cursor-pointer flex-col rounded-lg bg-color4-400 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg'
-                onContextMenu={e => handleContextMenu(e, id)}
+                className='flex h-full min-h-48 cursor-pointer flex-col rounded-xl bg-color4-400 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg'
                 onDoubleClick={handleOpen}
             >
                 <div className='flex items-center justify-end gap-3 border-b-2 border-color4-25 p-2 pl-3'>
                     <span>{getIcon(type)}</span>
                     <h3 className='flex-1 font-primary text-xl font-medium text-color1-100'>{title}</h3>
+                    {canOpenMenu && (
+                        <button
+                            className='cursor-pointer rounded-sm p-1 hover:bg-color1-400/10'
+                            onClick={e => handleContextMenu(e, id)}
+                        >
+                            <IconDotsVertical />
+                        </button>
+                    )}
                 </div>
                 <div className='flex-1 p-3 text-color2-100'>
                     <p className='font-secundary'>
