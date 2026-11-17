@@ -19,7 +19,7 @@ from models.flashcards import FlashCards
 from models.formularios import Formulario
 from models.historico import Historico
 from models.material import Difficulty, Material, MaterialType
-from models.planos_de_aula import PlanoDeAula
+from models.plano_de_aula import PlanoDeAula
 from models.professor import Professor
 from models.questoes import Questoes
 from models.quizzes import Quiz

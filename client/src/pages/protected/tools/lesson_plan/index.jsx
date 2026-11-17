@@ -53,6 +53,7 @@ export default function GenerateLessonPlan({ setOpen }) {
 
             document.body.style.overflowY = 'auto';
             navigate(response.redirect);
+            console.log(response.redirect)
 
             setMessages(prev => [
                 ...prev,
@@ -78,11 +79,11 @@ export default function GenerateLessonPlan({ setOpen }) {
 
     useEffect(() => {
         function handleClick(event) {
-            if (!isLoading && !articleRef.current.contains(event.target)) setClose(true);
+            if (!articleRef.current.contains(event.target)) setClose(true);
         }
 
         function handleKey(event) {
-            if (!isLoading && event.key === 'Escape') setClose(true);
+            if (event.key === 'Escape') setClose(true);
         }
 
         document.addEventListener('mousedown', handleClick);
@@ -92,7 +93,7 @@ export default function GenerateLessonPlan({ setOpen }) {
             document.removeEventListener('mousedown', handleClick);
             document.removeEventListener('keydown', handleKey);
         };
-    }, [isLoading]);
+    }, []);
 
     return (
         <div

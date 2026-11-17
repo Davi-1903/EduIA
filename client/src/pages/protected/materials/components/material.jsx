@@ -14,7 +14,7 @@ import {
 } from '@tabler/icons-react';
 import { useNavigate } from 'react-router-dom';
 import { useMessages } from '../../../../context/messagesContext';
-import { DELETE, GET } from '../../../../api/materials';
+import { DELETE, GET, GetPDF } from '../../../../api/materials';
 import MenuCard from './menu';
 import Questions from './contents/questoes';
 import Quiz from './contents/quiz';
@@ -23,7 +23,10 @@ import Formulario from './contents/forms';
 import GuidedExercises from './contents/guided_exercises';
 import Desafio from './contents/desafio';
 import Explicacoes from './contents/explicacoes';
+import LessonPlan from './contents/lesson_plan';
+import StudyGuide from './contents/study_guide'
 import { useAuthenticated } from '../../../../context/authContext';
+
 export default function MaterialCard({
     id,
     title,
@@ -124,7 +127,21 @@ export default function MaterialCard({
                     setContent={setContent}
                 />
             ),
-            'plano de aula': null,
+            plano_de_aula: (
+                            <LessonPlan
+                                discipline={discipline}
+                                subject={title}
+                                grade={grade}
+                                resources={{
+                                    chalkboard,
+                                    projector,
+                                    printed,
+                                    digital,
+                                }}
+                                content={content}
+                                setContent={setContent}
+                            />
+            ),
             questoes: (
                 <Questions
                     discipline={discipline}
@@ -145,7 +162,16 @@ export default function MaterialCard({
                 />
             ),
             resumo: null,
-            roteiro: null,
+            roteiro: (
+                        <StudyGuide
+                            discipline={discipline}
+                            subject={title}
+                            grade={grade}
+                            duration={time}
+                            content={content}
+                            setContent={setContent}
+                        />
+            ),
         };
         return icons[type];
     }
@@ -204,10 +230,48 @@ export default function MaterialCard({
                 if (data.status !== 200) {
                     throw new Error(data.message || 'Erro ao buscar material');
                 }
-                setContent(data.material.content.content);
+                setContent(tipo === 'exercicio_guiado' ? data.material.content : data.material.content.content);
             })
             .catch(err => setMessages(prev => [...prev, { id: prev.length + 1, message: err.message, type: 'danger' }]))
             .finally(() => setIsOpening(false));
+    }
+
+    async function handleDownload() {
+        setMenu(null);
+        const formatTypes = {
+            desafio: 'Desafios',
+            exercicio_guiado: 'Exercício guiado',
+            explicacoes: 'Explicações',
+            flashcards: 'Flashcards',
+            formulario: 'Formulário',
+            plano_de_aula: 'Plano de aula',
+            questoes: 'Questões',
+            quiz: 'Quiz',
+            resumo: 'Resumo',
+            roteiro: 'Roteiro de estudo',
+        };
+
+        try {
+            console.log(type);
+            await GetPDF(`/api/materials/${type}/${id}/pdf`, formatTypes[type], title);
+            setMessages(prev => [
+                ...prev,
+                {
+                    id: prev.length + 1,
+                    message: `${formatTypes[type]} baixado com sucesso`,
+                    type: 'ok',
+                },
+            ]);
+        } catch (err) {
+            setMessages(prev => [
+                ...prev,
+                {
+                    id: prev.length + 1,
+                    message: err.message,
+                    type: 'danger',
+                },
+            ]);
+        }
     }
 
     function handleDelete() {
@@ -240,6 +304,7 @@ export default function MaterialCard({
                     type={type}
                     setMenu={setMenu}
                     handleOpen={handleOpen}
+                    handleDownload={handleDownload}
                     handleDelete={handleDelete}
                     setContent={setContent}
                 />

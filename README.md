@@ -213,11 +213,11 @@ Há duas formas principais de rodar o EduIA:
     ```env
     # ========================< API KEYS >========================
     PINECONE_API_KEY=<SUA-CHAVE-DE-API-DO-PINECONE>
-    HUGGINGFACEHUB_API_TOKEN=<SUA-CHAVE-DE-API-DO-HUGGING-FACE>
+    GROQ_API_KEY=<SUA-CHAVE-DE-API-DO-GROQ>
 
     # =====================< Hugging Face >=====================
     HF_EMBEDDING_MODEL=<MODELO-DE-EMBEDDING>
-    HF_MODEL=<MODELO-DE-IA>
+    GROQ_MODEL=<MODELO-DE-IA>
     MAX_TOKENS=3000
     INDEX_NAME=eduia-rag
 

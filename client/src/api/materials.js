@@ -7,6 +7,19 @@ export async function GET(url) {
     return data;
 }
 
+export async function GetPDF(url, type, title) {
+    const res = await fetch(url, { credentials: 'include' });
+    if (!res.ok) throw new Error('Erro ao gerar o PDF');
+
+    const blob = await res.blob();
+    const urlBlob = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = urlBlob;
+    a.download = `${type} - ${title}.pdf`;
+    a.click();
+    URL.revokeObjectURL(urlBlob);
+}
+
 export async function POST(url, data) {
     const csrf = await getCSRF();
     const response = await fetch(url, {

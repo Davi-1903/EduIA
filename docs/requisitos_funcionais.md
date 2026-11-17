@@ -24,7 +24,7 @@
 |  Código  | Requisito                | Como funcionará                                                                                            | Módulo    | Prioridade | Status                |
 | :------: | ------------------------ | ---------------------------------------------------------------------------------------------------------- | --------- | ---------- | --------------------- |
 | **RF10** | Gerar Questões           | Listas de exercícios com quantidade e nível especificados pelo usuário                                     | Ambos     | Essencial  | ✅ Implementado       |
-| **RF11** | Gerar Formulários        | Formulários com quantidade e nível especificados pelo usuário                                              | Professor | Essencial  | 🔧 Em desenvolvimento |
+| **RF11** | Gerar Formulários        | Formulários com quantidade e nível especificados pelo usuário                                              | Professor | Essencial  | ✅ Implementado       |
 | **RF12** | Gerar Quiz               | Quizzes com pontuação e tempo estabelecidos pelo usuário                                                   | Ambos     | Importante | ✅ Implementado       |
 | **RF13** | Gerar Flashcards         | Cartões com perguntas simples e suas respostas                                                             | Aluno     | Essencial  | ✅ Implementado       |
 | **RF14** | Gerar Resumos            | Resumo de um determinado assunto ou matéria                                                                | Ambos     | Importante | 🔧 Em desenvolvimento |
@@ -41,5 +41,5 @@
 | **RF20** | Permitir salvar materiais criados                                | Essencial  | ✅ Implementado       |
 | **RF21** | Proporcionar a organização dos materiais por disciplinas         | Desejável  | 🔧 Em desenvolvimento |
 | **RF22** | Permitir a visualização dos materiais diretamente pelo navegador | Essencial  | 🔧 Em desenvolvimento |
-| **RF23** | Permitir o download dos materiais gerados                        | Desejável  | 🔧 Em desenvolvimento |
+| **RF23** | Permitir o download dos materiais gerados                        | Desejável  | ✅ Implementado       |
 | **RF24** | Permitir buscar materiais por palavra-chave                      | Desejável  | ✅ Implementado       |

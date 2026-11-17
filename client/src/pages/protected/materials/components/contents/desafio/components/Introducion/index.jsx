@@ -1,4 +1,11 @@
-import { IconAlertCircle, IconArrowRight, IconBook, IconBook2, IconBrandSpeedtest, IconSchool } from '@tabler/icons-react';
+import {
+    IconAlertCircle,
+    IconArrowRight,
+    IconBook,
+    IconBook2,
+    IconBrandSpeedtest,
+    IconSchool,
+} from '@tabler/icons-react';
 
 export default function Introduction({ discipline, subject, difficulty, handleClose, handleStart }) {
     const informations = [

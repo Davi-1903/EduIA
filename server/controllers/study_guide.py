@@ -1,20 +1,12 @@
-from pathlib import Path
-
 from flask import Blueprint, jsonify, request
-from flask_login import current_user, login_required
-from loguru import logger
-from sqlalchemy import func, select
-
+from flask_login import login_required, current_user
 from database import SessionLocal
-from models.historico import Historico
+from sqlalchemy import select, func
 from models.roteiros import Roteiro
-from utils import setup_logger
+from models.historico import Historico
 
 
-setup_logger(__name__, Path(__file__).resolve().parents[1] / 'logs' / 'study-guides.log')
-
-
-bp_study_guide = Blueprint('roteiro_estudos', __name__, url_prefix='/roteiro_estudos')
+bp_study_guide = Blueprint('roteiro_estudos', __name__, url_prefix='/roteiro')
 
 
 @bp_study_guide.route('/', methods=['GET'])
@@ -67,23 +59,26 @@ def get_studys_guides():
 def get_study_guide(id: int):
     with SessionLocal() as session:
         material = session.get(Roteiro, id)
-        if material is None or material.deleted_at is not None:
-            return jsonify({'ok': False, 'message': 'Plano de aula não encontrado'}), 404
+        if (
+            material is None
+            or material.deleted_at is not None
+            or material.user_id != current_user.id
+        ):
+            return jsonify({'ok': False, 'message': 'Roteiro não encontrado'}), 404
 
         return jsonify(
             {
                 'ok': True,
-                'materials': [
-                    {
-                        'id': material.id,
-                        'title': material.subject,
-                        'discipline': material.discipline,
-                        'note': material.note,
-                        'created_at': material.created_at,
-                        'content': material.content,
-                        'type': material.type.value,
-                    }
-                ],
+                'status': 200,
+                'material': {
+                    'id': material.id,
+                    'title': material.subject,
+                    'discipline': material.discipline,
+                    'note': material.note,
+                    'created_at': material.created_at,
+                    'content': material.content,
+                    'type': material.type.value,
+                },
             }
         ), 200
 
@@ -108,10 +103,8 @@ def create_study_guide():
             session.add(resume)
             session.add(historico)
             session.commit()
-            logger.info('Roteiro de estudos salvo no banco de dados')
             return jsonify({'ok': True, 'redirect': '/materials'}), 201
 
         except Exception:
             session.rollback()
-            logger.error('Falha ao salvar roteiro de estudos no banco de dados')
             return jsonify({'ok': False, 'message': 'Ocorreu um erro interno'}), 500

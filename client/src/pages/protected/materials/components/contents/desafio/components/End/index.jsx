@@ -15,9 +15,7 @@ export default function End({ elapsedSeconds, onRestart, onExit }) {
                 <h2 className='bg-linear-to-tr from-color1-400 to-color4-25 bg-clip-text font-primary text-3xl font-extrabold text-transparent'>
                     Desafio concluído!
                 </h2>
-                <p className='mt-2 font-secundary text-base text-color1-100'>
-                    Sua resolução foi enviada com sucesso.
-                </p>
+                <p className='mt-2 font-secundary text-base text-color1-100'>Sua resolução foi enviada com sucesso.</p>
             </div>
 
             <div className='flex items-center gap-3 rounded-xl border-2 border-color4-100 p-4'>

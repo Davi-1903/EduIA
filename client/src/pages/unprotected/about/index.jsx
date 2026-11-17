@@ -11,14 +11,14 @@ export default function About() {
                     content='Página de sobre, explicando sobre o que é p EduIA'
                 />
             </Helmet>
-            <main className='flex flex-col items-center gap-15 bg-[linear-gradient(135deg,#e0e9fb_0%,#f4f7ff_100%)]'>
-                <div className='flex w-full flex-wrap items-center justify-center rounded-bl-[20%] bg-[#F7F8F8] pt-32 pb-24'>
+            <main className='flex flex-col items-center gap-15 bg-linear-135 from-[#e0e9fb] from-0% to-[#f4f7ff] to-100% pb-24'>
+                <section className='flex w-full flex-wrap items-center justify-center rounded-bl-[20%] bg-[#F7F8F8] pt-32 pb-24'>
                     <article className='flex max-w-200 flex-2 basis-80 flex-col gap-2'>
-                        <h1 className='mb-4 px-10 font-primary text-4xl font-bold text-color2-200 md:text-5xl'>
+                        <h1 className='mb-4 bg-linear-to-br from-color1-200 to-color4-25 bg-clip-text px-10 font-primary text-4xl font-bold text-transparent md:text-5xl'>
                             Sobre
                         </h1>
                         <p className='min-w-100 px-10 font-secundary leading-relaxed text-color3-100 sm:text-lg md:text-xl'>
-                            O EduIA é uma plataforma educacional que utiliza
+                            O EduIA é um sistema educacional que utiliza
                             <strong className='text-color1-100'> Inteligência Artificial</strong> para auxiliar alunos e
                             professores na criação de materiais de estudo de forma
                             <strong className='text-color1-100'> rápida, personalizada e eficiente</strong>.
@@ -31,15 +31,15 @@ export default function About() {
                     </article>
                     <article className='hidden min-[900px]:block'>
                         <img
-                            src='/assets/images/mascote/sobre.png'
+                            src='/assets/images/mascote/sobre.webp'
                             alt='Mascote do EduIA para about'
                             className='mx-auto max-w-100'
                         />
                     </article>
-                </div>
+                </section>
                 <article className='flex flex-wrap-reverse items-center justify-center p-10 md:gap-30'>
                     <img
-                        src='/assets/images/mascote/funcionalidades.png'
+                        src='/assets/images/mascote/funcionalidades.webp'
                         alt='Mascote do EduIA para funcionalidades'
                         className='mx-auto max-w-80 animate-floating'
                     />
@@ -47,7 +47,7 @@ export default function About() {
                         <span className='rounded-full bg-blue-500/10 px-4 py-1 text-sm font-bold text-color1-200 uppercase'>
                             Funcionalidades
                         </span>
-                        <h2 className='my-4 font-primary text-3xl font-bold text-color2-200 md:text-4xl'>
+                        <h2 className='my-4 bg-linear-to-tr from-color1-200 from-50% to-color4-25 bg-clip-text font-primary text-3xl font-bold text-transparent md:text-4xl'>
                             O que você pode fazer no EduIA
                         </h2>
                         <div>
@@ -64,7 +64,7 @@ export default function About() {
                         <span className='rounded-full bg-blue-500/10 px-4 py-1 text-sm font-bold text-color1-200 uppercase'>
                             Objetivo
                         </span>
-                        <h2 className='my-4 font-primary text-3xl font-bold text-color2-200 md:text-4xl'>
+                        <h2 className='my-4 bg-linear-to-tr from-color1-200 to-color4-25 bg-clip-text font-primary text-3xl font-bold text-transparent md:text-4xl'>
                             Nosso objetivo
                         </h2>
                         <div>
@@ -77,7 +77,7 @@ export default function About() {
                         </div>
                     </div>
                     <img
-                        src='/assets/images/mascote/objetivo.png'
+                        src='/assets/images/mascote/objetivo.webp'
                         alt='Mascote do EduIA para objetivo'
                         className='mx-auto max-w-80 animate-floating'
                     />

@@ -64,7 +64,9 @@ export default function Introduction({ discipline, subject, difficulty, question
                     strokeWidth={2.5}
                     className='stroke-color1-400'
                 />
-                <span className='font-secundary text-sm font-bold text-color1-400'>PREPARAÇÃO PARA OS EXERCÍCIOS GUIADOS</span>
+                <span className='font-secundary text-sm font-bold text-color1-400'>
+                    PREPARAÇÃO PARA OS EXERCÍCIOS GUIADOS
+                </span>
             </div>
             <h2 className='bg-linear-to-tr from-color1-400 to-color4-25 bg-clip-text font-primary text-4xl font-extrabold text-transparent'>
                 Pronto para começar?
@@ -79,7 +81,7 @@ export default function Introduction({ discipline, subject, difficulty, question
                             {item.icon}
                         </div>
                         <div>
-                            <span className='block font-secundary text- font-medium text-color1-100/40'>
+                            <span className='text- block font-secundary font-medium text-color1-100/40'>
                                 {item.type}
                             </span>
                             <span className='block font-primary text-base font-bold text-color1-100'>

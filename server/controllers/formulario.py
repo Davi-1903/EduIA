@@ -27,8 +27,8 @@ def get_formularios():
 @login_required
 def get_formulario(id: int):
     try:
-        formularios = get_formulario_service(id)
-        return jsonify({'ok': True, 'material': formularios}), 200
+        formulario = get_formulario_service(id)
+        return jsonify({'ok': True, 'material': formulario}), 200
 
     except MaterialNotFoundError as erro:
         return jsonify({'ok': False, 'message': str(erro)}), 404
