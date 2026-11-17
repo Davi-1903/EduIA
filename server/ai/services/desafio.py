@@ -1,3 +1,6 @@
+from langchain_core.exceptions import OutputParserException
+from pydantic import ValidationError
+
 from errors.ai import AiInvalidData, AiInvalidRequest
 from schemas.desafios import Desafio
 
