@@ -23,7 +23,8 @@ import Formulario from './contents/forms';
 import GuidedExercises from './contents/guided_exercises';
 import Desafio from './contents/desafio';
 import Explicacoes from './contents/explicacoes';
-import LessonPlan from './contents/lesson_plan'
+import LessonPlan from './contents/lesson_plan';
+import StudyGuide from './contents/study_guide'
 import { useAuthenticated } from '../../../../context/authContext';
 
 export default function MaterialCard({
@@ -161,7 +162,16 @@ export default function MaterialCard({
                 />
             ),
             resumo: null,
-            roteiro: null,
+            roteiro: (
+                        <StudyGuide
+                            discipline={discipline}
+                            subject={title}
+                            grade={grade}
+                            duration={time}
+                            content={content}
+                            setContent={setContent}
+                        />
+            ),
         };
         return icons[type];
     }
@@ -197,7 +207,6 @@ export default function MaterialCard({
 
     function handleOpen() {
         const tipo = normalizarTipo(type);
-        console.log('abrindo', { id, tipo, type, title });
 
         if (!getContent(type)) {
             setMessages(prev => [
