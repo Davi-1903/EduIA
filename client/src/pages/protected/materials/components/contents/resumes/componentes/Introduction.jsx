@@ -71,7 +71,7 @@ export default function Introduction({ discipline, subject, handleClose, handleS
                     className='stroke-color1-100'
                 />
                 <p className='font-secundary text-base text-color1-100'>
-                    Leia cada questão com atenção. Você pode revisar suas respostas antes de finalizar.
+                    Você pode copiar o resumo.
                 </p>
             </blockquote>
             <div className='flex gap-4'>
@@ -85,7 +85,7 @@ export default function Introduction({ discipline, subject, handleClose, handleS
                     className='group flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-button px-8 py-2 font-secundary text-lg font-bold text-color4-400 transition-all duration-250 hover:shadow-lg-hard'
                     onClick={handleStart}
                 >
-                    <span>Iniciar Resumo</span>
+                    <span>Ver Resumo</span>
                     <IconArrowRight className='transition-all duration-250 group-hover:ml-2' />
                 </button>
             </div>

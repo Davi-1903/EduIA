@@ -1,20 +1,23 @@
 from langchain_core.output_parsers import JsonOutputParser
 from langchain_core.prompts import PromptTemplate
 
-from schemas.resumos import ResumosJSON
+from schemas.resumos import Resumos
 
 
 PROMPT = """
-Você é um professor especialista em {disciplina}. Gere um resumo explicativo.
+Você é um professor especialista em {disciplina}.
+
+Gere um resumo sobre o tema abaixo, organizado em seções curtas.
 
 Tema: {assunto}
 Observações: {observacoes}
-Formato da resposta: {format_instructions}
+
+{format_instructions}
 
 {documentacao}
 """
 
-parser = JsonOutputParser(pydantic_object=ResumosJSON)
+parser = JsonOutputParser(pydantic_object=Resumos)
 
 prompt_template = PromptTemplate(
     template=PROMPT,

@@ -21,16 +21,12 @@ export default function Resume({ discipline, subject, content, setContent }) {
 
     useEffect(() => {
         function handleClick(event) {
-            if (
-                !materialRef.current?.contains(event.target) &&
-                (!start || confirm('Deseja parar de responder os flashcards?'))
-            )
+            if (!materialRef.current?.contains(event.target) && (!start || confirm('Deseja sair do resumo?')))
                 setClose(true);
         }
 
         function handleKey(event) {
-            if (event.key === 'Escape' && (!start || confirm('Deseja parar de responder os flashcards?')))
-                setClose(true);
+            if (event.key === 'Escape' && (!start || confirm('Deseja sair do resumo?'))) setClose(true);
         }
 
         document.addEventListener('mousedown', handleClick);
@@ -51,7 +47,7 @@ export default function Resume({ discipline, subject, content, setContent }) {
         >
             <main
                 ref={materialRef}
-                className='flex h-170 w-full max-w-160 flex-col gap-6 rounded-2xl bg-white p-6 shadow-2xl shadow-color1-100/15 lg:w-4/5'
+                className='flex h-170 w-full max-w-160 flex-col justify-center gap-6 rounded-2xl bg-white p-6 shadow-2xl shadow-color1-100/15 lg:w-4/5'
             >
                 {!start ? (
                     <Introduction
@@ -62,9 +58,12 @@ export default function Resume({ discipline, subject, content, setContent }) {
                     />
                 ) : (
                     <>
-                        <h1>OIII</h1>
-
-                        <p>{content.content}</p>
+                        {content.map(c => (
+                            <>
+                                <h1 className='text-color1-400 font-medium'>{c.title}</h1>
+                                <p>{c.text}</p>
+                            </>
+                        ))}
                     </>
                 )}
             </main>
