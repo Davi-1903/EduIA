@@ -1,35 +1,13 @@
-from pathlib import Path
-
 from flask import Blueprint, jsonify, request
-from flask_login import current_user, login_required
-from loguru import logger
-from sqlalchemy import func, select
-
-from database import SessionLocal
-from models import desafios
-from models.desafios import Desafio
-from models.historico import Historico
-from models.material import Difficulty
-from services import desafio
-from utils import setup_logger
-
-
-setup_logger(__name__, Path(__file__).resolve().parents[1] / 'logs' / 'challenges.log')
 from flask_login import login_required
 
 from ai.services.desafio import generate_desafios
-from errors.ai import (
-    AiInvalidData,
-    AiInvalidResponse,
-    AiProviderUnavailable,
-    AiServiceError,
-    AiTimeout,
-)
+from errors.ai import AiInvalidData, AiInvalidResponse, AiProviderUnavailable, AiServiceError, AiTimeout
 from errors.materials import MaterialNotFoundError, MaterialServiceError, MaterialValidationError
 from services.desafio import create_desafio_service, get_desafio_service, get_desafios_service
 
 
-bp_materials_desafio = Blueprint('desafios', __name__, url_prefix='/desafio')
+bp_materials_desafio = Blueprint('desafio', __name__, url_prefix='/desafio')
 
 
 @bp_materials_desafio.route('/', methods=['GET'])
@@ -49,7 +27,7 @@ def get_desafios():
 @login_required
 def get_desafio(id: int):
     try:
-        desafio = get_desafios_service(id)
+        desafio = get_desafio_service(id)
         return jsonify({'ok': True, 'material': desafio}), 200
 
     except MaterialNotFoundError as erro:

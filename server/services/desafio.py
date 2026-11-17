@@ -1,18 +1,21 @@
+from pathlib import Path
+
 from flask_login import current_user
+from loguru import logger
 from sqlalchemy import func, select
 
 from database import SessionLocal
-from errors.materials import (
-    MaterialNotFoundError,
-    MaterialServiceError,
-    MaterialValidationError,
-)
+from errors.materials import MaterialNotFoundError, MaterialServiceError
 from models.desafios import Desafio
 from models.historico import Historico
 from models.material import Difficulty
+from utils import setup_logger
 
 
-def get_desafio_service(cursor: int, limit: int):
+setup_logger(__name__, Path(__file__).resolve().parents[1] / 'logs' / 'challenges.log')
+
+
+def get_desafios_service(cursor: int, limit: int):
     with SessionLocal() as session:
         count_stmt = (
             select(func.count())
@@ -48,14 +51,10 @@ def get_desafio_service(cursor: int, limit: int):
         }
 
 
-def get_desafios_service(id: int):
+def get_desafio_service(id: int):
     with SessionLocal() as session:
         material = session.get(Desafio, id)
-        if (
-            material is None
-            or material.deleted_at is not None
-            or material.user_id != current_user.id
-        ):
+        if material is None or material.deleted_at is not None or material.user_id != current_user.id:
             raise MaterialNotFoundError('Desafio não encontrado')
 
         return {
@@ -78,17 +77,14 @@ def create_desafio_service(data: dict):
                 subject=data['subject'],
                 content=data['content'],
                 difficulty=Difficulty(data['difficulty']),
-                amount=data['amount'],
             )
             historico = Historico(material=desafios)
             session.add(desafios)
             session.add(historico)
             session.commit()
 
-        except (KeyError, ValueError) as exc:
-            session.rollback()
-            raise MaterialValidationError('Dados inválidos') from exc
 
         except Exception as exc:
             session.rollback()
+            logger.error('Falha ao salvar desafio no banco de dados')
             raise MaterialServiceError('Ocorreu um erro interno') from exc

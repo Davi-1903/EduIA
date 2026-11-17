@@ -239,7 +239,7 @@ export default function MaterialCard({
     async function handleDownload() {
         setMenu(null);
         const formatTypes = {
-            desafio: 'Desafios',
+            desafio: 'Desafio',
             exercicio_guiado: 'Exercício guiado',
             explicacoes: 'Explicações',
             flashcards: 'Flashcards',
