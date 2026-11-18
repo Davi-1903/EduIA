@@ -1,21 +1,19 @@
-from pathlib import Path
-
 from flask import Blueprint, jsonify, request
-from flask_login import current_user, login_required
-from loguru import logger
-from sqlalchemy import func, select
+from flask_login import login_required
 
-from database import SessionLocal
-from models.exercicios_guiados import ExercicioGuiado
-from models.historico import Historico
-from models.material import Difficulty
-from utils import setup_logger
-
-
-setup_logger(__name__, Path(__file__).resolve().parents[1] / 'logs' / 'guided-exercises.log')
+from ai.services.guided_exercises import generate_guided_exercises
+from errors.ai import AiInvalidData, AiInvalidResponse, AiProviderUnavailable, AiServiceError, AiTimeout
+from errors.materials import MaterialNotFoundError, MaterialServiceError, MaterialValidationError
+from services.guided_exercises import (
+    create_guided_exercise_service,
+    get_guided_exercise_service,
+    get_guided_exercises_service,
+)
 
 
 bp_materials_exercicio_guiado = Blueprint('exercicio_guiado', __name__, url_prefix='/exercicio_guiado')
+
+TIPOS = ('multiple_choice', 'true_or_false', 'discursive')
 
 
 @bp_materials_exercicio_guiado.route('/', methods=['GET'])
@@ -24,76 +22,26 @@ def get_guided_exercises():
     cursor = request.args.get('cursor', 0, type=int)
     limit = request.args.get('limit', 50, type=int)
 
-    with SessionLocal() as session:
-        count_stmt = (
-            select(func.count())
-            .select_from(ExercicioGuiado)
-            .where(ExercicioGuiado.user_id == current_user.id)
-            .where(ExercicioGuiado.deleted_at.is_(None))
-        )
-        statement = (
-            select(ExercicioGuiado)
-            .where(ExercicioGuiado.user_id == current_user.id)
-            .where(ExercicioGuiado.deleted_at.is_(None))
-            .offset(cursor)
-            .limit(limit)
-            .order_by(ExercicioGuiado.created_at.desc())
-        )
+    try:
+        exercises = get_guided_exercises_service(cursor, limit)
+        return jsonify({'ok': True, **exercises}), 200
 
-        total = session.scalar(count_stmt) or 0
-        materials = session.scalars(statement).all()
-
-        return jsonify(
-            {
-                'ok': True,
-                'total': total,
-                'materials': [
-                    {
-                        'id': material.id,
-                        'title': material.subject,
-                        'discipline': material.discipline,
-                        'difficulty': material.difficulty.value,
-                        'amount': material.amount,
-                        'created_at': material.created_at,
-                        'type': material.type.value,
-                    }
-                    for material in materials
-                ],
-            }
-        ), 200
+    except MaterialServiceError as error:
+        return jsonify({'ok': False, 'message': str(error)}), 500
 
 
 @bp_materials_exercicio_guiado.route('/<int:id>', methods=['GET'])
 @login_required
 def get_guided_exercise(id: int):
-    with SessionLocal() as session:
-        material = session.get(ExercicioGuiado, id)
-        if material is None or material.deleted_at is not None:
-            return jsonify({'ok': False, 'message': 'Exercício guiado não encontrado'}), 404
+    try:
+        exercise = get_guided_exercise_service(id)
+        return jsonify({'ok': True, 'material': exercise}), 200
 
-        return jsonify(
-            {
-                'ok': True,
-                'material': {
-                    'id': material.id,
-                    'title': material.subject,
-                    'discipline': material.discipline,
-                    'difficulty': material.difficulty.value,
-                    'amount': material.amount,
-                    'resolution': material.resolution,
-                    'theory': material.theory,
-                    'multiple_choice': material.multiple_choice,
-                    'true_or_false': material.true_or_false,
-                    'discursive': material.discursive,
-                    'interpretation': material.interpretation,
-                    'code': material.code,
-                    'note': material.note,
-                    'content': material.content,
-                    'created_at': material.created_at,
-                    'type': material.type.value,
-                },
-            }
-        ), 200
+    except MaterialNotFoundError as error:
+        return jsonify({'ok': False, 'message': str(error)}), 404
+
+    except MaterialServiceError as error:
+        return jsonify({'ok': False, 'message': str(error)}), 500
 
 
 @bp_materials_exercicio_guiado.route('/', methods=['POST'])
@@ -103,34 +51,27 @@ def create_guided_exercise():
     if data is None:
         return jsonify({'ok': False, 'message': 'Dados não recebidos'}), 400
 
-    # Lógica da IA...
+    tipos = [tipo for tipo in TIPOS if data.get(tipo)]
+    if len(tipos) != 1:
+        return jsonify({'ok': False, 'message': 'Selecione um único tipo de exercício'}), 400
 
-    with SessionLocal() as session:
-        try:
-            guided_exercise = ExercicioGuiado(
-                user_id=current_user.id,
-                discipline=data['discipline'],
-                subject=data['subject'],
-                content={'content': 1},  # Resposta da IA
-                difficulty=Difficulty(data['difficulty']),
-                amount=data['amount'],
-                resolution=data['resolution'],
-                theory=data['theory'],
-                multiple_choice=data['multiple_choice'],
-                true_or_false=data['true_or_false'],
-                discursive=data['discursive'],
-                interpretation=data['interpretation'],
-                code=data['code'],
-                note=data['note'] if data['note'] != '' else None,
-            )
-            historico = Historico(material=guided_exercise)
-            session.add(guided_exercise)
-            session.add(historico)
-            session.commit()
-            logger.info('Exercício guiado salvo no banco de dados')
-            return jsonify({'ok': True, 'redirect': '/materials'}), 201
+    try:
+        content = generate_guided_exercises({**data, 'type': tipos[0]})
+    except AiInvalidData as error:
+        return jsonify({'ok': False, 'message': str(error)}), 400
+    except AiInvalidResponse as error:
+        return jsonify({'ok': False, 'message': str(error)}), 502
+    except AiTimeout as error:
+        return jsonify({'ok': False, 'message': str(error)}), 503
+    except AiProviderUnavailable as error:
+        return jsonify({'ok': False, 'message': str(error)}), 503
+    except AiServiceError as error:
+        return jsonify({'ok': False, 'message': str(error)}), 500
 
-        except Exception:
-            session.rollback()
-            logger.error('Falha ao salvar exercício guiado no banco de dados')
-            return jsonify({'ok': False, 'message': 'Ocorreu um erro interno'}), 500
+    try:
+        create_guided_exercise_service({**data, 'content': content})
+        return jsonify({'ok': True, 'redirect': '/materials'}), 201
+    except MaterialValidationError as error:
+        return jsonify({'ok': False, 'message': str(error)}), 400
+    except MaterialServiceError:
+        return jsonify({'ok': False, 'message': 'Ocorreu um erro interno'}), 500

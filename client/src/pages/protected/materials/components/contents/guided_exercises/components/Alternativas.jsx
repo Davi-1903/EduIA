@@ -51,8 +51,12 @@ export default function Alternativas({ tipo, questao, revelada }) {
                 ].map(op => (
                     <li
                         key={op.texto}
-                        destaque={revelada && op.valor === questao.correctAnswer}
-                        className='b-color1-100 w-28 rounded-xl border-2 p-3 text-center font-medium text-color1-100 transition-all duration-250 hover:bg-button hover:text-color4-400'
+                        className={clsx(
+                            'w-28 rounded-xl border-2 p-3 text-center font-medium text-color1-100 transition-all duration-250',
+                            revelada && op.valor === questao.correctAnswer
+                                ? 'border-green-500 bg-green-50'
+                                : 'border-color1-100',
+                        )}
                     >
                         <span>{op.texto}</span>
                     </li>
