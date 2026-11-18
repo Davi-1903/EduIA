@@ -11,7 +11,6 @@ def generate_desafios(data: dict):
     try:
         payload = {
             'disciplina': data['discipline'],
-            'dificuldade': data['difficulty'],
             'assunto': data['subject'],
             'observacoes': data.get('note') or 'Não há observações',
         }

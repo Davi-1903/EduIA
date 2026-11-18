@@ -53,7 +53,7 @@ export default function GenerateLessonPlan({ setOpen }) {
 
             document.body.style.overflowY = 'auto';
             navigate(response.redirect);
-            console.log(response.redirect)
+            console.log(response.redirect);
 
             setMessages(prev => [
                 ...prev,

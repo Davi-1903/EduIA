@@ -5,11 +5,10 @@ from schemas.desafios import Desafio
 
 
 PROMPT = """
-Você é um professor especialista em {disciplina}. Gere um desafio com uma situação e uma explicação breve da resolução
+Você é um professor especialista em {disciplina}. Gere um desafio com uma situação e uma explicação breve da resolução dividida em seções curtas formatada em uma lista markdown. Faça com uma dificuldade muito difícil.
 
 Tema: {assunto}
 Formato da resposta: {format_instructions}
-Dificuldade: {dificuldade}
 Observações: {observacoes}
 
 {documentacao}
@@ -19,6 +18,6 @@ parser = JsonOutputParser(pydantic_object=Desafio)
 
 prompt_template = PromptTemplate(
     template=PROMPT,
-    input_variables=['disciplina', 'dificuldade', 'assunto', 'observacoes', 'documentacao'],
+    input_variables=['disciplina', 'assunto', 'observacoes', 'documentacao'],
     partial_variables={'format_instructions': parser.get_format_instructions()},
 )

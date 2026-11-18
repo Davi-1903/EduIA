@@ -76,13 +76,12 @@ def create_desafio_service(data: dict):
                 discipline=data['discipline'],
                 subject=data['subject'],
                 content=data['content'],
-                difficulty=Difficulty(data['difficulty']),
+                difficulty=Difficulty.MUITO_DIFICIL,
             )
             historico = Historico(material=desafios)
             session.add(desafios)
             session.add(historico)
             session.commit()
-
 
         except Exception as exc:
             session.rollback()

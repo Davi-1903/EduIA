@@ -156,6 +156,7 @@ def generate_formularios(payload: dict):
         logger.error('Falha inesperada durante geração de formulários')
         raise AiProviderUnavailable('Não foi possível acessar o serviço de IA') from error
 
+
 def generate_resumos(payload: dict):
     logger.info('Iniciando geração de resumos')
     try:

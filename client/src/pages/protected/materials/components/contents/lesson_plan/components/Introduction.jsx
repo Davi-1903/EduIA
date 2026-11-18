@@ -64,30 +64,34 @@ export default function Introduction({ discipline, subject, grade, duration, han
                     strokeWidth={2.5}
                     className='stroke-color1-400'
                 />
-                <span className='font-secundary text-sm font-bold text-color1-400'>PREPARAÇÃO PARA O PLANO DE AULA</span>
+                <span className='font-secundary text-sm font-bold text-color1-400'>
+                    PREPARAÇÃO PARA O PLANO DE AULA
+                </span>
             </div>
             <h2 className='bg-linear-to-tr from-color1-400 to-color4-25 bg-clip-text font-primary text-4xl font-extrabold text-transparent'>
                 Pronto para começar?
             </h2>
             <ul className='flex flex-col rounded-xl border-2 border-color4-100'>
-                {informations.filter(item => item.content).map(item => (
-                    <li
-                        key={item.id}
-                        className='flex items-center gap-3 p-3 not-last:border-b-2 not-last:border-color4-100'
-                    >
-                        <div className='grid aspect-square h-full max-h-11 place-items-center rounded-lg bg-color4-100 p-3'>
-                            {item.icon}
-                        </div>
-                        <div>
-                            <span className='block font-secundary text-sm font-medium text-color1-100/40'>
-                                {item.type}
-                            </span>
-                            <span className='block font-primary text-base font-bold text-color1-100'>
-                                {item.content}
-                            </span>
-                        </div>
-                    </li>
-                ))}
+                {informations
+                    .filter(item => item.content)
+                    .map(item => (
+                        <li
+                            key={item.id}
+                            className='flex items-center gap-3 p-3 not-last:border-b-2 not-last:border-color4-100'
+                        >
+                            <div className='grid aspect-square h-full max-h-11 place-items-center rounded-lg bg-color4-100 p-3'>
+                                {item.icon}
+                            </div>
+                            <div>
+                                <span className='block font-secundary text-sm font-medium text-color1-100/40'>
+                                    {item.type}
+                                </span>
+                                <span className='block font-primary text-base font-bold text-color1-100'>
+                                    {item.content}
+                                </span>
+                            </div>
+                        </li>
+                    ))}
             </ul>
             <blockquote className='flex items-center gap-3 rounded-lg bg-color4-100 p-4'>
                 <IconAlertCircle

@@ -80,7 +80,7 @@ def create_resume_service(data: dict):
             session.add(historico)
             session.commit()
             logger.info('Resumo salvo no banco de dados')
-        
+
         except Exception as exc:
             session.rollback()
             logger.error('Falha ao salvar resumo no banco de dados')

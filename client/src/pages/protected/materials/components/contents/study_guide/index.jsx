@@ -51,7 +51,11 @@ export default function StudyGuide({ discipline, subject, grade, duration, conte
                         handleStart={handleStart}
                     />
                 ) : (
-                    <Guide discipline={discipline} subject={subject} content={content} />
+                    <Guide
+                        discipline={discipline}
+                        subject={subject}
+                        content={content}
+                    />
                 )}
             </main>
         </div>
