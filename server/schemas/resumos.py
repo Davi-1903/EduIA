@@ -8,4 +8,4 @@ class ResumosJSON(BaseModel):
 
 
 class Resumos(BaseModel):
-    content: list[ResumosJSON]
+    content: ResumosJSON
