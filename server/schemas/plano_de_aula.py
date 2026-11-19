@@ -1,5 +1,5 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
-class PlanoDeAulaJSON(BaseModel):
-    content: str  # Armazenado em markdown
+class PlanoDeAula(BaseModel):
+    content: str = Field(min_length=1, description='Plano de aula completo em Markdown')

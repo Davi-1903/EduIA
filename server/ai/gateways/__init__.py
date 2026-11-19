@@ -3,7 +3,7 @@ from pathlib import Path
 from langchain_core.exceptions import OutputParserException
 from loguru import logger
 
-from ai.prompts import desafio, flashcards, formularios, guided_exercises, questoes, quiz, resumos
+from ai.prompts import desafio, flashcards, formularios, guided_exercises, questoes, quiz, resumos, lesson_plan, study_guide
 from errors.ai import AiInvalidRequest, AiInvalidResponse, AiProviderUnavailable, AiServiceError, AiTimeout
 from utils import setup_logger
 from utils.ai import search_documentation
@@ -229,6 +229,7 @@ def generate_guided_exercises(payload: dict):
         raise AiProviderUnavailable('Não foi possível acessar o serviço de IA') from error
 
 
+
 def generate_desafio(payload: dict):
     logger.info('Iniciando geração de desafios')
     try:
@@ -261,4 +262,14 @@ def generate_desafio(payload: dict):
         raise AiProviderUnavailable('O serviço de IA está indisponível') from error
     except Exception as error:
         logger.error('Falha inesperada durante geração de desafios')
+        raise AiProviderUnavailable('Não foi possível acessar o serviço de IA') from error
+
+def generate_plano_de_aula(payload: dict):
+    try:
+        llm = get_llm_ext()  
+        chain = lesson_plan.prompt_template | llm | lesson_plan.parser
+        return chain.invoke(payload)
+    
+    except Exception as error:
+        logger.exception('Falha inesperada durante geração de plano de aula')
         raise AiProviderUnavailable('Não foi possível acessar o serviço de IA') from error

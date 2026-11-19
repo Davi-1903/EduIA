@@ -53,6 +53,7 @@ export default function GenerateLessonPlan({ setOpen }) {
 
             document.body.style.overflowY = 'auto';
             navigate(response.redirect);
+            console.log(response.redirect)
 
             setMessages(prev => [
                 ...prev,
@@ -103,7 +104,7 @@ export default function GenerateLessonPlan({ setOpen }) {
             )}
         >
             <form
-                className='flex w-full max-w-xl flex-col gap-4 rounded-2xl bg-color4-200 px-4 py-6 lg:gap-6 lg:px-6 lg:py-8'
+                className='flex w-full max-w-xl flex-col gap-6 rounded-2xl bg-color4-200 px-4 py-8 lg:px-6'
                 ref={articleRef}
                 onSubmit={handleSubmit}
             >
@@ -142,15 +143,22 @@ export default function GenerateLessonPlan({ setOpen }) {
                 </div>
 
                 <div className='flex flex-col'>
-                    <label className='font-secundary font-bold text-color1-100'>Ano/Série</label>
-                    <input
-                        type='text'
-                        placeholder='Ano ou série da turma'
-                        className='required rounded-lg border border-gray-300 bg-color4-200 px-4 py-2 outline-none focus:ring-2 focus:ring-color1-400'
+                    <label className='font-secundary font-bold text-color1-100'>
+                        Ano/Série
+                    </label>
+
+                    <select
                         value={grade}
                         onChange={e => setGrade(e.target.value)}
+                        className='rounded-lg border border-gray-300 bg-color4-200 px-4 py-3 outline-none focus:ring-2 focus:ring-color1-400'
                         required
-                    />
+                    >
+                        <option value='' disabled>Selecione o ano/série</option>
+                        <option value='1º ano - Ensino Médio Integrado'>1º ano - Ensino Médio Integrado</option>
+                        <option value='2º ano - Ensino Médio Integrado'>2º ano - Ensino Médio Integrado</option>
+                        <option value='3º ano - Ensino Médio Integrado'>3º ano - Ensino Médio Integrado</option>
+                        <option value='4º ano - Ensino Médio Integrado'>4º ano - Ensino Médio Integrado</option>
+                    </select>
                 </div>
 
                 <div className='flex flex-col'>
