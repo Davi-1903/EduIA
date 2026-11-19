@@ -68,7 +68,7 @@ export default function Resume({ discipline, subject, content, setContent }) {
         >
             <main
                 ref={materialRef}
-                className='overflow-y-autoh-170 flex min-h-0 w-full max-w-160 min-w-0 flex-1 flex-col gap-6 rounded-2xl bg-white px-6 py-10 shadow-2xl shadow-color1-100/15 lg:w-4/5'
+                className='flex h-170 min-h-0 w-full max-w-160 min-w-0 flex-1 flex-col gap-6 overflow-y-auto rounded-2xl bg-white px-6 py-10 shadow-2xl shadow-color1-100/15 lg:w-4/5'
             >
                 {!start ? (
                     <Introduction
