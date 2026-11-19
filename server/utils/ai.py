@@ -55,6 +55,8 @@ def get_vector_store() -> PineconeVectorStore:
     try:
         pc = Pinecone(api_key=get_env('PINECONE_API_KEY'))
         index = pc.Index(get_env('INDEX_NAME'))
+        print('INDEX_NAME:', get_env('INDEX_NAME'))
+        print('INDEX INFO:', pc.describe_index(get_env('INDEX_NAME')))
     except Exception as err:
         logger.exception('Não foi possível se conectar ao Pinecone')
         raise RuntimeError(f'Não foi possível se conectar ao pinecone: {err}') from err
