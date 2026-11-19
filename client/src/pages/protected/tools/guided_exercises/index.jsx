@@ -13,9 +13,7 @@ export default function GenerateQuidedExercises({ setOpen }) {
     const [subject, setSubject] = useState('');
     const [difficulty, setDifficulty] = useState(0);
     const [amount, setAmount] = useState(5);
-    const [multipleChoice, setMultipleChoice] = useState(false);
-    const [trueOrFalse, setTrueOrFalse] = useState(false);
-    const [discursive, setDiscursive] = useState(false);
+    const [exerciseFormat, setExerciseFormat] = useState('');
     const [note, setNote] = useState('');
     const [isClose, setClose] = useState(false);
     const [isLoading, setLoading] = useState(false);
@@ -43,9 +41,9 @@ export default function GenerateQuidedExercises({ setOpen }) {
                 amount,
                 resolution: false,
                 theory: false,
-                multiple_choice: multipleChoice,
-                true_or_false: trueOrFalse,
-                discursive,
+                multiple_choice: exerciseFormat === 'multiple_choice',
+                true_or_false: exerciseFormat === 'true_or_false',
+                discursive: exerciseFormat === 'discursive',
                 interpretation: false,
                 code: false,
                 note,
@@ -104,7 +102,7 @@ export default function GenerateQuidedExercises({ setOpen }) {
             )}
         >
             <form
-                className='flex w-full max-w-xl flex-col gap-4 rounded-2xl bg-color4-200 px-4 py-6 lg:gap-6 lg:px-6 lg:py-8'
+                className='flex w-full max-w-xl flex-col gap-6 rounded-2xl bg-color4-200 px-4 py-8 lg:px-6'
                 ref={articleRef}
                 onSubmit={handleSubmit}
             >
@@ -122,9 +120,11 @@ export default function GenerateQuidedExercises({ setOpen }) {
                         onChange={e => setDiscipline(e.target.value)}
                     >
                         {Object.entries(disciplinasList).map(([key, disciplinas]) => (
-                            <optgroup label={key}>
+                            <optgroup key={key} label={key}>
                                 {disciplinas.map(disciplina => (
-                                    <option value={disciplina}>{disciplina}</option>
+                                    <option key={disciplina} value={disciplina}>
+                                        {disciplina}
+                                    </option>
                                 ))}
                             </optgroup>
                         ))}
@@ -180,43 +180,43 @@ export default function GenerateQuidedExercises({ setOpen }) {
                     />
                 </div>
 
-                <div>
-                    <label className='font-secundary font-bold text-color1-100'>Formato dos exercícios</label>
+                <div className='grid grid-cols-2 gap-x-8 pl-2'>
+                    <label className='flex items-center gap-2 font-secundary text-sm text-color1-100'>
+                        <input
+                            type='radio'
+                            name='exercise_format'
+                            value='multiple_choice'
+                            checked={exerciseFormat === 'multiple_choice'}
+                            onChange={e => setExerciseFormat(e.target.value)}
+                            className='accent-color1-100'
+                            required
+                        />
+                        Múltipla escolha
+                    </label>
 
-                    <div className='grid grid-cols-2 gap-x-8 pl-2'>
-                        <label className='flex items-center gap-2 font-secundary text-sm text-color1-100'>
-                            <input
-                                type='checkbox'
-                                name='multiple_choice'
-                                checked={multipleChoice}
-                                onChange={e => setMultipleChoice(e.target.checked)}
-                                className='accent-color1-100'
-                            />
-                            Múltipla escolha
-                        </label>
+                    <label className='flex items-center gap-2 font-secundary text-sm text-color1-100'>
+                        <input
+                            type='radio'
+                            name='exercise_format'
+                            value='true_or_false'
+                            checked={exerciseFormat === 'true_or_false'}
+                            onChange={e => setExerciseFormat(e.target.value)}
+                            className='accent-color1-100'
+                        />
+                        Verdadeiro ou falso
+                    </label>
 
-                        <label className='flex items-center gap-2 font-secundary text-sm text-color1-100'>
-                            <input
-                                type='checkbox'
-                                name='true_or_false'
-                                checked={trueOrFalse}
-                                onChange={e => setTrueOrFalse(e.target.checked)}
-                                className='accent-color1-100'
-                            />
-                            Verdadeiro ou falso
-                        </label>
-
-                        <label className='flex items-center gap-2 font-secundary text-sm text-color1-100'>
-                            <input
-                                type='checkbox'
-                                name='discursive'
-                                checked={discursive}
-                                onChange={e => setDiscursive(e.target.checked)}
-                                className='accent-color1-100'
-                            />
-                            Discursivo
-                        </label>
-                    </div>
+                    <label className='flex items-center gap-2 font-secundary text-sm text-color1-100'>
+                        <input
+                            type='radio'
+                            name='exercise_format'
+                            value='discursive'
+                            checked={exerciseFormat === 'discursive'}
+                            onChange={e => setExerciseFormat(e.target.value)}
+                            className='accent-color1-100'
+                        />
+                        Discursivo
+                    </label>
                 </div>
 
                 <div className='flex flex-col'>

@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { IconArrowRight, IconBook, IconBulb } from '@tabler/icons-react';
 import Alternativas from './Alternativas';
 import { Dica, MostrarResposta, Resposta } from './Painel';
+import Texto from './Texto';
 
 export default function Questions({ discipline, difficulty, tipo, questoes, onFinish }) {
     const [indice, setIndice] = useState(0);
@@ -21,7 +22,7 @@ export default function Questions({ discipline, difficulty, tipo, questoes, onFi
 
     return (
         <article className='flex flex-1 flex-col gap-5'>
-            {/* Cabeçalho */}
+            
             <header className='flex items-center gap-3'>
                 <div className='rounded-full bg-black/3 p-4'>
                     <IconBook
@@ -37,7 +38,7 @@ export default function Questions({ discipline, difficulty, tipo, questoes, onFi
                 </div>
             </header>
 
-            {/* Progresso */}
+            
             <div className='flex flex-col gap-2'>
                 <div className='text-md flex items-center justify-between font-secundary font-bold text-black'>
                     <span>
@@ -53,9 +54,9 @@ export default function Questions({ discipline, difficulty, tipo, questoes, onFi
                 </div>
             </div>
 
-            {/* Enunciado */}
+            
             <p className='text-color1-black font-primary text-xl font-medium'>
-                {indice + 1}. {questao.question}
+                {indice + 1}. <Texto>{questao.question}</Texto>
             </p>
 
             <Alternativas
@@ -86,7 +87,7 @@ export default function Questions({ discipline, difficulty, tipo, questoes, onFi
                 />
             )}
 
-            {/* Rodapé */}
+            
             <div className='mt-auto flex gap-4'>
                 {questao.hint && (
                     <button

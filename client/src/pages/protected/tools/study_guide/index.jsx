@@ -20,7 +20,7 @@ export default function GenerateStudyGuide({ setOpen }) {
         setLoading(true);
 
         try {
-            const response = await POST('api/materials/roteiro_estudos', {
+            const response = await POST('api/materials/roteiro', {
                 discipline,
                 subject,
                 note,

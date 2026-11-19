@@ -273,3 +273,14 @@ def generate_plano_de_aula(payload: dict):
     except Exception as error:
         logger.exception('Falha inesperada durante geração de plano de aula')
         raise AiProviderUnavailable('Não foi possível acessar o serviço de IA') from error
+
+def generate_study_guide(payload: dict):
+    try:
+        llm = get_llm_ext()   
+        chain = study_guide.prompt_template | llm | study_guide.parser
+        texto = chain.invoke(payload)
+        return {'content': texto}
+
+    except Exception as error:
+        logger.exception('Falha inesperada durante geração de roteiro de estudo')
+        raise AiProviderUnavailable('Não foi possível acessar o serviço de IA') from error

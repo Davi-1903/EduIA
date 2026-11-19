@@ -1,4 +1,5 @@
 import clsx from 'clsx';
+import Texto from './Texto';
 
 export const LETRAS = ['A', 'B', 'C', 'D', 'E'];
 
@@ -11,7 +12,6 @@ export function obterResposta(tipo, questao) {
     return questao.expectedAnswer;
 }
 
-// Opção só para leitura (não clicável)
 function Opcao({ destaque, children }) {
     return (
         <li
@@ -35,7 +35,7 @@ export default function Alternativas({ tipo, questao, revelada }) {
                         destaque={revelada && a.id === questao.correctAnswerId}
                     >
                         <strong>{LETRAS[i]})</strong>
-                        <span>{a.text}</span>
+                        <span><Texto>{a.text}</Texto></span>
                     </Opcao>
                 ))}
             </ul>
