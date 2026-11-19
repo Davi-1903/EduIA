@@ -10,6 +10,11 @@ export default function Explicacoes({ content, subject, setContent }) {
     const [isClose, setClose] = useState(false);
     const materialRef = useRef(null);
 
+    function handleStart() {
+        setTimeSpent(performance.now());
+        setStart(true);
+    }
+
     function handleAnimationEnd(event) {
         if (event.target !== event.currentTarget) return;
         if (isClose) setContent(null);
@@ -66,10 +71,21 @@ export default function Explicacoes({ content, subject, setContent }) {
                 isClose ? 'animate-fade-out' : 'animate-fade-in',
             )}
         >
-            <div
+            <main
                 ref={materialRef}
                 className='flex max-h-[90dvh] w-full max-w-2xl flex-col gap-6 overflow-hidden rounded-3xl bg-white p-6 shadow-[5px_5px_7px_rgba(0,0,0,.2)] sm:gap-6 sm:p-8'
             >
+                {/* {!start ? (
+                                    <Introduction
+                                        discipline={discipline}
+                                        subject={subject}
+                                        difficulty={difficulty}
+                                        time={time}
+                                        questionsLength={content.length}
+                                        handleClose={() => setClose(true)}
+                                        handleStart={handleStart}
+                                    />
+                                ) */}
                 <div className='flex w-full flex-col gap-4 lg:flex-row lg:items-center lg:justify-between'>
                     <div className='flex min-w-0 items-center gap-4'>
                         <div className='rounded-full bg-black/3 p-4'>
@@ -151,7 +167,7 @@ export default function Explicacoes({ content, subject, setContent }) {
                         </button>
                     </div>
                 </div>
-            </div>
+            </main>
         </div>
     );
 }
