@@ -1,117 +1,147 @@
 {
 	"files": [
 		{
-			"path": "README.md",
+			"path": "client/src/globals.css",
 			"bookmarks": [
 				{
-					"line": 111,
+					"line": 22,
 					"column": 0,
-					"label": "Atualizar ao utilizarmos o modelo da OpenAI"
+					"label": "Mudar fontes"
 				}
 			]
 		},
 		{
-			"path": ".env.example",
+			"path": "README.md",
+			"bookmarks": [
+				{
+					"line": 13,
+					"column": 0,
+					"label": "Lembrar de adicionar uma imagem"
+				}
+			]
+		},
+		{
+			"path": "client/src/components/loading/index.jsx",
+			"bookmarks": [
+				{
+					"line": 2,
+					"column": 0,
+					"label": "Loading provisório. Vamos fazer com skeletons"
+				}
+			]
+		},
+		{
+			"path": "client/src/pages/unprotected/landingpage/index.jsx",
+			"bookmarks": [
+				{
+					"line": 14,
+					"column": 0,
+					"label": "Adicionar perguntas e respostas com FAQ"
+				}
+			]
+		},
+		{
+			"path": "client/src/layout.jsx",
 			"bookmarks": [
 				{
 					"line": 7,
 					"column": 0,
-					"label": "Acho que vai precisar aumentar"
+					"label": "Padronizar as páginas"
 				}
 			]
 		},
 		{
-			"path": "server/controllers/explanation.py",
+			"path": "server/models/roteiros.py",
 			"bookmarks": [
 				{
-					"line": 40,
+					"line": 5,
 					"column": 0,
-					"label": "Criar integração com IA"
+					"label": "Talvez adicionar o tempo (quantidade de dias, tempo de estudo por dia...)"
 				}
 			]
 		},
 		{
-			"path": "server/controllers/guided_exercises.py",
+			"path": "server/schemas/formularios.py",
 			"bookmarks": [
 				{
-					"line": 19,
+					"line": 7,
 					"column": 0,
-					"label": "Separar a interação com o banco de dados em um serviço separado"
+					"label": "Ok, estou com dúvidas o que são esses formulários"
+				}
+			]
+		},
+		{
+			"path": "client/src/pages/protected/materials/index.jsx",
+			"bookmarks": [
+				{
+					"line": 101,
+					"column": 0,
+					"label": "Mostrar os filtros mesmo quando não há materiais?"
 				},
 				{
-					"line": 98,
+					"line": 103,
 					"column": 0,
-					"label": "Criar integração com IA"
+					"label": "Adicionar aviso que não há materiais para filtros especificados?"
 				}
 			]
 		},
 		{
-			"path": "server/controllers/lesson_plan.py",
+			"path": "client/src/pages/protected/materials/components/material.jsx",
 			"bookmarks": [
 				{
-					"line": 18,
-					"column": 0,
-					"label": "Separar a interação com o banco de dados em um serviço separado"
-				},
-				{
-					"line": 95,
-					"column": 0,
-					"label": "Criar integração com IA"
+					"line": 92,
+					"column": 1,
+					"label": "Talvez trocar ícone por tag, acho que fica mais fácil de identificar o material"
 				}
 			]
 		},
 		{
-			"path": "server/controllers/study_guide.py",
+			"path": "server/models/exercicios_guiados.py",
 			"bookmarks": [
 				{
-					"line": 18,
+					"line": 10,
 					"column": 0,
-					"label": "Separar a interação com o banco de dados em um serviço separado"
-				},
-				{
-					"line": 89,
-					"column": 0,
-					"label": "Criar integração com IA"
+					"label": "Não estou entendendo o porquê da quantidade"
 				}
 			]
 		},
 		{
-			"path": "client/src/pages/protected/history/components/tools/lesson_plan.jsx",
+			"path": "client/src/pages/protected/tools/questions/index.jsx",
 			"bookmarks": [
 				{
-					"line": 9,
+					"line": 17,
 					"column": 0,
-					"label": "Plano de aula não tem tempo"
+					"label": "Adicionar animação quando o material estiver sendo gerado pela IA"
 				}
 			]
 		},
 		{
-			"path": "server/utils/download.py",
+			"path": "client/src/pages/protected/materials/components/cardsView.jsx",
 			"bookmarks": [
 				{
 					"line": 4,
 					"column": 0,
-					"label": "Testar o weasyprint"
+					"label": "Quando há poucos materiais a largura fica enorme"
 				}
 			]
 		},
 		{
-			"path": "server/schemas/exercicios_guiados.py",
+			"path": "server/controllers/questoes.py",
 			"bookmarks": [
 				{
-					"line": 3,
+					"line": 78,
 					"column": 0,
-					"label": "Mudar o schema, pois os exercícios guiados não são mais em markdown, mas em JSON"
+					"label": "Por enquanto, cria um material sem conteúdo"
 				}
 			]
 		},
 		{
-			"path": "client/src/pages/protected/materials/components/contents/explicacoes/index.jsx",
+			"path": "docs/requisitos_nao_funcionais.md",
 			"bookmarks": [
 				{
-					"line": 60,
+					"line": 21,
 					"column": 0,
-					"label": "Adicionar introdução, para ficar igual aos outros"
+					"label": "Alterar prioridade"
 				}
 			]
 		}

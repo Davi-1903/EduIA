@@ -59,11 +59,7 @@ def get_studys_guides():
 def get_study_guide(id: int):
     with SessionLocal() as session:
         material = session.get(Roteiro, id)
-        if (
-            material is None
-            or material.deleted_at is not None
-            or material.user_id != current_user.id
-        ):
+        if material is None or material.deleted_at is not None or material.user_id != current_user.id:
             return jsonify({'ok': False, 'message': 'Roteiro não encontrado'}), 404
 
         return jsonify(

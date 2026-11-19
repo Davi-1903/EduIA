@@ -2,4 +2,10 @@ from pydantic import BaseModel
 
 
 class DesafioJSON(BaseModel):
-    content: str  # Armazenado em markdown
+    id: int
+    question: str
+    answer: str
+
+
+class Desafio(BaseModel):
+    content: list[DesafioJSON]

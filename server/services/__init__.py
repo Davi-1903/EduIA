@@ -1,4 +1,30 @@
-from . import historico, lixeira, materials, questoes, quiz, user
+from . import (
+    desafio,
+    explanation,
+    flashcards,
+    formularios,
+    guided_exercises,
+    historico,
+    lixeira,
+    materials,
+    questoes,
+    quiz,
+    resumos,
+    user,
+)
 
 
-__all__ = ['materials', 'questoes', 'quiz', 'historico', 'lixeira', 'user']
+__all__ = [
+    'desafio',
+    'explanation',
+    'flashcards',
+    'formularios',
+    'guided_exercises',
+    'historico',
+    'lixeira',
+    'materials',
+    'questoes',
+    'quiz',
+    'resumos',
+    'user',
+]

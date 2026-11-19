@@ -1,0 +1,23 @@
+from langchain_core.output_parsers import JsonOutputParser
+from langchain_core.prompts import PromptTemplate
+
+from schemas.desafios import Desafio
+
+
+PROMPT = """
+Você é um professor especialista em {disciplina}. Gere um desafio com uma situação e uma explicação breve da resolução dividida em seções curtas formatada em uma lista markdown. Faça com uma dificuldade muito difícil.
+
+Tema: {assunto}
+Formato da resposta: {format_instructions}
+Observações: {observacoes}
+
+{documentacao}
+"""
+
+parser = JsonOutputParser(pydantic_object=Desafio)
+
+prompt_template = PromptTemplate(
+    template=PROMPT,
+    input_variables=['disciplina', 'assunto', 'observacoes', 'documentacao'],
+    partial_variables={'format_instructions': parser.get_format_instructions()},
+)
