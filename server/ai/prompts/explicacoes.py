@@ -23,8 +23,11 @@ Organize a explicação utilizando Markdown:
 - Exemplos práticos;
 - Analogias quando facilitarem o entendimento.
 
-Adapte a linguagem à dificuldade solicitada, sem comprometer
-a precisão conceitual.
+A explicação deve abordar o assunto de maneira completa,
+não se limitando a responder diretamente às dúvidas apresentadas.
+
+As dúvidas devem orientar quais pontos merecem maior atenção
+e aprofundamento.
 
 Documentação de referência:
 {documentacao}
