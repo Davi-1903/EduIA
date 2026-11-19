@@ -4,6 +4,7 @@ import {
     IconCards,
     IconChalkboard,
     IconChalkboardTeacher,
+    IconDotsVertical,
     IconFile,
     IconFileDescription,
     IconLaurelWreath1,
@@ -319,13 +320,20 @@ export default function MaterialCard({
             )}
             {content && getContent(type)}
             <article
-                className='flex h-full min-h-48 cursor-pointer flex-col rounded-lg bg-color4-400 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg'
-                onContextMenu={e => handleContextMenu(e, id)}
+                className='flex h-full min-h-48 cursor-pointer flex-col rounded-xl bg-color4-400 shadow-sm transition-all hover:-translate-y-1 hover:shadow-lg'
                 onDoubleClick={handleOpen}
             >
                 <div className='flex items-center justify-end gap-3 border-b-2 border-color4-25 p-2 pl-3'>
                     <span>{getIcon(type)}</span>
                     <h3 className='flex-1 font-primary text-xl font-medium text-color1-100'>{title}</h3>
+                    {canOpenMenu && (
+                        <button
+                            className='cursor-pointer rounded-sm p-1 hover:bg-color1-400/10'
+                            onClick={e => handleContextMenu(e, id)}
+                        >
+                            <IconDotsVertical />
+                        </button>
+                    )}
                 </div>
                 <div className='flex-1 p-3 text-color2-100'>
                     <p className='font-secundary'>

@@ -41,16 +41,16 @@ export default function Options({
                     </li>
                 ))}
             </ul>
-            <div className='flex justify-end gap-4'>
+            <div className='flex flex-wrap justify-end gap-4'>
                 <button
-                    className='cursor-pointer rounded-lg border-3 border-color1-100 px-6 py-2 font-primary text-lg text-color1-100 transition-all duration-250 not-disabled:hover:bg-button not-disabled:hover:text-color4-400 disabled:cursor-no-drop disabled:opacity-50'
+                    className='cursor-pointer rounded-lg border-3 border-color1-100 px-6 py-2 font-primary text-lg text-color1-100 transition-all duration-250 not-sm:flex-1 not-disabled:hover:bg-button not-disabled:hover:text-color4-400 disabled:cursor-no-drop disabled:opacity-50'
                     onClick={() => setShowExplanation(true)}
                     disabled={answerId === null}
                 >
                     Explicação
                 </button>
                 <button
-                    className='flex cursor-pointer items-center gap-3 rounded-lg bg-button px-6 py-2 font-primary text-lg text-color4-400 transition-all duration-250 not-disabled:hover:shadow-lg-hard disabled:cursor-no-drop disabled:opacity-50'
+                    className='flex cursor-pointer items-center justify-center gap-3 rounded-lg bg-button px-6 py-2 font-primary text-lg text-color4-400 transition-all duration-250 not-sm:flex-1 not-disabled:hover:shadow-lg-hard disabled:cursor-no-drop disabled:opacity-50'
                     disabled={answerId === null}
                     onClick={nextQuestion}
                 >

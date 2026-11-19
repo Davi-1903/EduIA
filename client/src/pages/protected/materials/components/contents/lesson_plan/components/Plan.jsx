@@ -68,14 +68,11 @@ export default function Plan({ subject, grade, duration, objective, resources = 
             <header className='flex items-center justify-between gap-3'>
                 <div className='flex items-center gap-3'>
                     <div className='rounded-full bg-black/3 p-4'>
-                        <IconChalkboard
-                            size={30}
-                            className='stroke-color1-100'
-                        />
+                        <IconChalkboard size={30} className='stroke-color1-100' />
                     </div>
                     <div>
                         <h2 className='font-primary text-xl font-bold text-color1-100'>Plano de aula</h2>
-                        <span className='text-md block font-secundary text-color1-100/70'>
+                        <span className='block font-secundary text-md text-color1-100/70'>
                             {[subject, grade, duration && `${duration} min`].filter(Boolean).join(' · ')}
                         </span>
                     </div>
@@ -86,7 +83,7 @@ export default function Plan({ subject, grade, duration, objective, resources = 
             {objetivo && (
                 <section className='flex flex-col gap-2'>
                     <h3 className='font-primary text-lg font-bold text-color1-100'>Objetivo</h3>
-                    <p className='text-md font-secundary text-color1-100'>{objetivo}</p>
+                    <p className='font-secundary text-md text-color1-100'>{objetivo}</p>
                 </section>
             )}
 
@@ -94,7 +91,7 @@ export default function Plan({ subject, grade, duration, objective, resources = 
             {recursos.length > 0 && (
                 <section className='flex flex-col gap-2'>
                     <h3 className='font-primary text-lg font-bold text-color1-100'>Recursos de ensino</h3>
-                    <ul className='text-md list-disc pl-6 font-secundary text-color1-100'>
+                    <ul className='list-disc pl-6 font-secundary text-md text-color1-100'>
                         {recursos.map(r => (
                             <li key={r}>{r}</li>
                         ))}
@@ -125,7 +122,7 @@ export default function Plan({ subject, grade, duration, objective, resources = 
                                     </h4>
                                 </div>
                                 {etapa.descricao && (
-                                    <p className='text-md pl-11 font-secundary whitespace-pre-line text-color1-100'>
+                                    <p className='whitespace-pre-line pl-11 font-secundary text-md text-color1-100'>
                                         {etapa.descricao}
                                     </p>
                                 )}

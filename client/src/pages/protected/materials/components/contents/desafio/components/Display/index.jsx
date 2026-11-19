@@ -94,3 +94,4 @@ export default function Display({ content, discipline, subject }) {
         </>
     );
 }
+

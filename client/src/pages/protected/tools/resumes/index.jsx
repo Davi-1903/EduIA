@@ -31,7 +31,7 @@ export default function GenerateResumes({ setOpen }) {
             setMessages(prev => [
                 ...prev,
                 {
-                    id: prev.lenght + 1,
+                    id: prev.length + 1,
                     message: 'Resumo criado com sucesso!',
                     type: 'ok',
                 },
@@ -40,7 +40,7 @@ export default function GenerateResumes({ setOpen }) {
             setMessages(prev => [
                 ...prev,
                 {
-                    id: prev.lenght + 1,
+                    id: prev.length + 1,
                     message: err.message,
                     type: 'danger',
                 },
@@ -82,7 +82,7 @@ export default function GenerateResumes({ setOpen }) {
         >
             <form
                 ref={articleRef}
-                className='flex w-full max-w-xl flex-col gap-6 rounded-2xl bg-color4-200 px-4 py-8 lg:px-6'
+                className='flex w-full max-w-xl flex-col gap-4 rounded-2xl bg-color4-200 px-4 py-6 lg:gap-6 lg:px-6 lg:py-8'
                 onSubmit={handleSubmit}
             >
                 <h2 className='bg-linear-to-tr from-color1-100 to-color4-100 bg-clip-text font-primary text-4xl font-bold text-transparent'>

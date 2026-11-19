@@ -17,11 +17,18 @@ export default function Pagination({ cursor, setCursor, limit, length }) {
         pageItems.push(totalPages - 1);
     }
 
+    function handleClick(page) {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+        setCursor(page * limit);
+    }
+
     function next() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
         if (currentPage + 1 < totalPages) setCursor((currentPage + 1) * limit);
     }
 
     function previous() {
+        window.scrollTo({ top: 0, behavior: 'smooth' });
         if (currentPage > 0) setCursor((currentPage - 1) * limit);
     }
 
@@ -46,7 +53,7 @@ export default function Pagination({ cursor, setCursor, limit, length }) {
                 ) : (
                     <button
                         key={item}
-                        onClick={() => setCursor(item * limit)}
+                        onClick={() => handleClick(item)}
                         disabled={item === currentPage}
                         className={clsx(
                             'aspect-square h-9 cursor-pointer rounded-lg bg-linear-to-br from-color4-100 to-color4-400 font-secundary font-medium text-color1-400 shadow-lg transition-all disabled:from-color1-400 disabled:to-color1-100 disabled:text-color4-100 md:h-10 md:text-lg',

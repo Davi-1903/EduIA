@@ -70,7 +70,7 @@ export default function End({ questions, corrects, time, handleRestart, setClose
     }
 
     return (
-        <article className='flex h-full w-full flex-col gap-6'>
+        <article className='flex h-full w-full flex-col gap-3 md:gap-6'>
             <div className='flex items-center gap-2'>
                 <IconCircleCheck
                     size={20}
@@ -79,11 +79,11 @@ export default function End({ questions, corrects, time, handleRestart, setClose
                 />
                 <span className='font-secundary text-sm font-bold text-green-500'>QUESTÕES CONCLUÍDA COM SUCESSO</span>
             </div>
-            <h2 className='bg-linear-to-tr from-color1-400 to-color4-25 bg-clip-text font-primary text-4xl font-extrabold text-transparent'>
+            <h2 className='bg-linear-to-tr from-color1-400 to-color4-25 bg-clip-text font-primary text-3xl font-extrabold text-transparent md:text-4xl'>
                 Parabéns! Você concluiu!
             </h2>
-            <div className='flex items-center gap-8 py-2'>
-                <div className='relative grid aspect-square h-36 place-items-center'>
+            <div className='flex flex-wrap items-center gap-8 py-2'>
+                <div className='relative grid aspect-square h-36 flex-1 place-items-center'>
                     <svg
                         className='h-36 w-36 -rotate-90'
                         viewBox='0 0 160 160'
@@ -129,7 +129,7 @@ export default function End({ questions, corrects, time, handleRestart, setClose
                     </div>
                 </div>
                 <div
-                    className='flex-1 rounded-xl p-4'
+                    className='flex-1 basis-48 rounded-xl p-4'
                     style={{
                         backgroundColor: `hsl(from ${getColor()} h s l/0.1)`,
                     }}
@@ -143,7 +143,7 @@ export default function End({ questions, corrects, time, handleRestart, setClose
                     <p className='font-secundary text-base text-color1-100'>{getResult().description}</p>
                 </div>
             </div>
-            <div className='flex gap-4'>
+            <div className='flex flex-wrap gap-4'>
                 <article className='flex-1 rounded-xl border-2 border-color4-100 p-4'>
                     <div className='mb-2 flex items-center gap-2'>
                         <IconCheck

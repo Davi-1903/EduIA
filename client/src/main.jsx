@@ -6,7 +6,6 @@ import WrapperProvider from './context/wrapperProvider';
 import Loading from './components/loading';
 
 import Layout from './layout';
-const SignUp = lazy(() => import('./pages/unprotected/signup'));
 const SignIn = lazy(() => import('./pages/unprotected/signin'));
 const About = lazy(() => import('./pages/unprotected/about'));
 const LandingPage = lazy(() => import('./pages/unprotected/landingpage'));
@@ -95,14 +94,6 @@ const router = createBrowserRouter([
         element: (
             <Suspense fallback={<Loading />}>
                 <SignIn />
-            </Suspense>
-        ),
-    },
-    {
-        path: 'cadastro',
-        element: (
-            <Suspense fallback={<Loading />}>
-                <SignUp />
             </Suspense>
         ),
     },
