@@ -8,10 +8,10 @@ from schemas.questoes import Answer
 class ExercicioGuiadoJSON(BaseModel):
     id: int
     question: str
-    answers: list[Answer] | None = None  
-    correctAnswerId: int | None = None  
-    correctAnswer: bool | None = None  
-    expectedAnswer: str | None = None  
+    answers: list[Answer] | None = None
+    correctAnswerId: int | None = None
+    correctAnswer: bool | None = None
+    expectedAnswer: str | None = None
     hint: str
     explanation: str
 

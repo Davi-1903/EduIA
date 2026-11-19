@@ -284,8 +284,6 @@ export default function MaterialCard({
     }
 
     function handleDelete() {
-        if (!confirm('Você tem certeza? Deseja mesmo mover esse material para a lixeira?')) return;
-
         setMenu(null);
         DELETE(`/api/materials/${id}`)
             .then(data => {

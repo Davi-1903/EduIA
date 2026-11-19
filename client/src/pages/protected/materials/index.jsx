@@ -57,8 +57,6 @@ export default function Materials() {
                 setMaterials(data.materials);
                 setWithFilter(data.withFilter);
                 setTotal(data.total);
-
-                if (data.total === 0 && data.withFilter) throw new Error('Não há materiais para os filtros escolhidos');
             } catch (err) {
                 if (err.name === 'AbortError') return;
                 setMaterials(null);
@@ -80,8 +78,6 @@ export default function Materials() {
     );
 
     function clearFilters() {
-        if (!confirm('Deseja limpar todos os filtros')) return;
-
         setDebouncedSearch('');
         setDifficulty('all');
         setDiscipline('all');

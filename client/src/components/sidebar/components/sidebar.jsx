@@ -1,4 +1,5 @@
-import { memo, useEffect, useRef } from 'react';
+import { memo, useRef } from 'react';
+import { useNavigate, Link } from 'react-router-dom';
 import {
     IconBook2,
     IconClock,
@@ -6,15 +7,14 @@ import {
     IconLayoutSidebarLeftCollapse,
     IconLayoutSidebarLeftExpand,
     IconLogout,
-    IconSettings,
     IconTrash,
     IconUser,
 } from '@tabler/icons-react';
 import Logo from '/assets/images/logo.svg';
-import clsx from 'clsx';
 import getCSRF from '../../../api/csrf';
 import { useAuthenticated } from '../../../context/authContext';
-import { useNavigate, Link } from 'react-router-dom';
+import { useMessages } from '../../../context/messagesContext';
+import clsx from 'clsx';
 
 const links = [
     {
@@ -67,17 +67,7 @@ function SidebarModel({ isOpen, setOpen }) {
     const sidebarRef = useRef(null);
     const navigate = useNavigate();
     const { setAuthenticated } = useAuthenticated();
-
-    useEffect(() => {
-        const handleClick = event => {
-            if (isOpen && !sidebarRef.current?.contains(event.target)) {
-                setOpen(false);
-            }
-        };
-
-        document.addEventListener('mousedown', handleClick);
-        return () => document.removeEventListener('mousedown', handleClick);
-    }, [isOpen, setOpen]);
+    const { setMessages } = useMessages();
 
     async function handleLogout(e) {
         e.preventDefault();
@@ -98,7 +88,7 @@ function SidebarModel({ isOpen, setOpen }) {
             setAuthenticated(false);
             navigate(data.redirected);
         } else {
-            alert('Erro ao deslogar!');
+            setMessages(prev => [...prev, { id: prev.length + 1, message: 'Erro ao deslogar', type: 'danger' }]);
         }
     }
 

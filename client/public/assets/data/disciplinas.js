@@ -23,7 +23,7 @@ export const disciplinasList = {
         'Fundamentos de Lógica e Algoritmo',
         'Análise e Projeto Orientados a Objeto',
         'Projeto de Desenvolvimento de Sistemas para Internet',
-        'Princípios de Design e Projeto Gráfica',
+        'Princípios de Design e Projeto Gráfico',
         'Design Web e Arquitetura da Informação',
         'Programação Estruturada e Orientada a Objetos',
         'Banco de Dados',

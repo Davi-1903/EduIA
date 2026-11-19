@@ -10,7 +10,7 @@ export default function LandingPageQuestions() {
         {
             id: 1,
             question: 'O EduIA é apenas para alunos?',
-            answer: 'O sistema foi dedicado e estruturado para atender tantos os discentes (alunos) quanto dos docentes (professores) do IFRN',
+            answer: 'O sistema foi dedicado e estruturado para atender tantos os discentes (alunos) quanto os docentes (professores) do IFRN',
         },
         {
             id: 2,
@@ -20,12 +20,12 @@ export default function LandingPageQuestions() {
         {
             id: 3,
             question: 'O EduIA gera materiais sobre materia técnica?',
-            answer: 'O EduIA é um sistema para geração de materiais de estudo com IA para estudantes do ensio médio técnico integrado',
+            answer: 'O EduIA é um sistema para geração de materiais de estudo com IA para estudantes do ensino médio técnico integrado',
         },
         {
             id: 4,
             question: 'O sistema usa qual IA?',
-            answer: 'O sistema utiliza do modelo de linguagem ChatGPT-5 nano, por suas popularidade, capacidade de resposta, velocidade e baixo custo',
+            answer: 'O sistema utiliza do modelo de linguagem ChatGPT-5 nano, por sua popularidade, capacidade de resposta, velocidade e baixo custo',
         },
     ];
 

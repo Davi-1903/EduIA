@@ -10,8 +10,6 @@ export default function MenuCard({ x, y, id, setMenu, fetchMaterials }) {
     const navigate = useNavigate();
 
     function handleRestore() {
-        if (!confirm('Você tem certeza?')) return;
-
         setMenu(null);
         PATCH(`/api/materials/${id}/restore`)
             .then(data => {

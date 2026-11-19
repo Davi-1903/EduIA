@@ -176,7 +176,7 @@ export default function GenerateForms({ setOpen }) {
                             className='block font-secundary text-base font-bold text-color1-100'
                             htmlFor='quantidade'
                         >
-                            Quantidade de campos
+                            Quantidade de perguntas
                         </label>
 
                         <InputRange

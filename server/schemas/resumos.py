@@ -6,5 +6,6 @@ class ResumosJSON(BaseModel):
     title: str
     text: str
 
+
 class Resumos(BaseModel):
     content: list[ResumosJSON]

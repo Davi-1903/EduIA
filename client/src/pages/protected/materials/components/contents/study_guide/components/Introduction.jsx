@@ -12,25 +12,45 @@ export default function Introduction({ discipline, subject, grade, duration, han
     const informations = [
         {
             id: 1,
-            icon: <IconSchool size={24} className='stroke-color1-100' />,
+            icon: (
+                <IconSchool
+                    size={24}
+                    className='stroke-color1-100'
+                />
+            ),
             type: 'Disciplina',
             content: discipline,
         },
         {
             id: 2,
-            icon: <IconBook2 size={24} className='stroke-color1-100' />,
+            icon: (
+                <IconBook2
+                    size={24}
+                    className='stroke-color1-100'
+                />
+            ),
             type: 'Conteúdo',
             content: subject,
         },
         {
             id: 3,
-            icon: <IconUsersGroup size={24} className='stroke-color1-100' />,
+            icon: (
+                <IconUsersGroup
+                    size={24}
+                    className='stroke-color1-100'
+                />
+            ),
             type: 'Série',
             content: grade,
         },
         {
             id: 4,
-            icon: <IconClock size={24} className='stroke-color1-100' />,
+            icon: (
+                <IconClock
+                    size={24}
+                    className='stroke-color1-100'
+                />
+            ),
             type: 'Duração',
             content: duration && `${duration} min`,
         },
@@ -39,7 +59,11 @@ export default function Introduction({ discipline, subject, grade, duration, han
     return (
         <article className='flex flex-col gap-6'>
             <div className='flex items-center gap-2'>
-                <IconNotebook size={20} strokeWidth={2.5} className='stroke-color1-400' />
+                <IconNotebook
+                    size={20}
+                    strokeWidth={2.5}
+                    className='stroke-color1-400'
+                />
                 <span className='font-secundary text-sm font-bold text-color1-400'>
                     PREPARAÇÃO PARA O ROTEIRO DE ESTUDO
                 </span>
@@ -53,9 +77,7 @@ export default function Introduction({ discipline, subject, grade, duration, han
                         key={item.id}
                         className='flex items-center gap-3 p-3 not-last:border-b-2 not-last:border-color4-100'
                     >
-                        <div className='grid shrink-0 place-items-center rounded-lg bg-color4-100 p-4'>
-                            {item.icon}
-                        </div>
+                        <div className='grid shrink-0 place-items-center rounded-lg bg-color4-100 p-4'>{item.icon}</div>
                         <div>
                             <span className='block font-secundary text-sm font-medium text-color1-100/40'>
                                 {item.type}
@@ -68,7 +90,10 @@ export default function Introduction({ discipline, subject, grade, duration, han
                 ))}
             </ul>
             <blockquote className='flex items-center gap-3 rounded-lg bg-color4-100 p-4'>
-                <IconAlertCircle size={28} className='stroke-color1-100' />
+                <IconAlertCircle
+                    size={28}
+                    className='stroke-color1-100'
+                />
                 <p className='font-secundary text-base text-color1-100'>
                     Siga as etapas do roteiro na ordem e respeite o tempo de cada uma. Você pode copiar o roteiro para
                     consultar depois.

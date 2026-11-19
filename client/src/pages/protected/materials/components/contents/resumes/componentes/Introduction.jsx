@@ -1,10 +1,4 @@
-import {
-    IconAlertCircle,
-    IconArrowRight,
-    IconBook,
-    IconBook2,
-    IconSchool,
-} from '@tabler/icons-react';
+import { IconAlertCircle, IconArrowRight, IconBook, IconBook2, IconSchool } from '@tabler/icons-react';
 
 export default function Introduction({ discipline, subject, handleClose, handleStart }) {
     const informations = [
@@ -70,9 +64,7 @@ export default function Introduction({ discipline, subject, handleClose, handleS
                     size={28}
                     className='stroke-color1-100'
                 />
-                <p className='font-secundary text-base text-color1-100'>
-                    Você pode copiar o resumo.
-                </p>
+                <p className='font-secundary text-base text-color1-100'>Você pode copiar o resumo.</p>
             </blockquote>
             <div className='flex gap-4'>
                 <button
@@ -92,4 +84,3 @@ export default function Introduction({ discipline, subject, handleClose, handleS
         </article>
     );
 }
-

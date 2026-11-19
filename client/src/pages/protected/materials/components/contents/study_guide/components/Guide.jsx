@@ -45,17 +45,19 @@ export default function Guide({ discipline, subject, content }) {
     const linhasEtapas = buscarSecao(secoes, 'etapa', 'roteiro', 'desenvolvimento') ?? markdown.split('\n');
     const etapas = listarEtapas(linhasEtapas);
 
-
     return (
         <article className='flex flex-col gap-5 rounded-2xl bg-white p-6 shadow-2xl shadow-color1-100/15'>
             <header className='flex items-center justify-between gap-3'>
                 <div className='flex items-center gap-3'>
                     <div className='rounded-full bg-black/3 p-4'>
-                        <IconReorder size={30} className='stroke-color1-100' />
+                        <IconReorder
+                            size={30}
+                            className='stroke-color1-100'
+                        />
                     </div>
                     <div>
                         <h2 className='font-primary text-xl font-bold text-color1-100'>Roteiro de estudo</h2>
-                        <div className='font-secundary text-md'>
+                        <div className='text-md font-secundary'>
                             {discipline && <span className='block font-medium text-color1-100'>{discipline}</span>}
                             {subject && <span className='block text-color1-100/70'>{subject}</span>}
                         </div>
@@ -85,7 +87,7 @@ export default function Guide({ discipline, subject, content }) {
                                 </h4>
                             </div>
                             {etapa.descricao && (
-                                <p className='whitespace-pre-line pl-11 font-secundary text-md text-color1-100'>
+                                <p className='text-md pl-11 font-secundary whitespace-pre-line text-color1-100'>
                                     {etapa.descricao}
                                 </p>
                             )}

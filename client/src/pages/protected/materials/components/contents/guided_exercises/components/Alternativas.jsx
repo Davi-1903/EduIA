@@ -67,4 +67,3 @@ export default function Alternativas({ tipo, questao, revelada }) {
 
     return null;
 }
-
