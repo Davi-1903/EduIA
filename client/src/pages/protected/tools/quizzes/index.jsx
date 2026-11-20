@@ -135,7 +135,7 @@ export default function GenerateQuizzes({ setOpen }) {
                     <input
                         type='text'
                         id='conteudo'
-                        placeholder='Descreva o assunto das questões'
+                        placeholder='Descreva o assunto do quiz'
                         className='h-12 w-full rounded-lg border border-color4-25 px-4 font-medium outline-none focus:ring-2 focus:ring-color1-400'
                         value={subject}
                         onChange={e => setSubject(e.target.value)}

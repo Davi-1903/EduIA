@@ -71,7 +71,7 @@ export default function History() {
                             Histórico
                         </h1>
                         <p className='mt-6 text-lg text-color3-200'>
-                            Aqui você pode visualizar todos os materiais que gerou durante seu uso da plataforma.
+                            Aqui você pode visualizar todos os materiais que gerou durante o uso do sistema.
                         </p>
                     </div>
                     {isLoading && !historico ? (

@@ -8,6 +8,8 @@ import Pagination from './components/pagination';
 import EmptyMaterials from './components/empty';
 import Filters from './components/filters';
 import CardsView from './components/cardsView';
+import { IconPlus } from '@tabler/icons-react';
+import { Link } from 'react-router-dom';
 
 export default function Materials() {
     const { user } = useAuthenticated();
@@ -101,9 +103,20 @@ export default function Materials() {
             </Helmet>
             <main className='min-h-screen bg-color4-200 not-sm:col-span-2'>
                 <section className='mx-auto max-w-400 space-y-12 px-6 py-16'>
-                    <h1 className='bg-linear-to-tr from-color1-100 to-color4-100 bg-clip-text text-4xl leading-tight font-bold text-transparent md:text-5xl'>
-                        Meus materiais
-                    </h1>
+                    <div className='flex flex-wrap items-center'>
+                        <h1 className='bg-linear-to-tr from-color1-100 to-color4-100 bg-clip-text text-4xl leading-tight font-bold text-transparent md:text-5xl'>
+                            Meus materiais
+                        </h1>
+                        <Link
+                            to='/dash'
+                            className='group ml-auto'
+                        >
+                            <button className='flex cursor-pointer items-center gap-2 rounded-lg bg-button py-2 pr-4 pl-3 font-primary text-lg text-color4-100 transition-all duration-250 group-hover:gap-3 group-hover:shadow-lg-hard'>
+                                <IconPlus className='transition-all duration-250 ease-[cubic-bezier(.94,.01,.51,1.27)] group-hover:-rotate-90' />
+                                <span>Gerar materiais</span>
+                            </button>
+                        </Link>
+                    </div>
                     {(total > 0 || withFilter) && (
                         <Filters
                             user={user?.tipo}

@@ -137,7 +137,7 @@ export default function GenerateChallenge({ setOpen }) {
                         id='conteudo'
                         value={subject}
                         onChange={e => setSubject(e.target.value)}
-                        placeholder='Descreva o assunto das questões'
+                        placeholder='Descreva o assunto do desafio'
                         className='h-12 w-full rounded-lg border border-color4-25 px-4 font-medium outline-none focus:ring-2 focus:ring-color1-400'
                         required
                     />

@@ -120,15 +120,9 @@ def find_or_create_user(profile: dict) -> Usuario:
         raise SuapAuthenticationError('Nome não encontrado no perfil do SUAP')
     name = name.strip()[:50]
 
-    email = next(
-        value.strip().lower()
-        for value in (
-            profile.get('email_google_classroom'),
-            profile.get('email_academico'),
-            profile.get('email_preferencial'),
-        )
-        if isinstance(value, str) and '@' in value.strip()
-    )
+    email = profile['email_preferencial']
+    email_escolar = profile['email_google_classroom']
+    email_academico = profile['email_academico']
 
     try:
         user = get_user_by_matricula_service(registration)
@@ -154,7 +148,11 @@ def find_or_create_user(profile: dict) -> Usuario:
             {
                 'nome': profile['nome_registro'],
                 'email': email,
+                'email_escolar': email_escolar,
+                'email_academico': email_academico,
                 'matricula': registration,
+                'campus': profile['campus'],
+                'nascimento': profile['data_de_nascimento'],
                 'foto': profile['foto'],
                 'type': user_type.value,
             }

@@ -22,7 +22,6 @@ export default function Questions({ discipline, difficulty, tipo, questoes, onFi
 
     return (
         <article className='flex flex-1 flex-col gap-5'>
-            
             <header className='flex items-center gap-3'>
                 <div className='rounded-full bg-black/3 p-4'>
                     <IconBook
@@ -38,7 +37,6 @@ export default function Questions({ discipline, difficulty, tipo, questoes, onFi
                 </div>
             </header>
 
-            
             <div className='flex flex-col gap-2'>
                 <div className='text-md flex items-center justify-between font-secundary font-bold text-black'>
                     <span>
@@ -54,7 +52,6 @@ export default function Questions({ discipline, difficulty, tipo, questoes, onFi
                 </div>
             </div>
 
-            
             <p className='text-color1-black font-primary text-xl font-medium'>
                 {indice + 1}. <Texto>{questao.question}</Texto>
             </p>
@@ -87,7 +84,6 @@ export default function Questions({ discipline, difficulty, tipo, questoes, onFi
                 />
             )}
 
-            
             <div className='mt-auto flex gap-4'>
                 {questao.hint && (
                     <button

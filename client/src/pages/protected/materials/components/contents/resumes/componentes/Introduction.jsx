@@ -45,7 +45,7 @@ export default function Introduction({ discipline, subject, handleClose, handleS
                         key={item.id}
                         className='flex items-center gap-3 p-3 not-last:border-b-2 not-last:border-color4-100'
                     >
-                        <div className='grid aspect-square h-full max-h-11 place-items-center rounded-lg bg-color4-100'>
+                        <div className='grid aspect-square h-11 place-items-center rounded-lg bg-color4-100'>
                             {item.icon}
                         </div>
                         <div>
@@ -66,7 +66,7 @@ export default function Introduction({ discipline, subject, handleClose, handleS
                 />
                 <p className='font-secundary text-base text-color1-100'>Você pode copiar o resumo.</p>
             </blockquote>
-            <div className='flex g:flex-wrap gap-4'>
+            <div className='g:flex-wrap flex gap-4'>
                 <button
                     className='cursor-pointer rounded-xl border-3 border-color1-100 px-8 py-2 font-secundary text-lg font-bold text-color1-100 transition-all duration-250 hover:bg-button hover:text-color4-400'
                     onClick={handleClose}
@@ -74,7 +74,7 @@ export default function Introduction({ discipline, subject, handleClose, handleS
                     Voltar
                 </button>
                 <button
-                    className='group flex w-full  cursor-pointer items-center justify-center gap-2 rounded-xl bg-button px-8 py-2 font-secundary text-lg font-bold text-color4-400 transition-all duration-250 hover:shadow-lg-hard'
+                    className='group flex w-full cursor-pointer items-center justify-center gap-2 rounded-xl bg-button px-8 py-2 font-secundary text-lg font-bold text-color4-400 transition-all duration-250 hover:shadow-lg-hard'
                     onClick={handleStart}
                 >
                     <span>Ver Resumo</span>

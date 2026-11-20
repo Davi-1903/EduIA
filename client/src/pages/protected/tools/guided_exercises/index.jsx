@@ -120,9 +120,15 @@ export default function GenerateQuidedExercises({ setOpen }) {
                         onChange={e => setDiscipline(e.target.value)}
                     >
                         {Object.entries(disciplinasList).map(([key, disciplinas]) => (
-                            <optgroup key={key} label={key}>
+                            <optgroup
+                                key={key}
+                                label={key}
+                            >
                                 {disciplinas.map(disciplina => (
-                                    <option key={disciplina} value={disciplina}>
+                                    <option
+                                        key={disciplina}
+                                        value={disciplina}
+                                    >
                                         {disciplina}
                                     </option>
                                 ))}
@@ -136,7 +142,7 @@ export default function GenerateQuidedExercises({ setOpen }) {
 
                     <input
                         type='text'
-                        placeholder='Descreva o assunto da aula'
+                        placeholder='Descreva o assunto dos exercícios'
                         className='required rounded-lg border border-gray-300 bg-color4-200 px-4 py-2 outline-none focus:ring-2 focus:ring-color1-400'
                         value={subject}
                         onChange={e => setSubject(e.target.value)}

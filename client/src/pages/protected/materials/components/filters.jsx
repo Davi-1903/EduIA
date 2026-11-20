@@ -133,7 +133,7 @@ export default function Filters({
             </div>
             <div className='col-span-full'>
                 <button
-                    className='cursor-pointer rounded-lg bg-button px-4 py-2 text-color4-100 transition-all duration-150'
+                    className='cursor-pointer rounded-lg bg-button px-4 py-2 text-color4-100 transition-all duration-150 hover:shadow-lg-hard'
                     onClick={clearFilters}
                 >
                     Limpar filtros

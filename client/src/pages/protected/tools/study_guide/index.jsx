@@ -31,7 +31,7 @@ export default function GenerateStudyGuide({ setOpen }) {
             setMessages(prev => [
                 ...prev,
                 {
-                    id: prev.lenght + 1,
+                    id: prev.length + 1,
                     message: 'Roteiro de estudos criado com sucesso!',
                     type: 'ok',
                 },
@@ -40,7 +40,7 @@ export default function GenerateStudyGuide({ setOpen }) {
             setMessages(prev => [
                 ...prev,
                 {
-                    id: prev.lenght + 1,
+                    id: prev.length + 1,
                     message: err.message,
                     type: 'danger',
                 },
@@ -108,7 +108,7 @@ export default function GenerateStudyGuide({ setOpen }) {
                     <label className='font-secundary font-bold text-color1-100'>Conteúdo</label>
                     <input
                         type='text'
-                        placeholder='Descreva o assunto da aula'
+                        placeholder='Descreva o assunto do roteiro de estudos'
                         className='required rounded-lg border border-gray-300 bg-color4-200 px-4 py-2 outline-none focus:ring-2 focus:ring-color1-400'
                         value={subject}
                         onChange={e => setSubject(e.target.value)}

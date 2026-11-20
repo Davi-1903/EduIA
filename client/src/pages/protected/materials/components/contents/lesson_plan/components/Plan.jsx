@@ -1,4 +1,3 @@
-
 import clsx from 'clsx';
 import Texto from '../../guided_exercises/components/Texto';
 import { IconChalkboard } from '@tabler/icons-react';
@@ -45,7 +44,10 @@ function listarEtapas(linhas) {
     for (const linha of linhas) {
         if (temH3) {
             if (linha.startsWith('### ')) {
-                const titulo = linha.slice(4).replace(/^\d+[.)]\s*/, '').trim();
+                const titulo = linha
+                    .slice(4)
+                    .replace(/^\d+[.)]\s*/, '')
+                    .trim();
                 const m = titulo.match(/^(.*?)\s*\((\d+)\s*min\)\s*$/);
                 etapas.push({
                     titulo: m ? m[1].trim() : titulo,
@@ -85,11 +87,14 @@ export default function Plan({ subject, grade, duration, objective, resources = 
             <header className='flex items-center justify-between gap-3'>
                 <div className='flex items-center gap-3'>
                     <div className='rounded-full bg-black/3 p-4'>
-                        <IconChalkboard size={30} className='stroke-color1-100' />
+                        <IconChalkboard
+                            size={30}
+                            className='stroke-color1-100'
+                        />
                     </div>
                     <div>
                         <h2 className='font-primary text-xl font-bold text-color1-100'>Plano de aula</h2>
-                        <span className='block font-secundary text-md text-color1-100/70'>
+                        <span className='text-md block font-secundary text-color1-100/70'>
                             {[subject, grade, duration && `${duration} min`].filter(Boolean).join(' · ')}
                         </span>
                     </div>
@@ -99,7 +104,7 @@ export default function Plan({ subject, grade, duration, objective, resources = 
             {(objetivoMarkdown || objetivo) && (
                 <section className='flex flex-col gap-2'>
                     <h3 className='font-primary text-lg font-bold text-color1-100'>Objetivo</h3>
-                    <div className='font-secundary text-md text-color1-100'>
+                    <div className='text-md font-secundary text-color1-100'>
                         <Texto>{objetivoMarkdown || objetivo}</Texto>
                     </div>
                 </section>
@@ -108,7 +113,7 @@ export default function Plan({ subject, grade, duration, objective, resources = 
             {recursosLista.length > 0 && (
                 <section className='flex flex-col gap-2'>
                     <h3 className='font-primary text-lg font-bold text-color1-100'>Recursos de ensino</h3>
-                    <ul className='list-disc pl-6 font-secundary text-md text-color1-100'>
+                    <ul className='text-md list-disc pl-6 font-secundary text-color1-100'>
                         {recursosLista.map(r => (
                             <li key={r}>{r}</li>
                         ))}
@@ -138,7 +143,7 @@ export default function Plan({ subject, grade, duration, objective, resources = 
                                     </h4>
                                 </div>
                                 {etapa.descricao && (
-                                    <div className='pl-11 font-secundary text-md text-color1-100'>
+                                    <div className='text-md pl-11 font-secundary text-color1-100'>
                                         <Texto>{etapa.descricao}</Texto>
                                     </div>
                                 )}
@@ -155,11 +160,14 @@ export default function Plan({ subject, grade, duration, objective, resources = 
                 const nome = Object.keys(secoes).find(k => k.includes(chave));
 
                 return (
-                    <section key={chave} className='flex flex-col gap-2 border-t-2 border-color4-100 pt-5'>
+                    <section
+                        key={chave}
+                        className='flex flex-col gap-2 border-t-2 border-color4-100 pt-5'
+                    >
                         <h3 className='font-primary text-lg font-bold text-color1-100'>
                             {nome.charAt(0).toUpperCase() + nome.slice(1)}
                         </h3>
-                        <div className='font-secundary text-md text-color1-100'>
+                        <div className='text-md font-secundary text-color1-100'>
                             <Texto>{linhas.join('\n')}</Texto>
                         </div>
                     </section>

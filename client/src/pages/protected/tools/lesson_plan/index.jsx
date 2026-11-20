@@ -53,7 +53,7 @@ export default function GenerateLessonPlan({ setOpen }) {
 
             document.body.style.overflowY = 'auto';
             navigate(response.redirect);
-            console.log(response.redirect)
+            console.log(response.redirect);
 
             setMessages(prev => [
                 ...prev,
@@ -143,9 +143,7 @@ export default function GenerateLessonPlan({ setOpen }) {
                 </div>
 
                 <div className='flex flex-col'>
-                    <label className='font-secundary font-bold text-color1-100'>
-                        Ano/Série
-                    </label>
+                    <label className='font-secundary font-bold text-color1-100'>Ano/Série</label>
 
                     <select
                         value={grade}
@@ -153,7 +151,12 @@ export default function GenerateLessonPlan({ setOpen }) {
                         className='rounded-lg border border-gray-300 bg-color4-200 px-4 py-3 outline-none focus:ring-2 focus:ring-color1-400'
                         required
                     >
-                        <option value='' disabled>Selecione o ano/série</option>
+                        <option
+                            value=''
+                            disabled
+                        >
+                            Selecione o ano/série
+                        </option>
                         <option value='1º ano - Ensino Médio Integrado'>1º ano - Ensino Médio Integrado</option>
                         <option value='2º ano - Ensino Médio Integrado'>2º ano - Ensino Médio Integrado</option>
                         <option value='3º ano - Ensino Médio Integrado'>3º ano - Ensino Médio Integrado</option>

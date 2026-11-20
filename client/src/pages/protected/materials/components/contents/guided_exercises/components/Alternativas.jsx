@@ -35,7 +35,9 @@ export default function Alternativas({ tipo, questao, revelada }) {
                         destaque={revelada && a.id === questao.correctAnswerId}
                     >
                         <strong>{LETRAS[i]})</strong>
-                        <span><Texto>{a.text}</Texto></span>
+                        <span>
+                            <Texto>{a.text}</Texto>
+                        </span>
                     </Opcao>
                 ))}
             </ul>

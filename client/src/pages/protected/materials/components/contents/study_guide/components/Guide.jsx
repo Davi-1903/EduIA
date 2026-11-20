@@ -38,7 +38,10 @@ function listarEtapas(linhas) {
     for (const linha of linhas) {
         if (temH3) {
             if (linha.startsWith('### ')) {
-                const titulo = linha.slice(4).replace(/^\d+[.)]\s*/, '').trim();
+                const titulo = linha
+                    .slice(4)
+                    .replace(/^\d+[.)]\s*/, '')
+                    .trim();
                 const m = titulo.match(/^(.*?)\s*\((\d+)\s*min\)\s*$/);
                 etapas.push({
                     titulo: m ? m[1].trim() : titulo,
@@ -67,7 +70,7 @@ function SecaoExtra({ secoes, chave }) {
             <h3 className='font-primary text-lg font-bold text-color1-100'>
                 {nome.charAt(0).toUpperCase() + nome.slice(1)}
             </h3>
-            <div className='font-secundary text-md text-color1-100'>
+            <div className='text-md font-secundary text-color1-100'>
                 <Texto>{linhas.join('\n')}</Texto>
             </div>
         </section>
@@ -86,11 +89,14 @@ export default function Guide({ discipline, subject, content }) {
             <header className='flex items-center justify-between gap-3'>
                 <div className='flex items-center gap-3'>
                     <div className='rounded-full bg-black/3 p-4'>
-                        <IconReorder size={30} className='stroke-color1-100' />
+                        <IconReorder
+                            size={30}
+                            className='stroke-color1-100'
+                        />
                     </div>
                     <div>
                         <h2 className='font-primary text-xl font-bold text-color1-100'>Roteiro de estudo</h2>
-                        <div className='font-secundary text-md'>
+                        <div className='text-md font-secundary'>
                             {discipline && <span className='block font-medium text-color1-100'>{discipline}</span>}
                             {subject && <span className='block text-color1-100/70'>{subject}</span>}
                         </div>
@@ -98,10 +104,14 @@ export default function Guide({ discipline, subject, content }) {
                 </div>
             </header>
 
-            {subject && <h3 className='font-primary text-3xl capitalize font-bold text-color1-100'>{subject}</h3>}
+            {subject && <h3 className='font-primary text-3xl font-bold text-color1-100 capitalize'>{subject}</h3>}
 
             {SECOES_ANTES.map(chave => (
-                <SecaoExtra key={chave} secoes={secoes} chave={chave} />
+                <SecaoExtra
+                    key={chave}
+                    secoes={secoes}
+                    chave={chave}
+                />
             ))}
 
             {etapas.length > 0 && (
@@ -126,7 +136,7 @@ export default function Guide({ discipline, subject, content }) {
                                     </h4>
                                 </div>
                                 {etapa.descricao && (
-                                    <div className='pl-11 font-secundary text-md text-color1-100'>
+                                    <div className='text-md pl-11 font-secundary text-color1-100'>
                                         <Texto>{etapa.descricao}</Texto>
                                     </div>
                                 )}
@@ -137,7 +147,11 @@ export default function Guide({ discipline, subject, content }) {
             )}
 
             {SECOES_DEPOIS.map(chave => (
-                <SecaoExtra key={chave} secoes={secoes} chave={chave} />
+                <SecaoExtra
+                    key={chave}
+                    secoes={secoes}
+                    chave={chave}
+                />
             ))}
         </article>
     );

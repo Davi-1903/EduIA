@@ -1,3 +1,4 @@
+from datetime import date
 from pathlib import Path
 
 from loguru import logger
@@ -20,10 +21,26 @@ def create_user_service(data: dict):
     with SessionLocal() as session:
         try:
             if data['type'] == UserType.ALUNO.value:
-                new_user = Aluno(name=data['nome'], email=data['email'], matricula=data['matricula'], foto=data['foto'])
+                new_user = Aluno(
+                    name=data['nome'],
+                    email=data['email'],
+                    email_escolar=data['email_escolar'],
+                    email_academico=data['email_academico'],
+                    campus=data['campus'],
+                    nascimento=date(*map(int, data['nascimento'].split('-'))),
+                    matricula=data['matricula'],
+                    foto=data['foto'],
+                )
             elif data['type'] == UserType.PROFESSOR.value:
                 new_user = Professor(
-                    name=data['nome'], email=data['email'], matricula=data['matricula'], foto=data['foto']
+                    name=data['nome'],
+                    email=data['email'],
+                    email_escolar=data['email_escolar'],
+                    email_academico=data['email_academico'],
+                    campus=data['campus'],
+                    nascimento=date(*map(int, data['nascimento'].split('-'))),
+                    matricula=data['matricula'],
+                    foto=data['foto'],
                 )
             else:
                 raise UserTypeError('Tipo inválido')
@@ -56,7 +73,7 @@ def get_user_by_matricula_service(matricula: str):
 
 def get_user_by_email_service(email: str):
     with SessionLocal() as session:
-        user = session.scalar(select(Usuario).where(Usuario.email == email))
+        user = session.scalar(select(Usuario).where(Usuario.email_escolar == email))
         if user is None:
             raise UserCredentialsError('Credenciais inválidas')
         return user

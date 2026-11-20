@@ -22,7 +22,9 @@ export function Dica({ texto, onClose }) {
                     <IconX size={18} />
                 </button>
             </div>
-            <p className='text-md mt-2 font-secundary text-color1-100'><Texto>{texto}</Texto></p>
+            <p className='text-md mt-2 font-secundary text-color1-100'>
+                <Texto>{texto}</Texto>
+            </p>
         </section>
     );
 }
@@ -45,7 +47,9 @@ export function Resposta({ tipo, questao, onClose }) {
         <div className='flex flex-col gap-3'>
             <div className='rounded-xl border-2 border-green-500 bg-green-50 p-3'>
                 <span className='mb-3 block font-secundary text-lg font-bold text-green-600'>Resposta</span>
-                <p className='text-md font-secundary font-medium text-green-600'><Texto>{obterResposta(tipo, questao)}</Texto></p>
+                <p className='text-md font-secundary font-medium text-green-600'>
+                    <Texto>{obterResposta(tipo, questao)}</Texto>
+                </p>
             </div>
             {questao.explanation && (
                 <section className='rounded-xl border-2 border-color4-100 p-4'>
@@ -60,7 +64,9 @@ export function Resposta({ tipo, questao, onClose }) {
                             <IconX size={18} />
                         </button>
                     </div>
-                    <p className='text-md mt-2 font-secundary text-color1-100'><Texto>{questao.explanation}</Texto></p>
+                    <p className='text-md mt-2 font-secundary text-color1-100'>
+                        <Texto>{questao.explanation}</Texto>
+                    </p>
                 </section>
             )}
         </div>
