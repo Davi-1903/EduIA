@@ -1,4 +1,4 @@
-import { memo, useRef } from 'react';
+import { memo, useEffect, useRef } from 'react';
 import { useNavigate, Link } from 'react-router-dom';
 import {
     IconBook2,
@@ -91,6 +91,17 @@ function SidebarModel({ isOpen, setOpen }) {
             setMessages(prev => [...prev, { id: prev.length + 1, message: 'Erro ao deslogar', type: 'danger' }]);
         }
     }
+
+    useEffect(() => {
+        const handleClick = event => {
+            if (isOpen && window.innerWidth < 640 && !sidebarRef.current?.contains(event.target)) {
+                setOpen(false);
+            }
+        };
+
+        document.addEventListener('mousedown', handleClick);
+        return () => document.removeEventListener('mousedown', handleClick);
+    }, [isOpen, setOpen]);
 
     return (
         <div

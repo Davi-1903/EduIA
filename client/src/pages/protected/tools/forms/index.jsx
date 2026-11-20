@@ -1,9 +1,10 @@
 import { useEffect, useRef, useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { disciplinasList } from '../../../../../public/assets/data/disciplinas';
-import InputRange from '../../../../components/inputRange';
 import { POST } from '../../../../api/materials';
 import { useMessages } from '../../../../context/messagesContext';
+import LoadingMaterial from '../../../../components/loadingMaterial';
+import InputRange from '../../../../components/inputRange';
 import clsx from 'clsx';
 
 export default function GenerateForms({ setOpen }) {
@@ -16,6 +17,7 @@ export default function GenerateForms({ setOpen }) {
     const [note, setNote] = useState('');
     const [difficulty, setDifficulty] = useState(0);
     const [loading, setLoading] = useState(false);
+    const [animation, setAnimation] = useState(false);
     const navigate = useNavigate();
     const difficulties = ['Muito fácil', 'Fácil', 'Médio', 'Difícil', 'Muito difícil'];
 
@@ -25,7 +27,10 @@ export default function GenerateForms({ setOpen }) {
 
     async function handleSubmit(e) {
         e.preventDefault();
-        setLoading(true);
+        const timeID = setTimeout(() => {
+            setLoading(true);
+            setAnimation(true);
+        }, 200);
 
         try {
             const response = await POST('/api/materials/formulario/', {
@@ -60,6 +65,7 @@ export default function GenerateForms({ setOpen }) {
             ]);
         } finally {
             setLoading(false);
+            clearInterval(timeID);
         }
     }
 
@@ -82,138 +88,147 @@ export default function GenerateForms({ setOpen }) {
     }, [loading]);
 
     return (
-        <div
-            onAnimationEnd={handleAnimationEnd}
-            className={clsx(
-                'fixed inset-0 z-7 grid place-items-center bg-gray-800/20 backdrop-blur-sm',
-                isClose ? 'animate-fade-out' : 'animate-fade-in',
+        <>
+            {animation && (
+                <LoadingMaterial
+                    message={'Gerando o formulário...'}
+                    isLoading={loading}
+                    setAnimation={setAnimation}
+                />
             )}
-        >
-            <form
-                ref={articleRef}
-                onSubmit={handleSubmit}
-                className='flex w-full max-w-xl flex-col gap-4 rounded-2xl bg-color4-200 px-4 py-6 lg:gap-6 lg:px-6 lg:py-8'
+            <div
+                onAnimationEnd={handleAnimationEnd}
+                className={clsx(
+                    'fixed inset-0 z-7 grid place-items-center bg-gray-800/20 backdrop-blur-sm',
+                    isClose ? 'animate-fade-out' : 'animate-fade-in',
+                )}
             >
-                <h2 className='bg-linear-to-tr from-color1-100 to-color4-100 bg-clip-text font-primary text-4xl font-bold text-transparent'>
-                    Formulário
-                </h2>
-
-                <div className='flex flex-col gap-5'>
-                    <div>
-                        <label
-                            className='block font-secundary text-base font-bold text-color1-100'
-                            htmlFor='disciplina'
-                        >
-                            Disciplina
-                        </label>
-
-                        <select
-                            id='disciplina'
-                            value={discipline}
-                            onChange={e => setDiscipline(e.target.value)}
-                            className='h-12 w-full rounded-lg border border-gray-300 px-4 font-medium text-color1-100 outline-none'
-                            required
-                        >
-                            <option value=''>Selecione uma disciplina</option>
-
-                            {Object.entries(disciplinasList).map(([key, disciplinas]) => (
-                                <optgroup
-                                    key={key}
-                                    label={key}
-                                >
-                                    {disciplinas.map(disciplina => (
-                                        <option
-                                            key={disciplina}
-                                            value={disciplina}
-                                        >
-                                            {disciplina}
-                                        </option>
-                                    ))}
-                                </optgroup>
-                            ))}
-                        </select>
-                    </div>
-
-                    <div>
-                        <label
-                            className='block font-secundary text-base font-bold text-color1-100'
-                            htmlFor='conteudo'
-                        >
-                            Conteúdo
-                        </label>
-
-                        <input
-                            type='text'
-                            id='conteudo'
-                            value={subject}
-                            onChange={e => setSubject(e.target.value)}
-                            placeholder='Descreva o assunto das questões'
-                            className='h-12 w-full rounded-lg border border-color4-25 px-4 font-medium outline-none focus:ring-2 focus:ring-color1-400'
-                            required
-                        />
-                    </div>
-
-                    <div>
-                        <label
-                            className='block font-secundary text-base font-bold text-color1-100'
-                            htmlFor='dificuldade'
-                        >
-                            Dificuldade
-                        </label>
-
-                        <InputRange
-                            value={difficulties[difficulty]}
-                            trueValue={difficulty}
-                            setValue={setDifficulty}
-                            steps={1}
-                            min={0}
-                            max={4}
-                        />
-                    </div>
-
-                    <div>
-                        <label
-                            className='block font-secundary text-base font-bold text-color1-100'
-                            htmlFor='quantidade'
-                        >
-                            Quantidade de perguntas
-                        </label>
-
-                        <InputRange
-                            value={quantidade}
-                            trueValue={quantidade}
-                            setValue={setQuantidade}
-                            min={5}
-                            max={50}
-                        />
-                    </div>
-
-                    <div>
-                        <label
-                            className='font-secundary font-bold text-color1-100'
-                            htmlFor='observacoes'
-                        >
-                            Observações
-                        </label>
-
-                        <textarea
-                            id='observacoes'
-                            value={note}
-                            onChange={e => setNote(e.target.value)}
-                            className='h-24 w-full resize-none rounded-lg border border-color4-25 px-4 py-2 outline-none focus:ring-2 focus:ring-color1-400'
-                            placeholder='Caso deseje, descreva aqui suas observações'
-                        ></textarea>
-                    </div>
-                </div>
-
-                <button
-                    type='submit'
-                    disabled={loading}
-                    className='h-12 cursor-pointer rounded-lg bg-button text-xl text-color4-100 transition-all duration-150 not-disabled:hover:shadow-lg-hard disabled:cursor-not-allowed disabled:opacity-60'
+                <form
+                    ref={articleRef}
+                    onSubmit={handleSubmit}
+                    className='flex w-full max-w-xl flex-col gap-4 rounded-2xl bg-color4-200 px-4 py-6 lg:gap-6 lg:px-6 lg:py-8'
                 >
-                    {loading ? 'Gerando...' : 'Gerar'}
-                </button>
-            </form>
-        </div>
+                    <h2 className='bg-linear-to-tr from-color1-100 to-color4-100 bg-clip-text font-primary text-4xl font-bold text-transparent'>
+                        Formulário
+                    </h2>
+
+                    <div className='flex flex-col gap-5'>
+                        <div>
+                            <label
+                                className='block font-secundary text-base font-bold text-color1-100'
+                                htmlFor='disciplina'
+                            >
+                                Disciplina
+                            </label>
+
+                            <select
+                                id='disciplina'
+                                value={discipline}
+                                onChange={e => setDiscipline(e.target.value)}
+                                className='h-12 w-full rounded-lg border border-gray-300 px-4 font-medium text-color1-100 outline-none'
+                                required
+                            >
+                                <option value=''>Selecione uma disciplina</option>
+
+                                {Object.entries(disciplinasList).map(([key, disciplinas]) => (
+                                    <optgroup
+                                        key={key}
+                                        label={key}
+                                    >
+                                        {disciplinas.map(disciplina => (
+                                            <option
+                                                key={disciplina}
+                                                value={disciplina}
+                                            >
+                                                {disciplina}
+                                            </option>
+                                        ))}
+                                    </optgroup>
+                                ))}
+                            </select>
+                        </div>
+
+                        <div>
+                            <label
+                                className='block font-secundary text-base font-bold text-color1-100'
+                                htmlFor='conteudo'
+                            >
+                                Conteúdo
+                            </label>
+
+                            <input
+                                type='text'
+                                id='conteudo'
+                                value={subject}
+                                onChange={e => setSubject(e.target.value)}
+                                placeholder='Descreva o assunto das questões'
+                                className='h-12 w-full rounded-lg border border-color4-25 px-4 font-medium outline-none focus:ring-2 focus:ring-color1-400'
+                                required
+                            />
+                        </div>
+
+                        <div>
+                            <label
+                                className='block font-secundary text-base font-bold text-color1-100'
+                                htmlFor='dificuldade'
+                            >
+                                Dificuldade
+                            </label>
+
+                            <InputRange
+                                value={difficulties[difficulty]}
+                                trueValue={difficulty}
+                                setValue={setDifficulty}
+                                steps={1}
+                                min={0}
+                                max={4}
+                            />
+                        </div>
+
+                        <div>
+                            <label
+                                className='block font-secundary text-base font-bold text-color1-100'
+                                htmlFor='quantidade'
+                            >
+                                Quantidade de perguntas
+                            </label>
+
+                            <InputRange
+                                value={quantidade}
+                                trueValue={quantidade}
+                                setValue={setQuantidade}
+                                min={5}
+                                max={50}
+                            />
+                        </div>
+
+                        <div>
+                            <label
+                                className='font-secundary font-bold text-color1-100'
+                                htmlFor='observacoes'
+                            >
+                                Observações
+                            </label>
+
+                            <textarea
+                                id='observacoes'
+                                value={note}
+                                onChange={e => setNote(e.target.value)}
+                                className='h-24 w-full resize-none rounded-lg border border-color4-25 px-4 py-2 outline-none focus:ring-2 focus:ring-color1-400'
+                                placeholder='Caso deseje, descreva aqui suas observações'
+                            ></textarea>
+                        </div>
+                    </div>
+
+                    <button
+                        type='submit'
+                        disabled={loading}
+                        className='h-12 cursor-pointer rounded-lg bg-button text-xl text-color4-100 transition-all duration-150 not-disabled:hover:shadow-lg-hard disabled:cursor-not-allowed disabled:opacity-60'
+                    >
+                        {loading ? 'Gerando...' : 'Gerar'}
+                    </button>
+                </form>
+            </div>
+        </>
     );
 }
