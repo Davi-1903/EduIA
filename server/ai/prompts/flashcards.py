@@ -5,7 +5,7 @@ from schemas.flashcards import Flashcards
 
 
 PROMPT = """
-Você é um professor especialista em {disciplina}. Gere {quantidade} flashcards, com breves explicações sobre.
+Você é um professor especialista em {disciplina}. Gere {quantidade} flashcards, com breves explicações sobre o assunto.
 
 Tema: {assunto}
 Dificuldade: {dificuldade}

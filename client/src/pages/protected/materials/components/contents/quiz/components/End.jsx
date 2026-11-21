@@ -40,7 +40,7 @@ export default function End({ questions, corrects, time, handleRestart, setClose
             return {
                 message: 'Resultado com potencial de melhora',
                 description:
-                    'Não o melhor resultado! Porém, é possível obter uma melhora considerável. Continue tentando.',
+                    'Não foi o melhor resultado! Porém, é possível melhorar consideravelmente. Continue tentando.',
             };
         if (safePercentage < 60)
             return {
@@ -55,7 +55,7 @@ export default function End({ questions, corrects, time, handleRestart, setClose
         if (safePercentage < 100)
             return {
                 message: 'Resultado muito bom!',
-                description: 'Quase perfeito! Revise apenas os detalhes e próxima vez será 100%!',
+                description: 'Quase perfeito! Revise os detalhes e, na próxima vez, você pode alcançar 100%!',
             };
         return {
             message: 'Resultado PERFEITO!',

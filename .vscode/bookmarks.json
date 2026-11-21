@@ -51,26 +51,6 @@
 			]
 		},
 		{
-			"path": "client/src/components/sidebar/components/sidebar.jsx",
-			"bookmarks": [
-				{
-					"line": 65,
-					"column": 0,
-					"label": "Adicionar o isOpen em um contexto"
-				}
-			]
-		},
-		{
-			"path": "client/src/components/loadingMaterial/index.jsx",
-			"bookmarks": [
-				{
-					"line": 12,
-					"column": 0,
-					"label": "Otimizar vídeo ou fazer um mecanismo para esperar o vídeo carregar"
-				}
-			]
-		},
-		{
 			"path": "client/src/pages/protected/materials/components/contents/lesson_plan/components/Introduction.jsx",
 			"bookmarks": [
 				{
@@ -84,12 +64,12 @@
 			"path": "client/src/pages/protected/materials/components/contents/questoes/components/Display.jsx",
 			"bookmarks": [
 				{
-					"line": 3,
+					"line": 5,
 					"column": 0,
 					"label": "Talvez adicionar um cabeçalho para padronizar com os de Cecilya"
 				},
 				{
-					"line": 16,
+					"line": 18,
 					"column": 0,
 					"label": "Fazer componente global para markdown"
 				}

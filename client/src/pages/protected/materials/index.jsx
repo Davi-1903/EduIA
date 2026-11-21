@@ -98,7 +98,7 @@ export default function Materials() {
                 <title>EduIA | Materials</title>
                 <meta
                     name='description'
-                    content='Materiais geradas pelo usuário'
+                    content='Materiais gerados pelo usuário'
                 />
             </Helmet>
             <main className='min-h-screen bg-color4-200 not-sm:col-span-2'>
@@ -144,7 +144,7 @@ export default function Materials() {
                             />
                         </>
                     ) : (
-                        <EmptyMaterials />
+                        <EmptyMaterials withFilter={withFilter} />
                     )}
                 </section>
             </main>

@@ -1,10 +1,10 @@
 import Mascote from '/assets/images/mascote/materiais.webp';
 
-export default function EmptyMaterials() {
+export default function EmptyMaterials({ withFilter }) {
     return (
         <div className='pt-12'>
             <h2 className='text-center font-secundary text-2xl font-semibold text-color3-400 lg:text-3xl'>
-                Não há materiais ainda...
+                {withFilter ? 'Materiais não encontrados...' : 'Não há materiais ainda...'}
             </h2>
             <img
                 src={Mascote}

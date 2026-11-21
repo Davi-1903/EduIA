@@ -4,7 +4,7 @@ export default function LoadingMaterial({ message, isLoading, setAnimation }) {
     return (
         <div
             className={clsx(
-                'fixed inset-0 z-8 grid place-items-center bg-radial from-yellow-400 from-0% via-yellow-100 via-10% to-color4-100 to-90% backdrop-blur-3xl',
+                'fixed inset-0 z-8 grid place-items-center bg-radial from-yellow-100 from-10% to-color4-100 to-90% backdrop-blur-3xl',
                 isLoading ? 'animate-fade-in' : 'animate-fade-out',
             )}
             onAnimationEnd={() => isLoading || setAnimation(false)}

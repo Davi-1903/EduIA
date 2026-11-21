@@ -14,17 +14,17 @@ export default function Resume({ discipline, subject, content, setContent }) {
     const normalize = str => str.replace(/\\n/g, '\n');
     const { setMessages } = useMessages();
 
-    async function copyExplanation(c) {
+    async function copyResume(c) {
         try {
             const text = removeMarkdown(normalize(c.text ?? ''));
 
             await navigator.clipboard.writeText(text);
-            setMessages(prev => [...prev, { id: prev.length + 1, message: 'Explicação copiada', type: 'ok' }]);
+            setMessages(prev => [...prev, { id: prev.length + 1, message: 'Resumo copiado', type: 'ok' }]);
         } catch (err) {
-            console.error('Erro ao copiar explicação:', err);
+            console.error('Erro ao copiar o resumo:', err);
             setMessages(prev => [
                 ...prev,
-                { id: prev.length + 1, message: 'Não foi possível copiar a explicação', type: 'danger' },
+                { id: prev.length + 1, message: 'Não foi possível copiar o resumo', type: 'danger' },
             ]);
         }
     }
@@ -92,7 +92,7 @@ export default function Resume({ discipline, subject, content, setContent }) {
                                     </h1>
                                 </div>
                                 <button
-                                    onClick={() => copyExplanation(content)}
+                                    onClick={() => copyResume(content)}
                                     class='text-md flex cursor-pointer items-center gap-2 rounded-lg bg-button px-5 py-3 text-color4-100'
                                 >
                                     <IconCopy size={20} />

@@ -5,7 +5,7 @@ from schemas.desafios import Desafio
 
 
 PROMPT = """
-Você é um professor especialista em {disciplina}. Gere um desafio com uma situação e uma explicação breve da resolução dividida em seções curtas formatada em uma lista markdown. Faça com uma dificuldade muito difícil.
+Você é um professor especialista em {disciplina}. Gere um desafio com uma situação e uma breve explicação da resolução, dividida em seções curtas e formatada como uma lista em Markdown. Use um nível de dificuldade muito difícil.
 
 Tema: {assunto}
 Formato da resposta: {format_instructions}

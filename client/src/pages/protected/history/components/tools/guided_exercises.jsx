@@ -69,7 +69,7 @@ export default function GuidedExercisesForm({
                     <input
                         type='text'
                         placeholder='Descreva o assunto da aula'
-                        className='required rounded-lg border border-gray-300 bg-color4-200 px-4 py-2 outline-none focus:ring-2 focus:ring-color1-400'
+                        className='required rounded-lg border border-gray-300 bg-color4-200 px-4 py-2 outline-none'
                         value={subject}
                         readOnly
                     />
@@ -111,7 +111,7 @@ export default function GuidedExercisesForm({
                     <div className='grid grid-cols-2 gap-x-8 pl-2'>
                         <label className='flex items-center gap-2 font-secundary text-sm text-color1-100'>
                             <input
-                                type='checkbox'
+                                type='radio'
                                 name='multiple_choice'
                                 checked={multipleChoice}
                                 className='accent-color1-100'
@@ -121,7 +121,7 @@ export default function GuidedExercisesForm({
                         </label>
                         <label className='flex items-center gap-2 font-secundary text-sm text-color1-100'>
                             <input
-                                type='checkbox'
+                                type='radio'
                                 name='true_or_false'
                                 checked={trueOrFalse}
                                 className='accent-color1-100'
@@ -131,7 +131,7 @@ export default function GuidedExercisesForm({
                         </label>
                         <label className='flex items-center gap-2 font-secundary text-sm text-color1-100'>
                             <input
-                                type='checkbox'
+                                type='radio'
                                 name='discursive'
                                 checked={discursive}
                                 className='accent-color1-100'
@@ -145,7 +145,7 @@ export default function GuidedExercisesForm({
                     <label className='font-secundary font-bold text-color1-100'>Observação</label>
                     <textarea
                         placeholder='Escreva algo específico que deseja nos exercícios...'
-                        className='resize-none rounded-lg border border-gray-300 bg-color4-200 px-4 py-2 outline-none focus:ring-2 focus:ring-color1-400'
+                        className='resize-none rounded-lg border border-gray-300 bg-color4-200 px-4 py-2 outline-none'
                         value={note}
                         readOnly
                     ></textarea>

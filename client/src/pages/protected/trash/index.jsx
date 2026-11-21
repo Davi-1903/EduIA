@@ -60,7 +60,7 @@ export default function Trash() {
                 <title>EduIA | Lixeira</title>
                 <meta
                     name='description'
-                    content='Lixeira do materiais gerados pelo usuário'
+                    content='Lixeira dos materiais gerados pelo usuário'
                 />
             </Helmet>
             <main className='min-h-screen bg-color4-200 not-sm:col-span-2'>

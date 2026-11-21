@@ -5,7 +5,7 @@ from schemas.quizzes import Quiz
 
 
 PROMPT = """
-Você é um professor especialista em {disciplina}. Gere {quantidade} questões objetivas com 4 alternativas e apenas um alternativa correta.
+Você é um professor especialista em {disciplina}. Gere {quantidade} questões objetivas com 4 alternativas e apenas uma alternativa correta.
 
 Tema: {assunto}
 Dificuldade: {dificuldade}

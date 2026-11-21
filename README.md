@@ -47,7 +47,7 @@
     <a href='#-o-que-o-sistema-gera'>O que o sistema gera</a> •
     <a href='#-como-funciona'>Como funciona</a> •
     <a href='#️-stack-tecnológica'>Stack tecnológica</a> •
-    <a href='#-pré-requisitos'>Pré requisitos</a> •
+    <a href='#-pré-requisitos'>Pré-requisitos</a> •
     <a href='#-como-executar-o-projeto'>Como executar o projeto</a> •
     <a href='#-documentação'>Documentação</a> •
     <a href='#-equipe'>Equipe</a> •
@@ -77,7 +77,7 @@ O projeto foi desenvolvido por estudantes do ensino médio técnico integrado do
         alt='Página de cadastro do sistema'
         width='800'
     >
-    <p>Página de cadastro</p>
+    <p>Página de login do sistema</p>
 </div>
 
 <div align='center'>
@@ -172,7 +172,7 @@ Essa abordagem permite que o mesmo fluxo seja reutilizado para diferentes materi
 </table>
 
 > [!NOTE]
-> A documentações completas de requisitos e decisões técnicas: [**Documentação**](#-documentação).
+> Consulte a documentação completa de requisitos e decisões técnicas: [**Documentação**](#-documentação).
 
 ## 🚀 Pré-requisitos
 
@@ -223,8 +223,11 @@ Há duas formas principais de rodar o EduIA:
 
     # =====================< Autenticação >=====================
     SECRET_KEY=<SUA-CHAVE-SECRETA-AQUI>
-    CORS_ORIGINS=http://localhost:3000,http://localhost:4173
+    VITE_CORS_ORIGINS_CLIENT=http://localhost:5000,http://localhost:8000
+    CORS_ORIGINS_SERVER=http://localhost:3000,http://localhost:4173
     SESSION_COOKIE_SECURE=0
+    SESSION_COOKIE_HTTPONLY=1
+    SESSION_COOKIE_SAMESITE=lax
 
     # ========================< SUAP OAuth >=======================
     SUAP_CLIENT_ID=<CLIENT-ID-DO-SUAP>

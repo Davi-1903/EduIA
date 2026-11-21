@@ -36,4 +36,4 @@ def get_connection(**kargs) -> Engine:
             logger.warning('Tentativa {}/10 de conexão com o banco falhou: {}', attempt + 1, error)
             sleep(3)
     logger.error('Não foi possível estabelecer uma conexão com o banco de dados após 10 tentativas')
-    raise RuntimeError('Não foi possível estabeler uma conexão com o banco de dados')
+    raise RuntimeError('Não foi possível estabelecer uma conexão com o banco de dados')

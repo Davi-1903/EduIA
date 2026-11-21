@@ -61,7 +61,7 @@ export default function History() {
                 <title>EduIA | Histórico</title>
                 <meta
                     name='description'
-                    content='Histórico de materiais geradas pelo usuário'
+                    content='Histórico de materiais gerados pelo usuário'
                 />
             </Helmet>
             <main className='min-h-screen bg-color4-200 not-sm:col-span-2'>

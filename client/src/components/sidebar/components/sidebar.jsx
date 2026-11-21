@@ -189,7 +189,7 @@ function SidebarModel({ isOpen, setOpen }) {
                             <a
                                 onClick={handleLogout}
                                 href='#'
-                                className='flex items-center gap-2 overflow-x-hidden rounded-md p-1.5 transition-colors duration-150 hover:bg-color3-100/20'
+                                className='flex items-center gap-2 overflow-x-hidden rounded-md p-1.5 transition-colors duration-150 hover:bg-red-600/20'
                                 target='_parent'
                             >
                                 <div>

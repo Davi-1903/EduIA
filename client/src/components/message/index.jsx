@@ -45,12 +45,12 @@ export default function Message({ id, message, type }) {
             </div>
             <div className='self-start'>
                 <button
-                    className='cursor-pointer rounded-sm p-1 transition-all duration-100 hover:bg-color4-200/25'
+                    className='group cursor-pointer rounded-sm p-1 transition-all duration-100 hover:bg-color4-200/25'
                     onClick={() => setClose(true)}
                 >
                     <IconX
                         size={24}
-                        className='stroke-color4-200'
+                        className='stroke-color4-200 transition-all duration-250 ease-[cubic-bezier(1,0,.5,1.5)] group-hover:rotate-90'
                     />
                 </button>
             </div>
