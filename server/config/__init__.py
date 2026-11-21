@@ -15,9 +15,9 @@ __all__ = ['config_app']
 def config_app(app: Flask):
     app.config.update(
         SECRET_KEY=get_env('SECRET_KEY'),
-        SESSION_COOKIE_HTTPONLY=True,
+        SESSION_COOKIE_HTTPONLY=get_env('SESSION_COOKIE_HTTPONLY', '1').lower() in {'1', 'true', 'yes'},
         SESSION_COOKIE_SECURE=get_env('SESSION_COOKIE_SECURE', '0').lower() in {'1', 'true', 'yes'},
-        SESSION_COOKIE_SAMESITE='Lax',
+        SESSION_COOKIE_SAMESITE=get_env('SESSION_COOKIE_SAMESITE', 'lax').lower(),
         SUAP_CLIENT_ID=get_env('SUAP_CLIENT_ID', ''),
         SUAP_CLIENT_SECRET=get_env('SUAP_CLIENT_SECRET', ''),
         SUAP_REDIRECT_URI=get_env('SUAP_REDIRECT_URI', ''),
@@ -26,7 +26,7 @@ def config_app(app: Flask):
         SUAP_PROFILE_URL=get_env('SUAP_PROFILE_URL', 'https://suap.ifrn.edu.br/api/rh/eu/'),
         SUAP_PROFILE_FALLBACK_URL=get_env('SUAP_PROFILE_FALLBACK_URL', 'https://suap.ifrn.edu.br/api/rh/meus-dados/'),
     )
-    origins = get_env('CORS_ORIGINS', 'http://localhost:3000,http://localhost:4173').split(',')
+    origins = get_env('CORS_ORIGINS_SERVER', 'http://localhost:3000,http://localhost:4173').split(',')
     CORS(app, supports_credentials=True, origins=origins)
     csrf = CSRFProtect()
     csrf.init_app(app)

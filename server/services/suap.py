@@ -134,7 +134,7 @@ def find_or_create_user(profile: dict) -> Usuario:
 
     # Testando se já há um usuário cadastrado com esse email
     try:
-        _ = get_user_by_email_service(email)
+        get_user_by_email_service(email_escolar)
         raise SuapAuthenticationError(
             'Este e-mail já pertence a uma conta. Entre com ela ou solicite a vinculação ao administrador.',
             'account_conflict',
