@@ -11,6 +11,7 @@ export default function Quiz({ discipline, subject, difficulty, time, content, s
     const [isClose, setClose] = useState(false);
     const [questionId, setQuestionId] = useState(0);
     const [answeredId, setAnsweredId] = useState(null);
+    const [showAnswer, setShowAnswer] = useState(false);
     const [itsWrong, setWrong] = useState(false);
     const [corrects, setCorrests] = useState(0);
     const [timeSpent, setTimeSpent] = useState(0);
@@ -34,6 +35,7 @@ export default function Quiz({ discipline, subject, difficulty, time, content, s
         }
         if (isCorrect && !itsWrong) setCorrests(prev => prev + 1);
         setAnsweredId(null);
+        setShowAnswer(false);
         setWrong(false);
     }
 
@@ -46,7 +48,7 @@ export default function Quiz({ discipline, subject, difficulty, time, content, s
 
     function onAnimationEnd() {
         if (answeredId === null) setWrong(true);
-        setAnsweredId(content[questionId].correctAnswerId);
+        setShowAnswer(true);
     }
 
     function handleClick(id) {
@@ -112,6 +114,7 @@ export default function Quiz({ discipline, subject, difficulty, time, content, s
                             questions={content}
                             currentQuestionId={questionId}
                             answeredId={answeredId}
+                            showAnswer={showAnswer}
                             toRespond={toRespond}
                             handleClick={handleClick}
                         />

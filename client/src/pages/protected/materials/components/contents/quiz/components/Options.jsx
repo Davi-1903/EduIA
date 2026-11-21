@@ -1,9 +1,9 @@
 import { IconArrowRight } from '@tabler/icons-react';
 import clsx from 'clsx';
 
-export default function Options({ questions, currentQuestionId, answeredId, toRespond, handleClick }) {
+export default function Options({ questions, currentQuestionId, answeredId, showAnswer, toRespond, handleClick }) {
     function getColor(id) {
-        if (answeredId !== null && questions[currentQuestionId].correctAnswerId === id)
+        if ((showAnswer || answeredId !== null) && questions[currentQuestionId].correctAnswerId === id)
             return 'border-green-600 text-green-600';
         if (answeredId === id && questions[currentQuestionId].correctAnswerId !== id)
             return 'border-red-600 text-red-600';
@@ -30,7 +30,7 @@ export default function Options({ questions, currentQuestionId, answeredId, toRe
             <div className='flex justify-end'>
                 <button
                     className='flex cursor-pointer items-center justify-center gap-3 rounded-lg bg-button px-6 py-2 font-primary text-lg text-color4-400 transition-all duration-250 not-sm:flex-1 not-disabled:hover:shadow-lg-hard disabled:cursor-no-drop disabled:opacity-50'
-                    disabled={answeredId === null}
+                    disabled={!showAnswer && answeredId === null}
                     onClick={() => toRespond(answeredId === questions[currentQuestionId].correctAnswerId)}
                 >
                     <span>Próximo</span>

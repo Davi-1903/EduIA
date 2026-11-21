@@ -11,7 +11,7 @@ export default function LoadingMaterial({ message, isLoading, setAnimation }) {
         >
             <div>
                 <video
-                    src='../../../public/assets/images/mascote/loading_materials.webm'
+                    src='/assets/images/mascotes_animados/loading_materials.webm'
                     className='h-[65dvh]'
                     autoPlay
                     loop
