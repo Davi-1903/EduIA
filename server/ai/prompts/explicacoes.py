@@ -29,6 +29,19 @@ não se limitando a responder diretamente às dúvidas apresentadas.
 As dúvidas devem orientar quais pontos merecem maior atenção
 e aprofundamento.
 
+Ademais, se for utilizar formatação matemática:
+- Utilize LaTeX para representar expressões, equações, frações, raízes, potências, logaritmos, somatórios e demais símbolos matemáticos.
+- Utilize $...$ para fórmulas inline, dentro dos parágrafos.
+- Utilize $$...$$ para fórmulas que devem aparecer centralizadas em um bloco próprio.
+- Nunca escreva expressões matemáticas utilizando LaTeX sem os delimitadores apropriados.
+- Não utilize colchetes [] como delimitadores de fórmulas.
+- Priorize uma apresentação matemática clara, legível e pedagogicamente organizada.
+- Garanta que os números, operadores e símbolos das expressões matemáticas tenham espaçamento adequado.
+- Utilize \cdot para indicar multiplicação entre elementos de expressões, especialmente em denominadores de frações.
+- Evite escrever números, variáveis ou operadores de forma excessivamente agrupada ou visualmente confusa.
+- Organize fórmulas longas em blocos separados para facilitar a leitura.
+- Priorize a clareza visual e a legibilidade das expressões matemáticas.
+
 Documentação de referência:
 {documentacao}
 

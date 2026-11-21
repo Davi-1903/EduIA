@@ -1,6 +1,13 @@
-import { IconArrowRight, IconBook, IconBook2, IconQuestionMark, IconSchool } from '@tabler/icons-react';
+import {
+    IconAlertCircle,
+    IconArrowRight,
+    IconBook,
+    IconBook2,
+    IconQuestionMark,
+    IconSchool,
+} from '@tabler/icons-react';
 
-export default function Introduction({ discipline, subject, time, questionsLength, handleClose, handleStart }) {
+export default function Introduction({ discipline, subject, handleClose, handleStart }) {
     const informations = [
         {
             id: 1,
@@ -69,6 +76,15 @@ export default function Introduction({ discipline, subject, time, questionsLengt
                     </li>
                 ))}
             </ul>
+            <blockquote className='flex items-center gap-3 rounded-lg bg-color4-100 p-4'>
+                <IconAlertCircle
+                    size={28}
+                    className='stroke-color1-100'
+                />
+                <p className='font-secundary text-base text-color1-100'>
+                    Sua explicação será direcionada à dúvida apresentada, explorando o conteúdo de forma clara e didática para facilitar sua compreensão.
+                </p>
+            </blockquote>
             <div className='flex gap-4'>
                 <button
                     className='cursor-pointer rounded-xl border-3 border-color1-100 px-8 py-2 font-secundary text-lg font-bold text-color1-100 transition-all duration-250 hover:bg-button hover:text-color4-400'
