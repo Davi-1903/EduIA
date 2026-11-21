@@ -1,5 +1,5 @@
 import { memo, useEffect, useRef } from 'react';
-import { useNavigate, Link } from 'react-router-dom';
+import { useNavigate, Link, NavLink } from 'react-router-dom';
 import {
     IconBook2,
     IconClock,
@@ -146,14 +146,19 @@ function SidebarModel({ isOpen, setOpen }) {
                                 key={link.id}
                                 className='not-last:mb-4'
                             >
-                                <a
-                                    href={link.path}
-                                    className='flex items-center gap-2 overflow-x-hidden rounded-md p-1.5 transition-colors duration-150 hover:bg-color3-100/20'
+                                <NavLink
+                                    to={link.path}
+                                    className={({ isActive }) =>
+                                        clsx(
+                                            'flex items-center gap-2 overflow-x-hidden rounded-md p-1.5 text-color1-100 transition-colors duration-150',
+                                            isActive ? 'bg-color3-100/20' : 'hover:bg-color3-100/20',
+                                        )
+                                    }
                                     target='_parent'
                                 >
                                     <div>{link.icon}</div>
                                     <span className='font-secundary text-nowrap text-color1-100'>{link.name}</span>
-                                </a>
+                                </NavLink>
                             </li>
                         ))}
                     </ul>
@@ -162,9 +167,14 @@ function SidebarModel({ isOpen, setOpen }) {
                 <div>
                     <ul>
                         <li>
-                            <Link
+                            <NavLink
                                 to='/perfil'
-                                className='mb-4 flex items-center gap-2 overflow-x-hidden rounded-md p-1.5 transition-colors duration-150 hover:bg-color3-100/20'
+                                className={({ isActive }) =>
+                                    clsx(
+                                        'mb-4 flex items-center gap-2 overflow-x-hidden rounded-md p-1.5 transition-colors duration-150',
+                                        isActive ? 'bg-color3-100/20' : 'hover:bg-color3-100/20',
+                                    )
+                                }
                             >
                                 <div>
                                     <IconUser
@@ -173,7 +183,7 @@ function SidebarModel({ isOpen, setOpen }) {
                                     />
                                 </div>
                                 <span className='font-secundary text-nowrap text-color1-100'>Perfil</span>
-                            </Link>
+                            </NavLink>
                         </li>
                         <li>
                             <a

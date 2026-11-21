@@ -115,7 +115,7 @@ export default function Introduction({
                     className='basis-16 stroke-color1-100'
                 />
                 <p className='font-secundary text-base text-color1-100'>
-                    Leia cada questão com atenção. Você pode revisar suas respostas antes de finalizar.
+                    Leia cada questão com atenção, mas não se esqueça do tempo...
                 </p>
             </blockquote>
             <div className='flex flex-col-reverse gap-4 sm:flex-row'>

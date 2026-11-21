@@ -83,7 +83,7 @@ export default function Introduction({ discipline, subject, difficulty, handleCl
                     className='stroke-color1-100'
                 />
                 <p className='font-secundary text-base text-color1-100'>
-                    Leia o desafio com atenção e escreva sua resolução com calma antes de enviar.
+                    Leia o desafio com atenção antes de resolver.
                 </p>
             </blockquote>
             <div className='flex gap-4'>

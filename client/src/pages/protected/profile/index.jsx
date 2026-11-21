@@ -96,7 +96,7 @@ export default function Profile() {
             nome: 'Resumos',
             tipo: 'resumo',
             icone: <IconFileDescription size={34} className='stroke-color1-100' />,
-            skin: '/assets/images/mascote/achievements/skin_resumo.png',
+            skin: '/assets/images/mascote/achievements/skin_resumos.png',
             animacao: '/assets/images/mascotes_animados/resumo.webm',
         },
         {
@@ -104,7 +104,7 @@ export default function Profile() {
             nome: 'Roteiros',
             tipo: 'roteiro',
             icone: <IconReorder size={34} className='stroke-color1-100' />,
-            skin: '/assets/images/mascote/achievements/skin_roteiro.png',
+            skin: '/assets/images/mascote/achievements/skin_roteiros.png',
             animacao: '/assets/images/mascotes_animados/roteiro.webm',
         },
     ];

@@ -7,11 +7,11 @@ export default function Display({ content, discipline, subject }) {
 
     return (
         <>
-            <h1 className='text-center font-primary text-2xl font-bold text-color1-100'>
+            <h1 className='bg-linear-to-tr from-color1-400 to-color4-25 bg-clip-text text-center font-primary text-2xl font-bold text-transparent md:text-3xl'>
                 Desafio de {discipline ?? subject}
             </h1>
 
-            <div className='rounded-xl bg-color4-100 p-6 font-secundary text-base leading-relaxed text-color1-100'>
+            <div className='rounded-xl bg-color4-100/60 px-3 pt-4 pb-0 font-secundary text-base leading-relaxed text-color1-100'>
                 <ReactMarkdown
                     components={{
                         h1: ({ children }) => (
@@ -49,8 +49,10 @@ export default function Display({ content, discipline, subject }) {
                 </button>
             ) : (
                 <>
-                    <h1 className='text-center font-primary text-2xl font-bold text-color1-100'> Resposta </h1>
-                    <div className='rounded-xl bg-color4-100 p-6 font-secundary text-base leading-relaxed text-color1-100'>
+                    <h1 className='bg-linear-to-tr from-color1-400 to-color4-25 bg-clip-text text-center font-primary text-2xl font-bold text-transparent md:text-3xl'>
+                        Resposta
+                    </h1>
+                    <div className='rounded-xl bg-color4-100/60 px-3 pt-4 pb-0 font-secundary text-base leading-relaxed text-color1-100'>
                         <ReactMarkdown
                             components={{
                                 h1: ({ children }) => (
