@@ -1,11 +1,10 @@
-from langchain_core.output_parsers import StrOutputParser
+from langchain_core.output_parsers import JsonOutputParser
 from langchain_core.prompts import PromptTemplate
 
+from schemas.study_guide import StudyGuide
 
-parser = StrOutputParser()
 
-prompt_template = PromptTemplate(
-    template="""
+PROMPT = """
 Você é um professor experiente e especialista em orientação de estudos.
 Crie um roteiro de estudo completo para um aluno que vai estudar sozinho.
 
@@ -40,7 +39,18 @@ Regras gerais:
 - Escreva em português do Brasil.
 - Não coloque o conteúdo dentro de blocos de código.
 
-Responda somente com o roteiro em Markdown, começando por "# Roteiro de estudo: <assunto>". Não escreva nada antes ou depois.
-""",
-    input_variables=['disciplina', 'assunto', 'observacoes'],
+Responda com o roteiro em Markdown, começando por "# Roteiro de estudo: <assunto>".
+
+{format_instructions}
+
+Documentação
+{documentacao}
+"""
+
+parser = JsonOutputParser(pydantic_object=StudyGuide)
+
+prompt_template = PromptTemplate(
+    template=PROMPT,
+    input_variables=['disciplina', 'assunto', 'observacoes', 'documentacao'],
+    partial_variables={'format_instructions': parser.get_format_instructions()},
 )

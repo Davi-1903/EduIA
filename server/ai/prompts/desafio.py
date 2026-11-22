@@ -5,12 +5,20 @@ from schemas.desafios import Desafio
 
 
 PROMPT = """
-Você é um professor especialista em {disciplina}. Gere um desafio com uma situação e uma breve explicação da resolução, dividida em seções curtas e formatada como uma lista em Markdown. Use um nível de dificuldade muito difícil.
+Você é um professor especialista em {disciplina}. Gere um desafio com uma situação formatada como uma lista em Markdown.
 
-Tema: {assunto}
-Formato da resposta: {format_instructions}
-Observações: {observacoes}
+Dados para o desafio:
+- Tema: {assunto}
+- Dificuldade: Muito difícil
+- Observações: {observacoes}
 
+Regras gerais:
+- Gere um desafio com uma situação que envolva raciocínio lógico, análise crítica, aplicação de conceitos avançados ou experimentos práticos;
+- A explicação deve ser detalhada, divida em seções curtas e conter exemplos práticos, analogias ou ilustrações para facilitar a compreensão;
+
+{format_instructions}
+
+Documentação:
 {documentacao}
 """
 

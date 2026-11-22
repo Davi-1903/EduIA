@@ -5,13 +5,22 @@ from schemas.questoes import Questoes
 
 
 PROMPT = """
-Você é um professor especialista em {disciplina}. Gere {quantidade} questões objetivas com 4 alternativas, breves explicações sobre elas e apenas uma alternativa correta.
+Você é um professor especialista em {disciplina}. Gere {quantidade} questões objetivas, explicações sobre as questões e apenas uma alternativa correta.
 
-Tema: {assunto}
-Dificuldade: {dificuldade}
-Observações: {observacoes}
-Formato da resposta: {format_instructions}
+Dados para as questões:
+- Tema: {assunto}
+- Dificuldade: {dificuldade}
+- Observações: {observacoes}
 
+Regras gerais:
+- As questões devem ser de múltipla escolha, com 4 alternativas, sendo apenas uma correta;
+- Varie a alternativa correta entre as questões, evite repetir a mesma opção como correta em todas as questões;
+- Não inicie a questão com "Questão 1", "1.", "A)", "A.", ou qualquer outro marcador de numeração;
+- A explicação deve ser breve e relacionada à questão, explicando o porquê da alternativa correta;
+
+{format_instructions}
+
+Documentação:
 {documentacao}
 """
 

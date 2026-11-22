@@ -4,10 +4,7 @@ from langchain_core.prompts import PromptTemplate
 from schemas.plano_de_aula import PlanoDeAula
 
 
-parser = JsonOutputParser(pydantic_object=PlanoDeAula)
-
-prompt_template = PromptTemplate(
-    template="""
+PROMPT = """
 Você é um professor experiente e especialista em planejamento pedagógico.
 Crie um plano de aula completo, pronto para ser aplicado pelo professor.
 
@@ -50,7 +47,24 @@ Regras gerais:
 - Não coloque o conteúdo dentro de blocos de código.
 
 {format_instructions}
-""",
-    input_variables=['disciplina', 'serie', 'assunto', 'objetivo', 'duracao', 'recursos', 'observacoes'],
+
+Documentação:
+{documentacao}
+"""
+
+parser = JsonOutputParser(pydantic_object=PlanoDeAula)
+
+prompt_template = PromptTemplate(
+    template=PROMPT,
+    input_variables=[
+        'disciplina',
+        'serie',
+        'assunto',
+        'objetivo',
+        'duracao',
+        'recursos',
+        'observacoes',
+        'documentacao',
+    ],
     partial_variables={'format_instructions': parser.get_format_instructions()},
 )

@@ -6,14 +6,15 @@ from schemas.resumos import Resumos
 
 PROMPT = """
 Você é um professor especialista em {disciplina}.
-
 Gere um resumo sobre o tema abaixo, organizado em seções curtas.
 
-Tema: {assunto}
-Observações: {observacoes}
+Dados para o resumo:
+- Tema: {assunto}
+- Observações: {observacoes}
 
 {format_instructions}
 
+Documentação:
 {documentacao}
 """
 

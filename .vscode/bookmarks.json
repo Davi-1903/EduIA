@@ -84,6 +84,16 @@
 					"label": "Fazer botão global para copiar"
 				}
 			]
+		},
+		{
+			"path": "client/src/pages/protected/materials/components/contents/forms/index.jsx",
+			"bookmarks": [
+				{
+					"line": 7,
+					"column": 0,
+					"label": "Fazer formulários discursivos e explorar a possibilidade de uma correção com IA"
+				}
+			]
 		}
 	]
 }
