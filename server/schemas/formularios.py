@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, Field
 
 
 class FormularioJSON(BaseModel):
@@ -13,8 +13,7 @@ class Formularios(BaseModel):
 
 class Answer(BaseModel):
     id: int
-    answer: str
-    exptectedAnswer: str
+    result: int = Field(ge=1, le=10, description='Número inteiro de 1 à 10')
 
 
 class Answers(BaseModel):

@@ -24,7 +24,7 @@ def generate_formularios(payload: dict):
         raise
 
     try:
-        chain = formularios.prompt_template | llm | formularios.parser
+        chain = formularios.generate_prompt_template | llm | formularios.generate_parser
         content = chain.invoke({**payload, 'documentacao': documentation})
         logger.info('Geração de formulários concluída')
         return content
@@ -46,4 +46,22 @@ def generate_formularios(payload: dict):
         raise AiProviderUnavailable('O serviço de IA está indisponível') from error
     except Exception as error:
         logger.error('Falha inesperada durante geração de formulários')
+        raise AiProviderUnavailable('Não foi possível acessar o serviço de IA') from error
+
+
+def evaluate_answers(payload: dict):
+    logger.info('Iniciando a análise das respostas')
+    try:
+        llm = get_llm_ext()
+    except Exception as err:
+        logger.error('Falha ao preparar a análise das respostas do formulário ({})', type(err).__name__)
+        raise AiServiceError
+
+    try:
+        chain = formularios.correction_prompt_template | llm | formularios.correction_parser
+        content = chain.invoke(payload)
+        return content
+
+    except Exception as error:
+        logger.error('Falha inesperada durante a análise das respostas do formulárioo')
         raise AiProviderUnavailable('Não foi possível acessar o serviço de IA') from error

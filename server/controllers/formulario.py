@@ -80,6 +80,4 @@ def to_answer(id: int):
     except:
         ...
 
-    # Salvar correção no Banco de dados?
-
-    return jsonify({'ok': False, 'message': 'Funcionalidade ainda não implementada'}), 200
+    return jsonify({'ok': False, 'message': 'Funcionalidade ainda não implementada'}), 500
