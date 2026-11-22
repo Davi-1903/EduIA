@@ -1,190 +1,95 @@
-import clsx from 'clsx';
 import { useState } from 'react';
-
-import { IconCheck, IconLoader2, IconSend } from '@tabler/icons-react';
-
+import { IconSend } from '@tabler/icons-react';
 import { POST } from '../../../../../../../../api/materials';
 import { useMessages } from '../../../../../../../../context/messagesContext';
 
-export default function Display({ id, content, userEmail, emailConfirmed, setEmailConfirmed, setClose, onSuccess }) {
-    const [answers, setAnswers] = useState({});
-    const [isSending, setIsSending] = useState(false);
-
+export default function Display({ id, subject, content, setClose, onSuccess }) {
+    const [answers, setAnswers] = useState(
+        content.map(item => ({ id: item.id, answer: '', expectedAnswer: item.expectedAnswer })),
+    );
+    const [isLoading, setLoading] = useState(false);
     const { setMessages } = useMessages();
 
-    const answeredCount = Object.keys(answers).length;
-
-    function pushError(message) {
-        setMessages(prev => [
-            ...prev,
-            {
-                id: prev.length + 1,
-                message,
-                type: 'danger',
-            },
-        ]);
+    function toAnswer(id, e) {
+        setAnswers(prev => prev.map(item => (item.id === id ? { ...item, answer: e.target.value } : item)));
     }
 
-    function setAnswer(questionId, answerId) {
-        setAnswers(prev => ({
-            ...prev,
-            [questionId]: answerId,
-        }));
+    function isFinished() {
+        for (const item of answers) {
+            if (item.answer === '') return false;
+        }
+        return true;
     }
 
-    async function handleSubmit() {
-        if (isSending) return;
-
-        if (!emailConfirmed) {
-            return pushError('Confirme seu e-mail antes de enviar.');
-        }
-
-        if (answeredCount !== content.length) {
-            return pushError('Responda todas as perguntas antes de enviar.');
-        }
-
-        setIsSending(true);
+    async function handleSubmit(e) {
+        e.preventDefault();
+        console.log(answers);
+        const timeID = setTimeout(() => {
+            setLoading(true);
+        }, 200);
 
         try {
-            const data = await POST(`/api/materials/formulario/${id}/respostas`, {
-                answers,
-            });
-
-            if (data.status !== 200 && data.status !== 201) {
-                throw new Error(data.message || 'Não foi possível enviar as respostas');
-            }
-
+            const data = await POST(`/api/materials/formulario/${id}/answer`, { answers });
+            if (data.status !== 200) throw new Error(data.message || 'Não foi possível enviar as respostas');
             onSuccess();
+            setClose(true);
         } catch (err) {
-            pushError(err.name === 'SyntaxError' ? 'Ocorreu um problema com a resposta do servidor' : err.message);
+            setMessages(prev => [
+                ...prev,
+                {
+                    id: prev.length + 1,
+                    message:
+                        err.name === 'SyntaxError' ? 'Ocorreu um problema com a resposta do servidor' : err.message,
+                    type: 'error',
+                },
+            ]);
         } finally {
-            setIsSending(false);
+            setLoading(false);
+            clearTimeout(timeID);
         }
     }
 
     return (
-        <>
-            <h1 className='text-center font-primary text-2xl font-bold text-color1-100'>Formulário</h1>
-
-            <div className='flex flex-col gap-2'>
-                <span className='font-secundary text-sm text-color1-100/60'>
-                    Confirme seu e-mail para enviar as respostas:
-                </span>
-
-                <button
-                    type='button'
-                    onClick={() => setEmailConfirmed(prev => !prev)}
-                    disabled={isSending}
-                    className='flex cursor-pointer items-center gap-2 disabled:cursor-no-drop'
-                >
-                    <span
-                        className={clsx(
-                            'grid h-5 w-5 shrink-0 place-items-center rounded-md border-2',
-                            emailConfirmed ? 'border-color1-400 bg-color1-400' : 'border-color4-50',
-                        )}
-                    >
-                        {emailConfirmed && (
-                            <IconCheck
-                                size={14}
-                                className='stroke-white'
-                            />
-                        )}
-                    </span>
-
-                    <span className='font-secundary text-sm text-color1-100'>{userEmail}</span>
-                </button>
-            </div>
-
-            <div className='flex items-center justify-between'>
-                <h2 className='font-primary text-lg font-bold text-color1-100'>Perguntas</h2>
-
-                <span className='font-secundary text-sm text-color1-100/60'>
-                    {answeredCount} de {content.length} respondidas
-                </span>
-            </div>
-
+        <form
+            onSubmit={handleSubmit}
+            className='flex flex-col gap-4'
+        >
+            <h1 className='bg-linear-to-tr from-color1-400 from-25% to-color4-25 bg-clip-text text-center font-primary text-2xl font-bold text-transparent'>
+                {subject}
+            </h1>
             <div className='flex flex-col gap-6'>
-                {content.map((question, index) => (
-                    <div
+                {content.map(question => (
+                    <label
                         key={question.id}
+                        htmlFor={String(question.id) + ' answer'}
                         className='flex flex-col gap-3'
                     >
-                        <p className='font-secundary text-base font-semibold text-color1-100'>
-                            {index + 1}. {question.question}
-                        </p>
-
-                        <ul
-                            role='radiogroup'
-                            aria-label={question.question}
-                            className='flex flex-col gap-2 pl-1'
+                        <p
+                            id={String(question.id) + ' question'}
+                            className='font-secundary text-base text-color1-100'
                         >
-                            {question.answers.map(answer => {
-                                const checked = answers[question.id] === answer.id;
-
-                                return (
-                                    <li key={answer.id}>
-                                        <button
-                                            type='button'
-                                            role='radio'
-                                            aria-checked={checked}
-                                            disabled={isSending}
-                                            onClick={() => setAnswer(question.id, answer.id)}
-                                            className='flex cursor-pointer items-center gap-2 text-left disabled:cursor-no-drop'
-                                        >
-                                            <span
-                                                className={clsx(
-                                                    'grid h-5 w-5 shrink-0 place-items-center rounded-md border-2',
-                                                    checked ? 'border-color1-400 bg-color1-400' : 'border-color4-50',
-                                                )}
-                                            >
-                                                {checked && (
-                                                    <IconCheck
-                                                        size={14}
-                                                        className='stroke-white'
-                                                    />
-                                                )}
-                                            </span>
-
-                                            <span className='font-secundary text-sm text-color1-100'>
-                                                {answer.text}
-                                            </span>
-                                        </button>
-                                    </li>
-                                );
-                            })}
-                        </ul>
-                    </div>
+                            <strong className='bg-linear-to-tr from-color1-400 from-25% to-color4-25 bg-clip-text text-transparent'>
+                                {question.id}.
+                            </strong>{' '}
+                            {question.question}
+                        </p>
+                        <textarea
+                            id={String(question.id) + ' answer'}
+                            onChange={e => toAnswer(question.id, e)}
+                            className='resize-none rounded-lg border border-color4-25 p-2 font-medium outline-none focus:ring-2 focus:ring-color1-400'
+                            placeholder='Sua resposta aqui...'
+                            required
+                        ></textarea>
+                    </label>
                 ))}
             </div>
-
-            <div className='flex justify-center gap-4 pt-2'>
-                <button
-                    type='button'
-                    className='flex cursor-pointer items-center gap-2 rounded-lg bg-button px-8 py-2 font-secundary text-base font-bold text-color4-400 transition-all duration-250 not-disabled:hover:shadow-lg-hard disabled:cursor-no-drop disabled:opacity-50'
-                    onClick={handleSubmit}
-                    disabled={isSending}
-                >
-                    {isSending ? (
-                        <IconLoader2
-                            size={18}
-                            className='animate-spin'
-                        />
-                    ) : (
-                        <IconSend size={18} />
-                    )}
-
-                    {isSending ? 'Enviando...' : 'Enviar'}
-                </button>
-
-                <button
-                    type='button'
-                    className='cursor-pointer rounded-lg border-2 border-color1-100 px-8 py-2 font-secundary text-base font-bold text-color1-100 transition-all duration-250 hover:bg-button hover:text-color4-400 disabled:cursor-no-drop disabled:opacity-50'
-                    onClick={() => setClose(true)}
-                    disabled={isSending}
-                >
-                    Voltar
-                </button>
-            </div>
-        </>
+            <button
+                disabled={!isFinished() || isLoading}
+                className='flex w-fit cursor-pointer items-center justify-center gap-3 self-end rounded-lg bg-button py-2 pr-4 pl-3 font-primary text-lg text-color4-400 transition-all duration-250 hover:not-disabled:shadow-lg-hard disabled:cursor-no-drop disabled:opacity-50'
+            >
+                <IconSend size={24} />
+                Enviar respostas
+            </button>
+        </form>
     );
 }

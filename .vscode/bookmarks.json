@@ -94,6 +94,16 @@
 					"label": "Fazer formulários discursivos e explorar a possibilidade de uma correção com IA"
 				}
 			]
+		},
+		{
+			"path": "server/controllers/formulario.py",
+			"bookmarks": [
+				{
+					"line": 82,
+					"column": 0,
+					"label": "Salvar correções no banco de dados?"
+				}
+			]
 		}
 	]
 }

@@ -65,3 +65,21 @@ def create_formularios():
         return jsonify({'ok': False, 'message': str(error)}), 400
     except MaterialServiceError:
         return jsonify({'ok': False, 'message': 'Ocorreu um erro interno'}), 500
+
+
+@bp_materials_formulario.route('/<int:id>/answer', methods=['POST'])
+@login_required
+def to_answer(id: int):
+    data = request.get_json(silent=True)
+    if data is None:
+        return jsonify({'ok': False, 'message': 'Dados não recebidos'}), 400
+
+    # Corrigir com IA
+    try:
+        print(id, data)
+    except:
+        ...
+
+    # Salvar correção no Banco de dados?
+
+    return jsonify({'ok': False, 'message': 'Funcionalidade ainda não implementada'}), 200
