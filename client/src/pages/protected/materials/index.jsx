@@ -103,15 +103,15 @@ export default function Materials() {
             </Helmet>
             <main className='min-h-screen bg-color4-200 not-sm:col-span-2'>
                 <section className='mx-auto max-w-400 space-y-12 px-6 py-16'>
-                    <div className='flex flex-wrap items-center'>
-                        <h1 className='bg-linear-to-tr from-color1-100 to-color4-100 bg-clip-text text-4xl leading-tight font-bold text-transparent md:text-5xl'>
+                    <div className='flex flex-col items-baseline sm:flex-row'>
+                        <h1 className='bg-linear-to-tr from-color1-100 to-color4-100 bg-clip-text text-4xl leading-tight font-bold text-transparent not-sm:mb-6 not-sm:w-full not-sm:text-center md:text-5xl'>
                             Meus materiais
                         </h1>
                         <Link
                             to='/dash'
-                            className='group ml-auto'
+                            className='group ml-auto not-sm:w-full'
                         >
-                            <button className='flex cursor-pointer items-center gap-2 rounded-lg bg-button py-2 pr-4 pl-3 font-primary text-lg text-color4-100 transition-all duration-250 group-hover:gap-3 group-hover:shadow-lg-hard'>
+                            <button className='flex w-full cursor-pointer items-center justify-center gap-2 rounded-lg bg-button px-2 py-2 font-primary text-lg text-color4-100 transition-all duration-250 group-hover:gap-3 group-hover:shadow-lg-hard sm:pr-4 sm:pl-3'>
                                 <IconPlus className='transition-all duration-250 ease-[cubic-bezier(.94,.01,.51,1.27)] group-hover:-rotate-90' />
                                 <span>Gerar materiais</span>
                             </button>
