@@ -13,7 +13,7 @@ class Formularios(BaseModel):
 
 class Answer(BaseModel):
     id: int
-    result: int = Field(ge=1, le=10, description='Número inteiro de 1 à 10')
+    result: int = Field(ge=0, le=10, description='Número inteiro de 0 a 10')
 
 
 class Answers(BaseModel):

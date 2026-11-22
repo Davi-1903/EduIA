@@ -56,7 +56,7 @@ def get_formulario_service(id: int):
     with SessionLocal() as session:
         material = session.get(Formulario, id)
         if material is None or material.deleted_at is not None:
-            return MaterialNotFoundError('Formulário não encontrados')
+            raise MaterialNotFoundError('Formulário não encontrados')
 
         return {
             'id': material.id,

@@ -31,8 +31,7 @@ export default function Display({ id, subject, content, setClose, onSuccess }) {
         try {
             const data = await POST(`/api/materials/formulario/${id}/answer`, { answers });
             if (data.status !== 200) throw new Error(data.message || 'Não foi possível enviar as respostas');
-            onSuccess();
-            setClose(true);
+            onSuccess(data.correction);
         } catch (err) {
             setMessages(prev => [
                 ...prev,

@@ -1,7 +1,7 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
 
-from ai.services.formularios import generate_formularios
+from ai.services.formularios import generate_formularios, correct_formularios
 from errors.ai import AiInvalidData, AiInvalidResponse, AiProviderUnavailable, AiServiceError, AiTimeout
 from errors.materials import MaterialNotFoundError, MaterialServiceError, MaterialValidationError
 from services.formularios import create_formulario_service, get_formulario_service, get_formularios_service
@@ -74,10 +74,18 @@ def to_answer(id: int):
     if data is None:
         return jsonify({'ok': False, 'message': 'Dados não recebidos'}), 400
 
-    # Corrigir com IA
     try:
-        print(id, data)
-    except:
-        ...
+        formulario = get_formulario_service(id)
+        correction = correct_formularios({**formulario, 'answers': data.get('answers')})
+    except MaterialNotFoundError as error:
+        return jsonify({'ok': False, 'message': str(error)}), 404
+    except AiInvalidData as error:
+        return jsonify({'ok': False, 'message': str(error)}), 400
+    except AiInvalidResponse as error:
+        return jsonify({'ok': False, 'message': str(error)}), 502
+    except (AiTimeout, AiProviderUnavailable) as error:
+        return jsonify({'ok': False, 'message': str(error)}), 503
+    except (AiServiceError, MaterialServiceError) as error:
+        return jsonify({'ok': False, 'message': str(error)}), 500
 
-    return jsonify({'ok': False, 'message': 'Funcionalidade ainda não implementada'}), 500
+    return jsonify({'ok': True, 'correction': correction}), 200

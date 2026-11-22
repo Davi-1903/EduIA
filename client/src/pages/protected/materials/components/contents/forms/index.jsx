@@ -9,6 +9,7 @@ export default function Formulario({ id, discipline, subject, difficulty, userEm
     const [emailConfirmed, setEmailConfirmed] = useState(false);
     const [start, setStart] = useState(false);
     const [finished, setFinished] = useState(false);
+    const [correction, setCorrection] = useState(null);
     const [isClose, setClose] = useState(false);
     const materialRef = useRef(null);
 
@@ -56,6 +57,8 @@ export default function Formulario({ id, discipline, subject, difficulty, userEm
                         discipline={discipline}
                         subject={subject}
                         questionsLength={content.length}
+                        content={content}
+                        correction={correction}
                         handleClose={() => setClose(true)}
                     />
                 ) : !start ? (
@@ -77,7 +80,10 @@ export default function Formulario({ id, discipline, subject, difficulty, userEm
                         discipline={discipline}
                         subject={subject}
                         setClose={setClose}
-                        onSuccess={() => setFinished(true)}
+                        onSuccess={result => {
+                            setCorrection(result);
+                            setFinished(true);
+                        }}
                     />
                 )}
             </main>
