@@ -4,7 +4,7 @@ from pydantic import ValidationError
 from errors.ai import AiInvalidData, AiInvalidRequest
 from schemas.exercicios_guiados import ExerciciosGuiados
 
-from ..gateways import generate_guided_exercises as generate_guided_exercises_gateway
+from ..gateways.guided_exercises import generate_guided_exercises as generate_guided_exercises_gateway
 
 
 TIPOS_VALIDOS = {'multiple_choice', 'true_or_false', 'discursive'}

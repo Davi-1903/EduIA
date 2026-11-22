@@ -4,7 +4,7 @@ from pydantic import ValidationError
 from errors.ai import AiInvalidData, AiInvalidRequest
 from schemas.desafios import Desafio
 
-from ..gateways import generate_desafio as generate_desafio_gateway
+from ..gateways.desafio import generate_desafio as generate_desafio_gateway
 
 
 def generate_desafios(data: dict):

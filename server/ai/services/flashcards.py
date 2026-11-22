@@ -4,7 +4,7 @@ from pydantic import ValidationError
 from errors.ai import AiInvalidData, AiInvalidRequest
 from schemas.flashcards import Flashcards
 
-from ..gateways import generate_flashcards as generate_flashcards_gateway
+from ..gateways.flashcards import generate_flashcards as generate_flashcards_gateway
 
 
 def generate_flashcards(data: dict):

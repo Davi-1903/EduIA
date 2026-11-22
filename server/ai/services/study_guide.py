@@ -4,7 +4,7 @@ from pydantic import ValidationError
 from errors.ai import AiInvalidData, AiInvalidRequest
 from schemas.study_guide import StudyGuide
 
-from ..gateways import generate_study_guide as generate_study_guide_gateway
+from ..gateways.study_guide import generate_study_guide as generate_study_guide_gateway
 
 
 def generate_study_guide(data: dict):

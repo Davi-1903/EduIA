@@ -4,7 +4,7 @@ from pydantic import ValidationError
 from errors.ai import AiInvalidData, AiInvalidRequest
 from schemas.formularios import Formularios
 
-from ..gateways import generate_formularios as generate_formularios_gateway
+from ..gateways.formularios import generate_formularios as generate_formularios_gateway
 
 
 def generate_formularios(data: dict):

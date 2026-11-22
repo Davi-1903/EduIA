@@ -4,7 +4,7 @@ from pydantic import ValidationError
 from errors.ai import AiInvalidData, AiInvalidRequest
 from schemas.plano_de_aula import PlanoDeAula
 
-from ..gateways import generate_plano_de_aula as generate_plano_de_aula_gateway
+from ..gateways.lesson_plan import generate_plano_de_aula as generate_plano_de_aula_gateway
 
 
 def generate_plano_de_aula(data: dict):

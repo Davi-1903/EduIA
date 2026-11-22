@@ -5,13 +5,20 @@ from schemas.formularios import Formularios
 
 
 PROMPT = """
-Você é um professor especialista em {disciplina}. Gere {quantidade} questões objetivas com 4 alternativas, com apenas uma alternativa correta.
+Você é um professor especialista em {disciplina}. Gere {quantidade} questões discursivas.
 
-Tema: {assunto}
-Dificuldade: {dificuldade}
-Observações: {observacoes}
-Formato da resposta: {format_instructions}
+Dados para o formulário:
+- Tema: {assunto}
+- Dificuldade: {dificuldade}
+- Observações: {observacoes}
 
+Regras gerais:
+- Cada questão deve conter uma pergunta e uma resposta esperada;
+- As respostas esperadas devem ser detalhadas e fundamentadas com explicações claras, exemplos e dados obtidos na pesquisa dos documentos fornecidos, se houver;
+
+{format_instructions}
+
+Documentação:
 {documentacao}
 """
 

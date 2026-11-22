@@ -1,5 +1,14 @@
-from .questoes import generate_questions
-from .quiz import generate_quiz
+from . import desafio, flashcards, formularios, guided_exercises, lesson_plan, questoes, quiz, resumos, study_guide
 
 
-__all__ = ['generate_questions', 'generate_quiz']
+__all__ = [
+    'desafio',
+    'flashcards',
+    'formularios',
+    'guided_exercises',
+    'lesson_plan',
+    'questoes',
+    'quiz',
+    'resumos',
+    'study_guide',
+]

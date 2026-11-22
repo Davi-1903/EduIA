@@ -4,7 +4,7 @@ from pydantic import ValidationError
 from errors.ai import AiInvalidData, AiInvalidRequest
 from schemas.resumos import Resumos
 
-from ..gateways import generate_resumos as generate_resumos_gateway
+from ..gateways.resumos import generate_resumos as generate_resumos_gateway
 
 
 def generate_resumos(data: dict):
