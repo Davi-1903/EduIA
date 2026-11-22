@@ -9,6 +9,7 @@ from schemas.formularios import Answers, Formularios
 from ..gateways.formularios import evaluate_answers as evaluate_answers_gateway
 from ..gateways.formularios import generate_formularios as generate_formularios_gateway
 
+
 def generate_formularios(data: dict):
     try:
         payload = {
@@ -33,25 +34,11 @@ def generate_formularios(data: dict):
 
 def correct_formularios(data: dict):
     try:
-        respostas_usuario = {}
-        for item in data['answers']:
-            id_pergunta = item['id']
-            resposta = item.get('answer')
-
-            if resposta is None:
-                resposta = ''
-
-            respostas_usuario[id_pergunta] = resposta
-
+        respostas_usuario = {item['id']: item.get('answer', '') for item in data['answers']}
         respostas = []
         for question in data['content']['content']:
             id_pergunta = question['id']
-
-            if id_pergunta in respostas_usuario:
-                resposta_dada = respostas_usuario[id_pergunta]
-            else:
-                resposta_dada = ''
-
+            resposta_dada = respostas_usuario.get(id_pergunta, '')
             respostas.append(
                 {
                     'id': id_pergunta,

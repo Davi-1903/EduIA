@@ -51,17 +51,25 @@ def generate_formularios(payload: dict):
 
 def evaluate_answers(payload: dict):
     logger.info('Iniciando a análise das respostas')
-    try:
-        llm = get_llm_ext()
-    except Exception as err:
-        logger.error('Falha ao preparar a análise das respostas do formulário ({})', type(err).__name__)
-        raise AiServiceError
+    llm = get_llm_ext()
 
     try:
         chain = formularios.correction_prompt_template | llm | formularios.correction_parser
         content = chain.invoke(payload)
         return content
 
+    except OutputParserException as error:
+        logger.warning('Análise das respostas do usuário retornou um resposta inválida')
+        raise AiInvalidResponse('A IA retornou uma resposta inválida') from error
+    except (KeyError, TypeError, ValueError) as error:
+        logger.warning('Análise das respostas do formulário recebeu dados inválidos')
+        raise AiInvalidRequest('Dados inválidos para geração de formularios') from error
+    except TimeoutError as error:
+        logger.warning('Análise das respostas do formulário excedeu o tempo limite')
+        raise AiTimeout('O serviço de IA demorou para responder') from error
+    except (ConnectionError, OSError) as error:
+        logger.warning('Provedor indisponível durante análise das respostas do formulário')
+        raise AiProviderUnavailable('O serviço de IA está indisponível') from error
     except Exception as error:
-        logger.error('Falha inesperada durante a análise das respostas do formulárioo')
+        logger.error('Falha inesperada durante a análise das respostas do formulário')
         raise AiProviderUnavailable('Não foi possível acessar o serviço de IA') from error
