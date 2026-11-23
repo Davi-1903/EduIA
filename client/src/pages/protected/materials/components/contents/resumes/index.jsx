@@ -80,62 +80,64 @@ export default function Resume({ discipline, subject, content, setContent }) {
                     />
                 ) : (
                     <>
-                        <div className='flex flex-1 flex-col gap-3 rounded-2xl border-2 border-color1-200 p-6 text-justify shadow-xl'>
+                        <div className='flex flex-1 flex-col gap-4 text-justify'>
                             <div className='button flex items-center justify-between'>
                                 <div className='flex items-center gap-2'>
                                     <IconFileText
-                                        size={35}
+                                        size={26}
                                         className='text-color1-400'
                                     />
-                                    <h1 className='t bg-clip-text text-3xl leading-tight font-bold text-color1-400 md:text-4xl'>
+                                    <h1 className='t bg-clip-text text-2xl leading-tight font-bold text-color1-400 md:text-3xl'>
                                         {content.title}
                                     </h1>
                                 </div>
                                 <button
                                     onClick={() => copyResume(content)}
-                                    class='text-md flex cursor-pointer items-center gap-2 rounded-lg bg-button px-5 py-3 text-color4-100'
+                                    class='text-md flex cursor-pointer items-center gap-2 rounded-lg bg-button px-6 py-2 text-color4-100'
                                 >
                                     <IconCopy size={20} />
                                     Copiar
                                 </button>
                             </div>
-                            <ReactMarkdown
-                                components={{
-                                    h1: ({ children }) => (
-                                        <h1 className='mb-3 text-2xl font-bold wrap-break-word text-color1-100'>
-                                            {children}
-                                        </h1>
-                                    ),
-                                    h2: ({ children }) => (
-                                        <h2 className='mt-5 mb-3 text-xl font-bold wrap-break-word text-color1-100'>
-                                            {children}
-                                        </h2>
-                                    ),
-                                    h3: ({ children }) => (
-                                        <h3 className='mt-4 mb-2 text-lg font-semibold wrap-break-word text-color1-100'>
-                                            {children}
-                                        </h3>
-                                    ),
-                                    p: ({ children }) => (
-                                        <p className='mb-4 text-lg leading-relaxed wrap-break-word whitespace-pre-wrap'>
-                                            {children}
-                                        </p>
-                                    ),
-                                    ul: ({ children }) => (
-                                        <ul className='mb-4 list-disc space-y-2 pl-5 sm:pl-8'>{children}</ul>
-                                    ),
-                                    ol: ({ children }) => (
-                                        <ol className='mb-4 list-decimal space-y-2 pl-5 sm:pl-8'>{children}</ol>
-                                    ),
-                                    li: ({ children }) => (
-                                        <li className='text-lg leading-relaxed wrap-break-word'>{children}</li>
-                                    ),
-                                    strong: ({ children }) => <strong className='font-bold'>{children}</strong>,
-                                    em: ({ children }) => <em className='italic'>{children}</em>,
-                                }}
-                            >
-                                {normalize(content.text)}
-                            </ReactMarkdown>
+                            <div>
+                                <ReactMarkdown
+                                    components={{
+                                        h1: ({ children }) => (
+                                            <h1 className='mb-3 text-2xl font-bold wrap-break-word text-color1-100'>
+                                                {children}
+                                            </h1>
+                                        ),
+                                        h2: ({ children }) => (
+                                            <h2 className='mt-5 mb-3 text-xl font-bold wrap-break-word text-color1-100'>
+                                                {children}
+                                            </h2>
+                                        ),
+                                        h3: ({ children }) => (
+                                            <h3 className='mt-4 mb-2 text-lg font-semibold wrap-break-word text-color1-100'>
+                                                {children}
+                                            </h3>
+                                        ),
+                                        p: ({ children }) => (
+                                            <p className='mb-4 text-lg leading-relaxed wrap-break-word whitespace-pre-wrap'>
+                                                {children}
+                                            </p>
+                                        ),
+                                        ul: ({ children }) => (
+                                            <ul className='mb-4 list-disc space-y-2 pl-5 sm:pl-8'>{children}</ul>
+                                        ),
+                                        ol: ({ children }) => (
+                                            <ol className='mb-4 list-decimal space-y-2 pl-5 sm:pl-8'>{children}</ol>
+                                        ),
+                                        li: ({ children }) => (
+                                            <li className='text-lg leading-relaxed wrap-break-word'>{children}</li>
+                                        ),
+                                        strong: ({ children }) => <strong className='font-bold'>{children}</strong>,
+                                        em: ({ children }) => <em className='italic'>{children}</em>,
+                                    }}
+                                >
+                                    {normalize(content.text)}
+                                </ReactMarkdown>
+                            </div>
                         </div>
                     </>
                 )}
