@@ -31,7 +31,7 @@
 				{
 					"line": 19,
 					"column": 0,
-					"label": "Download para materiais"
+					"label": "Download para formulário"
 				}
 			]
 		},
@@ -97,6 +97,41 @@
 					"line": 7,
 					"column": 0,
 					"label": "Fazer formulários discursivos e explorar a possibilidade de uma correção com IA"
+				}
+			]
+		},
+		{
+			"path": "client/src/pages/protected/materials/components/contents/desafio/components/Display/index.jsx",
+			"bookmarks": [
+				{
+					"line": 4,
+					"column": 0,
+					"label": "Não sei se precisa revelar a resposta"
+				}
+			]
+		},
+		{
+			"path": "client/src/pages/protected/materials/components/contents/questoes/index.jsx",
+			"bookmarks": [
+				{
+					"line": 10,
+					"column": 0,
+					"label": "É necessário recarregar a página para obter as novas respostas"
+				},
+				{
+					"line": 80,
+					"column": 0,
+					"label": "Problemas na mensagem de confirmação de saida em questões já respondidas"
+				}
+			]
+		},
+		{
+			"path": "client/src/pages/protected/materials/components/material.jsx",
+			"bookmarks": [
+				{
+					"line": 83,
+					"column": 0,
+					"label": "Pensar em uma forma melhor de selecionar os componentes, sem precisar pegar todas as informações de todos os materiais ao mesmo tempo"
 				}
 			]
 		}

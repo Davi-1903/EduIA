@@ -137,9 +137,7 @@ export default function End({ discipline, subject, questionsLength, content, cor
                             >
                                 {getResult(average).message}
                             </span>
-                            <p className='font-secundary text-base text-color1-100'>
-                                {getResult(average).description}
-                            </p>
+                            <p className='font-secundary text-base text-color1-100'>{getResult(average).description}</p>
                         </div>
                     </div>
 

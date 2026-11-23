@@ -64,6 +64,8 @@ def get_question_service(id: int):
             'discipline': material.discipline,
             'difficulty': material.difficulty.value,
             'content': material.content,
+            'answers': material.answers,
+            'time_used': material.time_used,
             'amount': material.amount,
             'created_at': material.created_at,
             'type': material.type.value,
@@ -92,3 +94,19 @@ def create_question_service(data: dict):
             session.rollback()
             logger.error('Falha ao salvar material de questões no banco de dados')
             raise MaterialServiceError('Ocorreu um erro interno') from exc
+
+
+def update_questions_answers_service(_id: int, data: dict):
+    with SessionLocal() as session:
+        material = session.get(Questoes, _id)
+        if material is None or material.deleted_at is not None:
+            raise MaterialNotFoundError('Questões não encontradas')
+
+        material.answers = {'answers': data['answers']}
+        material.time_used = data['time_used']
+
+        try:
+            session.commit()
+            session.refresh(material)
+        except Exception as err:
+            raise MaterialServiceError('Ocorreu um erro ao salvar as respostas das questões') from err

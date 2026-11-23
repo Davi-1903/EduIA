@@ -1,6 +1,8 @@
 import { IconCheck, IconCircleCheck, IconClock, IconX } from '@tabler/icons-react';
+import clsx from 'clsx';
 
-export default function End({ questions, corrects, time, handleRestart, setClose }) {
+export default function End({ questions, answers, time, handleRestart, setClose }) {
+    const corrects = answers?.filter(answer => answer.isCorrect).length;
     const safeQuestionsLength = questions.length || 0;
     const percentage = safeQuestionsLength > 0 ? (corrects / safeQuestionsLength) * 100 : 0;
     const safePercentage = Number.isFinite(percentage) ? Math.max(0, Math.min(100, percentage)) : 0;
@@ -10,7 +12,6 @@ export default function End({ questions, corrects, time, handleRestart, setClose
     const dashOffset = circumference - (safePercentage / 100) * circumference;
 
     function formatTime(time) {
-        console.log(time);
         if (time < 1000) return `${time}ms`;
 
         const segundos = Math.floor((time / 1000) % 60);
@@ -180,7 +181,39 @@ export default function End({ questions, corrects, time, handleRestart, setClose
                     <span className='font-secundary text-3xl font-extrabold text-color1-100'>{formatTime(time)}</span>
                 </article>
             </div>
-            <div className='flex gap-4'>
+            {answers && (
+                <div className='flex flex-col gap-3'>
+                    <h3 className='font-primary text-xl font-bold text-color1-100'>Correção</h3>
+                    {answers.map(question => {
+                        const targetQuestion = questions.filter(q => q.id === question.id)[0];
+                        return (
+                            <div
+                                key={question.id}
+                                className='flex flex-col gap-2 rounded-xl border-2 border-color4-100 p-4'
+                            >
+                                <div className='flex items-start justify-between gap-4'>
+                                    <p className='font-secundary font-bold text-color1-100'>
+                                        {question.id}. {targetQuestion.question}
+                                    </p>
+                                    <p
+                                        className={clsx(
+                                            'shrink-0 font-primary text-lg font-extrabold',
+                                            question.isCorrect ? 'text-green-600' : 'text-red-600',
+                                        )}
+                                    >
+                                        {question.isCorrect ? 'Correto' : 'Errado'}
+                                    </p>
+                                </div>
+                                <p className='font-secundary text-sm text-color1-100/70'>
+                                    <span className='font-bold'>Resposta esperada:</span>{' '}
+                                    {targetQuestion.answers[targetQuestion.correctAnswerId - 1]?.text}
+                                </p>
+                            </div>
+                        );
+                    })}
+                </div>
+            )}
+            <div className='flex gap-4 pb-4 md:pb-6'>
                 <button
                     className='flex-1 cursor-pointer rounded-lg border-2 border-color1-100 px-8 py-2 font-secundary text-lg font-bold text-color1-100 transition-all duration-250 hover:bg-button hover:text-color4-400'
                     onClick={handleRestart}

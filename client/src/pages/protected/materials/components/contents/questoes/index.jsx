@@ -1,21 +1,24 @@
 import { useEffect, useRef, useState } from 'react';
+import { useMessages } from '../../../../../../context/messagesContext';
+import { POST } from '../../../../../../api/materials';
+import Introduction from './components/Introduction';
 import Explanation from './components/Explanation';
 import Display from './components/Display';
 import Options from './components/Options';
 import End from './components/End';
 import clsx from 'clsx';
-import Introduction from './components/Introduction';
 
-export default function Questions({ discipline, subject, difficulty, content, setContent }) {
+export default function Questions({ id, discipline, subject, difficulty, content, answers, time_used, setContent }) {
     const materialRef = useRef(null);
     const [start, setStart] = useState(false);
     const [isClose, setClose] = useState(false);
-    const [currentQuestionId, setCurrentQuestionId] = useState(0);
+    const [currentQuestionId, setCurrentQuestionId] = useState(answers ? content.length : 0);
     const [showExplanation, setShowExplanation] = useState(false);
     const [showAnswer, setShowAnswer] = useState(false);
+    const [answersList, setAnswersList] = useState(answers ?? []);
     const [answerId, setAnswerId] = useState(null);
-    const [corrects, setCorrects] = useState(0);
     const [time, setTime] = useState(0);
+    const { setMessages } = useMessages();
 
     function handleStart() {
         setTime(performance.now());
@@ -39,12 +42,15 @@ export default function Questions({ discipline, subject, difficulty, content, se
     }
 
     function handleRestart() {
+        if (!confirm('Responder novamente as questões?')) return;
+
         setCurrentQuestionId(0);
         setTime(performance.now());
         setShowAnswer(false);
         setAnswerId(null);
-        setCorrects(0);
+        setAnswersList([]);
         setShowExplanation(false);
+        setStart(false);
     }
 
     function toRespond(id) {
@@ -52,7 +58,24 @@ export default function Questions({ discipline, subject, difficulty, content, se
 
         setShowAnswer(true);
         setAnswerId(id);
-        if (id === content[currentQuestionId].correctAnswerId) setCorrects(prev => prev + 1);
+        setAnswersList(prev => [
+            ...prev,
+            { id: prev.length + 1, isCorrect: id === content[currentQuestionId].correctAnswerId },
+        ]);
+    }
+
+    async function saveProgress() {
+        try {
+            const response = await POST(`/api/materials/questoes/${id}/answer`, {
+                answers: answersList,
+                time_used: time,
+            });
+            if (response.status !== 200) throw new Error(response.message);
+            setMessages(prev => [...prev, { id: prev.length + 1, message: response.message, type: 'ok' }]);
+            nextQuestion();
+        } catch (err) {
+            setMessages(prev => [...prev, { id: prev.length + 1, message: err.message, type: 'danger' }]);
+        }
     }
 
     useEffect(() => {
@@ -80,7 +103,7 @@ export default function Questions({ discipline, subject, difficulty, content, se
             document.removeEventListener('mousedown', handleClick);
             document.removeEventListener('keydown', handleKey);
         };
-    }, [showExplanation, content.length, currentQuestionId, start]);
+    }, [showExplanation, content.length, currentQuestionId, start, answers]);
 
     return (
         <div
@@ -98,9 +121,9 @@ export default function Questions({ discipline, subject, difficulty, content, se
             )}
             <main
                 ref={materialRef}
-                className='flex min-h-170 w-full max-w-160 flex-col gap-3 rounded-2xl bg-white p-4 shadow-2xl shadow-color1-100/15 md:gap-6 md:p-6 lg:w-4/5'
+                className='flex h-170 w-full max-w-160 flex-col gap-3 overflow-y-auto rounded-2xl bg-white p-4 shadow-2xl shadow-color1-100/15 md:gap-6 md:p-6 lg:w-4/5'
             >
-                {!start ? (
+                {!start && !answers ? (
                     <Introduction
                         discipline={discipline}
                         subject={subject}
@@ -109,7 +132,16 @@ export default function Questions({ discipline, subject, difficulty, content, se
                         handleClose={() => setClose(true)}
                         handleStart={handleStart}
                     />
-                ) : currentQuestionId < content.length ? (
+                ) : !!answers && currentQuestionId >= content.length ? (
+                    <End
+                        questions={content}
+                        answers={answersList}
+                        subject={subject}
+                        time={answers ? time_used : time}
+                        handleRestart={handleRestart}
+                        setClose={setClose}
+                    />
+                ) : (
                     <>
                         <Display
                             questions={content}
@@ -123,18 +155,9 @@ export default function Questions({ discipline, subject, difficulty, content, se
                             nextQuestion={nextQuestion}
                             toRespond={toRespond}
                             setShowExplanation={setShowExplanation}
+                            saveProgress={saveProgress}
                         />
                     </>
-                ) : (
-                    <End
-                        questions={content}
-                        corrects={corrects}
-                        subject={subject}
-                        difficulty={difficulty}
-                        time={time}
-                        handleRestart={handleRestart}
-                        setClose={setClose}
-                    />
                 )}
             </main>
         </div>

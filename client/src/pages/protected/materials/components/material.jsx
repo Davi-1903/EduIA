@@ -37,6 +37,8 @@ export default function MaterialCard({
     amount,
     grade,
     time,
+    time_used,
+    answers,
     chalkboard,
     projector,
     printed,
@@ -146,10 +148,13 @@ export default function MaterialCard({
             ),
             questoes: (
                 <Questions
+                    id={id}
                     discipline={discipline}
                     subject={title}
                     difficulty={difficulty}
                     content={content}
+                    answers={answers?.answers}
+                    time_used={time_used}
                     setContent={setContent}
                 />
             ),

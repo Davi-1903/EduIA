@@ -4,7 +4,12 @@ from flask_login import login_required
 from ai.services.questoes import generate_questions
 from errors.ai import AiInvalidData, AiInvalidResponse, AiProviderUnavailable, AiServiceError, AiTimeout
 from errors.materials import MaterialNotFoundError, MaterialServiceError, MaterialValidationError
-from services.questoes import create_question_service, get_question_service, get_questions_service
+from services.questoes import (
+    create_question_service,
+    get_question_service,
+    get_questions_service,
+    update_questions_answers_service,
+)
 
 
 bp_materials_questoes = Blueprint('questoes', __name__, url_prefix='/questoes')
@@ -65,3 +70,19 @@ def create_questions():
         return jsonify({'ok': False, 'message': str(error)}), 400
     except MaterialServiceError:
         return jsonify({'ok': False, 'message': 'Ocorreu um erro interno'}), 500
+
+
+@bp_materials_questoes.route('/<int:id>/answer', methods=['POST'])
+@login_required
+def answer_questions(id: int):
+    data = request.get_json(silent=True)
+    if data is None:
+        return jsonify({'ok': False, 'message': 'Dados não recebidos'}), 400
+
+    try:
+        update_questions_answers_service(id, data)
+        return jsonify({'ok': True, 'message': 'Progresso salvo com sucesso!'}), 200
+    except MaterialNotFoundError as err:
+        return jsonify({'ok': False, 'message': str(err)}), 404
+    except MaterialServiceError as err:
+        return jsonify({'ok': False, 'message': str(err)}), 500
