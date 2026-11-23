@@ -11,57 +11,12 @@
 			]
 		},
 		{
-			"path": "server/controllers/explanation.py",
-			"bookmarks": [
-				{
-					"line": 40,
-					"column": 0,
-					"label": "Criar integração com IA"
-				}
-			]
-		},
-		{
 			"path": "server/utils/download.py",
 			"bookmarks": [
 				{
 					"line": 4,
 					"column": 0,
 					"label": "Testar o weasyprint"
-				},
-				{
-					"line": 19,
-					"column": 0,
-					"label": "Download para materiais"
-				}
-			]
-		},
-		{
-			"path": "client/src/pages/protected/materials/components/contents/explicacoes/index.jsx",
-			"bookmarks": [
-				{
-					"line": 65,
-					"column": 0,
-					"label": "Adicionar introdução, para ficar igual aos outros"
-				}
-			]
-		},
-		{
-			"path": "client/src/pages/protected/tools/lesson_plan/index.jsx",
-			"bookmarks": [
-				{
-					"line": 102,
-					"column": 0,
-					"label": "Muito grande dependendo da tela, adicionar responsividade para largura e altura"
-				}
-			]
-		},
-		{
-			"path": "client/src/pages/protected/materials/components/contents/lesson_plan/components/Introduction.jsx",
-			"bookmarks": [
-				{
-					"line": 101,
-					"column": 0,
-					"label": "Pode pedir ajustes?"
 				}
 			]
 		},
@@ -87,16 +42,6 @@
 					"line": 93,
 					"column": 0,
 					"label": "Fazer botão global para copiar"
-				}
-			]
-		},
-		{
-			"path": "client/src/pages/protected/materials/components/contents/forms/index.jsx",
-			"bookmarks": [
-				{
-					"line": 7,
-					"column": 0,
-					"label": "Fazer formulários discursivos e explorar a possibilidade de uma correção com IA"
 				}
 			]
 		}
