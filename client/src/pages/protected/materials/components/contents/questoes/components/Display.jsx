@@ -16,7 +16,7 @@ export default function Display({ questions, currentQuestionId }) {
             </div>
             <div className='grid flex-1 place-items-center'>
                 <p className='text-center font-secundary text-xl font-semibold text-color1-100 md:text-2xl'>
-                    {questions[currentQuestionId].question}
+                    {questions[currentQuestionId]?.question}
                 </p>
             </div>
         </>

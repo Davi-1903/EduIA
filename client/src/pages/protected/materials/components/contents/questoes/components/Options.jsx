@@ -9,6 +9,7 @@ export default function Options({
     nextQuestion,
     toRespond,
     setShowExplanation,
+    saveProgress,
 }) {
     const letters = ['A', 'B', 'C', 'D'];
 
@@ -18,6 +19,11 @@ export default function Options({
         if (answerId === id && questions[currentQuestionId].correctAnswerId !== id)
             return 'border-red-600 text-red-600';
         return 'border-color4-50 text-color1-100';
+    }
+
+    function handleClick() {
+        if (currentQuestionId === questions.length - 1) saveProgress();
+        else nextQuestion();
     }
 
     return (
@@ -52,9 +58,9 @@ export default function Options({
                 <button
                     className='flex cursor-pointer items-center justify-center gap-3 rounded-lg bg-button px-6 py-2 font-primary text-lg text-color4-400 transition-all duration-250 not-sm:flex-1 not-disabled:hover:shadow-lg-hard disabled:cursor-no-drop disabled:opacity-50'
                     disabled={answerId === null}
-                    onClick={nextQuestion}
+                    onClick={handleClick}
                 >
-                    <span>Próximo</span>
+                    <span>{currentQuestionId === questions.length - 1 ? 'Finalizar' : 'Próximo'}</span>
                     <IconArrowRight />
                 </button>
             </div>
