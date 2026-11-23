@@ -25,10 +25,10 @@ def create_url() -> str:
     return f'mysql+pymysql://{user}:{password}@{host}:{port}/{name}'
 
 
-def get_connection(**kargs) -> Engine:
+def get_connection(**kwargs) -> Engine:
     for attempt in range(10):
         try:
-            engine = create_engine(**kargs)
+            engine = create_engine(**kwargs)
             engine.connect()
             logger.info('Conexão com o banco de dados estabelecida')
             return engine
