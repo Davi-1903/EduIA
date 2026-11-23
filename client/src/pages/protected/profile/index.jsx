@@ -25,7 +25,6 @@ import { useState, useEffect } from 'react';
 export default function Profile() {
     const { user } = useAuthenticated();
     const [conquistaSelecionada, setConquistaSelecionada] = useState(null);
-
     const conquistas = [
         {
             id: 1,
@@ -122,6 +121,12 @@ export default function Profile() {
         return achievements;
     }
 
+    const conquistasDoUsuario = getAchievementsByUserType(user?.tipo);
+    const totalDesbloqueadas = conquistasDoUsuario.filter(c => progresso[c.tipo]).length;
+    const porcentagem = conquistasDoUsuario.length
+        ? (totalDesbloqueadas / conquistasDoUsuario.length) * 100
+        : 0;
+
     useEffect(() => {
         async function carregarProgresso() {
             const response = await GET('/api/user/progresso');
@@ -151,35 +156,35 @@ export default function Profile() {
                 </div>
                 <div className='flex flex-col gap-6 md:flex-row'>
                     <div>
-                        <div className='flex min-w-75 flex-col items-center justify-center rounded-xl bg-white p-6 shadow'>
+                        <div className='flex min-w-90 flex-col items-center justify-center rounded-xl bg-white p-6 shadow'>
                             <img
                                 src={user?.foto}
-                                className='relative -top-15 left-5 h-22 w-22 rounded-full md:static md:top-0 md:left-0 md:h-25 md:w-25'
+                                className='relative -top-15 left-5 h-22 w-22 rounded-full md:static md:top-0 md:left-0 md:h-26 md:w-26'
                                 alt='Foto do usuário'
                             />
-                            <h2 className='text-md bg-linear-to-tr from-color1-100 from-45% to-color4-100 bg-clip-text leading-tight font-bold text-transparent md:text-2xl'>
+                            <h2 className='text-2xl bg-linear-to-tr from-color1-100 from-45% to-color4-100 bg-clip-text leading-tight font-bold text-transparent md:text-2xl'>
                                 {user?.nome?.toUpperCase()}
                             </h2>
-                            <p className='text-lg text-color3-200'>{user?.email_escolar}</p>
-                            <div className='intems-center flex gap-1 rounded-xl bg-color1-100 px-3 py-0.5'>
+                            <p className='text-lg text-color3-200 mb-1'>{user?.email_escolar}</p>
+                            <div className='items-center flex gap-1 rounded-md bg-[#EEF2FB] px-4 py-1.5'>
                                 {user?.tipo === 'professor' ? (
                                     <IconChalkboardTeacher
                                         size={19}
-                                        className='stroke-color4-100'
+                                        className='stroke-color1-100'
                                     />
                                 ) : (
                                     <IconSchool
                                         size={19}
-                                        className='stroke-color4-100'
+                                        className='stroke-color1-100'
                                     />
                                 )}
-                                <p className='font-secundary text-sm text-color4-100'>
+                                <p className='font-secundary text-sm text-color1-100 font-medium'>
                                     {user?.tipo?.charAt(0).toUpperCase() + user?.tipo?.slice(1)}(a)
                                 </p>
                             </div>
                             <button
                                 type='submit'
-                                className='text-md mt-2 min-h-9 cursor-pointer rounded-lg bg-red-700 px-6 text-color4-100 transition-all duration-150 not-disabled:hover:shadow-lg-hard disabled:cursor-not-allowed disabled:opacity-60'
+                                className='text-md mt-3 min-h-9 cursor-pointer rounded-lg bg-red-700 px-6 text-color4-100 transition-all duration-150 not-disabled:hover:shadow-lg-hard disabled:cursor-not-allowed disabled:opacity-60'
                             >
                                 Excluir perfil
                             </button>
@@ -202,12 +207,12 @@ export default function Profile() {
                         </div>
                     </div>
 
-                    <div className='flex flex-col gap-6 md:w-2/3'>
+                    <div className='flex flex-col gap-4 md:w-2/3'>
                         <div className='mb-4 flex flex-col rounded-xl bg-white p-6 shadow'>
-                            <h3 className='mb-3 text-2xl font-bold text-color1-100'>Dados pessoais</h3>
+                            <h3 className='mb-6 text-3xl font-bold text-color1-100'>Dados pessoais</h3>
                             <div className='grid grid-cols-2'>
-                                <div className='mb-6 flex items-center gap-3'>
-                                    <article className='flex h-11 w-11 items-center justify-center rounded-lg bg-[#EDF3FF]'>
+                                <div className='mb-2 flex items-center gap-3 border-b border-color4-100 py-4 mr-10'>
+                                    <article className='flex h-11 w-11 items-center justify-center rounded-lg bg-[#EDF3FF] '>
                                         <IconUser
                                             size={28}
                                             className='stroke-color1-100'
@@ -218,7 +223,7 @@ export default function Profile() {
                                         <p className='text-lg'>{user?.nome}</p>
                                     </article>
                                 </div>
-                                <div className='mb-6 flex items-center gap-3'>
+                                <div className='mb-2 flex items-center gap-3 border-b border-color4-100 py-4 mr-10'>
                                     <article className='flex h-11 w-11 items-center justify-center rounded-lg bg-[#EDF3FF]'>
                                         <IconMail
                                             size={28}
@@ -230,7 +235,7 @@ export default function Profile() {
                                         <p className='text-lg'>{user?.email_escolar}</p>
                                     </article>
                                 </div>
-                                <div className='mb-6 flex items-center gap-3'>
+                                <div className='mb-2 flex items-center gap-3 border-b border-color4-100 py-4 mr-10'>
                                     <article className='flex h-11 w-11 items-center justify-center rounded-lg bg-[#EDF3FF]'>
                                         {user?.tipo === 'professor' ? (
                                             <IconChalkboardTeacher
@@ -251,7 +256,7 @@ export default function Profile() {
                                         </p>
                                     </article>
                                 </div>
-                                <div className='mb-6 flex items-center gap-3'>
+                                <div className='mb-2 flex items-center gap-3 border-b border-color4-100 py-4 mr-10'>
                                     <article className='flex h-11 w-11 items-center justify-center rounded-lg bg-[#EDF3FF]'>
                                         <IconMail
                                             size={28}
@@ -263,7 +268,7 @@ export default function Profile() {
                                         <p className='text-lg'>{user?.email_academico}</p>
                                     </article>
                                 </div>
-                                <div className='mb-6 flex items-center gap-3'>
+                                <div className='mb-2 flex items-center gap-3 border-b border-color4-100 py-4 mr-10'>
                                     <article className='flex h-11 w-11 items-center justify-center rounded-lg bg-[#EDF3FF]'>
                                         <IconId
                                             size={28}
@@ -275,7 +280,7 @@ export default function Profile() {
                                         <p className='text-lg'>{user?.matricula}</p>
                                     </article>
                                 </div>
-                                <div className='mb-6 flex items-center gap-3'>
+                                <div className='mb-2 flex items-center gap-3 border-b border-color4-100 py-4 mr-10'>
                                     <article className='flex h-11 w-11 items-center justify-center rounded-lg bg-[#EDF3FF]'>
                                         <IconMapPin
                                             size={28}
@@ -287,7 +292,7 @@ export default function Profile() {
                                         <p className='text-lg'>{user?.campus}</p>
                                     </article>
                                 </div>
-                                <div className='flex items-center gap-3'>
+                                <div className='mb-2 flex items-center gap-3 py-4 mr-10'>
                                     <article className='flex h-11 w-11 items-center justify-center rounded-lg bg-[#EDF3FF]'>
                                         <IconCalendar
                                             size={28}
@@ -303,7 +308,27 @@ export default function Profile() {
                         </div>
 
                         <div className='rounded-xl bg-white p-6 shadow'>
-                            <h3 className='mb-4 text-2xl font-bold text-color1-100'>Conquistas</h3>
+                            <div className='mb-6'>
+                                <div className='mb-2 flex items-baseline justify-between gap-4'>
+                                    <h3 className='text-3xl font-bold text-color1-100'>Conquistas</h3>
+                                    <span className='text-sm text-color3-200'>
+                                        {totalDesbloqueadas} de {conquistasDoUsuario.length} desbloqueadas
+                                    </span>
+                                </div>
+                                <div
+                                    role='progressbar'
+                                    aria-valuemin={0}
+                                    aria-valuemax={conquistasDoUsuario.length}
+                                    aria-valuenow={totalDesbloqueadas}
+                                    aria-label='Conquistas desbloqueadas'
+                                    className='h-2 w-full overflow-hidden rounded-full bg-color4-100'
+                                >
+                                    <div
+                                        className='h-full rounded-full bg-color1-100 transition-all duration-500'
+                                        style={{ width: `${porcentagem}%` }}
+                                    />
+                                </div>
+                            </div>
                             <div className='flex flex-wrap justify-center gap-10'>
                                 {getAchievementsByUserType(user?.tipo).map(conquista => {
                                     const desbloqueada = progresso[conquista.tipo];
@@ -341,9 +366,8 @@ export default function Profile() {
                             </div>
                         </div>
 
-                        {/* Atividades recentes */}
                         <div className='rounded-xl bg-white p-6 shadow'>
-                            <h3 className='mb-4 text-2xl font-bold text-color1-100'>Atividades recentes</h3>
+                            <h3 className='mb-6 text-3xl font-bold text-color1-100'>Atividades recentes</h3>
                             <div className='flex flex-col gap-6'>
                                 {atividades.length === 0 && (
                                     <p className='text-sm text-color3-200'>Você ainda não gerou nenhum material.</p>
