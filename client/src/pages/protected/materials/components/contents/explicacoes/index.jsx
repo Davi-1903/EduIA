@@ -87,7 +87,7 @@ export default function Explicacoes({ content, subject, discipline, doubt, setCo
             document.removeEventListener('keydown', handleKey);
         };
     }, []);
-
+    
     return (
         <div
             onAnimationEnd={handleAnimationEnd}
@@ -196,7 +196,7 @@ export default function Explicacoes({ content, subject, discipline, doubt, setCo
                                             ),
                                         }}
                                     >
-                                        {content ?? 'Erro na exibição da explicação'}
+                                        { content ?? 'Erro na exibição da explicação' }
                                     </ReactMarkdown>
                                 </div>
                             </div>

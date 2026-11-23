@@ -14,7 +14,7 @@
     "@tabler/icons-react": "^3.50.0",
     "@tailwindcss/vite": "^4.3.4",
     "clsx": "^2.1.1",
-    "katex": "^0.19.1",
+    "katex": "^0.16.22",
     "react": "^19.3.1",
     "react-dom": "^19.3.1",
     "react-helmet-async": "^3.0.0",
