@@ -3,10 +3,23 @@ import Introduction from './components/Introduction';
 import Display from './components/Display';
 import Options from './components/Options';
 import End from './components/End';
+import PreviousResult from './components/PreviousResult';
 import clsx from 'clsx';
+import { POST } from '../../../../../../api/materials';
 
-export default function Quiz({ discipline, subject, difficulty, time, content, setContent }) {
+export default function Quiz({
+    quizId,
+    attempts = [],
+    onSaved,
+    discipline,
+    subject,
+    difficulty,
+    time,
+    content,
+    setContent,
+}) {
     const materialRef = useRef(null);
+    const responsesRef = useRef([]);
     const [start, setStart] = useState(false);
     const [isClose, setClose] = useState(false);
     const [questionId, setQuestionId] = useState(0);
@@ -15,8 +28,28 @@ export default function Quiz({ discipline, subject, difficulty, time, content, s
     const [itsWrong, setWrong] = useState(false);
     const [corrects, setCorrests] = useState(0);
     const [timeSpent, setTimeSpent] = useState(0);
+    const [retaking, setRetaking] = useState(false);
+    const [reviewId, setReviewId] = useState(0);
+    const [reviewDone, setReviewDone] = useState(false);
+
+    const lastAttempt = attempts[attempts.length - 1];
+    const reviewAnswers = Object.fromEntries(
+        (lastAttempt?.details ?? []).map(detail => [detail.questionId, detail.answerId]),
+    );
+    const isReviewing = !start && attempts.length > 0 && !retaking && !reviewDone;
+
+    async function submitAttempt(answers) {
+        try {
+            const data = await POST(`/api/materials/quiz/${quizId}/attempts`, { answers });
+            if (data.status === 201) onSaved?.();
+            else console.error('Falha ao salvar tentativa', data.message);
+        } catch (error) {
+            console.error('Falha ao salvar tentativa', error);
+        }
+    }
 
     function handleStart() {
+        responsesRef.current = [];
         setTimeSpent(performance.now());
         setStart(true);
     }
@@ -27,9 +60,12 @@ export default function Quiz({ discipline, subject, difficulty, time, content, s
     }
 
     function toRespond(isCorrect) {
+        responsesRef.current = [...responsesRef.current, { questionId: content[questionId].id, answerId: answeredId }];
+
         if (questionId >= content.length - 1) {
             setTimeSpent(prev => performance.now() - prev);
             setQuestionId(content.length);
+            submitAttempt(responsesRef.current);
         } else {
             setQuestionId(prev => prev + 1);
         }
@@ -40,6 +76,7 @@ export default function Quiz({ discipline, subject, difficulty, time, content, s
     }
 
     function handleRestart() {
+        responsesRef.current = [];
         setTimeSpent(performance.now());
         setQuestionId(0);
         setCorrests(0);
@@ -53,6 +90,11 @@ export default function Quiz({ discipline, subject, difficulty, time, content, s
 
     function handleClick(id) {
         if (answeredId === null) setAnsweredId(id);
+    }
+
+    function handleReviewNext() {
+        if (reviewId >= content.length - 1) setReviewDone(true);
+        else setReviewId(prev => prev + 1);
     }
 
     useEffect(() => {
@@ -92,7 +134,29 @@ export default function Quiz({ discipline, subject, difficulty, time, content, s
                 ref={materialRef}
                 className='flex min-h-170 w-full max-w-160 flex-col gap-3 rounded-2xl bg-white p-4 shadow-2xl shadow-color1-100/15 md:gap-6 md:p-6 lg:w-4/5'
             >
-                {!start ? (
+                {isReviewing ? (
+                    <>
+                        <Display currentQuestionId={reviewId} questions={content} review />
+                        <Options
+                            questions={content}
+                            currentQuestionId={reviewId}
+                            answeredId={reviewAnswers[content[reviewId].id] ?? null}
+                            showAnswer={true}
+                            toRespond={handleReviewNext}
+                            handleClick={() => {}}
+                        />
+                    </>
+                ) : !start && attempts.length > 0 && !retaking ? (
+                    <PreviousResult
+                        questions={content}
+                        attempts={attempts}
+                        onRetake={() => {
+                            setRetaking(true);
+                            handleStart();
+                        }}
+                        onBack={() => setClose(true)}
+                    />
+                ) : !start ? (
                     <Introduction
                         discipline={discipline}
                         subject={subject}

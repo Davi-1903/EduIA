@@ -65,3 +65,4 @@ export async function DELETE(url) {
     result.status = response.status;
     return result;
 }
+

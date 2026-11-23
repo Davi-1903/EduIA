@@ -1,16 +1,18 @@
-export default function Display({ currentQuestionId, questions, time, onAnimationEnd }) {
+export default function Display({ currentQuestionId, questions, time, onAnimationEnd, review = false }) {
     return (
         <>
             <div className='flex items-center gap-4 p-2'>
                 <div className='h-4 flex-1 overflow-hidden rounded-full bg-color4-100'>
-                    <div
-                        key={currentQuestionId}
-                        onAnimationEnd={onAnimationEnd}
-                        className='timer-bar'
-                        style={{
-                            animation: `animate-quiz-timer ${time}s linear forwards`,
-                        }}
-                    ></div>
+                    {!review && (
+                        <div
+                            key={currentQuestionId}
+                            onAnimationEnd={onAnimationEnd}
+                            className='timer-bar'
+                            style={{
+                                animation: `animate-quiz-timer ${time}s linear forwards`,
+                            }}
+                        ></div>
+                    )}
                 </div>
                 <div>
                     <span className='font-secundary text-base font-semibold text-color1-100'>

@@ -47,6 +47,7 @@ export default function MaterialCard({
 }) {
     const { setMessages } = useMessages();
     const [content, setContent] = useState(null);
+    const [attempts, setAttempts] = useState([]);
     const [menu, setMenu] = useState(null);
     const [isOpening, setIsOpening] = useState(false);
     const { user } = useAuthenticated();
@@ -155,6 +156,9 @@ export default function MaterialCard({
             ),
             quiz: (
                 <Quiz
+                    quizId={id}
+                    attempts={attempts}
+                    onSaved={refreshAttempts}
                     discipline={discipline}
                     subject={title}
                     difficulty={difficulty}
@@ -239,10 +243,17 @@ export default function MaterialCard({
                 if (data.status !== 200) {
                     throw new Error(data.message || 'Erro ao buscar material');
                 }
+                setAttempts(data.material.answers?.attempts ?? []);
                 setContent(tipo === 'exercicio_guiado' ? data.material.content : data.material.content.content);
             })
             .catch(err => setMessages(prev => [...prev, { id: prev.length + 1, message: err.message, type: 'danger' }]))
             .finally(() => setIsOpening(false));
+    }
+
+    function refreshAttempts() {
+        GET(`/api/materials/quiz/${id}`).then(data => {
+            if (data.status === 200) setAttempts(data.material.answers?.attempts ?? []);
+        });
     }
 
     async function handleDownload() {

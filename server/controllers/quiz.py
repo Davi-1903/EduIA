@@ -4,8 +4,9 @@ from flask_login import login_required
 from ai.services.quiz import generate_quiz
 from errors.ai import AiInvalidData, AiInvalidResponse, AiProviderUnavailable, AiServiceError, AiTimeout
 from errors.materials import MaterialNotFoundError, MaterialServiceError, MaterialValidationError
-from services.quiz import create_quiz_service, get_quiz_service, get_quizzes_service
-
+from services.quiz import create_quiz_service, get_quiz_service, get_quizzes_service, submit_quiz_service
+from pydantic import ValidationError
+from schemas.quizzes import QuizSubmission
 
 bp_materials_quiz = Blueprint('quiz', __name__, url_prefix='/quiz')
 
@@ -61,6 +62,27 @@ def create_quiz():
     try:
         create_quiz_service({**data, 'content': content})
         return jsonify({'ok': True, 'redirect': '/materials'}), 201
+    except MaterialValidationError as error:
+        return jsonify({'ok': False, 'message': str(error)}), 400
+    except MaterialServiceError:
+        return jsonify({'ok': False, 'message': 'Ocorreu um erro interno'}), 500
+
+@bp_materials_quiz.route('/<int:id>/attempts', methods=['POST'])
+@login_required
+def submit_quiz(id: int):
+    data = request.get_json(silent=True)
+    if data is None:
+        return jsonify({'ok': False, 'message': 'Dados não recebidos'}), 400
+
+    try:
+        submission = QuizSubmission.model_validate(data)
+        result = submit_quiz_service(id, submission)
+        return jsonify({'ok': True, **result}), 201
+
+    except ValidationError:
+        return jsonify({'ok': False, 'message': 'Respostas inválidas'}), 400
+    except MaterialNotFoundError as error:
+        return jsonify({'ok': False, 'message': str(error)}), 404
     except MaterialValidationError as error:
         return jsonify({'ok': False, 'message': str(error)}), 400
     except MaterialServiceError:

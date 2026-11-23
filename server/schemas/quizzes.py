@@ -15,3 +15,12 @@ class QuizJSON(BaseModel):
 
 class Quiz(BaseModel):
     content: list[QuizJSON]
+
+
+class SubmittedAnswer(BaseModel):
+    questionId: int
+    answerId: int | None = None
+
+
+class QuizSubmission(BaseModel):
+    answers: list[SubmittedAnswer]
