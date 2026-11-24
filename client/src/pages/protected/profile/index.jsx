@@ -32,6 +32,18 @@ const itemValueClass = 'text-base break-words md:text-lg';
 export default function Profile() {
     const { user } = useAuthenticated();
     const [conquistaSelecionada, setConquistaSelecionada] = useState(null);
+    const materialsType = {
+        desafio: 'Desafio',
+        exercicio_guiado: 'Exercício guiado',
+        explicacoes: 'Explicações',
+        flashcards: 'Flashcards',
+        formulario: 'Formulário',
+        plano_de_aula: 'Plano de aula',
+        questoes: 'Questões',
+        quiz: 'Quiz',
+        resumo: 'Resumo',
+        roteiro: 'Roteiro de estudo',
+    };
     const conquistas = [
         {
             id: 1,
@@ -222,7 +234,7 @@ export default function Profile() {
             </Helmet>
             <main className='flex w-full min-w-0 flex-col gap-8 bg-color4-200 px-4 pt-4 pb-6 md:gap-15 md:pt-0 md:pr-4 md:pb-4 md:pl-6'>
                 <div>
-                    <h1 className='bg-linear-to-tr from-color1-100 to-color4-100 bg-clip-text text-3xl leading-tight font-bold text-transparent sm:text-4xl mt-12 md:mt-6 md:text-5xl'>
+                    <h1 className='mt-12 bg-linear-to-tr from-color1-100 to-color4-100 bg-clip-text text-3xl leading-tight font-bold text-transparent sm:text-4xl md:mt-6 md:text-5xl'>
                         Meu perfil
                     </h1>
                 </div>
@@ -271,8 +283,9 @@ export default function Profile() {
                                         key={tipo}
                                         className='flex items-center justify-between rounded-lg px-3 py-2 hover:bg-color4-100'
                                     >
-                                        <span className='text-sm font-medium text-color2-200 capitalize'>{tipo}</span>
-
+                                        <span className='text-sm font-medium text-color2-200'>
+                                            {materialsType[tipo]}
+                                        </span>
                                         <span className='text-sm font-bold text-color1-100'>{quantidade}</span>
                                     </div>
                                 ))}
@@ -280,7 +293,7 @@ export default function Profile() {
                         )}
                     </div>
 
-                    <div className='flex max-w-140 min-w-0 grow-[2] basis-lg flex-col gap-4 md:max-w-170 xl:max-w-400'>
+                    <div className='flex max-w-140 min-w-0 grow-2 basis-lg flex-col gap-4 md:max-w-170 xl:max-w-400'>
                         <div className='flex flex-col rounded-xl bg-white p-4 shadow sm:p-6 md:mb-4'>
                             <h3 className='mb-4 text-2xl font-bold text-color1-100 md:mb-6 md:text-3xl'>
                                 Dados pessoais

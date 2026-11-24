@@ -27,7 +27,6 @@ import Explicacoes from './contents/explicacoes';
 import LessonPlan from './contents/lesson_plan';
 import StudyGuide from './contents/study_guide';
 import Resume from './contents/resumes';
-import { useAuthenticated } from '../../../../context/authContext';
 
 export default function MaterialCard({
     id,
@@ -49,7 +48,6 @@ export default function MaterialCard({
     const [content, setContent] = useState(null);
     const [menu, setMenu] = useState(null);
     const [isOpening, setIsOpening] = useState(false);
-    const { user } = useAuthenticated();
     const navigate = useNavigate();
 
     function formatarHora(created_at) {
@@ -125,7 +123,6 @@ export default function MaterialCard({
                     subject={title}
                     difficulty={difficulty}
                     content={content}
-                    userEmail={user.email}
                     setContent={setContent}
                 />
             ),
