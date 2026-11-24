@@ -27,21 +27,6 @@
 					"line": 5,
 					"column": 0,
 					"label": "Talvez adicionar um cabeçalho para padronizar com os de Cecilya"
-				},
-				{
-					"line": 18,
-					"column": 0,
-					"label": "Fazer componente global para markdown"
-				}
-			]
-		},
-		{
-			"path": "client/src/pages/protected/materials/components/contents/resumes/index.jsx",
-			"bookmarks": [
-				{
-					"line": 93,
-					"column": 0,
-					"label": "Fazer botão global para copiar"
 				}
 			]
 		}
