@@ -1,9 +1,10 @@
 from flask import Blueprint, jsonify
-from flask_login import current_user, login_required
-from sqlalchemy import select
+from flask_login import current_user, login_required, logout_user
+from sqlalchemy import select, func
 
 from database import SessionLocal
 from models.material import Material
+from models.user import Usuario
 
 from errors.user import UserServiceError
 from services.user import get_progress_service
@@ -15,31 +16,17 @@ bp_user = Blueprint('user', __name__, url_prefix='/api/user')
 @login_required
 def get_user():
     with SessionLocal() as session:
-        materiais = session.scalars(
-            select(Material).where(Material.user_id == current_user.id)
+        rows = session.execute(
+            select(Material.type, func.count(Material.id))
+            .where(
+                Material.user_id == current_user.id,
+                Material.deleted_at.is_(None),
+            )
+            .group_by(Material.type)
         ).all()
 
-        materiais_recentes = session.scalars(
-            select(Material)
-            .where(Material.user_id == current_user.id)
-            .order_by(Material.created_at.desc())
-            .limit(3)
-        ).all()
+    material_por_tipo = {type_.value: total for type_, total in rows}
 
-
-    material_por_tipo = {}
-    for material in materiais:
-        type_ = material.type.value
-        material_por_tipo[type_] = material_por_tipo.get(type_, 0) + 1
-
-    atividades = []
-    for material in materiais_recentes:
-        atividades.append({
-            'id': material.id,
-            'tipo': material.type.value,
-            'assunto': material.subject,
-            'data': material.created_at.isoformat(),
-        })
     return jsonify(
         {
             'ok': True,
@@ -55,11 +42,9 @@ def get_user():
                 'campus': current_user.campus,
                 'nascimento': current_user.nascimento.isoformat() if current_user.nascimento else None,
                 'materiais': material_por_tipo,
-                'atividades': atividades
             },
         }
     ), 200
-
 
 @bp_user.route('/progresso', methods=['GET'])
 @login_required
@@ -70,3 +55,20 @@ def get_progresso():
 
     except UserServiceError as error:
         return jsonify({'ok': False, 'message': str(error)}), 500
+
+@bp_user.route('', methods=['DELETE'])
+@login_required
+def delete_user():
+    user_id = current_user.id
+    try:
+        with SessionLocal() as session:
+            user = session.get(Usuario, user_id)
+            if user is None:
+                return jsonify({'ok': False, 'message': 'Usuário não encontrado'}), 404
+            session.delete(user)
+            session.commit()
+    except Exception:
+        return jsonify({'ok': False, 'message': 'Não foi possível excluir o perfil'}), 500
+
+    logout_user()
+    return jsonify({'ok': True}), 200

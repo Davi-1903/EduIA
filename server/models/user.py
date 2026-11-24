@@ -33,6 +33,6 @@ class Usuario(Base, UserMixin):
     type: Mapped[UserType] = mapped_column(Enum(UserType), nullable=False)
     foto: Mapped[str] = mapped_column(String(150), nullable=False)
 
-    materials: Mapped[list['Material']] = relationship(back_populates='user')
+    materials: Mapped[list['Material']] = relationship(back_populates='user', cascade='all, delete-orphan')
 
     __mapper_args__ = {'polymorphic_identity': None, 'polymorphic_on': 'type'}
