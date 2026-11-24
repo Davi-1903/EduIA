@@ -74,7 +74,7 @@ def create_explanation_service(data: dict):
                 discipline=data['discipline'],
                 questions=data['questions'],
                 subject=data['subject'],
-                content={'content': 1},
+                content=data['content'],
             )
             historico = Historico(material=explanation)
             session.add(explanation)

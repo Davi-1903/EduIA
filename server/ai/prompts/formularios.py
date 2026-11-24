@@ -13,8 +13,7 @@ Dados para o formulário:
 - Observações: {observacoes}
 
 Regras gerais:
-- Cada item traz a pergunta (question), a resposta esperada (expectedAnswer) e a resposta dada (answer);
-- Avalie se a resposta dada responde ao que a pergunta pede, usando a resposta esperada como referência;
+- Cada item traz a pergunta (question), a resposta esperada (expectedAnswer);
 - A resposta esperada pode conter exemplos e detalhes além do que a pergunta pede; eles não são obrigatórios para a nota máxima;
 
 {format_instructions}

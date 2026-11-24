@@ -3,7 +3,7 @@ import { IconSend } from '@tabler/icons-react';
 import { POST } from '../../../../../../../../api/materials';
 import { useMessages } from '../../../../../../../../context/messagesContext';
 
-export default function Display({ id, subject, content, setClose, onSuccess }) {
+export default function Display({ id, subject, content, onSuccess }) {
     const [answers, setAnswers] = useState(
         content.map(item => ({ id: item.id, answer: '', expectedAnswer: item.expectedAnswer })),
     );

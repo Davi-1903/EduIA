@@ -1,6 +1,15 @@
 from flask import Blueprint, jsonify, request
 from flask_login import login_required
 
+from ai.services.explicacoes import generate_explicacoes
+from errors.ai import (
+    AiInvalidData,
+    AiInvalidRequest,
+    AiInvalidResponse,
+    AiProviderUnavailable,
+    AiServiceError,
+    AiTimeout,
+)
 from errors.materials import MaterialNotFoundError, MaterialServiceError, MaterialValidationError
 from services.explanation import create_explanation_service, get_explanation_service, get_explanations_service
 
@@ -42,12 +51,26 @@ def create_explanation():
     if data is None:
         return jsonify({'ok': False, 'message': 'Dados não recebidos'}), 400
 
-    content = '# Opa!\n\nConteúdo de teste'
-
     try:
+        content = generate_explicacoes(data)
         create_explanation_service({**data, 'content': content})
+
         return jsonify({'ok': True, 'redirect': '/materials'}), 201
+
+    except (AiInvalidData, AiInvalidRequest) as error:
+        return jsonify({'ok': False, 'message': str(error)}), 400
+
+    except AiInvalidResponse as error:
+        return jsonify({'ok': False, 'message': str(error)}), 502
+
+    except (AiTimeout, AiProviderUnavailable):
+        return jsonify({'ok': False, 'message': 'O serviço de IA está indisponível'}), 503
+
+    except AiServiceError:
+        return jsonify({'ok': False, 'message': 'Ocorreu um erro na geração da explicação'}), 500
+
     except MaterialValidationError as error:
         return jsonify({'ok': False, 'message': str(error)}), 400
+
     except MaterialServiceError:
         return jsonify({'ok': False, 'message': 'Ocorreu um erro interno'}), 500

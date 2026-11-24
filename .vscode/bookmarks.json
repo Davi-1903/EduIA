@@ -11,57 +11,12 @@
 			]
 		},
 		{
-			"path": "server/controllers/explanation.py",
-			"bookmarks": [
-				{
-					"line": 40,
-					"column": 0,
-					"label": "Criar integração com IA"
-				}
-			]
-		},
-		{
 			"path": "server/utils/download.py",
 			"bookmarks": [
 				{
 					"line": 4,
 					"column": 0,
 					"label": "Testar o weasyprint"
-				},
-				{
-					"line": 19,
-					"column": 0,
-					"label": "Download para formulário"
-				}
-			]
-		},
-		{
-			"path": "client/src/pages/protected/materials/components/contents/explicacoes/index.jsx",
-			"bookmarks": [
-				{
-					"line": 60,
-					"column": 0,
-					"label": "Adicionar introdução, para ficar igual aos outros"
-				}
-			]
-		},
-		{
-			"path": "client/src/pages/protected/tools/lesson_plan/index.jsx",
-			"bookmarks": [
-				{
-					"line": 102,
-					"column": 0,
-					"label": "Muito grande dependendo da tela, adicionar responsividade para largura e altura"
-				}
-			]
-		},
-		{
-			"path": "client/src/pages/protected/materials/components/contents/lesson_plan/components/Introduction.jsx",
-			"bookmarks": [
-				{
-					"line": 101,
-					"column": 0,
-					"label": "Pode pedir ajustes?"
 				}
 			]
 		},
@@ -72,66 +27,6 @@
 					"line": 5,
 					"column": 0,
 					"label": "Talvez adicionar um cabeçalho para padronizar com os de Cecilya"
-				},
-				{
-					"line": 18,
-					"column": 0,
-					"label": "Fazer componente global para markdown"
-				}
-			]
-		},
-		{
-			"path": "client/src/pages/protected/materials/components/contents/resumes/index.jsx",
-			"bookmarks": [
-				{
-					"line": 93,
-					"column": 0,
-					"label": "Fazer botão global para copiar"
-				}
-			]
-		},
-		{
-			"path": "client/src/pages/protected/materials/components/contents/forms/index.jsx",
-			"bookmarks": [
-				{
-					"line": 7,
-					"column": 0,
-					"label": "Fazer formulários discursivos e explorar a possibilidade de uma correção com IA"
-				}
-			]
-		},
-		{
-			"path": "client/src/pages/protected/materials/components/contents/desafio/components/Display/index.jsx",
-			"bookmarks": [
-				{
-					"line": 4,
-					"column": 0,
-					"label": "Não sei se precisa revelar a resposta"
-				}
-			]
-		},
-		{
-			"path": "client/src/pages/protected/materials/components/contents/questoes/index.jsx",
-			"bookmarks": [
-				{
-					"line": 10,
-					"column": 0,
-					"label": "É necessário recarregar a página para obter as novas respostas"
-				},
-				{
-					"line": 80,
-					"column": 0,
-					"label": "Problemas na mensagem de confirmação de saida em questões já respondidas"
-				}
-			]
-		},
-		{
-			"path": "client/src/pages/protected/materials/components/material.jsx",
-			"bookmarks": [
-				{
-					"line": 83,
-					"column": 0,
-					"label": "Pensar em uma forma melhor de selecionar os componentes, sem precisar pegar todas as informações de todos os materiais ao mesmo tempo"
 				}
 			]
 		}

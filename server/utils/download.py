@@ -56,20 +56,32 @@ def json_to_html(content: dict, type_: str, title: str) -> str:
             html += f'<td><span>{item["answer"]}</span></td>'
             html += '</tr>'
         html += '</tbody></table>'
-    elif type_ in ('questoes', 'quiz', 'formulario'):
+    elif type_ in ('questoes', 'quiz'):
         for question in content['content']:
             html += f'<h2>{question["id"]}. {question["question"]}</h2>'
             html += '<ul>'
             for letter, item in zip(letters, question['answers']):
                 html += f'<p><strong>{letter}</strong> {item["text"]}</p>'
             html += '</ul>'
+    elif type_ == 'formulario':
+        for question in content['content']:
+            html += f'<h2>{question["id"]}. {question["question"]}</h2>'
+            html += '<hr>' * 3
 
     return html
 
 
 def make_pdf(content: dict, type_: str, title: str) -> bytes:
-    if isinstance(content['content'], (list, dict)):
+    if isinstance(content['content'], (list, dict)) and type_ not in ('resumo', 'desafio'):
         html_body = json_to_html(content, type_, title)
+    elif type_ == 'resumo':
+        html_body = nh3.clean(
+            markdown(content['content']['text'], extensions=['extra', 'sane_lists', 'tables', 'fenced_code'])
+        )
+    elif type_ == 'desafio':
+        html_body = nh3.clean(
+            markdown(content['content'][0]['answer'], extensions=['extra', 'sane_lists', 'tables', 'fenced_code'])
+        )
     else:
         html_body = nh3.clean(markdown(content['content'], extensions=['extra', 'sane_lists', 'tables', 'fenced_code']))
     html = f"<html><head><meta charset='utf-8'><style>{PDF_CSS}</style></head><body>{html_body}</body></html>"

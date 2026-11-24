@@ -18,6 +18,5 @@
 		"editor.codeActionsOnSave": {
 			"source.organizeImports.ruff": "always"
 		}
-	},
-	"postman.settings.dotenv-detection-notification-visibility": false
+	}
 }
