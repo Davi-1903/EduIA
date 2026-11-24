@@ -4,19 +4,6 @@ import { IconArrowUp, IconBrandGithub } from '@tabler/icons-react';
 import Logo from '/assets/images/logo_dark.svg';
 
 function Footer() {
-    const funcionalidades = [
-        'Questões',
-        'Formulários',
-        'Quizzes',
-        'Flashcards',
-        'Resumos',
-        'Explicações',
-        'Exercícios guiados',
-        'Planos de aula',
-        'Roteiros de estudo',
-        'Desafios',
-    ];
-
     return (
         <footer className='z-1 col-span-2 bg-color4-400 sm:z-4'>
             <div className='mx-auto flex max-w-360 flex-col justify-between gap-4 p-4 sm:p-12 lg:flex-row'>
@@ -60,23 +47,6 @@ function Footer() {
                     </button>
                 </article>
                 <div className='flex flex-col gap-4 md:flex-row lg:w-160'>
-                    <article className='flex-1'>
-                        <h2 className='mb-2 font-primary text-xl font-bold text-color1-100 md:text-2xl'>
-                            Funcionalidades
-                        </h2>
-                        <ul>
-                            {funcionalidades.map((material, idx) => (
-                                <li key={idx}>
-                                    <Link
-                                        to='/sobre'
-                                        className='font-primary text-color1-100 hover:underline'
-                                    >
-                                        Gerar {material}
-                                    </Link>
-                                </li>
-                            ))}
-                        </ul>
-                    </article>
                     <article className='flex-1'>
                         <h2 className='mb-2 font-primary text-xl font-bold text-color1-100 md:text-2xl'>
                             Institucional
