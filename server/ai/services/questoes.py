@@ -19,11 +19,13 @@ def generate_questions(data: dict):
     except (KeyError, TypeError) as error:
         raise AiInvalidData('Dados inválidos para geração de questões') from error
 
-    try:
-        content = generate_questions_gateway(payload)
-        Questoes.model_validate(content)
-        return content
-    except (ValidationError, OutputParserException) as error:
-        raise AiInvalidData('A IA retornou dados inválidos') from error
-    except AiInvalidRequest as error:
-        raise AiInvalidData(str(error)) from error
+    for _ in range(3):
+        try:
+            content = generate_questions_gateway(payload)
+            Questoes.model_validate(content)
+            return content
+        except (ValidationError, OutputParserException):
+            continue
+        except AiInvalidRequest as error:
+            raise AiInvalidData(str(error)) from error
+    raise AiInvalidData('A IA retornou dados inválidos')

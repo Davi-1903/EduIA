@@ -37,7 +37,12 @@ export default function Profile() {
             id: 1,
             nome: 'Desafios',
             tipo: 'desafio',
-            icone: <IconLaurelWreath1 size={34} className='stroke-color1-100' />,
+            icone: (
+                <IconLaurelWreath1
+                    size={34}
+                    className='stroke-color1-100'
+                />
+            ),
             skin: '/assets/images/mascote/achievements/skin_desafios.png',
             animacao: '/assets/images/mascotes_animados/desafios.webm',
         },
@@ -45,7 +50,12 @@ export default function Profile() {
             id: 2,
             nome: 'Exercícios Guiados',
             tipo: 'exercicio_guiado',
-            icone: <IconArrowBigUp size={34} className='stroke-color1-100' />,
+            icone: (
+                <IconArrowBigUp
+                    size={34}
+                    className='stroke-color1-100'
+                />
+            ),
             skin: '/assets/images/mascote/achievements/skin_exercicios_guiados.png',
             animacao: '/assets/images/mascotes_animados/exercicio_guiado.webm',
         },
@@ -53,7 +63,12 @@ export default function Profile() {
             id: 3,
             nome: 'Explicações',
             tipo: 'explicacoes',
-            icone: <IconChalkboardTeacher size={34} className='stroke-color1-100' />,
+            icone: (
+                <IconChalkboardTeacher
+                    size={34}
+                    className='stroke-color1-100'
+                />
+            ),
             skin: '/assets/images/mascote/achievements/skin_explicacoes.png',
             animacao: '/assets/images/mascotes_animados/explicacao.webm',
         },
@@ -61,7 +76,12 @@ export default function Profile() {
             id: 4,
             nome: 'Flashcards',
             tipo: 'flashcards',
-            icone: <IconCards size={34} className='stroke-color1-100' />,
+            icone: (
+                <IconCards
+                    size={34}
+                    className='stroke-color1-100'
+                />
+            ),
             skin: '/assets/images/mascote/achievements/skin_flashcards.png',
             animacao: '/assets/images/mascotes_animados/flashcard.webm',
         },
@@ -69,7 +89,12 @@ export default function Profile() {
             id: 5,
             nome: 'Formulários',
             tipo: 'formulario',
-            icone: <IconListDetails size={34} className='stroke-color1-100' />,
+            icone: (
+                <IconListDetails
+                    size={34}
+                    className='stroke-color1-100'
+                />
+            ),
             skin: '/assets/images/mascote/achievements/skin_formulario.png',
             animacao: '/assets/images/mascotes_animados/formulario.webm',
         },
@@ -77,7 +102,12 @@ export default function Profile() {
             id: 6,
             nome: 'Planos de Aula',
             tipo: 'plano_de_aula',
-            icone: <IconChalkboard size={34} className='stroke-color1-100' />,
+            icone: (
+                <IconChalkboard
+                    size={34}
+                    className='stroke-color1-100'
+                />
+            ),
             skin: '/assets/images/mascote/achievements/skin_plano_de_aula.png',
             animacao: '/assets/images/mascotes_animados/plano_de_aula.webm',
         },
@@ -85,7 +115,12 @@ export default function Profile() {
             id: 7,
             nome: 'Questões',
             tipo: 'questoes',
-            icone: <IconListLetters size={34} className='stroke-color1-100' />,
+            icone: (
+                <IconListLetters
+                    size={34}
+                    className='stroke-color1-100'
+                />
+            ),
             skin: '/assets/images/mascote/achievements/skin_questoes.png',
             animacao: '/assets/images/mascotes_animados/questao.webm',
         },
@@ -93,7 +128,12 @@ export default function Profile() {
             id: 8,
             nome: 'Quiz',
             tipo: 'quiz',
-            icone: <IconTimeDuration10 size={34} className='stroke-color1-100' />,
+            icone: (
+                <IconTimeDuration10
+                    size={34}
+                    className='stroke-color1-100'
+                />
+            ),
             skin: '/assets/images/mascote/achievements/skin_quiz.png',
             animacao: '/assets/images/mascotes_animados/quiz.webm',
         },
@@ -101,7 +141,12 @@ export default function Profile() {
             id: 9,
             nome: 'Resumos',
             tipo: 'resumo',
-            icone: <IconFileDescription size={34} className='stroke-color1-100' />,
+            icone: (
+                <IconFileDescription
+                    size={34}
+                    className='stroke-color1-100'
+                />
+            ),
             skin: '/assets/images/mascote/achievements/skin_resumos.png',
             animacao: '/assets/images/mascotes_animados/resumo.webm',
         },
@@ -109,7 +154,12 @@ export default function Profile() {
             id: 10,
             nome: 'Roteiros',
             tipo: 'roteiro',
-            icone: <IconReorder size={34} className='stroke-color1-100' />,
+            icone: (
+                <IconReorder
+                    size={34}
+                    className='stroke-color1-100'
+                />
+            ),
             skin: '/assets/images/mascote/achievements/skin_roteiros.png',
             animacao: '/assets/images/mascotes_animados/roteiro.webm',
         },
@@ -170,30 +220,27 @@ export default function Profile() {
                     content='Página de perfil'
                 />
             </Helmet>
-            <main className='flex w-full min-w-0 flex-col gap-8 bg-[linear-gradient(135deg,#e0e9fb_0%,#f4f7ff_100%)] px-4 pt-4 pb-6 md:gap-15 md:pt-0 md:pr-4 md:pl-6 md:pb-4'>
+            <main className='flex w-full min-w-0 flex-col gap-8 bg-color4-200 px-4 pt-4 pb-6 md:gap-15 md:pt-0 md:pr-4 md:pb-4 md:pl-6'>
                 <div>
-                    <h1 className='bg-linear-to-tr from-color1-100 from-45% to-color4-100 bg-clip-text text-3xl leading-tight font-bold text-transparent sm:text-4xl md:mt-6 md:text-5xl'>
+                    <h1 className='bg-linear-to-tr from-color1-100 to-color4-100 bg-clip-text text-3xl leading-tight font-bold text-transparent sm:text-4xl mt-12 md:mt-6 md:text-5xl'>
                         Meu perfil
                     </h1>
-                    <p className='text-base text-color3-200 md:text-lg'>
-                        Gerencie suas informações pessoais, conquistas e atividades da plataforma
-                    </p>
                 </div>
-                <div className='flex flex-wrap gap-6 justify-center itens-center'>
-                    <div className='mt-10 min-w-0 grow basis-90 md:mt-0 max-w-140 xl:max-w-110 md:max-w-130'>
-                        <div className='flex w-full flex-col items-center justify-center rounded-xl bg-white p-4 shadow sm:p-6 h-60 md:h-80 '>
+                <div className='itens-center flex flex-wrap justify-center gap-6'>
+                    <div className='mt-10 max-w-140 min-w-0 grow basis-90 md:mt-0 md:max-w-130 xl:max-w-110'>
+                        <div className='flex h-60 w-full flex-col items-center justify-center rounded-xl bg-white p-4 shadow sm:p-6 md:h-80'>
                             <img
                                 src={user?.foto}
-                                className='relative -top-13 h-24 w-24 rounded-full object-cover md:static md:top-0 md:left-0 md:h-26 md:w-26 border-3 border-color1-100'
+                                className='relative -top-13 h-24 w-24 rounded-full border-3 border-color1-100 object-cover md:static md:top-0 md:left-0 md:h-26 md:w-26'
                                 alt='Foto do usuário'
                             />
-                            <h2 className='bg-linear-to-tr from-color1-100 from-45% to-color4-100 bg-clip-text text-center text-xl leading-tight font-bold text-transparent sm:text-2xl relative -top-12 md:top-0'>
+                            <h2 className='relative -top-12 bg-linear-to-tr from-color1-100 from-45% to-color4-100 bg-clip-text text-center text-xl leading-tight font-bold text-transparent sm:text-2xl md:top-0'>
                                 {user?.nome?.toUpperCase()}
                             </h2>
-                            <p className='mb-1 text-center text-base break-all text-color3-200 md:text-lg relative -top-12 md:top-0'>
+                            <p className='relative -top-12 mb-1 text-center text-base break-all text-color3-200 md:top-0 md:text-lg'>
                                 {user?.email_escolar}
                             </p>
-                            <div className='flex items-center gap-1 rounded-md bg-[#EEF2FB] px-4 py-1.5 relative -top-10 md:top-0'>
+                            <div className='relative -top-10 flex items-center gap-1 rounded-md bg-[#EEF2FB] px-4 py-1.5 md:top-0'>
                                 {user?.tipo === 'professor' ? (
                                     <IconChalkboardTeacher
                                         size={19}
@@ -212,7 +259,7 @@ export default function Profile() {
                             <button
                                 type='button'
                                 onClick={() => setConfirmandoExclusao(true)}
-                                className='mt-3 min-h-10 w-full cursor-pointer rounded-lg bg-red-700 px-6 text-base text-color4-100 transition-all duration-150 not-disabled:hover:shadow-lg-hard disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto relative -top-10 md:top-0'
+                                className='relative -top-10 mt-3 min-h-10 w-full cursor-pointer rounded-lg bg-red-700 px-6 text-base text-color4-100 transition-all duration-150 not-disabled:hover:shadow-lg not-disabled:hover:shadow-red-600 disabled:cursor-not-allowed disabled:opacity-60 sm:w-auto md:top-0'
                             >
                                 Excluir perfil
                             </button>
@@ -233,7 +280,7 @@ export default function Profile() {
                         )}
                     </div>
 
-                    <div className='flex min-w-0 grow-[2] basis-lg flex-col gap-4 max-w-140 xl:max-w-400 md:max-w-170'>
+                    <div className='flex max-w-140 min-w-0 grow-[2] basis-lg flex-col gap-4 md:max-w-170 xl:max-w-400'>
                         <div className='flex flex-col rounded-xl bg-white p-4 shadow sm:p-6 md:mb-4'>
                             <h3 className='mb-4 text-2xl font-bold text-color1-100 md:mb-6 md:text-3xl'>
                                 Dados pessoais
@@ -434,8 +481,7 @@ export default function Profile() {
                             Excluir perfil?
                         </h3>
                         <p className='mt-2 text-base text-color3-200'>
-                            Essa ação não pode ser desfeita. Sua conta, seus materiais e suas conquistas serão
-                            apagados.
+                            Essa ação não pode ser desfeita. Sua conta, seus materiais e suas conquistas serão apagados.
                         </p>
                         {erroExclusao && <p className='mt-3 text-sm text-red-700'>{erroExclusao}</p>}
                         <div className='mt-6 flex flex-col-reverse gap-3 sm:flex-row sm:justify-end'>

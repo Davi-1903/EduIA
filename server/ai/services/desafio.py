@@ -17,11 +17,13 @@ def generate_desafios(data: dict):
     except (KeyError, TypeError) as error:
         raise AiInvalidData('Dados inválidos para geração de desafios') from error
 
-    try:
-        content = generate_desafio_gateway(payload)
-        Desafio.model_validate(content)
-        return content
-    except (ValidationError, OutputParserException) as error:
-        raise AiInvalidData('A IA retornou dados inválidos') from error
-    except AiInvalidRequest as error:
-        raise AiInvalidData(str(error)) from error
+    for _ in range(3):
+        try:
+            content = generate_desafio_gateway(payload)
+            Desafio.model_validate(content)
+            return content
+        except (ValidationError, OutputParserException):
+            continue
+        except AiInvalidRequest as error:
+            raise AiInvalidData(str(error)) from error
+    raise AiInvalidData('A IA retornou dados inválidos')

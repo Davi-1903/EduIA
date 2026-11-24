@@ -32,11 +32,13 @@ def generate_plano_de_aula(data: dict):
     except (KeyError, TypeError) as error:
         raise AiInvalidData('Dados inválidos para geração do plano de aula') from error
 
-    try:
-        content = generate_plano_de_aula_gateway(payload)
-        PlanoDeAula.model_validate(content)
-        return content
-    except (ValidationError, OutputParserException) as error:
-        raise AiInvalidData('A IA retornou dados inválidos') from error
-    except AiInvalidRequest as error:
-        raise AiInvalidData(str(error)) from error
+    for _ in range(3):
+        try:
+            content = generate_plano_de_aula_gateway(payload)
+            PlanoDeAula.model_validate(content)
+            return content
+        except (ValidationError, OutputParserException):
+            continue
+        except AiInvalidRequest as error:
+            raise AiInvalidData(str(error)) from error
+    raise AiInvalidData('A IA retornou dados inválidos')

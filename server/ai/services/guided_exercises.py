@@ -26,12 +26,14 @@ def generate_guided_exercises(data: dict):
     if payload['tipo'] not in TIPOS_VALIDOS:
         raise AiInvalidData('Tipo de exercício guiado inválido')
 
-    try:
-        content = generate_guided_exercises_gateway(payload)
-        content['type'] = payload['tipo']
-        ExerciciosGuiados.model_validate(content)
-        return content
-    except (ValidationError, OutputParserException) as error:
-        raise AiInvalidData('A IA retornou dados inválidos') from error
-    except AiInvalidRequest as error:
-        raise AiInvalidData(str(error)) from error
+    for _ in range(3):
+        try:
+            content = generate_guided_exercises_gateway(payload)
+            content['type'] = payload['tipo']
+            ExerciciosGuiados.model_validate(content)
+            return content
+        except (ValidationError, OutputParserException):
+            continue
+        except AiInvalidRequest as error:
+            raise AiInvalidData(str(error)) from error
+    raise AiInvalidData('A IA retornou dados inválidos')

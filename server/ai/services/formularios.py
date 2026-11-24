@@ -22,14 +22,16 @@ def generate_formularios(data: dict):
     except (KeyError, TypeError) as error:
         raise AiInvalidData('Dados inválidos para geração de formulários') from error
 
-    try:
-        content = generate_formularios_gateway(payload)
-        Formularios.model_validate(content)
-        return content
-    except (ValidationError, OutputParserException) as error:
-        raise AiInvalidData('A IA retornou dados inválidos') from error
-    except AiInvalidRequest as error:
-        raise AiInvalidData(str(error)) from error
+    for _ in range(3):
+        try:
+            content = generate_formularios_gateway(payload)
+            Formularios.model_validate(content)
+            return content
+        except (ValidationError, OutputParserException):
+            continue
+        except AiInvalidRequest as error:
+            raise AiInvalidData(str(error)) from error
+    raise AiInvalidData('A IA retornou dados inválidos')
 
 
 def correct_formularios(data: dict):
@@ -55,11 +57,13 @@ def correct_formularios(data: dict):
     except (KeyError, TypeError) as error:
         raise AiInvalidData('Dados inválidos para correção de formulários') from error
 
-    try:
-        content = evaluate_answers_gateway(payload)
-        Answers.model_validate(content)
-        return content
-    except (ValidationError, OutputParserException) as error:
-        raise AiInvalidData('A IA retornou dados inválidos') from error
-    except AiInvalidRequest as error:
-        raise AiInvalidData(str(error)) from error
+    for _ in range(3):
+        try:
+            content = evaluate_answers_gateway(payload)
+            Answers.model_validate(content)
+            return content
+        except (ValidationError, OutputParserException):
+            continue
+        except AiInvalidRequest as error:
+            raise AiInvalidData(str(error)) from error
+    raise AiInvalidData('A IA retornou dados inválidos')

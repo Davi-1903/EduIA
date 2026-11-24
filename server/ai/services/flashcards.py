@@ -18,11 +18,13 @@ def generate_flashcards(data: dict):
     except (KeyError, TypeError) as error:
         raise AiInvalidData('Dados inválidos para geração de flashcards') from error
 
-    try:
-        content = generate_flashcards_gateway(payload)
-        Flashcards.model_validate(content)
-        return content
-    except (ValidationError, OutputParserException) as error:
-        raise AiInvalidData('A IA retornou dados inválidos') from error
-    except AiInvalidRequest as error:
-        raise AiInvalidData(str(error)) from error
+    for _ in range(3):
+        try:
+            content = generate_flashcards_gateway(payload)
+            Flashcards.model_validate(content)
+            return content
+        except (ValidationError, OutputParserException):
+            continue
+        except AiInvalidRequest as error:
+            raise AiInvalidData(str(error)) from error
+    raise AiInvalidData('A IA retornou dados inválidos')

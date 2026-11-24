@@ -17,13 +17,15 @@ def generate_explicacoes(data: dict):
     except (KeyError, TypeError) as error:
         raise AiInvalidData('Dados inválidos para geração de explicações') from error
 
-    try:
-        content = generate_explicacoes_gateway(payload)
-        ExplicacoesJSON.model_validate(content)
-        return content
+    for _ in range(3):
+        try:
+            content = generate_explicacoes_gateway(payload)
+            ExplicacoesJSON.model_validate(content)
+            return content
 
-    except (ValidationError, OutputParserException) as error:
-        raise AiInvalidData('A IA retornou dados inválidos') from error
+        except (ValidationError, OutputParserException):
+            continue
 
-    except AiInvalidRequest as error:
-        raise AiInvalidData(str(error)) from error
+        except AiInvalidRequest as error:
+            raise AiInvalidData(str(error)) from error
+    raise AiInvalidData('A IA retornou dados inválidos')
